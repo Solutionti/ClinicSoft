@@ -23,6 +23,15 @@ class Financiero_model extends CI_model {
         $this->db->insert("gastos", $datos);
     }
 
+    public function editarPagos($estado, $atencion, $documento) {
+      $datos = [
+        "estado" => $estado
+      ];
+      $this->db->where("codigo_atencion", $atencion);
+      $this->db->where("paciente", $documento);
+      $this->db->update("atenciones", $datos);    
+    }
+
 }
 
 ?>

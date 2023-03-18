@@ -150,6 +150,7 @@
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Estado</th>
                         </tr>
                      </thead>
+                     
                      <tbody>
                         <?php foreach($pago->result() as $pagos){ ?>
                         <tr>
@@ -157,12 +158,14 @@
                               <div class="row">
                                  <a 
                                     class="icon icon-shape icon-sm me-1 bg-gradient-info shadow mx-3"
-                                    >
+                                    href="#"
+                                    id="editarPago"
+                                 >
                                  <i class="fas fa-eye text-white opacity-10"></i>
                                  </a>
                                  <a 
                                     class="icon icon-shape icon-sm  bg-gradient-danger shadow"
-                                    >
+                                 >
                                  <i class="fas fa-file-pdf text-white opacity-10"></i>
                                  </a>
                               </div>
@@ -186,8 +189,132 @@
             <?php require_once("componentes/footer.php"); ?>
          </div>
       </main>
+
       <?php require_once("componentes/personalizar.php"); ?>
-      <!-- LARGE MODAL -->
+        <!-- VENTANAS MODALES -->
+      <div class="modal fade" id="modal-pagos" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog  modal-xl" role="document">
+            <form class="modal-content" id="AddCITA">
+               <div class="modal-header bg-default">
+                  <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">EDITAR PAGO</h5>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="messageError"></div>
+                  <div class="row">
+                     <div class="col-md-1" style="opacity: 0;">
+                     </div>
+                     <div class="col-md-10">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="" id="Cont_Horas" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                           </div>
+                           <div class="col-md-1" style="opacity: 0;">
+                              <select class="form-control" id="hora" required style="height: 32px;padding: 0px;">
+                                 <option value="">Seleccionar</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                 <label>DNI Paciente</label>
+                                 <div class="input-group">
+                                    <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-5">
+                              <div class="form-group input-group-sm">
+                                 <label>Apellidos y Nombres  Paciente</label>
+                                 <input type="text" class="form-control" id="nombre" required>
+                              </div>
+                           </div>
+                           <div class="col-md-2">
+                              <div class="form-group input-group-sm">
+                                 <label>Fecha</label>
+                                 <input type="text" class="form-control" id="telefono">
+                              </div>
+                           </div>
+                           <div class="col-md-2">
+                              <div class="form-group input-group-sm">
+                                 <label>No HC</label>
+                                 <input type="text" class="form-control" id="telefono">
+                              </div>
+                           </div>
+                           <h5>Datos del Ingreso</h5>
+                           <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                 <label>Costo</label>
+                                 <input type="text" class="form-control" id="telefono">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                 <label>Descuento</label>
+                                 <input type="text" class="form-control" id="observaciones">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                 <label>Comisiòn</label>
+                                 <input type="text" class="form-control" id="observaciones">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                 <label>Cantidad recibida</label>
+                                 <input type="text" class="form-control" id="observaciones">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                           <div class="form-group input-group-sm">
+                              <label>Especialidad</label>
+                              <select class="form-control">
+
+                              </select>
+                           </div>
+                           </div>
+                           <div class="col-md-6">
+                           <div class="form-group input-group-sm">
+                              
+                              <label>Doctor</label>
+                              <select class="form-control">
+                                 
+                              </select>
+                           </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                           <div class="form-group input-group-sm">
+                              <label>Estado</label>
+                              <select class="form-control">
+                                 <option value="Registrado">SELECCIONE UNA OPCION</option>
+                                 <option value="Registrado">ATENCION</option>
+                                 <option value="Triaje">TRIAJE</option>
+                                 <option value="Consulta">CONSULTA</option>
+                                 <option value="Atendido">ATENDIDO</option>
+                              </select>
+                           </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" >Guardar</button>
+               </div>
+            </form>
+         </div>
+      </div>
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/pagos.js"></script>
    </body>

@@ -199,6 +199,7 @@
          </div>
       </main>
       <?php require_once("componentes/personalizar.php"); ?>
+      
       <!-- LARGE MODAL -->
       <div class="modal fade " id="modalatencion" tabindex="" aria-labelledby="modalatencionLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog modal-fullscreen">

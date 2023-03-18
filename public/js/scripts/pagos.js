@@ -41,6 +41,22 @@ $(document).ready(function (){
               }
             });
     })
+    
+  $("#editarPago").on("click", function() {
+    $("#modal-pagos").modal("show");
+    var dni = $("#").val(""),
+        nombre = $("#").val(""),
+        fecha = $("#").val(""),
+        hc = $("#").val(""),
+        costo = $("#").val(""),
+        descuento = $("#").val(""),
+        comision = $("#").val(""),
+        cantidad_recibida = $("#").val(""),
+        especialidad = $("#").val(""),
+        doctor = $("#").val(""),
+        Estado = $("#").val("");
+  });
+
 });
 
 
