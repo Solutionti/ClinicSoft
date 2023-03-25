@@ -32,6 +32,38 @@ class Financiero_model extends CI_model {
       $this->db->update("atenciones", $datos);    
     }
 
+    public function getpagosAtencion($codigo){
+      $this->db->select("p.*, c.nombre, c.apellido, c.hc, a.estado, a.codigo_atencion");
+      $this->db->from("pagos p");
+      $this->db->join("pacientes c", "p.dni_paciente = c.documento");
+      $this->db->join("atenciones a", "p.atencion = a.codigo_atencion");
+      $this->db->where("codigo_pago", $codigo);
+      $result = $this->db->get();
+
+      return $result->row();
+    }
+
+    public function actualizarPagos($data, $pago) {
+      $datos = [
+          "medico" => $data["doctor"],
+          "especialidad" => $data["especialidad"],
+          "descuento" => $data["descuento"],
+          "comision" => $data["comision"],
+          "total" => $data["costo"],
+          "cantidad_recibida" => $data["cantidad_recibida"],
+      ];
+      $this->db->where("codigo_pago", $pago);
+      $this->db->update("pagos", $datos);
+    }
+
+    public function actualizarPagosAtencion($estado, $atencion) {
+        $datos = [
+          "estado" => $estado
+        ];
+        $this->db->where("codigo_atencion", $atencion);
+        $this->db->update("atenciones", $datos);
+    }
+
 }
 
 ?>

@@ -92,29 +92,18 @@ class Atencion extends Admin_Controller {
 	public function registrarAtencion() {
 
 		$dni = $this->input->post("dni");
-
 		$nombre = $this->input->post("nombre");
-
 		$especialidad = $this->input->post("especialidad");
-
 		$doctor = $this->input->post("doctor");
-
 		$costo = $this->input->post("costo");
-
 		$comision = $this->input->post("comision");
-
 		$turno = $this->input->post("turno");
-
 		$cola_atencion = $this->input->post("cola_atencion");
 
 		//FACTURA
-
 		$descuento = $this->input->post("descuento");
-
 		$total = $this->input->post("total");
-
 		$total_recibida= $this->input->post("cantidad_recibida");
-
 		$tipo_deposito = $this->input->post("forma_pago");
 
         $orden__ = 0;
@@ -130,26 +119,6 @@ class Atencion extends Admin_Controller {
 
 			}
 
-		$factura = [
-
-			"dni" => $dni,
-
-			"doctor" => $doctor,
-
-			"descuento" => $descuento,
-
-			"especialidad" => $especialidad,
-
-			"comision" => $comision,
-
-			"total" => $total,
-
-			"total_recibida" => $total_recibida,
-
-			"tipo_deposito" => $tipo_deposito,
-
-		];
-
 		$data = [
 		  "dni" => $dni,
 		  "nombre" => $nombre,
@@ -160,11 +129,21 @@ class Atencion extends Admin_Controller {
 		  "cola_atencion" => $cola_atencion,
 		  "orden__" => $orden__
 		];
-
-		$this->Atencion_model->registrarAtencion($data);
-
+		$atenciones = $this->Atencion_model->registrarAtencion($data);
+		
+		$factura = [
+			"dni" => $dni,
+			"doctor" => $doctor,
+			"descuento" => $descuento,
+			"especialidad" => $especialidad,
+			"atencion" => $atenciones,
+			"comision" => $comision,
+			"total" => $total,
+			"total_recibida" => $total_recibida,
+			"tipo_deposito" => $tipo_deposito,
+		];
+		
 		$this->Pagos_model->CrearPagos($factura);
-
 		$this->Atencion_model->CrearLineaTiempoAtencion($dni, $especialidad,$doctor);
 
 	}
