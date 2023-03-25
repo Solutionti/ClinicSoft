@@ -108,7 +108,7 @@ $("#guardarDatosPagos").on("click", function(){
           type: "success",
           message: "El pago se ha  actualizado correctamente"
         });
-        // setTimeout(reloadPage, 3000);
+        setTimeout(reloadPage, 3000);
       },
       error: function() {
         $("body").overhang({
