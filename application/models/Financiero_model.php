@@ -6,6 +6,7 @@ class Financiero_model extends CI_model {
         $this->db->from("pagos p");
         $this->db->join("pacientes t", "p.dni_paciente = t.documento");
         $this->db->join("doctores d", "p.medico = d.codigo_doctor");
+        $this->db->order_by("codigo_pago", "DESC");
         $result = $this->db->get();
 
         return $result;
