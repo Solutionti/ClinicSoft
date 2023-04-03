@@ -25,16 +25,7 @@ class Financiero_model extends CI_model {
     }
 
     public function editarPagos($estado, $atencion, $documento, $costo, $comision, $medico, $especialidad) {
-      $datos = [
-        "estado" => $estado,
-        "costo" => $costo,
-        "comision" => $comision,
-        "medico" => $medico,
-        "especialidad" => $especialidad
-      ];
-      $this->db->where("codigo_atencion", $atencion);
-      $this->db->where("paciente", $documento);
-      $this->db->update("atenciones", $datos);    
+         
     }
 
     public function getpagosAtencion($codigo){
@@ -61,12 +52,18 @@ class Financiero_model extends CI_model {
       $this->db->update("pagos", $datos);
     }
 
-    public function actualizarPagosAtencion($estado, $atencion) {
-        $datos = [
-          "estado" => $estado
-        ];
-        $this->db->where("codigo_atencion", $atencion);
-        $this->db->update("atenciones", $datos);
+    public function actualizarPagosAtencion($estado, $atencion, $documento, $costo, $comision, $medico, $especialidad) {
+      $datos = [
+        "estado" => $estado,
+        "costo" => $costo,
+        "comision" => $comision,
+        "medico" => $medico,
+        "especialidad" => $especialidad
+      ];
+      
+      $this->db->where("codigo_atencion", $atencion);
+      $this->db->where("paciente", $documento);
+      $this->db->update("atenciones", $datos); 
     }
 
 }
