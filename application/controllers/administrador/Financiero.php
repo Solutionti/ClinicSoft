@@ -66,8 +66,8 @@ class Financiero extends Admin_Controller {
 		  "doctor" => $doctor,
 		  "estado" => $estado,
 		];
-
+		
 		$this->Financiero_model->actualizarPagos($datos, $codigo_pago);
-		$this->Financiero_model->actualizarPagosAtencion($estado, $atencion);
+		$this->Financiero_model->actualizarPagosAtencion($estado, $atencion, $costo, $comision, $doctor, $especialidad);
 	}
 }

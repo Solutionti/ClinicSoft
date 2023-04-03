@@ -24,9 +24,13 @@ class Financiero_model extends CI_model {
         $this->db->insert("gastos", $datos);
     }
 
-    public function editarPagos($estado, $atencion, $documento) {
+    public function editarPagos($estado, $atencion, $documento, $costo, $comision, $medico, $especialidad) {
       $datos = [
-        "estado" => $estado
+        "estado" => $estado,
+        "costo" => $costo,
+        "comision" => $comision,
+        "medico" => $medico,
+        "especialidad" => $especialidad
       ];
       $this->db->where("codigo_atencion", $atencion);
       $this->db->where("paciente", $documento);
