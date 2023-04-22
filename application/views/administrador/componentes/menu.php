@@ -261,6 +261,11 @@
                               <span class="sidenav-normal">Laboratorio</span>
                               </a>
                            </li>
+                           <li class="nav-item">
+                              <a class="nav-link " href="<?php echo base_url(); ?>administracion/financiero">
+                              <span class="sidenav-normal">Pagos</span>
+                              </a>
+                           </li>
                         </ul>
                      </div>
                      <li class="nav-item">
