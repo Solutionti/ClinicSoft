@@ -7,7 +7,7 @@ $pdf->Image('public/img/theme/logo.png' , 10 ,9, 25 , 20,'png');
 $pdf->SetFont('Times','',13);
 $pdf->Ln(1);
 $pdf->Cell(40,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'Clinica Enfoque Salud Maternidad y Especialidades', '', 0,'L', false );
+$pdf->Cell(60,6,'CLINICA ENFOQUE SALUD Maternidad y Especialidades', '', 0,'L', false );
 $pdf->Ln(8);
 $pdf->Cell(70,6,'', '', 0,'L', false );
 $pdf->Cell(1,6,'ECOGRAFIA DE MAMA', '', 0,'L', false );

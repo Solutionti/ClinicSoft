@@ -16,19 +16,19 @@ $pdf->SetFont('Times','',13);
 
 $pdf->Ln(1);
 
-$pdf->Cell(65,6,'', '', 0,'L', false );
+$pdf->Cell(62,6,'', '', 0,'L', false );
 
-$pdf->Cell(60,6,'Clinica Enfoque Salud', '', 0,'L', false );
+$pdf->Cell(63,6,'"CLINICA ENFOQUE SALUD"', '', 0,'L', false );
 
 $pdf->Ln(5);
 
-$pdf->Cell(72,6,'', '', 0,'L', false );
+$pdf->Cell(67,6,'', '', 0,'L', false );
 
 $pdf->Cell(1,6,'Maternidad y Especialidades', '', 0,'L', false );
 
 $pdf->Ln(5);
 
-$pdf->Cell(60,6,'', '', 0,'L', false );
+$pdf->Cell(70,6,'', '', 0,'L', false );
 
 $pdf->Cell(7,6,'Calle Alfonso Ugarte #673', '', 0,'L', false );
 

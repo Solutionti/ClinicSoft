@@ -9,7 +9,7 @@ $pdf->Image('public/img/theme/zonac.png' , 28 ,107, 15 , 15,'png');
 $pdf->SetFont('Times','',8);
 $pdf->Ln(13);
 $pdf->Cell(7,5,'', '', 0,'L', false );
-$pdf->Cell(1,5,'Clinica Enfoque Salud', '', 0,'L', false );
+$pdf->Cell(1,5,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
 $pdf->Ln(4);
 $pdf->Cell(10,5,'', '', 0,'L', false );
 $pdf->Cell(1,5,'Maternidad y Especialidades', '', 0,'L', false );
