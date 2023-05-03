@@ -102,25 +102,25 @@ class Laboratorio extends Admin_Controller {
 
         $pdf->Ln();
 
-        $pdf->SetFont('Times','',8);
+        $pdf->SetFont('Arial','',8);
 
         $pdf->Ln(13);
 
-        $pdf->Cell(7,5,'', '', 0,'L', false );
+        $pdf->Cell(8,5,'', '', 0,'L', false );
 
-        $pdf->Cell(1,5,'Centro Medico Especializado', '', 0,'L', false );
+        $pdf->Cell(1,5,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
 
         $pdf->Ln(4);
 
-        $pdf->Cell(10,5,'', '', 0,'L', false );
+        $pdf->Cell(8,5,'', '', 0,'L', false );
 
-        $pdf->Cell(1,5,'Salud Madre & Mujer', '', 0,'L', false );
+        $pdf->Cell(1,5,'Maternidad y Especialidades', '', 0,'L', false );
 
         $pdf->Ln(5);
 
-        $pdf->Cell(4,5,'', '', 0,'L', false );
+        $pdf->Cell(9,5,'', '', 0,'L', false );
 
-        $pdf->Cell(7,5,'Av Salaverry 1402 - Urb. Bancarios', '', 0,'L', false );
+        $pdf->Cell(7,5,'Calle Alfonso Ugarte #673', '', 0,'L', false );
 
         $pdf->Ln(2);
 
