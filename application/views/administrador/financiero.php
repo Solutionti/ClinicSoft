@@ -192,38 +192,7 @@
 
       <?php require_once("componentes/personalizar.php"); ?>
         <!-- VENTANAS MODALES -->
-        <div class="modal fade" id="modal-servicio" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-default">
-        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Ingresar Pago</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group input-group-sm">
-                    <label>Descripcion</label>
-                    <input type="text" class="form-control" id="especialidad">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-md-6">
-                <div class="form-group input-group-sm">
-                    <label>Precio</label>
-                    <input type="number" class="form-control" id= "precio">
-                </div>
-            </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="crearPrecio">Guardar</button>
        
-      </div>
-    </div>
-  </div>
-</div>
       <div class="modal fade" id="modal-pagos" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog  modal-xl" role="document">
             <form class="modal-content" id="AddCITA">
@@ -404,6 +373,38 @@
                   </form>
                </div>
             </div>
+<div class="modal fade" id="modal-servicio" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Ingresar Pago</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group input-group-sm">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+                <div class="form-group input-group-sm">
+                    <label>Precio</label>
+                    <input type="number" class="form-control" id= "precio-pago">
+                </div>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="crearPago">Guardar</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/pagos.js"></script>
    </body>
