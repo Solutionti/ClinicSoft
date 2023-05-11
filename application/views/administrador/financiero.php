@@ -236,7 +236,7 @@
                                       type="text"
                                       class="form-control"
                                       id="dni"
-                                      style="height: 32px;padding: 0px;"
+                                      style="height: 32px;padding: 1px;"
                                       minlength="7"
                                       maxlength="11"
                                       disabled
