@@ -68,8 +68,8 @@ class Financiero_model extends CI_model {
     public function crearPagoAdicional($descripcion, $precio){
       $datos = [
         "dni_paciente" => 0,
-        "medico" => 0,
-        "especialidad" => 0,
+        "medico" => 100,
+        "especialidad" => 999,
         "atencion" => 0,
         "fecha" => date("Y-m-d"),
         "hora" => date("h:i A"),

@@ -142,6 +142,7 @@
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Factura</th>
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Paciente</th>
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Medico</th>
+                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Especialidad</th>
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Concepto</th>
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Fecha</th>
                            <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" >Tipo de pago</th>
@@ -176,6 +177,7 @@
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->apellido." ".$pagos->paciente; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->doctor; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->especialidad; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $pagos->descripcion; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->fecha; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->tipo_deposito; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->descuento; ?></td>
