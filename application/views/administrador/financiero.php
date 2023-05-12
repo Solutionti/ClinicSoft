@@ -394,10 +394,10 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
                 <div class="form-group input-group-sm">
                     <label>Precio</label>
-                    <input type="number" class="form-control" id= "precio-pago">
+                    <input type="number" class="form-control" id="precio-pago">
                 </div>
             </div>
       <div class="modal-footer">

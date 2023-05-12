@@ -65,6 +65,25 @@ class Financiero_model extends CI_model {
       $this->db->update("atenciones", $datos); 
     }
 
+    public function crearPagoAdicional(){
+      $datos = [
+        "dni_paciente" => 0,
+        "medico" => 0,
+        "especialidad" => 0,
+        "atencion" => 0,
+        "fecha" => date("Y-m-d"),
+        "hora" => date("h:i A"),
+        "descuento" => 0,
+        "comision" => 0,
+        "total" => total,
+        "cantidad_recibida" => 0,
+        "tipo_deposito" => "Efectivo",
+        "estado" => "Pago",
+        "usuario" => $this->session->userdata("nombre")
+      ];
+      $this->db->insert("pagos", $datos); 
+    }
+
 }
 
 ?>

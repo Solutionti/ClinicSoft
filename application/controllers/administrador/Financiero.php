@@ -70,4 +70,11 @@ class Financiero extends Admin_Controller {
 		$this->Financiero_model->actualizarPagos($datos, $codigo_pago);
 		$this->Financiero_model->actualizarPagosAtencion($estado, $atencion, $costo, $comision, $doctor, $especialidad);
 	}
+
+	public function crearPagoAdicional(){
+		$descripcion = $this->input->post("descripcion");
+		$precio = $this->input->post("precio");
+
+		$this->Financiero_model->crearPagoAdicional();
+	}
 }

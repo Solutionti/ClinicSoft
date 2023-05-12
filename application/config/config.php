@@ -19,9 +19,9 @@
 date_default_timezone_set('America/Bogota');
 if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 
-    $ht = "https://";
+    $ht = "http://";
 } else {
-	$ht = "https://";
+	$ht = "http://";
 }
 $config['base_url'] = $ht.$_SERVER['HTTP_HOST'];
 $config['base_url'] .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/'; 
