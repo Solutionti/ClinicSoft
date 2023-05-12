@@ -120,7 +120,7 @@ $("#guardarDatosPagos").on("click", function(){
 })
 
 $("#crearPago").on("click", function(){
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearpagoadicional";
   var descripcion = $("#descripcion").val(),
       precio = $("#precio-pago").val();
   $.ajax({

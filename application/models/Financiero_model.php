@@ -65,7 +65,7 @@ class Financiero_model extends CI_model {
       $this->db->update("atenciones", $datos); 
     }
 
-    public function crearPagoAdicional(){
+    public function crearPagoAdicional($descripcion, $precio){
       $datos = [
         "dni_paciente" => 0,
         "medico" => 0,
@@ -75,7 +75,8 @@ class Financiero_model extends CI_model {
         "hora" => date("h:i A"),
         "descuento" => 0,
         "comision" => 0,
-        "total" => total,
+        "descripcion" => $descripcion,
+        "total" => $precio,
         "cantidad_recibida" => 0,
         "tipo_deposito" => "Efectivo",
         "estado" => "Pago",

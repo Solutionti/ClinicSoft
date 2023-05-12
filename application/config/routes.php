@@ -157,6 +157,10 @@ $route["administracion/mipres"] = "administrador/mipres";
 //TICKETS
 $route["administracion/tickets"] = "administrador/tickets";
 
+// PAGOS
+$route["administracion/crearpagoadicional"] = "administrador/financiero/crearpagoadicional";
+
+
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******

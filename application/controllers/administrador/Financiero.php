@@ -75,6 +75,6 @@ class Financiero extends Admin_Controller {
 		$descripcion = $this->input->post("descripcion");
 		$precio = $this->input->post("precio");
 
-		$this->Financiero_model->crearPagoAdicional();
+		$this->Financiero_model->crearPagoAdicional($descripcion, $precio);
 	}
 }
