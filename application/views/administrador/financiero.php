@@ -165,6 +165,8 @@
                                  </a>
                                  <a 
                                     class="icon icon-shape icon-sm  bg-gradient-danger shadow"
+                                    target="blank"
+                                    href="<?php echo base_url(); ?>administracion/cargarfactura/<?php echo $pagos->atencion; ?>"
                                  >
                                  <i class="fas fa-file-pdf text-white opacity-10"></i>
                                  </a>
@@ -173,7 +175,7 @@
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->codigo_pago; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->apellido." ".$pagos->paciente; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->doctor; ?></td>
-                           <td class="text-xs text-dark mb-0"><?php echo $pagos->descripcion; ?></td>
+                           <td class="text-xs text-dark mb-0"><?php echo $pagos->especialidad; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->fecha; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->tipo_deposito; ?></td>
                            <td class="text-xs text-dark mb-0"><?php echo $pagos->descuento; ?></td>

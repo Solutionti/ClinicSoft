@@ -2,10 +2,11 @@
 class Financiero_model extends CI_model {
 
     public function getPagos() {
-        $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.* ");
+        $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.*, e.descripcion as especialidad ");
         $this->db->from("pagos p");
         $this->db->join("pacientes t", "p.dni_paciente = t.documento");
         $this->db->join("doctores d", "p.medico = d.codigo_doctor");
+        $this->db->join("especialidades e", "p.especialidad = e.codigo_especialidad");
         $this->db->order_by("codigo_pago", "DESC");
         $result = $this->db->get();
 

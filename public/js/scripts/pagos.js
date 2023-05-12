@@ -62,7 +62,7 @@ function editarPagos(codigo) {
           $("#cantidad_recibida").val(data.cantidad_recibida);
           $("#doctor").val(data.medico);
           $("#especialidad").val(data.especialidad);
-          $("#nombre").val(data.apellido + "" + data.nombre);
+          $("#nombre").val(data.apellido + " " + data.nombre);
           $("#hc").val(data.hc);
           $("#estado").val(data.estado);
         },
