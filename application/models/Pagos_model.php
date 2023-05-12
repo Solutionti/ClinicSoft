@@ -10,6 +10,7 @@ class Pagos_model extends CI_model {
             "hora" => date("h:i A"),
             "descuento" => $data["descuento"],
             "especialidad" => $data["especialidad"],
+            "atencion" => $data["atencion"],
             "comision" => $data["comision"],
             "total" => $data["total"],
             "cantidad_recibida" => $data["total_recibida"],
@@ -19,6 +20,8 @@ class Pagos_model extends CI_model {
         ];
         $this->db->insert("pagos", $datos);
     }
+
+    
 
    
 

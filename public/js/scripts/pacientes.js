@@ -85,19 +85,21 @@ $("#crearpaciente").on("click", function () {
 		$("#provincia").removeClass("is-invalid");
 		$("#provincia").addClass("is-valid");
 		$("#distrito").addClass("is-invalid");
-	} else if (ocupacion === "") {
-		$("#distrito").removeClass("is-invalid");
-		$("#distrito").addClass("is-valid");
-		$("#ocupacion").addClass("is-invalid");
-	} else if (grado_academico === "") {
-		$("#ocupacion").removeClass("is-invalid");
-		$("#ocupacion").addClass("is-valid");
-		$("#grado_academico").addClass("is-invalid");
-	} else if (estado_civil === "") {
-		$("#grado_academico").removeClass("is-invalid");
-		$("#grado_academico").addClass("is-valid");
-		$("#estado_civil").addClass("is-invalid");
-	} else {
+	// } else if (ocupacion === "") {
+	// 	$("#distrito").removeClass("is-invalid");
+	// 	$("#distrito").addClass("is-valid");
+	// 	$("#ocupacion").addClass("is-invalid");
+	// } else if (grado_academico === "") {
+	// 	$("#ocupacion").removeClass("is-invalid");
+	// 	$("#ocupacion").addClass("is-valid");
+	// 	$("#grado_academico").addClass("is-invalid");
+	// } else if (estado_civil === "") {
+	// 	$("#grado_academico").removeClass("is-invalid");
+	// 	$("#grado_academico").addClass("is-valid");
+	// 	$("#estado_civil").addClass("is-invalid");
+	// } 
+	}
+	else {
 		$.ajax({
 			url: url1,
 			method: "POST",

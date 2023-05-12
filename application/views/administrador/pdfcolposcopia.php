@@ -8,14 +8,14 @@ $pdf->Image('public/colposcopia/'.$colposcopias->imagen1 , 35 ,115, 60 , 40,'JPG
 $pdf->Image('public/colposcopia/'.$colposcopias->imagen2 , 120 ,115, 60 , 40,'JPG');
 $pdf->SetFont('Times','',13);
 $pdf->Ln(1);
-$pdf->Cell(65,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'Centro Medico Especializado', '', 0,'L', false );
+$pdf->Cell(63,6,'', '', 0,'L', false );
+$pdf->Cell(60,6,'"CLINICA ENFOQUE SALUD"', '', 0,'L', false );
 $pdf->Ln(5);
-$pdf->Cell(72,6,'', '', 0,'L', false );
-$pdf->Cell(1,6,'Salud Madre & Mujer', '', 0,'L', false );
+$pdf->Cell(67,6,'', '', 0,'L', false );
+$pdf->Cell(1,6,'Maternidad y Especialidades', '', 0,'L', false );
 $pdf->Ln(5);
-$pdf->Cell(60,6,'', '', 0,'L', false );
-$pdf->Cell(7,6,'Av Salaverry 1402 - Urb. Bancarios', '', 0,'L', false );
+$pdf->Cell(68,6,'', '', 0,'L', false );
+$pdf->Cell(7,6,'Calle Alfonso Ugarte #673', '', 0,'L', false );
 $pdf->Ln(2);
 $pdf->Cell(42,5,'', '', 0,'L', false );
 $pdf->Cell(60,5,'_____________________________________________', '', 0,'L', false );
@@ -74,8 +74,8 @@ $pdf->Ln(60);
 $pdf->Cell(73,6,'', '', 0,'L', false );
 $pdf->Cell(70,6,$colposcopias->medico, '', 0,'L', false );
 $pdf->Ln(6);
-$pdf->Cell(78,6,'', '', 0,'L', false );
-$pdf->Cell(70,6,'CPM'. $colposcopias->cmp, '', 0,'L', false );
+$pdf->Cell(81,6,'', '', 0,'L', false );
+$pdf->Cell(70,6,'CMP :'. $colposcopias->cmp, '', 0,'L', false );
 
 $pdf->Output();
 

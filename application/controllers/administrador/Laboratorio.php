@@ -102,33 +102,31 @@ class Laboratorio extends Admin_Controller {
 
         $pdf->Ln();
 
-        $pdf->SetFont('Times','',8);
+        $pdf->SetFont('Arial','',8);
 
         $pdf->Ln(13);
 
-        $pdf->Cell(7,5,'', '', 0,'L', false );
+        $pdf->Cell(8,5,'', '', 0,'L', false );
 
-        $pdf->Cell(1,5,'Centro Medico Especializado', '', 0,'L', false );
+        $pdf->Cell(1,5,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
 
         $pdf->Ln(4);
 
-        $pdf->Cell(10,5,'', '', 0,'L', false );
+        $pdf->Cell(8,5,'', '', 0,'L', false );
 
-        $pdf->Cell(1,5,'Salud Madre & Mujer', '', 0,'L', false );
+        $pdf->Cell(1,5,'Maternidad y Especialidades', '', 0,'L', false );
 
         $pdf->Ln(5);
 
-        $pdf->Cell(4,5,'', '', 0,'L', false );
+        $pdf->Cell(9,5,'', '', 0,'L', false );
 
-        $pdf->Cell(7,5,'Av Salaverry 1402 - Urb. Bancarios', '', 0,'L', false );
+        $pdf->Cell(7,5,'Calle Alfonso Ugarte #673', '', 0,'L', false );
 
         $pdf->Ln(2);
 
         $pdf->Cell(10,5,'____________________________________', '', 0,'L', false );
 
         $pdf->SetFont('Times','',8);
-
-
 
         $pdf->Ln(5);
 
@@ -150,13 +148,11 @@ class Laboratorio extends Admin_Controller {
 
         $pdf->SetFont('Times','b',8);
 
-        $pdf->Cell(15,5,utf8_decode('Contraseña:'), '', 0,'L', false );
+        $pdf->Cell(15,5,utf8_decode('Contrase単a:'), '', 0,'L', false );
 
         $pdf->Cell(4,5,$laboratorio->password, '', 0,'L', false );
 
         $pdf->SetFont('Times','',8);
-
-
 
         $pdf->Ln(5);
 
@@ -194,41 +190,55 @@ class Laboratorio extends Admin_Controller {
 
         $pdf->Ln(2);
 
+        $pdf->Cell(1,5,'', '', 0,'L', false );
+
+        $pdf->setFontSize(9);
+
+        $pdf->Cell(43,5,'TOTAL : =============> S/.', '', 0,'L', false );
+
+        $pdf->setFontSize(15);
+
+        $pdf->Cell(20,5,$laboratorio->total, '', 0,'L', false );
+
+        $pdf->setFontSize(8);
+
         $pdf->Cell(2,5,'', '', 0,'L', false );
 
-        $pdf->Cell(25,5,' RECARGATE DE ENERGIA POSITIVA ', '', 0,'L', false );
+        $pdf->Ln(2);
 
-       
+        $pdf->Cell(10,5,'_____________________________________________', '', 0,'L', false );
 
-        
+        $pdf->SetFont('Times','',8);
 
-        $pdf->Ln(5);
+        $pdf->Ln(6);
 
-        $pdf->Cell(1,5,'', '', 0,'L', false );
+        $pdf->Cell(6,5,'', '', 0,'L', false );
 
         $pdf->Cell(31,5,'Para consultar sus resultados medicos ingresa', '', 0,'L', false );
 
         $pdf->Ln(4);
 
-        $pdf->Cell(5,5,'', '', 0,'L', false );
+        $pdf->Cell(10,5,'', '', 0,'L', false );
 
         $pdf->Cell(10,5,'https://saludmadreymujer.com/zonac', '', 0,'L', false );
 
         $pdf->Ln(4);
 
-        $pdf->Cell(3,5,'', '', 0,'L', false );
+        $pdf->Cell(8,5,'', '', 0,'L', false );
 
-        $pdf->Cell(25,5,utf8_decode('Digitar su numero de DNI y Contraseña.'), '', 0,'L', false );
+        $pdf->Cell(25,5,utf8_decode('Ingrese su numero de DNI y Contrase単a.'), '', 0,'L', false );
 
-        $pdf->Ln(5);
+        $pdf->Ln(4);
 
-        $pdf->Cell(11,5,'', '', 0,'L', false );
+        $pdf->Cell(5,5,'', '', 0,'L', false );
 
-        $pdf->Cell(25,5,'www.saludmadreymujer.com', '', 0,'L', false );
+        $pdf->Cell(25,5,'*Puede canjear este ticket por boleta o factura', '', 0,'L', false );
 
         $pdf->Output();
 
     }
+
+        
 
 
 

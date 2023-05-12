@@ -105,6 +105,8 @@ $route["administracion/loadcpegasto"] = "administrador/gastos/loadcpegasto";
 
 //FACTURA ELECTRONICA
 $route["administracion/facturaelectronica"] = "administrador/financiero/facturaElectronica";
+$route["administracion/getpagos/(:num)"] = "administrador/financiero/getpagosAtencion/$1";
+$route["administracion/actualizarpagos"] = "administrador/financiero/actualizarpagos";
 
 
 //REPORTES

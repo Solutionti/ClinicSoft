@@ -88,7 +88,7 @@
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> saludmadremujer.com.co
+            </script> clinicaenfoquesalud.com
           </p>
         </div>
       </div>
