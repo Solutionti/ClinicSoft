@@ -129,7 +129,7 @@
             <div class="card">
                <div class="row mt-4">
                   <div class="col-md-12">
-                     <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#AgregarPaciente" role="button">Agregar <i class="fas fa-plus"></i> </a>
+                     <a class="btn bg-gradient-danger btn-xs" data-bs-toggle="modal" href="#modal-servicio" role="button">Agregar <i class="fas fa-plus"></i> </a>
                   </div>
                </div>
                <br>  
@@ -194,6 +194,7 @@
 
       <?php require_once("componentes/personalizar.php"); ?>
         <!-- VENTANAS MODALES -->
+       
       <div class="modal fade" id="modal-pagos" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog  modal-xl" role="document">
             <form class="modal-content" id="AddCITA">
@@ -237,7 +238,7 @@
                                       type="text"
                                       class="form-control"
                                       id="dni"
-                                      style="height: 32px;padding: 0px;"
+                                      style="height: 32px;padding: 1px;"
                                       minlength="7"
                                       maxlength="11"
                                       disabled
@@ -374,6 +375,38 @@
                   </form>
                </div>
             </div>
+<div class="modal fade" id="modal-servicio" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Ingresar Pago</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group input-group-sm">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+                <div class="form-group input-group-sm">
+                    <label>Precio</label>
+                    <input type="number" class="form-control" id= "precio-pago">
+                </div>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="crearPago">Guardar</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/pagos.js"></script>
    </body>
