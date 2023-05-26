@@ -150,14 +150,16 @@
                            <tr>
                               <td class="">
                                  <div class="row">
+                                 <?php if($this->session->userdata("rol") != "Enfermera"){ ?>
                                     <a 
                                        class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-3"
                                        href="<?php echo base_url(); ?>administracion/eliminardoctor/<?php echo $doctores->codigo_doctor; ?>"  
                                        >
                                     <i class="fas fa-times text-white opacity-10"></i>
                                     </a>
+                                    <?php } ?>
                                     <a 
-                                       class="icon icon-shape icon-sm me-2 bg-gradient-info shadow"
+                                       class="icon icon-shape icon-sm me-2 bg-gradient-info shadow mx-3"
                                        onclick="getModalDataDoctor(<?php echo $doctores->codigo_doctor; ?>)"  
                                        >
                                     <i class="fas fa-cog text-white opacity-10"></i>
