@@ -182,8 +182,6 @@
             </div>
       </main>
       
-      
-
       <!--  -->
       <?php require_once("componentes/personalizar.php"); ?>
       <!-- VENTANAS MODALES -->

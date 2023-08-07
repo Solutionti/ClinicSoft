@@ -316,20 +316,20 @@
                         </div>
                         
                       <div class="table-responsive">
-                        <table class="table align-items-center ">
-                          <?php foreach($linea->result() as $linea_){ ?>
-                                <tbody>
+                        <table class="table align-items-center table-hover table-borderless">
+                           <tbody>
+                                   <?php foreach($linea->result() as $linea_){ ?>
                                   <tr>
                                     <td>
                                       <div class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">Ultima visita:</p>
-                                        <h6 class="text-sm mb-0"><?php echo $linea_->fecha." <br> ".$linea_->hora; ?></h6>
+                                        <h6 class="text-xs mb-0"><?php echo $linea_->fecha." <br> ".$linea_->hora; ?></h6>
                                       </div>
                                     </td>
                                     <td>
                                       <div class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">Servicio:</p>
-                                        <h6 class="text-sm mb-0">
+                                        <h6 class="text-xs mb-0">
                                         <?php 
                                           if($linea_->tp_atencion == ""){?>
                                             <?php echo "Laboratorio"; ?>
@@ -345,12 +345,12 @@
                                     <td>
                                       <div class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">Médico:</p>
-                                        <h6 class="text-sm mb-0"><?php echo $linea_->doctor; ?></h6>
+                                        <h6 class="text-xs mb-0"><?php echo $linea_->doctor; ?></h6>
                                       </div>
                                     </td>
                                   </tr>
+                                  <?php } ?>
                                 </tbody>
-                          <?php } ?>
                         </table>
 
 
@@ -2907,19 +2907,35 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Doctor tratante</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>" readonly>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>"
+                          readonly
+                          id="codigo_doctor"
+                        >
                      </div>
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
                         <label>Fecha</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("d-m-Y"); ?>" readonly>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo date("d-m-Y"); ?>"
+                          readonly
+                        >
                      </div>
                   </div>
                   <div class="col-md-3">
                      <div class="form-group">
                         <label>Hora</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("h:i A"); ?>" readonly>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo date("h:i A"); ?>"
+                          readonly
+                        >
                      </div>
                   </div>
                </div>
@@ -2927,13 +2943,24 @@
                   <div class="col-md-3">
                      <div class="form-group">
                         <label>Documento</label>
-                        <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
+                        <input
+                          type="number"
+                          class="form-control form-control-sm"
+                          value="<?php echo $pacientes->documento; ?>"
+                          readonly
+                          id="documento_paciente"
+                        >
                      </div>
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
                         <label>Apellidos</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->apellido; ?>" readonly>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo $pacientes->apellido; ?>"
+                          readonly
+                        >
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -3053,6 +3080,7 @@
       </div>
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/ecografias.js"></script>
       <script>
          $(document).ready(function (){
              var url1 = "<?php echo base_url(); ?>administracion/triajehistorias",
