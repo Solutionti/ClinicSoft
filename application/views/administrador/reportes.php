@@ -136,7 +136,7 @@
                      <div class="col-sm-7">
                         <div class="card">
                            <div class="card-body">
-                              <h6 class="card-title">Reporte de Atenciones Doctores</h6>
+                              <h6 class="card-title">Reporte de Atenciones Doctores </h6>
                               <form target="blank" action="<?php echo base_url(); ?>administracion/reportediario" method="POST">
                                  <div class="row">
                                     <div class="col-md-5" style="margin-bottom:10px">
