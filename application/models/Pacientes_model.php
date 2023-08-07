@@ -171,7 +171,7 @@ class Pacientes_model extends CI_model {
 			}
 			$where .=" )";
 		}
-		$sql = "SELECT * FROM pacientes WHERE estado = 'Activo'";
+		$sql = "SELECT * FROM pacientes WHERE estado = 'Activo' ORDER BY codigo_paciente DESC";
 		$sqlTot .= $sql;
 		$sqlRec .= $sql;
 
@@ -181,7 +181,7 @@ class Pacientes_model extends CI_model {
 		}
 	
 		if($columns[$params['order'][0]['column']] != 'acciones'){
-			$sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
+			// $sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
 		}
 
 	 	$sqlRec .=  "  LIMIT ".$params['start']." ,".$params['length']." ";

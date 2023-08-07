@@ -2,10 +2,11 @@
 class Financiero_model extends CI_model {
 
     public function getPagos() {
-        $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.* ");
+        $this->db->select("t.nombre as paciente,t.apellido,d.nombre as doctor, p.*, e.descripcion as especialidad ");
         $this->db->from("pagos p");
         $this->db->join("pacientes t", "p.dni_paciente = t.documento");
         $this->db->join("doctores d", "p.medico = d.codigo_doctor");
+        $this->db->join("especialidades e", "p.especialidad = e.codigo_especialidad");
         $this->db->order_by("codigo_pago", "DESC");
         $result = $this->db->get();
 
@@ -62,6 +63,26 @@ class Financiero_model extends CI_model {
       ];
       $this->db->where("codigo_atencion", $atencion);
       $this->db->update("atenciones", $datos); 
+    }
+
+    public function crearPagoAdicional($descripcion, $precio){
+      $datos = [
+        "dni_paciente" => 0,
+        "medico" => 100,
+        "especialidad" => 999,
+        "atencion" => 0,
+        "fecha" => date("Y-m-d"),
+        "hora" => date("h:i A"),
+        "descuento" => 0,
+        "comision" => 0,
+        "descripcion" => $descripcion,
+        "total" => $precio,
+        "cantidad_recibida" => 0,
+        "tipo_deposito" => "Efectivo",
+        "estado" => "Pago",
+        "usuario" => $this->session->userdata("nombre")
+      ];
+      $this->db->insert("pagos", $datos); 
     }
 
 }

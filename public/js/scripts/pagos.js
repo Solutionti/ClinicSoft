@@ -62,7 +62,7 @@ function editarPagos(codigo) {
           $("#cantidad_recibida").val(data.cantidad_recibida);
           $("#doctor").val(data.medico);
           $("#especialidad").val(data.especialidad);
-          $("#nombre").val(data.apellido + "" + data.nombre);
+          $("#nombre").val(data.apellido + " " + data.nombre);
           $("#hc").val(data.hc);
           $("#estado").val(data.estado);
         },
@@ -117,7 +117,28 @@ $("#guardarDatosPagos").on("click", function(){
         }); 
       }
     })
-}) 
+})
+
+$("#crearPago").on("click", function(){
+  var url = baseurl + "administracion/crearpagoadicional";
+  var descripcion = $("#descripcion").val(),
+      precio = $("#precio-pago").val();
+  $.ajax({
+    url: url,
+    method: "POST",
+    data: {
+      descripcion: descripcion,
+      precio: precio
+    },
+    success: function(){
+      $("body").overhang({
+        type: "success",
+        message: "El pago se ha  creado correctamente"
+      });
+      setTimeout(reloadPage, 3000);
+    }
+  });
+});
 
 
 const reloadPage = () => {

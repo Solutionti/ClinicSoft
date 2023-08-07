@@ -307,7 +307,7 @@
 				$state_user = true; 
 
 				for ($i=0; $i < sizeof($ingresos_comision); $i++) {
-					if($ingresos_comision[$i]['codigo_doctor']!=13){
+					if($ingresos_comision[$i]['codigo_doctor']!=199){
 						if($cajas[$QQ]['usuario'] == $ingresos_comision[$i]['usuario']){
 
 							if($state_user){
