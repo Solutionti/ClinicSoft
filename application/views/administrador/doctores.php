@@ -181,6 +181,10 @@
                <?php require_once("componentes/footer.php"); ?>
             </div>
       </main>
+      
+      
+
+      <!--  -->
       <?php require_once("componentes/personalizar.php"); ?>
       <!-- VENTANAS MODALES -->
       <div class="modal fade" id="AgregarDoctor" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
