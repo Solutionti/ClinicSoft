@@ -141,8 +141,8 @@
           <table class="table table-stripped table-borderless table hover" id="tabla-productos">
              <thead>
                <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Codigo</th>
-               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
                <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Categoria</th>
+               <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
                <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Historial</th>
                <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Valor</th>
                <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Cantidad</th>
@@ -152,8 +152,8 @@
                <?php foreach($producto->result() as $productos) { ?>
                 <tr>
                   <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->codigo; ?></td>
-                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->nombre; ?></td>
                   <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->categorias; ?></td>
+                  <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->nombre; ?></td>
                   <td class="text-uppercase text-dark text-xs font-weight-bolder text-center opacity-12"> <i data-bs-toggle="modal" href="#historial" role="button" class="fas fa-redo"></i> </td>
                   <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->precio; ?></td>
                   <td class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><?php echo $productos->cantidad; ?></td>
