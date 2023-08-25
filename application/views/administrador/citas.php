@@ -205,13 +205,13 @@
             </div>
             <div class="col-md-12">
                <div class="container-fluid py-2" >
-                  <div class="row" style="padding: 5px;background: #172b4d;border-radius: 10px;">
+                  <div class="row" style="padding: 5px;background: #;border-radius: 10px;">
                      <h5 style="
                         margin:0px;
                         text-align: center;
-                        color: white;
+                        color: black;
                         "
-                        class="mt-2"> Doctores y horarios disponibles
+                        class="mt-2 mt-5"> DOCTORES Y HORARIOS DISPONIBLES
                      </h5>
                      <style>
                         .doc_p{
@@ -255,10 +255,10 @@
                         <div class="container-fluid py-2" style="padding:2px 2px !important;">
                            <div class="row ">
                               <div style="padding: 0px 3px;" class="card card___cont">
-                                 <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
-                                 <span style="font-size: 12px;text-align: center;"><strong>Hoy</strong></span>
+                                 <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                 <span style="font-size: 12px;text-align: center;"><strong>HOY</strong></span>
                                  <hr style="margin: 3px;">
-                                 <div class="cont_day"></div>
+                                 <div class="cont_day text-uppercase"></div>
                               </div>
                            </div>
                         </div>
@@ -269,10 +269,10 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
-                                       <span style="font-size: 12px;text-align: center;"><strong>Mañana</strong></span>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <span style="font-size: 12px;text-align: center;"><strong>MAÑANA</strong></span>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>
@@ -281,9 +281,9 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>
@@ -292,9 +292,9 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>
@@ -303,9 +303,9 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>
@@ -314,9 +314,9 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>
@@ -325,9 +325,9 @@
                               <div class="container-fluid py-2" style="padding:2px 2px !important;">
                                  <div class="row ">
                                     <div style="padding: 0px 3px;" class="card card___cont">
-                                       <button class="btn bg-gradient-info" style="padding: 5px 15px;margin:10px 0px;">-</button>
+                                       <button class="btn bg-gradient-danger" style="padding: 5px 15px;margin:10px 0px;">-</button>
                                        <hr style="margin: 3px;">
-                                       <div class="cont_day"></div>
+                                       <div class="cont_day text-uppercase"></div>
                                     </div>
                                  </div>
                               </div>

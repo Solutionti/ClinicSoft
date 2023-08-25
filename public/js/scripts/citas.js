@@ -2,17 +2,17 @@ var dias = [
 	"Domingo",
 	"Lunes",
 	"Martes",
-	"Mierc.",
+	"Miercoles.",
 	"Jueves",
 	"Viernes",
 	"Sabado",
 ];
 $(document).ready(function () {
-	$("#table-citas").DataTable();
+  $("#table-citas").DataTable();
 });
 
 $("#lupa_DNI").click(function () {
-	VAL_Search_DNI();
+  VAL_Search_DNI();
 });
 $("#dni").keyup(function (e) {
   e.defaultPrevented;
@@ -115,7 +115,7 @@ function Get_Horarios(insert_hora) {
 										"'" +
 										insert_hora +
 										"'" +
-										')" class="btn_clock btn bg-gradient-warning" ><i class="fa fa-clock"></i>  ' +
+										')" class="btn_clock btn bg-gradient-danger" ><i class="fa fa-clock"></i>  ' +
 										insert_hora +
 										"</button>"
 								);
@@ -160,7 +160,7 @@ function Get_Horarios(insert_hora) {
 									"'" +
 									insert_hora +
 									"'" +
-									')" class="btn_clock btn bg-gradient-warning" ><i class="fa fa-clock"></i>  ' +
+									')" class="btn_clock btn bg-gradient-danger" ><i class="fa fa-clock"></i>  ' +
 									insert_hora +
 									"</button>"
 							);
@@ -203,13 +203,13 @@ function Get_Horarios(insert_hora) {
 function btn_clock(aaa, insert_hora) {
 	$("#hora").val(insert_hora);
 	$(".btn_clock").each(function () {
-		if ($(this).hasClass("bg-gradient-warning")) {
-			$(this).removeClass("bg-gradient-warning");
+		if ($(this).hasClass("bg-gradient-danger")) {
+			$(this).removeClass("bg-gradient-danger");
 			$(this).addClass("bg-gradient-info");
 		}
 	});
 	$(aaa).removeClass("bg-gradient-info");
-	$(aaa).addClass("bg-gradient-warning");
+	$(aaa).addClass("bg-gradient-danger");
 }
 $("#medico").change(function () {
 	Get_Horarios("");
@@ -445,7 +445,7 @@ function Reset_Horarios() {
 
 	var a = 0;
 	__fecha_hoy = new Date();
-	$(".card > .bg-gradient-info").each(function () {
+	$(".card > .bg-gradient-danger").each(function () {
 		var __today = __fecha_hoy.getDate();
 		$(this).html((_ordenado[a]).slice(0, 6) + " / " + __today);
 		a++;

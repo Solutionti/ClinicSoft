@@ -8,7 +8,7 @@
    </div>
    <hr class="horizontal dark mt-0">
    <div class="navbar-collapse  w-auto " style="height: 563px !important;" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav text-capitalize">
          <!-- ROL ADMINISTRADOR TIENE TODOS LOS PRIVILEGIOS --> 
          <?php if($this->session->userdata("rol") == "Administrador"){ ?>
          <li class="nav-item">
@@ -20,7 +20,7 @@
          
           <li class="nav-item">
             <a class="nav-link " href="<?php echo base_url(); ?>administracion/citas">
-              <i class="fa fa-calendar"></i>
+              <i class="fa fa-notes-medical"></i>
               <span class="sidenav-normal"> Citas</span>
             </a>
           </li>
@@ -96,7 +96,7 @@
          </li>
          <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usuarios">
-            <i class="fas fa-users"></i>
+            <i class="fas fa-user-lock "></i>
             <span class="sidenav-normal"> Usuarios <b class="caret"></b></span>
             </a>
             <div class="collapse " id="usuarios">
@@ -183,19 +183,19 @@
          
          <li class="nav-item">
             <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
-            <i class="fas fa-money-bill"></i>
+            <i class="fas fa-capsules"></i>
             <span class="">Botica</span>
             </a>
          </li>
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/tickets">
-            <i class="fas fa-money-bill"></i>
+            <i class="fas fa-dna"></i>
             <span> Tickets</span>
             </a>
          </li>
          <li class="nav-item">
             <a class="nav-link" href="#">
-            <i class="fas fa-info-circle"></i>
+            <i class="fas fa-info-circle text-primary"></i>
             <span> Version 2.0.0.0</span>
             </a>
          </li>
@@ -338,7 +338,7 @@
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
-                     <i class="fas fa-info-circle"></i>
+                     <i class="fas fa-info-circle "></i>
                      <span> Version 2.0.0.0</span>
                      </a>
                   </li>

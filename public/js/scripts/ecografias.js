@@ -1,8 +1,7 @@
 
 // CREAR ECOGRAFIA DE MAMA
 function createEcografiaMama() {
-
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearecografiamama";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       pezon_izq = $("#pezon_izq").val(),
@@ -42,6 +41,7 @@ function createEcografiaMama() {
         type: "success",
         message: "Ecografia de Mama se ha registrado correctamente"
       });
+      $("#btn_pdf_mama").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -53,7 +53,7 @@ function createEcografiaMama() {
 }
 
 function imprimirEcografiaMama() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdfmama";
   window.open(url, "_blank", " width=500, height=400");
 }
 
@@ -61,7 +61,7 @@ function imprimirEcografiaMama() {
 
 function createEcografiaTransvaginal() {
 
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearecografiatransvaginal";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       utero = $("#utero").val(),
@@ -83,7 +83,6 @@ function createEcografiaTransvaginal() {
       fondo_Saco = $("#fondo_Saco").val(),
       conclusion_transv = $("#conclusion_transv").val(),
       sugerencias_transv = $("#sugerencias_transv").val();
-
 
   $.ajax({
     url: url,
@@ -114,8 +113,9 @@ function createEcografiaTransvaginal() {
     success: function() {
       $("body").overhang({
         type: "success",
-        message: "Ecografia de Mama se ha registrado correctamente"
+        message: "Ecografia de transvaginal se ha registrado correctamente"
       });
+      $("#pdf_ecografia_transvaginal").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -127,13 +127,14 @@ function createEcografiaTransvaginal() {
 }
 
 function imprimirEcografiaTransvaginal() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdftransvaginal";
   window.open(url, "_blank", " width=500, height=400");
 }
+
 // ECOGRAFIA PELVICA
 function createEcografiaPelvica() {
 
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearecografiapelvica";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       utero_tipo = $("#utero_tipo").val(),
@@ -191,8 +192,9 @@ function createEcografiaPelvica() {
     success: function() {
       $("body").overhang({
         type: "success",
-        message: "Ecografia de Mama se ha registrado correctamente"
+        message: "Ecografia Pelvica se ha registrado correctamente"
       });
+      $("#pdf_ecografia_pelvica").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -204,14 +206,15 @@ function createEcografiaPelvica() {
 }
 
 function imprimirEcografiaPelvica() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdfpelvica";
   window.open(url, "_blank", " width=500, height=400");
 }
+
 // ECOGRAFIA MORFOLOGICA
 
 function createEcografiaMorfologica() {
 
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearecografiamorfologica";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       sexo_m = $("#sexo_m").val(),
@@ -280,6 +283,7 @@ function createEcografiaMorfologica() {
         type: "success",
         message: "Ecografia de Mama se ha registrado correctamente"
       });
+      $("#pdfecografiamorfologica").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -291,7 +295,7 @@ function createEcografiaMorfologica() {
 }
 
 function imprimirEcografiaMorfologica() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdfmorfologica";
   window.open(url, "_blank", " width=500, height=400");
 }
 
@@ -299,7 +303,7 @@ function imprimirEcografiaMorfologica() {
 
 function createEcografiaGenetica() {
 
-  var url = baseurl + "";
+  var url = baseurl + "administracion/crearecografiagenetica";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       feto_unico = $("#feto_unico").val(),
@@ -345,15 +349,13 @@ function createEcografiaGenetica() {
       ductudVenosa: ductudVenosa,
       conclusion_genetica: conclusion_genetica,
       sugerencia_genetica: sugerencia_genetica,
-      
-      
-
     },
     success: function() {
       $("body").overhang({
         type: "success",
         message: "Ecografia de Mama se ha registrado correctamente"
       });
+      $("#pdfecografiagenetica").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -365,7 +367,7 @@ function createEcografiaGenetica() {
 }
 
 function imprimirEcografiaGenetica() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdfgenetica";
   window.open(url, "_blank", " width=500, height=400");
 }
 
@@ -373,7 +375,7 @@ function imprimirEcografiaGenetica() {
 
 function createEcografiaObstetrica() {
 
-  var url = baseurl + "";
+  var url = baseurl + "administracion/verpdfobstetrica";
   var documento_paciente = $("#documento_paciente").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       feto_unico_obs = $("#feto_unico_obs").val(),
@@ -419,15 +421,13 @@ function createEcografiaObstetrica() {
       tipoParto: tipoParto,
       conclusion_obs: conclusion_obs,
       sugerencia_obs: sugerencia_obs,
-      
-      
-
     },
     success: function() {
       $("body").overhang({
         type: "success",
         message: "Ecografia de Mama se ha registrado correctamente"
       });
+      $("#pdfecografiaobstetrica").attr("hidden", false);
     },
     error: function() {
       $("body").overhang({
@@ -439,6 +439,6 @@ function createEcografiaObstetrica() {
 }
 
 function imprimirEcografiaObstetrica() {
-  url = baseurl  + "";
+  url = baseurl  + "administracion/verpdfobstetrica";
   window.open(url, "_blank", " width=500, height=400");
 }

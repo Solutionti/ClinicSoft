@@ -1818,7 +1818,13 @@
       <div class="col-md-6">
       <div class="form-group">
       <label>Doctor tratante</label>
-      <input type="text" class="form-control form-control-sm" value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>" readonly>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>"
+        readonly
+        id="codigo_doctor"
+      >
       </div>
       </div>
       <div class="col-md-3">
@@ -1838,7 +1844,13 @@
       <div class="col-md-3">
       <div class="form-group">
       <label>Documento</label>
-      <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        value="<?php echo $pacientes->documento; ?>"
+        readonly
+        id="documento_paciente"
+      >
       </div>
       </div>
       <div class="col-md-4">
@@ -1922,22 +1934,22 @@
       <label>UTERO</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="utero-medidas">
+      <input type="text" class="form-control form-control-sm" id="utero_medidas">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="utero-medidas1">
+      <input type="text" class="form-control form-control-sm" id="utero_medidas1">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="utero-medidas2">
+      <input type="text" class="form-control form-control-sm" id="utero_medidas2">
       </div>
       <div class="col-md-4">
-      <textarea id="comentario-utero" class="form-control form-control-sm" rows="1">DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
+      <textarea id="comentario_utero" class="form-control form-control-sm" rows="1">DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
       </div>
       </div>
       <br>
@@ -1946,19 +1958,19 @@
       <label>OVARIO DERECHO</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="ovario-der">
+      <input type="text" class="form-control form-control-sm" id="ovario_der">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="ovario-der1">
+      <input type="text" class="form-control form-control-sm" id="ovario_der1">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-4">
-      <textarea id="comentario-ovarioder" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+      <textarea id="comentario_ovarioder" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
       </div>
       </div>
       <br>
@@ -1967,19 +1979,19 @@
       <label>OVARIO IZQUIERDO</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="ovario-izq">
+      <input type="text" class="form-control form-control-sm" id="ovario_izq">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="ovario-izq1">
+      <input type="text" class="form-control form-control-sm" id="ovario_izq1">
       </div>
       <div class="col-md-1">
       <label class="mt-3">mm</label>
       </div>
       <div class="col-md-4">
-      <textarea id="comentario-ovarioizq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+      <textarea id="comentario_ovarioizq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
       </div>
       </div>
       </div>
@@ -1987,7 +1999,7 @@
       <div class="row">
       <div class="col-md-2">
       <label>Fondo de saco</label>
-      <textarea id="fondoSaco" class="form-control form-control-sm" rows="1">    Libre</textarea>
+      <textarea id="fondoSaco" class="form-control form-control-sm" rows="1">Libre</textarea>
       </div>
       <div class="col-md-5">
       <label>Conclusión</label>
@@ -2001,8 +2013,22 @@
       </div>
       <br>
       <div class="modal-footer">
-      <button type="button" class="btn btn-danger">pdf</button>
-      <button type="button" class="btn btn-primary">Guardar</button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        id="pdf_ecografia_transvaginal"
+        onclick="imprimirEcografiaTransvaginal()"
+        hidden
+      >
+        pdf
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="createEcografiaTransvaginal()"
+      >
+        Guardar
+      </button>
       </div>
       </div>
       </div>
@@ -2024,7 +2050,13 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Doctor tratante</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>" readonly>
+                        <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>"
+                          readonly
+                          id="codigo_doctor"
+                        >
                      </div>
                   </div>
                   <div class="col-md-3">
@@ -2044,7 +2076,12 @@
                   <div class="col-md-3">
                      <div class="form-group">
                         <label>Documento</label>
-                        <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
+                        <input 
+                          type="number"
+                          class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>"
+                          readonly
+                          id="documento_paciente"
+                        >
                      </div>
                   </div>
                   <div class="col-md-4">
@@ -2070,7 +2107,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Utero</label>
-                        <select class="form-control form-control-sm" id="utero-tipo">
+                        <select class="form-control form-control-sm" id="utero_tipo">
                            <option value="Anteverso">Anteverso</option>
                            <option value="Retroverso">Retroverso</option>
                            <option value="Ausente">Ausente</option>
@@ -2128,7 +2165,7 @@
                               <label>UTERO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="utero-medidas">
+                              <input type="number" class="form-control form-control-sm" id="utero_medidas">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
@@ -2152,19 +2189,19 @@
                               <label>OVARIO DERECHO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-der1">
+                              <input type="number" class="form-control form-control-sm" id="ovario_der1">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-der2">
+                              <input type="number" class="form-control form-control-sm" id="ovario_der2">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-4">
-                              <textarea id="comentarioOvario-der" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+                              <textarea id="comentarioOvario_der" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
                            </div>
                         </div>
                         <br>
@@ -2173,19 +2210,19 @@
                               <label>OVARIO IZQUIERDO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-iz1">
+                              <input type="number" class="form-control form-control-sm" id="ovario_iz1">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-iz2">
+                              <input type="number" class="form-control form-control-sm" id="ovario_iz2">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-4">
-                              <textarea id="comentarioOvario-izq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+                              <textarea id="comentarioOvario_izq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
                            </div>
                         </div>
                      </div>
@@ -2215,8 +2252,22 @@
                </div>
                <br>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="pdf_ecografia_pelvica"
+                    onclick="imprimirEcografiaPelvica()"
+                    hidden
+                  >
+                    pdf
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="createEcografiaPelvica()"
+                  >
+                    Guardar
+                  </button>
                </div>
             </div>
          </div>
@@ -2498,7 +2549,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+                  <button type="button" class="btn btn-danger" id="pdfecografiamorfologica" hidden>pdf</button>
                   <button type="button" class="btn btn-primary">Guardar</button>
                </div>
             </div>
@@ -2686,7 +2737,7 @@
                </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+                  <button type="button" class="btn btn-danger" id="pdfecografiagenetica" hidden>pdf</button>
                   <button type="button" class="btn btn-primary">Guardar</button>
                </div>
             </div>
@@ -2883,7 +2934,7 @@
                </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+                  <button type="button" class="btn btn-danger" id="pdfecografiaobstetrica" hidden>pdf</button>
                   <button type="button" class="btn btn-primary">Guardar</button>
                </div>
             </div>
@@ -2984,13 +3035,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Pezon</label>
-                              <input type="text" id="pezon-izq" class="form-control form-control-sm">
+                              <input type="text" id="pezon_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>TCSC</label>
-                              <input type="text" id="tcsc-izq" class="form-control form-control-sm">
+                              <input type="text" id="tcsc_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -2998,13 +3049,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Tejido glandular</label>
-                              <input type="text" id="tejidoGlandular-izq" class="form-control form-control-sm">
+                              <input type="text" id="tejido_glandular_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Axila</label>
-                              <input type="text" id="axila-izq" class="form-control form-control-sm">
+                              <input type="text" id="axila_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -3012,7 +3063,7 @@
                         <div class="col-md-12">
                            <div class="form-group">
                               <label>Comentario</label>
-                              <textarea class="form-control" id="comentario-mama-izq"></textarea>
+                              <textarea class="form-control" id="comentario_mama_izq"></textarea>
                            </div>
                         </div>
                      </div>
@@ -3023,13 +3074,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Pezon</label>
-                              <input type="text" id="pezon-der" class="form-control form-control-sm">
+                              <input type="text" id="pezon_der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>TCSC</label>
-                              <input type="text" id="tcsc-der" class="form-control form-control-sm">
+                              <input type="text" id="tcsc_der" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -3037,13 +3088,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Tejido glandular</label>
-                              <input type="text" id="tejidoGlandular-der" class="form-control form-control-sm">
+                              <input type="text" id="tejido_glandular_der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>Axila</label>
-                              <input type="text" id="axila-der" class="form-control form-control-sm">
+                              <input type="text" id="axila_der" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -3051,7 +3102,7 @@
                         <div class="col-md-12">
                            <div class="form-group">
                               <label>Comentario</label>
-                              <textarea id="comentario-der" class="form-control"></textarea>
+                              <textarea id="comentario_der" class="form-control"></textarea>
                            </div>
                         </div>
                      </div>
@@ -3060,17 +3111,31 @@
                      <h6 class="text-info "> FINAL </h6>
                      <div class="form-group">
                         <label for="">Conclusión</label>
-                        <textarea class="form-control" id="conclusion-mama"></textarea>
+                        <textarea class="form-control" id="conclusion_mama"></textarea>
                      </div>
                      <div class="form-group">
                         <label for="">Sugerencias</label>
-                        <textarea class="form-control" id="sugerencias-mama"></textarea>
+                        <textarea class="form-control" id="sugerencias_mama"></textarea>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" id=""> <i class="fas fa-file-pdf"></i> PDF</button>
-                  <button type="button" class="btn btn-primary" id="">Guardar</button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="btn_pdf_mama"
+                    onclick="imprimirEcografiaMama()"
+                    hidden
+                  > 
+                    <i class="fas fa-file-pdf"></i> PDF
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="createEcografiaMama()"
+                  >
+                    Guardar
+                  </button>
                </div>
             </div>
          </div>

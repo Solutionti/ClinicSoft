@@ -145,6 +145,29 @@ $route["administracion/pdfkardex"] = "administrador/inventarios/generarpdfkardex
 $route["administracion/ecografiamama"] = "administrador/ecografias/ecografiamama";
 $route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 
+$route["administracion/crearecografiamama"] = "administrador/ecografias/createEcografiaMama";
+$route["administracion/verpdfmama"] = "administrador/ecografias/ecografiaMama";
+
+$route["administracion/crearecografiatransvaginal"] = "administrador/ecografias/createEcografiaTransvaginal";
+$route["administracion/verpdftransvaginal"] = "administrador/ecografias/ecografiaTransvaginal";
+
+
+$route["administracion/crearecografiapelvica"] = "administrador/ecografias/createEcografiaPelvica";
+$route["administracion/verpdfpelvica"] = "administrador/ecografias/ecografiaPelvica";
+
+
+$route["administracion/crearecografiamorfologica"] = "administrador/ecografias/crearEcografiaMorfologica";
+$route["administracion/verpdfmorfologica"] = "administrador/ecografias/ecografiaMorfologica";
+
+
+$route["administracion/crearecografiagenetica"] = "administrador/ecografias/crearEcografiaGenetica";
+$route["administracion/verpdfgenetica"] = "administrador/ecografias/ecografiaGenetica";
+
+
+$route["administracion/crearecografiaobstetrica"] = "administrador/ecografias/crearEcografiaObstetrica";
+$route["administracion/verpdfobstetrica"] = "administrador/ecografias/ecografiaObstetrica";
+
+
 //PQRS
 $route["administracion/pqrs"] = "administrador/pqrs";
 
