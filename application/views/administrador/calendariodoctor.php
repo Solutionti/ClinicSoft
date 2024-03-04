@@ -97,17 +97,18 @@
              hour: '2-digit',
              minute: '2-digit',
              hour12: true
-             },
+        },
+        eventSources: {
+            url: url1,
+            method: "GET",
+            color: "green"
+          },
          eventTimeFormat: {
                hour: '2-digit',
                minute: '2-digit',
                hour12: true
               },
-         eventSources: {
-            url: url1,
-            method: "GET",
-            color: "green"
-        },
+        
         initialView: 'dayGridMonth',
         themeSystem: 'bootstrap',
         locale: 'es',
@@ -125,7 +126,6 @@
         },
         allDayText: "Todo el dia",
         height: 580,
-          
        });
       calendar.render();
      });
