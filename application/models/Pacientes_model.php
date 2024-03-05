@@ -171,7 +171,7 @@ class Pacientes_model extends CI_model {
 			}
 			$where .=" )";
 		}
-		$sql = "SELECT * FROM pacientes WHERE estado = 'Activo' ORDER BY codigo_paciente DESC";
+		$sql = "SELECT * FROM pacientes WHERE estado = 'Activo'";
 		$sqlTot .= $sql;
 		$sqlRec .= $sql;
 
