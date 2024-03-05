@@ -180,9 +180,9 @@ class Pacientes_model extends CI_model {
 			$sqlRec .= $where;
 		}
 	
-		if($columns[$params['order'][0]['column']] != 'acciones'){
-			// $sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
-		}
+		// if($columns[$params['order'][0]['column']] != 'acciones'){
+		// 	// $sqlRec .= " ORDER BY ". $columns[$params['order'][0]['column']]." ".$params['order'][0]['dir']." ";
+		// }
 
 	 	$sqlRec .=  "  LIMIT ".$params['start']." ,".$params['length']." ";
 	 	$queryTot = $this->db->query($sqlTot);
