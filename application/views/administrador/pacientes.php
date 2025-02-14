@@ -130,14 +130,14 @@
           <div class="row">
             <div class="col-md-12">
               <div class="d-flex flex-row-reverse">
-                <a
+                <!-- <a
                   class="btn btn-success text-white btn-xs"
                   hidden
                   id="btnhistoria"
                   target="_blank"
                 >
                   <i class="fas fa-file-medical text-white"></i> HC
-                </a>
+                </a> -->
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
                   hidden
@@ -458,115 +458,11 @@
   <?php require_once("componentes/personalizar.php"); ?>
   <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/pacientes_v2.js"></script>
-
-  <script>
-    function actualizarPaciente(id) {
-        var url5 = baseurl  + "administracion/pacienteidaaaa",
-            dni = $("#dni2"),
-            nombre = $("#nombre2"),
-            apellido = $("#apellido2"),
-            celular = $("#celular2"),
-            hc = $("#hc2"),
-            sexo = $("#sexo2"),
-            fecha_nacimiento = $("#fecha_nacimiento2"),
-            direccion = $("#direccion2"),
-            departamento = $("#departamento2"),
-            provincia = $("#provincia2"),
-            distrito = $("#distrito2"),
-            ocupacion = $("#ocupacion2"),
-            academico = $("#grado_academico2"),
-            estado_civil = $("#estado_civil2"),
-            documento = $("#documento2"),
-            fresponsable = $("#fresponsable2");
-
-            $.ajax({
-              url: url5,
-              method: "POST",
-              data: { id: id },
-              success: function(data) {
-                  data =  JSON.parse(data);
-                  console.log(data);
-                  $("#actualizarPaciente").modal("show");
-
-                  $("#id2").val(data.codigo_paciente);
-                  dni.val(data.documento);
-                  nombre.val(data.nombre);
-                  apellido.val(data.apellido);
-                  hc.val(data.hc);
-                  celular.val(data.telefono);
-                  sexo.val(data.sexo).prop("selected", true);
-                  fecha_nacimiento.val(data.fecha_nacimiento);
-                  direccion.val(data.direccion);
-                  departamento.val(data.departamento).prop("selected", true);
-                  provincia.val(data.provincia).prop("selected", true);
-                  distrito.val(data.distrito).prop("selected", true);
-                  ocupacion.val(data.ocupacion);
-                  academico.val(data.grado_academico).prop("selected", true);
-                  estado_civil.val(data.estado_civil).prop("selected", true);
-                  documento.val(data.familiar_documento);
-                  fresponsable.val(data.familiar_nombre);
-              }
-          });
-      }
-  </script>
+  
   <script>
     var departamento = <?php echo json_encode($departamento->result()); ?>;
     var provincia = <?php echo json_encode($provincia->result()); ?>;
     var distrito = <?php echo json_encode($distrito->result()); ?>;
-
-      $("#departamento").change(function(){
-        var id_departamento = ($('#departamento').find(":selected").val()).slice(0,2);
-
-        $("#provincia").html("");
-        $("#distrito").html("");
-        $("#provincia").append('<option value="" >Seleccione la Provincia</option>');
-        $("#distrito").append('<option value="" >Seleccione el Distrito</option>');
-        for (var i = 0; i < provincia.length; i++) {
-          if((provincia[i]['id']).slice(0,2) == id_departamento){
-            $("#provincia").append('<option value="'+provincia[i]['id']+'" >'+provincia[i]['name']+'</option>');
-          }
-        }
-
-        for (var i = 0; i < distrito.length; i++) {
-          if((distrito[i]['id']).slice(0,2) == id_departamento){
-            $("#distrito").append('<option value="'+distrito[i]['id']+'" >'+distrito[i]['name']+'</option>');
-          }
-        }
-        $('#provincia  option[value=""]').attr('selected','selected');
-        $('#distrito  option[value=""]').attr('selected','selected');
-      });
-
-      $("#provincia").change(function(){
-        var id_provincia = ($('#provincia').find(":selected").val()).slice(0,2);
-        $('#departamento  option[value="'+id_provincia+'"]').attr('selected','selected');
-        $("#distrito").html("");
-        $("#distrito").append('<option value="" selected>Seleccione el Distrito</option>');
-        for (var i = 0; i < distrito.length; i++) {
-          if((distrito[i]['id']).slice(0,2) == id_provincia){
-            $("#distrito").append('<option value="'+distrito[i]['id']+'" >'+distrito[i]['name']+'</option>');
-          }
-        }
-        $('#distrito  option[value=""]').attr('selected','selected');
-      });
-
-      $("#distrito").change(function(){
-        var id_distrito = ($('#distrito').find(":selected").val()).slice(0,2);
-        $('#departamento  option[value="'+id_distrito+'"]').attr('selected','selected');
-        $("#provincia").html("");
-        $("#provincia").append('<option value="">Seleccione la Provincia</option>');
-        for (var i = 0; i < provincia.length; i++) {
-          if((provincia[i]['id']).slice(0,2) == id_distrito){
-            $("#provincia").append('<option value="'+provincia[i]['id']+'" >'+provincia[i]['name']+'</option>');
-          }
-        }
-        var id_distrito = ($('#distrito').find(":selected").val()).slice(0,4);
-        for (var i = 0; i < provincia.length; i++) {
-          if((provincia[i]['id']).slice(0,4) == id_distrito){
-            $('#provincia  option[value="'+id_distrito+'"]').attr('selected','selected');
-            i = provincia.length;
-          }
-        }
-      });
   </script>
 
 </body>

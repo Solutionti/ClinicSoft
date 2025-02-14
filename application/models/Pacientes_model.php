@@ -19,7 +19,7 @@ class Pacientes_model extends CI_model {
       $this->db->or_like('nombre', $apellido);
       $result = $this->db->get();
 
-      if($result ->num_rows() > 0) {
+      if($result->num_rows() > 0) {
         return $result;
       }
       else {
