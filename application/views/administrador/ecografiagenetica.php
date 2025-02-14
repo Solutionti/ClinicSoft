@@ -177,7 +177,7 @@
             <div class="input-group">
               <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
+          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -189,6 +189,7 @@
             type="text"
             class="form-control form-control-sm"
             formControlName="nombre_ecografia_abdomninal"
+            id="nombre"
         >
     </div>
 
@@ -198,6 +199,7 @@
             type="text"
             class="form-control form-control-sm"
             formControlName="apellido_ecografia_abdomninal"
+            id="apellidos"
         >
     </div>
 
@@ -207,6 +209,8 @@
             type="text"
             class="form-control form-control-sm"
             formControlName="edad_ecografia_abdomninal"
+            id="edad"
+
         >
     </div>
 
@@ -216,79 +220,23 @@
             type="text"
             class="form-control form-control-sm"
             formControlName="hc_ecografia_abdomninal"
+            id="hc"
         >
-        </div>
-        </div>
-
-         <div class="modal fade" id="ecografiagenetica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title text-uppercase" id="exampleModalLabel">Ecografia genetica</h5>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <div class="row ">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Doctor tratante</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $this->session->userdata("apellido")." ". $this->session->userdata("nombre") ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Fecha</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("d-m-Y"); ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Hora</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo date("h:i A"); ?>" readonly>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label>Documento</label>
-                        <input type="number" class="form-control form-control-sm" value="<?php echo $pacientes->documento; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Apellidos</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->apellido; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label>Nombres</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->nombre; ?>" readonly>
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Edad</label>
-                        <input type="text" class="form-control form-control-sm" value="<?php echo $pacientes->edad; ?>" readonly>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
+    </div>
+      </div>
+        <div class="row">
                  <div class="col-md-3">
                     <label>Feto / Embriòn</label>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="si">
                      <label class="form-check-label" for="inlineRadio1">Unico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="no">
                      <label class="form-check-label" for="inlineRadio2">Multiple</label>
                    </div>
                  </div>
@@ -299,19 +247,19 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                     <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="cefa">
                      <label class="form-check-label" for="inlineRadio1">Cefalico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="situacion" id="podatico" value="poda">
                      <label class="form-check-label" for="inlineRadio2">Podatico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="indi">
                      <label class="form-check-label" for="inlineRadio2">Indiferente</label>
                    </div>
                  </div>
@@ -414,7 +362,11 @@
    </div>
     </div>
   </main>
+         
+               
 
   <?php require_once("componentes/scripts.php"); ?>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiahisterosonografia.js"></script>
 </body>
 </html>
