@@ -367,6 +367,6 @@
 
   <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
-  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiahisterosonografia.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiagenetica.js"></script>
 </body>
 </html>

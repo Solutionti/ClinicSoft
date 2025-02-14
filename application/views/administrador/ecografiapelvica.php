@@ -176,7 +176,7 @@
             <div class="input-group">
               <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
+          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="nombre_ecografia_abdomninal"
+            id="nombre"
         >
     </div>
 
@@ -196,7 +196,7 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="apellido_ecografia_abdomninal"
+            id="apellidos"
         >
     </div>
 
@@ -205,7 +205,7 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="edad_ecografia_abdomninal"
+            id="edad"
         >
     </div>
 
@@ -214,7 +214,7 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="hc_ecografia_abdomninal"
+            id="hc"
         >
         </div>
         </div>
@@ -233,11 +233,11 @@
                      <label>Superficie</label>
                      <br>
                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <input class="form-check-input" type="radio" name="superficie" id="regular" value="R">
                         <label class="form-check-label" for="inlineRadio1">Regular</label> 
                      </div>
                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <input class="form-check-input" type="radio" name="superficie" id="modular" value="M">
                         <label class="form-check-label" for="inlineRadio2">Modular</label>
                      </div>
                   </div>
@@ -250,11 +250,11 @@
                            <label>Tumor anexial</label>
                            <br>
                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                              <input class="form-check-input" type="radio" name="tumoraxial" id="si" value="1">
                               <label class="form-check-label" for="inlineRadio1">Si</label> 
                            </div>
                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                              <input class="form-check-input" type="radio" name="tumoraxial" id="no" value="2">
                               <label class="form-check-label" for="inlineRadio2">No</label>
                            </div>
                            <input type="text" id="conclusion" id="tumorAnexial-com" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
@@ -384,5 +384,7 @@
   </main>
 
   <?php require_once("componentes/scripts.php"); ?>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiapelvica.js"></script>
 </body>
 </html>

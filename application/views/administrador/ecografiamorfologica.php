@@ -224,19 +224,19 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                     <input class="form-check-input" type="radio" name="sexo" id="masculino" value="M">
                      <label class="form-check-label" for="inlineRadio1">Masculino</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="sexo" id="femenino" value="F">
                      <label class="form-check-label" for="inlineRadio2">Femenino</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="sexo" id="novisible" value="N">
                      <label class="form-check-label" for="inlineRadio2">No visible</label>
                    </div>
                  </div>
@@ -247,19 +247,19 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                     <input class="form-check-input" type="radio" name="situacion" id="cefa" value="cefalico">
                      <label class="form-check-label" for="inlineRadio1">Cefalico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                     <label class="form-check-label" for="inlineRadio2">Podatico</label>
+                     <input class="form-check-input" type="radio" name="situacion" id="poda" value="podolico">
+                     <label class="form-check-label" for="inlineRadio2">Podalico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                     <input class="form-check-input" type="radio" name="situacion" id="indi" value="indiferente">
                      <label class="form-check-label" for="inlineRadio2">Indiferente</label>
                    </div>
                  </div>
@@ -454,6 +454,6 @@
 
   <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
-  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiahisterosonografia.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiamorfologica.js"></script>
 </body>
 </html>
