@@ -171,12 +171,12 @@
                     </div>
                     <div class="col-md-5">
                         <ul class="list-inline ">
-                            <li class="mt-1">0 Mts</li>
-                            <li class="mt-0">0 Kg</li>
-                            <li class="mt-1">0 IMC</li>
-                            <li class="mt-0">0 C</li>
-                            <li class="mt-2">0 r/m</li>
-                            <li class="mt-1">0 mmHg</li>
+                            <li class="mt-1" id="estatura"></li>
+                            <li class="mt-0" id="peso"> </li>
+                            <li class="mt-1" id="imc"> </li>
+                            <li class="mt-0" id="temperatura"></li>
+                            <li class="mt-2" id="respiratoria"></li>
+                            <li class="mt-1" id="cardiaca"> </li>
                             <li class="mt-0">0 %</li>
                           </ul>
                     </div>
@@ -470,5 +470,8 @@
           </div>
         </div>
       </div>
+
+      <?php require_once("componentes/scripts.php"); ?>
+      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
    </body>
 </html>

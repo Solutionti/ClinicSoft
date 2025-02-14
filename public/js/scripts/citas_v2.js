@@ -1,83 +1,51 @@
 var dias = [
-
-	"Domingo",
-
-	"Lunes",
-
-	"Martes",
-
-	"Mierc.",
-
-	"Jueves",
-
-	"Viernes",
-
-	"Sabado",
-
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Mierc.",
+  "Jueves",
+  "Viernes",
+  "Sabado",
 ];
 
 $(document).ready(function () {
-
 	$("#table-citas").DataTable();
-
 });
 
-
-
 $("#lupa_DNI").click(function () {
-
 	VAL_Search_DNI();
-
 });
 
 $("#dni").keyup(function (e) {
-
   e.defaultPrevented;
-
   if (e.which == 13) {
-
     VAL_Search_DNI();
-
   }
-
 });
 
 function Cont_closest(bloque) {
 
 	$(bloque).block({
-
 		message: '<div class="ft-refresh-cw icon-spin font-medium-2"></div>',
-
 		overlayCSS: {
-
-			backgroundColor: "#fff",
-
-			opacity: 0.8,
-
-			cursor: "wait",
-
+		  backgroundColor: "#fff",
+		  opacity: 0.8,
+		  cursor: "wait",
 		},
 
 		css: {
-
-			border: 0,
-
-			padding: 0,
-
-			backgroundColor: "transparent",
-
+		  border: 0,
+		  padding: 0,
+		  backgroundColor: "transparent",
 		},
 
 	});
 
 }
 
-
-
 function VAL_Search_DNI() {
 
 	var url1 = baseurl + "buscarpaciente",
-
 		dni = $("#dni").val();
 
 	if (dni.length >= 8) {
@@ -97,38 +65,24 @@ function VAL_Search_DNI() {
 			$("#nombre").val(datos.apellido_paterno +" "+datos.apellido_materno+" "+datos.nombres);
         } else {
 			$("body").overhang({
-
                 type: "error",
-
                 message:
-
                   "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-
               });
         }
-
       },
-
       error: function () {
-
         $("body").overhang({
-
           type: "error",
-
           message:
-
             "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-
         });
-
       },
 
     });
 
 	} else {
-
 		warning("Minimo debe ingresar 8 digitos");
-
 	}
 
 }
@@ -138,87 +92,47 @@ function VAL_Search_DNI() {
 function Get_Horarios(insert_hora) {
 
 	$("#Cont_Horas").empty();
-
 	var url2 = baseurl + "administracion/traerhorarios",
-
 		fecha = $("#fecha").val(),
-
 		medico = $("#medico").val();
 
-
-
 	if (fecha != "" && medico != "") {
-
 		$.ajax({
-
-			url: url2,
-
-			method: "POST",
-
-			data: { medico: medico, fecha: fecha },
-
+		  url: url2,
+		  method: "POST",
+		  data: { medico: medico, fecha: fecha },
 			success: function (data) {
-
 				data = JSON.parse(data);
-
 				$("#hora").empty();
-
 				$("#hora").append('<option value="">Seleccionar</option>');
-
 				var stta = true;
 
 				if (data.acction == 1) {
-
 					var arrr = data.horarios_mostrar;
-
 					if(arrr != false){
-
 						for (let i = 0; i < arrr.length; i++) {
-
 							if (
-
-								arrr[i]["hora"] > insert_hora &&
-
-								stta == true &&
-
-								insert_hora != ""
-
+							  arrr[i]["hora"] > insert_hora &&
+							  stta == true &&
+							  insert_hora != ""
 							) {
-
 								stta = false;
-
 								$("#Cont_Horas").append(
-
 									'<button type="button" onclick="btn_clock(this,' +
-
 										"'" +
-
 										insert_hora +
-
 										"'" +
-
 										')" class="btn_clock btn bg-gradient-warning" ><i class="fa fa-clock"></i>  ' +
-
 										insert_hora +
-
 										"</button>"
-
 								);
-
 								$("#hora").append(
-
 									'<option value="' +
-
 										insert_hora +
-
 										'">' +
-
 										insert_hora +
-
 										"</option>"
-
 								);
-
 								/*
 
 								console.log(
@@ -236,63 +150,35 @@ function Get_Horarios(insert_hora) {
 								);
 
 								*/
-
 							}
 
 							$("#Cont_Horas").append(
-
 								'<button type="button" onclick="btn_clock(this,' +
-
 									"'" +
-
 									arrr[i]["hora"] +
-
 									"'" +
-
 									')" class="btn_clock btn bg-gradient-info" ><i class="fa fa-clock"></i>  ' +
-
 									arrr[i]["hora"] +
-
 									"</button>"
-
 							);
 
 							$("#hora").append(
-
 								'<option value="' +
-
 									arrr[i]["hora"] +
-
 									'">' +
-
 									arrr[i]["hora"] +
-
 									"</option>"
-
 							);
-
 						}
-
 					}else{
-
-
-
-							$("#Cont_Horas").append(
-
-								'<button type="button" onclick="btn_clock(this,' +
-
+					  $("#Cont_Horas").append(
+					  '<button type="button" onclick="btn_clock(this,' +
 									"'" +
-
 									insert_hora +
-
 									"'" +
-
 									')" class="btn_clock btn bg-gradient-warning" ><i class="fa fa-clock"></i>  ' +
-
 									insert_hora +
-
 									"</button>"
-
 							);
 
 							$("#hora").append(
@@ -320,39 +206,22 @@ function Get_Horarios(insert_hora) {
 					});
 
 				} else if (data.acction == 2) {
-
 					$("#Cont_Horas").append(
-
 						"No se encontraron horarios libres para esta fecha, intente con otra fecha o doctor."
-
 					);
 
-					
-
 					$("body").overhang({
-
 						type: "info",
-
-						message:
-
-							"No se encontraron horarios libres para esta fecha, intente con otra fecha o doctor."
-
+						message: "No se encontraron horarios libres para esta fecha, intente con otra fecha o doctor."
 					});
-
 				}
-
 			},
 
 			error: function () {
 
 				$("body").overhang({
-
 					type: "error",
-
-					message:
-
-						"Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-
+					message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
 				});
 
 			},

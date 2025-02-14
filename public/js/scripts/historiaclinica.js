@@ -527,8 +527,31 @@ $("#ecografias").on("change", function() {
     }
     else if ($("#ecografias").val() == "obstetrica") {
         $("#ecografiaobstetrica").modal("show");
-    }
-    
+    } 
+});
+
+$(document).ready(function (){
+    var url1 = baseurl + "administracion/triajehistorias",
+        documento = '1110542802';
+
+        $.ajax( {
+          url: url1,
+          method: "POST",
+          data: { documento: documento  },
+          success: function (data) {
+            data = JSON.parse(data);
+              console.log(data);
+              
+              document.getElementById('estatura').innerHTML = data.talla + ' Mts';
+              document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
+              document.getElementById('peso').innerHTML = data.peso + ' Kg';
+              document.getElementById('imc').innerHTML = data.imc + ' IMC';
+              document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
+              document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
+
+          }
+        });
+  
 })
 
 const reloadPage = () => {

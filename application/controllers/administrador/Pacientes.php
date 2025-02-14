@@ -146,7 +146,6 @@ class Pacientes extends Admin_Controller {
 		$apellido = $this->input->post("apellido");
 
 		$result = $this->Pacientes_model->getPacienteTabla($id, $apellido)->result();
-		
 		if($result == 0) {
 		  echo "error"; 
 		}
