@@ -66,13 +66,10 @@ class Atencion extends Admin_Controller {
 	public function searchAtencion() {
 
 		$dni = $this->input->post("dni");
-
 		$result = $this->Atencion_model->searchAtencion($dni);
-
 		if($result){
 		  echo json_encode($result);
 		}
-
 		else {
 		  echo "error";
 		}

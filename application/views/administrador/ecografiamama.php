@@ -174,20 +174,36 @@
           <div class="form-group input-group-sm">
           <label>DNI Paciente</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
+              <input
+                type="text"
+                class="form-control"
+                id="dni"
+                style="height: 32px;padding: 0px;"
+                minlength="7"
+                maxlength="11"
+                required
+              >
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()" ><i class="fa fa-search"></i></button>
-              </div>
-            </div>
+             <button
+               type="button"
+               style="padding: 5px;"
+               class="btn btn-primary"
+               id="lupa_DNI"
+               onclick="buscarPaciente()"
+             >
+               <i class="fa fa-search"></i>
+              </button>
+           </div>
           </div>
         </div>
-    
+      </div>
     <div class="col-md-3">
-        <label class="form-label">Nombre</label>
+        <label class="form-label">Nombres</label>
         <input
             type="text"
             class="form-control form-control-sm"
             id="nombre"
+            readonly
         >
     </div>
 
@@ -197,28 +213,29 @@
             type="text"
             class="form-control form-control-sm"
             id="apellidos"
+            readonly
         >
     </div>
 
     <div class="col-md-1">
         <label class="form-label">Edad</label>
         <input
-            type="text"
-            class="form-control form-control-sm"
-            id="edad"
+          type="text"
+          class="form-control form-control-sm"
+          id="edad"
+          readonly
         >
     </div>
-
     <div class="col-md-2">
-        <label class="form-label">HC</label>
-        <input
-            type="text"
-            class="form-control form-control-sm"
-            id="hc"
-
-        >
-        </div>
-        </div>
+      <label class="form-label">HC</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="hc"
+        readonly
+      >
+    </div>
+  </div>
          
                <div class="row">
                   <div class="col-md-4">
