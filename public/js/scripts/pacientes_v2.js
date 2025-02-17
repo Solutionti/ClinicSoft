@@ -426,7 +426,7 @@ function buscarPacienteBaseDatos() {
        document.getElementById('table_buscar').querySelector('tbody').appendChild(tr);
 	   });
 	// cadena = "<tr onclick='pasarDatosPaciente(\"" + pacientes.documento + "\")'><td><div class='form-check'><input class='form-check-input' type='radio' name='flexRadioDefault' id='flexRadioDefault1' id='checkpacientes'></div></td><td><div class='d-flex px-2 py-1'><div><img src='https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg' class='avatar avatar-sm me-3'></div><div class='d-flex flex-column justify-content-center'><p class='mb-0 text-xs text-uppercase'>"+pacientes.nombre + ' ' +pacientes.apellido+"</p><p class='text-xs text-secondary mb-0 text-uppercase'>"+pacientes.documento+"</p></div></div></td><td>"+pacientes.telefono+"</td><td>"+pacientes.fecha_nacimiento+"</td><td>"+pacientes.sexo+"</td><td>"+pacientes.estado_civil+"</td></tr>";
-	//    document.getElementById("table_buscar").innerHTML = cadena;
+	// document.getElementById("table_buscar").innerHTML = cadena;
 }
 	},
 	error: function() {

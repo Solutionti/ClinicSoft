@@ -139,13 +139,13 @@
   <div class="table-responsive" >
     <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-colposcopia">
       <thead>
-        <tr>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Opciones</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Informe</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Paciente</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Fecha</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Medico</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Imagenes</th>
+        <tr class="bg-default">
+          <th class="text-uppercase text-white text-xxs font-weight-bolder opacity-12">Opciones</th>
+          <th class="text-uppercase text-white text-xxs font-weight-bolder opacity-12">Informe</th>
+          <th class="text-uppercase text-white text-xxs font-weight-bolder opacity-12">Paciente</th>
+          <th class="text-uppercase text-white text-xxs font-weight-bolder opacity-12">Fecha</th>
+          <th class="text-uppercase text-white text-xxs font-weight-bolder opacity-12 ps-2">Medico</th>
+          <th class="text-center text-uppercase text-white text-xxs font-weight-bolder opacity-12">Imagenes</th>
         </tr>
       </thead>
       <tbody>

@@ -53,12 +53,9 @@ class Ecografias extends Admin_Controller {
       $this->load->view("administrador/ecografiavenosa");
     }
   
-      
-
-    
-    
     public function createEcografiaMama() {
-
+      //print_r($this->input->post());
+      //exit;
       $documento_paciente = $this->input->post("documento_paciente");
       $codigo_doctor = $this->input->post("codigo_doctor");
       $pezon_izq = $this->input->post("pezon_izq");

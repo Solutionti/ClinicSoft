@@ -174,20 +174,36 @@
           <div class="form-group input-group-sm">
           <label>DNI Paciente</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
+              <input
+                type="text"
+                class="form-control"
+                id="dni"
+                style="height: 32px;padding: 0px;"
+                minlength="7"
+                maxlength="11"
+                required
+              >
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()" ><i class="fa fa-search"></i></button>
-              </div>
-            </div>
+             <button
+               type="button"
+               style="padding: 5px;"
+               class="btn btn-primary"
+               id="lupa_DNI"
+               onclick="buscarPaciente()"
+             >
+               <i class="fa fa-search"></i>
+              </button>
+           </div>
           </div>
         </div>
-    
+      </div>
     <div class="col-md-3">
-        <label class="form-label">Nombre</label>
+        <label class="form-label">Nombres</label>
         <input
             type="text"
             class="form-control form-control-sm"
             id="nombre"
+            readonly
         >
     </div>
 
@@ -197,43 +213,43 @@
             type="text"
             class="form-control form-control-sm"
             id="apellidos"
+            readonly
         >
     </div>
 
     <div class="col-md-1">
         <label class="form-label">Edad</label>
         <input
-            type="text"
-            class="form-control form-control-sm"
-            id="edad"
+          type="text"
+          class="form-control form-control-sm"
+          id="edad"
+          readonly
         >
     </div>
-
     <div class="col-md-2">
-        <label class="form-label">HC</label>
-        <input
-            type="text"
-            class="form-control form-control-sm"
-            id="hc"
-
-        >
-        </div>
-        </div>
-         
-               <div class="row">
-                  <div class="col-md-4">
+      <label class="form-label">HC</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="hc"
+        readonly
+      >
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-md-4">
                      <h6 class="text-danger">MAMA IZQUIERDA</h6>
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-danger">Pezon</label>
-                              <input type="text" id="pezon-izq" class="form-control form-control-sm">
+                              <input type="text" id="pezon_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-danger">TCSC</label>
-                              <input type="text" id="tcsc-izq" class="form-control form-control-sm">
+                              <input type="text" id="tcsc_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -241,13 +257,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-danger">Tejido glandular</label>
-                              <input type="text" id="tejidoGlandular-izq" class="form-control form-control-sm">
+                              <input type="text" id="tejido_glandular_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-danger">Axila</label>
-                              <input type="text" id="axila-izq" class="form-control form-control-sm">
+                              <input type="text" id="axila_izq" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -255,7 +271,7 @@
                         <div class="col-md-12">
                            <div class="form-group">
                               <label class="text-danger">Comentario</label>
-                              <textarea class="form-control" id="comentario-mama-izq"></textarea>
+                              <textarea class="form-control" id="comentario_mama_izq"></textarea>
                            </div>
                         </div>
                      </div>
@@ -266,13 +282,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-primary">Pezon</label>
-                              <input type="text" id="pezon-der" class="form-control form-control-sm">
+                              <input type="text" id="pezon_der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-primary">TCSC</label>
-                              <input type="text" id="tcsc-der" class="form-control form-control-sm">
+                              <input type="text" id="tcsc_der" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -280,13 +296,13 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-primary">Tejido glandular</label>
-                              <input type="text" id="tejidoGlandular-der" class="form-control form-control-sm">
+                              <input type="text" id="tejido_glandular_der" class="form-control form-control-sm">
                            </div>
                         </div>
                         <div class="col-md-6">
                            <div class="form-group">
                               <label class="text-primary">Axila</label>
-                              <input type="text" id="axila-der" class="form-control form-control-sm">
+                              <input type="text" id="axila_der" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -294,7 +310,7 @@
                         <div class="col-md-12">
                            <div class="form-group">
                               <label class="text-primary">Comentario</label>
-                              <textarea id="comentario-der" class="form-control"></textarea>
+                              <textarea id="comentario_der" class="form-control"></textarea>
                            </div>
                         </div>
                      </div>
@@ -303,21 +319,21 @@
                      <h6 class="text-info "> FINAL </h6>
                      <div class="form-group">
                         <label>Conclusión</label>
-                        <textarea class="form-control" id="conclusion-mama" rows="4"></textarea>
+                        <textarea class="form-control" id="conclusion_mama" rows="4"></textarea>
                      </div>
                      <div class="form-group">
                         <label class="mt-2">Sugerencias</label>
-                        <textarea class="form-control" id="sugerencias-mama"></textarea>
+                        <textarea class="form-control" id="sugerencias_mama"></textarea>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-danger" id=""> <i class="fas fa-file-pdf"></i> PDF</button>
-                  <button type="button" class="btn btn-primary" id="">Guardar</button>
+                  <button type="button" class="btn btn-primary" onclick="createEcografiaMama()">Guardar</button>
                </div>
             </div>
          </div>
-      </div>
+      </div>          
       </div>
       </div>
       </div>
@@ -327,7 +343,8 @@
    </div>
    </div>
     </div>
-  </main>
+  </main>       
+              
 
   <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>

@@ -8,15 +8,16 @@ class Atencion_model extends CI_model {
 
     public function searchAtencion($dni) {
 
-        $this->db->select("nombre,hc,apellido");
+        $this->db->select("nombre,hc,apellido,fecha_nacimiento");
         $this->db->from("pacientes");
         $this->db->where("documento", $dni);
         $result = $this->db->get();
+
         if($result->num_rows() > 0) {
-            return $result->row();
+          return $result->row();
         }
         else {
-            return 0;
+          return 0;
         }
     }
 

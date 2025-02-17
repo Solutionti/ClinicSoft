@@ -142,10 +142,11 @@ $route["administracion/consultarkardex"] = "administrador/inventarios/consultark
 $route["administracion/pdfinventarios"] = "administrador/inventarios/generarpdfinventarios";
 $route["administracion/pdfkardex"] = "administrador/inventarios/generarpdfkardex";
 
-//ECOGRAFIAS
-$route["administracion/ecografiamama"] = "administrador/ecografias/ecografiamama";
-$route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
+//ECOGRAFIAS CREAR
+$route["administracion/ecografiamama"] = "administrador/ecografias/createEcografiaMama";
 
+//
+$route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 //PQRS
 $route["administracion/pqrs"] = "administrador/pqrs";
 
