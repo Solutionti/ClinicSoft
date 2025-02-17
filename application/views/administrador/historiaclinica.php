@@ -190,7 +190,7 @@
               <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
-                      <ul
+                      <!-- <ul
                         class="list-inline"
                         *ngFor="let archivos of archivospdf"
                       >
@@ -204,7 +204,7 @@
                           </a>
                          </li>
                         <small>1 mb | 26-12-1993</small>
-                      </ul>
+                      </ul> -->
 
                       <button
                         class="btn btn-primary btn-xs"
@@ -367,9 +367,9 @@
       </div>
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
-          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
+          <!-- <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
               <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> EXAMENES AUXULIARES</span>
-          </a>
+          </a> -->
         </div>
         <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
           <div class="accordion-body">
@@ -482,7 +482,7 @@
       <div class="modal-body">
         <!--  -->
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8">
             <label>Tipo de historia clinica</label>
             <select
               class="form-control"
@@ -492,6 +492,15 @@
               <option value="1">CONSULTA GENERAL</option>
               <option value="2">CONSULTA DE GINECOLOGIA</option>
             </select>
+          </div>
+          <div class="col-md-2">
+            <label>Documento</label>
+            <input
+              type="number"
+              class="form-control"
+              id="documento_historia"
+              readonly
+            >
           </div>
           <div class="col-md-2">
             <label>Cons Historia</label>
@@ -1168,7 +1177,7 @@
                 <label>Tipo de alergia</label>
                 <select
                   class="form-control"
-                  formControlName="tpalergia"
+                  id="tpalergia"
                 >
                   <option value="">SELECCIONA UNA OPCION</option>
                   <option value="Medicamentos">ALERGIA A MEDICAMENTOS</option>
@@ -1181,7 +1190,7 @@
                  <label>Descripcion</label>
                  <textarea
                    class="form-control"
-                   formControlName="descripcion_alergia"
+                   id="descripcion_alergia"
                  ></textarea>
                </div>
              </div>
@@ -1190,8 +1199,7 @@
               <div class="col-md-12">
                 <button
                   class="btn btn-primary"
-                  (click)="createAlergias()"
-                  [disabled]="alergiasForm.invalid"
+                  onclick="crearAlergias()"
                 >
                   Guardar
                 </button>
@@ -1201,48 +1209,21 @@
           </div>
           <div class="tab-pane fade" id="nav-medicamentos" role="tabpanel" aria-labelledby="nav-medicamentos-tab" tabindex="0">
             <div class="container">
-              <form [formGroup]="medicamentosForm">
                 <div class="row mt-4">
-                  <div class="col-md-3">
-                    <label>Fecha</label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      formControlName="fecha_medicamento"
-                    >
-                  </div>
-                  <div class="col-md-4">
-                    <label>Doctor</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="doctor_medicamento"
-                    >
-                  </div>
-                  <div class="col-md-5">
-                    <label>Paciente</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="paciente_medicamento"
-                    >
-                  </div>
-                </div>
-                <div class="row mt-3">
                   <div class="col-md-7">
                     <label>Medicamento</label>
                     <div class="input-group ">
                       <input
                         type="text"
                         class="form-control"
-                        formControlName="medicamento_medicamento"
+                        id="medicamento_medicamento"
                       >
-                      <button
+                      <!-- <button
                         class="btn btn-primary"
                         type="button"
                       >
                         <i class="fas fa-eye"></i>
-                      </button>
+                      </button> -->
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -1250,14 +1231,14 @@
                     <input
                       type="number"
                       class="form-control"
-                      formControlName="cantidad_medicamento"
+                      id="cantidad_medicamento"
                     >
                   </div>
                   <div class="col-md-3">
                     <label>Dosis</label>
                     <select
                       class="form-control text-uppercase"
-                      formControlName="dosis_medicamento"
+                      id="dosis_medicamento"
                     >
                       <option value="">Seleccione la dosis</option>
                       <option value="Noespecificada">No especifica</option>
@@ -1284,7 +1265,7 @@
                     <label>Via Aplicación</label>
                     <select
                       class="form-control text-uppercase"
-                      formControlName="via_aplicacion_medicamento"
+                      id="via_aplicacion_medicamento"
                     >
                       <option value="">Seleccione la via aplicación</option>
                         <option value="Via_oral">Via oral</option>
@@ -1313,7 +1294,7 @@
                     <label>Frecuencia</label>
                     <select
                       class="form-control text-uppercase"
-                      formControlName="frecuencia_medicamento"
+                      id="frecuencia_medicamento"
                     >
                     <option value="">Seleccione la frecuencia</option>
                         <option value="No_especifica">No especifica</option>
@@ -1342,7 +1323,7 @@
                     <label>Duración</label>
                     <select
                       class="form-control text-uppercase"
-                      formControlName="duracion_medicamento"
+                      id="duracion_medicamento"
                     >
                       <option value="">Seleccione la duración</option>
                         <option value="cinco_dias">05 días</option>
@@ -1358,12 +1339,11 @@
                     </select>
                   </div>
                 </div>
-              </form>
               <div class="row mt-3">
                 <div class="col-md-12">
                   <button
                     class="btn btn-primary"
-                    (click)="crearMedicamentos()"
+                    onclick="crearMedicamento()"
                   >
                     Guardar
                   </button>
