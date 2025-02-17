@@ -406,9 +406,9 @@
                           <div class="d-grid gap-2">
                             <button
                               class="btn btn-primary rounded-pill"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                            >
+                              >
+                              <!-- data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop" -->
                             <i class="fas fa-calendar-alt"></i> Nueva Consulta
                             </button>
                           </div>
@@ -1366,8 +1366,8 @@
 <div class="modal fade" id="archivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="archivosLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="archivosLabel">SUBIR ARCHIVOS</h1>
+      <div class="modal-header bg-default">
+        <h1 class="modal-title fs-5 text-white" id="archivosLabel">SUBIR ARCHIVOS</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

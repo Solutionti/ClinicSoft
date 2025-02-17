@@ -300,6 +300,14 @@ class Historiaclinica extends Admin_Controller {
 		echo json_encode($result);
 	}
 
+	public function getconsecutivoGeneral() {
+
+	}
+
+	public function getConsecutivoGinecologica() {
+
+	}
+
 	public function crearAlergias() {
 	  $dni_paciente = $this->input->post("dni_paciente");	
 	  $tipo_alergia = $this->input->post("tipo_alergia");	
