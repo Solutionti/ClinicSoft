@@ -188,6 +188,7 @@
             type="text"
             class="form-control form-control-sm"
             id="nombre"
+            readonly
          >
     </div>
 
@@ -197,6 +198,7 @@
             type="text"
             class="form-control form-control-sm"
             id="apellidos"
+            readonly
         >
     </div>
 
@@ -206,6 +208,7 @@
             type="text"
             class="form-control form-control-sm"
             id="edad"
+            readonly
          >
     </div>
 
@@ -215,6 +218,7 @@
             type="text"
             class="form-control form-control-sm"
             id="hc"
+            readonly
          >
         </div>
         </div>
@@ -382,7 +386,7 @@
                            <div class="form-group">
                               <label>LF (mm)
                               </label>
-                              <input type="number" id="axila-der" class="form-control form-control-sm">
+                              <input type="number" id="lf" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>
@@ -421,7 +425,7 @@
                         <div class="col-md-6">
                            <div class="form-group">
                               <label>LCF (x min)</label>
-                              <input type="number" id="axila-der" class="form-control form-control-sm">
+                              <input type="number" id="lcf" class="form-control form-control-sm">
                            </div>
                         </div>
                      </div>

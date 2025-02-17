@@ -188,6 +188,7 @@
             type="text"
             class="form-control form-control-sm"
             id="nombre"
+            readonly
         >
     </div>
 
@@ -197,6 +198,7 @@
             type="text"
             class="form-control form-control-sm"
             id="apellidos"
+            readonly
         >
     </div>
 
@@ -206,6 +208,7 @@
             type="text"
             class="form-control form-control-sm"
             id="edad"
+            readonly
         >
     </div>
 
@@ -215,6 +218,7 @@
             type="text"
             class="form-control form-control-sm"
             id="hc"
+            readonly
         >
         </div>
         </div>
@@ -257,7 +261,7 @@
                               <input class="form-check-input" type="radio" name="tumoranexial" id="no" value="2">
                               <label class="form-check-label" for="inlineRadio2">No</label>
                            </div>
-                           <input type="text" id="conclusion" id="tumorAnexial-com" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
+                           <input type="text" id="tumorAnexial-com" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
                         </div>
                      </div>
                      <div class="col-md-8 ">
@@ -357,7 +361,7 @@
                   <div class="row">
                      <div class="col-md-6">
                         <label>Conclusión</label>
-                        <textarea id="conclusion" class="form-control form-control-sm" rows="2"></textarea>
+                        <textarea id="conclusion_izq" class="form-control form-control-sm" rows="2"></textarea>
                      </div>
                      <div class="col-md-6">
                         <label>Sugerencias</label>

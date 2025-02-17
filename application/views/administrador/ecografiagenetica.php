@@ -190,6 +190,7 @@
             class="form-control form-control-sm"
             formControlName="nombre_ecografia_abdomninal"
             id="nombre"
+            readonly
         >
     </div>
 
@@ -200,6 +201,7 @@
             class="form-control form-control-sm"
             formControlName="apellido_ecografia_abdomninal"
             id="apellidos"
+            readonly
         >
     </div>
 
@@ -210,6 +212,7 @@
             class="form-control form-control-sm"
             formControlName="edad_ecografia_abdomninal"
             id="edad"
+            readonly
 
         >
     </div>
@@ -221,6 +224,7 @@
             class="form-control form-control-sm"
             formControlName="hc_ecografia_abdomninal"
             id="hc"
+            readonly
         >
     </div>
       </div>
