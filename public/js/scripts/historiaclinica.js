@@ -413,45 +413,50 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
 
 $("#guardarhistoriageneral").on("click", function (){
     var url2 = baseurl + "administracion/crearhistoriageneral",
-    dni = $("#dni1").val(),
+    dni = $("#documento_historia").val(),
     doctorid = $("#doctorid1").val(),
     triaje = $("#triajeid1").val(),
-    anamnesis = $("#anamnesis2").val(),
-    empresa = $("#empresa2").val(),
-    compania = $("#compania2").val(),
-    iafa = $("#iafa2").val(),
-    acompanante = $("#acompanante2").val(),
-    dni3 = $("#dni3").val(),
-    celular = $("#celular2").val(),
-    motivo_consulta = $("#motivo_consulta2").val(),
-    tratamiento_anterior = $("#tratamiento_anterior2").val(),
-    enfermedad_actual = $("#enfermedad_actual2").val(),
-    tp_enfermedad = $("#tp_enfermedad2").val(),
-    inicio = $("#inicio2").val(),
-    curso = $("#curso2").val(),
-    sintomas = $("#sintomas2").val(),
-    cabeza = $("#cabeza2").val(),
-    cuello = $("#cuello2").val(),
-    ap_respiratorio = $("#ap_respiratorio2").val(),
-    ap_cardio = $("#ap_cardio2").val(),
-    abdomen = $("#abdomen2").val(),
+    // 
+    anamnesis = $("#anamnesis_directa").val(),
+    empresa = $("#anamnesis_empresa").val(),
+    compania = $("#anamnesis_compañia").val(),
+    iafa = $("#anamnesis_iafa").val(),
+    acompanante = $("#anamnesis_acompanante").val(),
+    dni3 = $("#anamnesis_dni").val(),
+    celular = $("#anamnesis_celular").val(),
+    motivo_consulta = $("#anamnesis_consulta").val(),
+    tratamiento_anterior = $("#anamnesis_tratamiento").val(),
+    enfermedad_actual = $("#anamnesis_enfermedad").val(),
+    tp_enfermedad = $("#anamnesis_tiempo").val(),
+    inicio = $("#anamnesis_inicio").val(),
+    curso = $("#anamnesis_curso").val(),
+    sintomas = $("#anamnesis_sintomas").val(),
+    // 
+    cuello = $("#fisico_cuello").val(),
+    abdomen = $("#fisico_abdomen").val(),
+    ap_respiratorio = $("#fisico_respiratorio").val(),
+    ap_cardio = $("#fisico_cardio").val(),
+    sistema_nervioso = $("#fisico_sistema").val(),
+    cabeza = $("#fisico_cabeza").val(),
+    locomotor = $("#fisico_locomotor").val(),
+    apetito = $("#fisico_apetito").val(),
+    sed = $("#fisico_sed").val(),
+    orina = $("#fisico_orina").val(),
+    
     ap_genito = $("#ap_genito2").val(),
-    locomotor = $("#locomotor2").val(),
-    sistema_nervioso = $("#sistema_nervioso2").val(),
-    apetito = $("#apetito2").val(),
-    sed = $("#sed2").val(),
-    orina = $("#orina2").val(),
-    examendx = $("#examendx2").val(),
-    procedimientos = $("#procedimientos2").val(),
-    interconsultas = $("#interconsultas2").val(),
-    tratamiento = $("#tratamiento2").val(),
-    referencia = $("#referencia2").val(),
-    cita = $("#cita2").val(),
-    firma = $("#firma2").val();
+    // 
+    examendx = $("#plan_examen").val(),
+    procedimientos = $("#plan_procedimiento").val(),
+    interconsultas = $("#plan_interconsulta").val(),
+    tratamiento = $("#plan_tratamiento").val(),
+    referencia = $("#plan_referencia").val(),
+    firma = $("#plan_firma").val();
+
     let diagnosticosgeneral = [];
     for (let i = 0; i < elementos_general.length; i++) {
         diagnosticosgeneral [i] = elementos_general[i][0];
     }
+
     $.ajax({
         url: url2,
         method: "POST",
@@ -490,7 +495,6 @@ $("#guardarhistoriageneral").on("click", function (){
             interconsultas: interconsultas,
             tratamiento: tratamiento,
             referencia: referencia,
-            cita: cita,
             firma: firma
         },
         success: function () {

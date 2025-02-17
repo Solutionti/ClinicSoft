@@ -338,7 +338,7 @@ class Historias_model extends CI_model {
         $this->db->from("historial_pacientes");
         $this->db->where("paciente", $documento);
         $this->db->where("tipo_consulta", 2);
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('codigo_historial_paciente', 'DESC');
         $result = $this->db->get();
   
         return $result; 
