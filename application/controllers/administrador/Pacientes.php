@@ -79,6 +79,7 @@ class Pacientes extends Admin_Controller {
 		echo json_encode($resultado);
 	}
 
+
 	public function actualizarPaciente() {
 		$dni = $this->input->post("dni");
 		$id = $this->input->post("id");
