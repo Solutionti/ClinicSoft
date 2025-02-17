@@ -24,6 +24,7 @@ function buscarPaciente() {
               $("#apellidos").val(data.apellido);
               $("#hc").val(data.hc);
               $(".messageError").prop("hidden", true);
+              
               calcularEdad(data.fecha_nacimiento);
           }
       },
@@ -39,7 +40,7 @@ function buscarPaciente() {
 
   function calcularEdad(fechanacimiento) {
     const date = new Date();
-    const cumple =  Date = new Date('"' + fechanacimiento + '"');
+    const cumple = new Date(fechanacimiento);
     // const cumple = new Date("1993-12-26");
 
     let age = date.getFullYear() - cumple.getFullYear();

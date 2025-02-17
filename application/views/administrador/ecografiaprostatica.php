@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecografia Prostatica</title>
     <?php require_once("componentes/head.php"); ?>
+    <style>
+    #observacion_container {
+        display: none; /* Ocultar el textarea al inicio */
+    }
+</style>
 </head>
 <body class="g-sidenav-show bg-gray-100">
   <div class="min-height-300 bg-default position-absolute w-100"></div> 
@@ -176,7 +181,7 @@
             <div class="input-group">
               <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
+          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -187,7 +192,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="nombre_ecografia_abdomninal"
+            id="nombre"
+            readonly
         >
     </div>
 
@@ -196,7 +202,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="apellido_ecografia_abdomninal"
+            id="apellidos"
+            readonly
         >
     </div>
 
@@ -205,7 +212,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="edad_ecografia_abdomninal"
+            id="edad"
+            readonly
         >
     </div>
 
@@ -214,7 +222,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="hc_ecografia_abdomninal"
+            id="hc"
+            readonly
         >
         </div>
         </div>
@@ -229,63 +238,66 @@
             
             <h5 class="mt-4">Hallazgos</h5>
             <h6 class="mt-3">Vejiga</h6>
-            <!-- Vejiga, Paredes, Contenido anecoico e Imágenes expansivas en una sola línea -->
+            <!-- Vejiga, Paredes, Contenido anecoico e Imágenes expansivas  -->
             <div class="row mb-3">
                 <div class="col-md-3">
                     <label for="replicacion" class="form-label">Replicación</label>
                     <select class="form-select form-select-sm" id="replicacion" formControlName="replicacion">
-                        <option>Normal</option>
-                        <option>Mínimo</option>
-                        <option>Excesivo</option>
+                    <option value="normal">Normal</option>
+                    <option value="minimo">Mínimo</option>
+                    <option value="excesivo">Excesivo</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label for="paredes" class="form-label">Paredes</label>
                     <select class="form-select form-select-sm" id="paredes" formControlName="paredes">
-                        <option>Normal</option>
-                        <option>Delgada</option>
-                        <option>Engrosada</option>
+                    <option value="normal">Normal</option>
+                    <option value="delgada">Delgada</option>
+                    <option value="engrosada">Engrosada</option>
                     </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="contenido" class="form-label">Contenido anecoico</label>
-                    <select class="form-select form-select-sm" id="contenido" formControlName="contenido" (change)="onContenidoChange($event)">
-                        <option value="Sí">Sí</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div class="col-md-3" *ngIf="isContenidoAnecoicoNo">
-                    <label for="detalle_contenido" class="form-label">Detalle Contenido</label>
-                    <input type="text" class="form-control form-control-sm" id="detalle_contenido" formControlName="detalle_contenido">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <!-- Imágenes expansivas -->
-                <div class="col-md-3">
-                    <label for="imagenes_expansivas" class="form-label">Imágenes expansivas</label>
-                    <select class="form-select form-select-sm" id="imagenes_expansivas" formControlName="imagenes_expansivas" (change)="onImagenesExpansivasChange($event)">
-                        <option value="No">No</option>
-                        <option value="Sí">Sí</option>
-                    </select>
-                </div>
-                <div class="col-md-3" *ngIf="isImagenesExpansivasSi">
-                    <label for="detalle_imagenes" class="form-label">Detalle Imágenes</label>
-                    <input type="text" class="form-control form-control-sm" id="detalle_imagenes" formControlName="detalle_imagenes">
-                </div>
-                
-                <!-- Cálculos en su interior -->
-                <div class="col-md-3">
-                    <label for="calculos" class="form-label">Cálculos en su interior</label>
-                    <select class="form-select form-select-sm" id="calculos" formControlName="calculos" (change)="onCalculosChange($event)">
-                        <option value="No">No</option>
-                        <option value="Sí">Sí</option>
-                    </select>
-                </div>
-                <div class="col-md-3" *ngIf="isCalculosSi">
-                    <label for="detalle_calculos" class="form-label">Detalle Cálculos</label>
-                    <input type="text" class="form-control form-control-sm" id="detalle_calculos" formControlName="detalle_calculos">
-                </div>
-            </div>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="contenido" class="form-label">Contenido anecoico</label>
+                      <select class="form-select form-select-sm" id="contenido">
+                      <option value="">Seleccione</option>
+                            <option value="Sí">Sí</option>
+                            <option value="No">No</option>
+                      </select>
+                    </div>
+
+                    
+    <div class="col-md-3" id="detalle_contenedor" style="display: none;">
+        <label for="detalle_contenido" class="form-label">Detalle Contenido</label>
+        <input type="text" class="form-control form-control-sm" id="detalle_contenido">
+    </div>
+    <div class="row mb-3">
+    <!-- Imágenes expansivas -->
+    <div class="col-md-3">
+        <label for="imagenes_expansivas" class="form-label">Imágenes expansivas</label>
+        <select class="form-select form-select-sm" id="imagenes_expansivas">
+            <option value="No">No</option>
+            <option value="Sí">Sí</option>
+        </select>
+    </div>
+    <div class="col-md-3" id="detalle_imagenes_contenedor" style="display: none;">
+        <label for="detalle_imagenes" class="form-label">Detalle Imágenes</label>
+        <input type="text" class="form-control form-control-sm" id="detalle_imagenes">
+    </div>
+
+    <!-- Cálculos en su interior -->
+    <div class="col-md-3">
+        <label for="calculos" class="form-label">Cálculos en su interior</label>
+        <select class="form-select form-select-sm" id="calculos">
+            <option value="No">No</option>
+            <option value="Sí">Sí</option>
+        </select>
+    </div>
+    <div class="col-md-3" id="detalle_calculos_contenedor" style="display: none;">
+        <label for="detalle_calculos" class="form-label">Detalle Cálculos</label>
+        <input type="text" class="form-control form-control-sm" id="detalle_calculos">
+    </div>
+</div>
+
             
             <div class="row mb-3">
                 <div class="col-md-4">
@@ -315,8 +327,8 @@
                 <div class="col-md-4">
                     <label for="bordes" class="form-label">Bordes</label>
                     <select class="form-select form-select-sm" id="bordes" formControlName="bordes">
-                        <option>Regulares</option>
-                        <option>Irregulares</option>
+                        <option value="regulares">Regulares</option>
+                        <option value="irregulares">Irregulares</option>
                     </select>
                 </div>
             
@@ -343,17 +355,18 @@
             </div>
             
             <div class="d-flex align-items-center mt-4">
-                <h6 class="mb-0">Observaciones</h6>
-                <div class="ms-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="otra" id="otra" formControlName="observacion" (change)="onObservacionChange($event)">
-                        <label class="form-check-label" for="otra">Agregar</label>
-                    </div>
-                </div>
+        <h6 class="mb-0">Observaciones</h6>
+        <div class="ms-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="otra" id="otra">
+                <label class="form-check-label" for="otra">Agregar</label>
             </div>
-            <div class="mt-3" *ngIf="isObservacionOtra">
-                <textarea class="form-control form-control-sm" id="observacion_textarea" formControlName="observacion_textarea" rows="3" placeholder="Escriba su observación"></textarea>
-            </div>
+        </div>
+    </div>
+
+    <div class="mt-3" id="observacion_container">
+        <textarea class="form-control form-control-sm" id="observacion_textarea" rows="3" placeholder="Escriba su observación"></textarea>
+    </div>
             
             <h6 class="mt-4">Conclusiones</h6>
             <div class="mb-3">
@@ -390,5 +403,7 @@
   </main>
 
   <?php require_once("componentes/scripts.php"); ?>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiaprostatica.js"></script>
 </body>
 </html>
