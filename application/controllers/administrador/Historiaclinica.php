@@ -36,7 +36,6 @@ class Historiaclinica extends Admin_Controller {
 			"docPatologia" => $docPatologias,
 			"docEcografia" => $docEcografias,
 			"diagnostico" => $diagnosticos,
-			// "linea" => $lineas,
 			"procedimiento" => $procedimientos
 		];
 		$this->load->view('administrador/historiaclinica', $data);
@@ -299,6 +298,44 @@ class Historiaclinica extends Admin_Controller {
 		$result = $this->Historias_model->getTriajeId($idpaciente);
 
 		echo json_encode($result);
+	}
+
+	public function crearAlergias() {
+	  $dni_paciente = $this->input->post("dni_paciente");	
+	  $tipo_alergia = $this->input->post("tipo_alergia");	
+	  $descripcion = $this->input->post("descripcion");
+
+	  $datos = [
+		"dni_paciente" => $dni_paciente,
+		"tipo_alergia" => $tipo_alergia,
+		"descripcion" => $descripcion,
+	  ];
+
+	  $this->Historias_model->crearAlergias($datos);
+	}
+
+	public function crearMedicamento() {
+	  $doctor = $this->input->post("doctor");		
+	  $paciente = $this->input->post("paciente");		
+	  $medicamento = $this->input->post("medicamento");		
+	  $cantidad = $this->input->post("cantidad");		
+	  $dosis = $this->input->post("dosis");		
+	  $via_aplicacion = $this->input->post("via_aplicacion");		
+	  $frecuencia = $this->input->post("frecuencia");		
+	  $duracion = $this->input->post("duracion");
+	  
+	  $datos = [
+	    "doctor" => $doctor,		
+	    "paciente" => $paciente,		
+	    "medicamento" => $medicamento,		
+	    "cantidad" => $cantidad,		
+	    "dosis" => $dosis,		
+	    "via_aplicacion" => $via_aplicacion,		
+	    "frecuencia" => $frecuencia,		
+	    "duracion" => $duracion,
+	  ];
+
+	  $this->Historias_model->crearMedicamento($datos);
 	}
 	
 }

@@ -95,6 +95,11 @@ $route["administracion/pdfginecologia/(:num)/(:any)"] = "administrador/historiac
 $route["administracion/pdfgeneral/(:num)/(:any)"] = "administrador/historiaclinica/generarpdfmedicinageneral";
 $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTriajeid";
 
+// VERSION 3.0 DE LA APLICACION
+$route["administracion/crearalergias"] = "administrador/historiaclinica/crearAlergias";
+$route["administracion/crearmedicamento"] = "administrador/historiaclinica/crearMedicamento";
+
+
 //COLPOSCOPIA
 $route["administracion/crearcolposcopia"] = "administrador/colposcopia/crearcolposcopia";
 $route["administraciopn/pdfcolposcopia/(:num)"] = "administrador/colposcopia/crearpdfcolposcopia";

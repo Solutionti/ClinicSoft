@@ -546,7 +546,7 @@ $(document).ready(function (){
         document.getElementById('imc').innerHTML = data.imc + ' IMC';
         document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
         document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
-
+        $("#documento_historia").val(data.documento);
       }
    });
 })
@@ -584,6 +584,74 @@ $("#tphistoria").on("change", function() {
     $("#nav-consultagine-tab").prop("hidden", true);
   }
 });
+
+function crearAlergias() {
+  var url = baseurl + "administracion/crearalergias",
+      dni_paciente = $("#documento_historia").val(),
+      tpalergia = $("#tpalergia").val(),
+      descripcion_alergia = $("#descripcion_alergia").val();
+      
+   $.ajax({
+     url: url,
+     method: "POST",
+     data: {
+       dni_paciente: dni_paciente,
+       tipo_alergia: tpalergia,
+       descripcion: descripcion_alergia
+     },
+     success: function() {
+       $("body").overhang({
+          type: "success",
+          message: "la alergia se ha registrado correctamente"
+       });
+     },
+     error: function() {
+       $("body").overhang({
+          type: "error",
+          message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+       }); 
+     }
+   });
+}
+
+function crearMedicamento() {
+    var url = baseurl + "administracion/crearmedicamento",
+    doctor = $("#documento_historia").val(),
+    paciente = $("#documento_historia").val(),
+    medicamento = $("#medicamento_medicamento").val(),
+    cantidad = $("#cantidad_medicamento").val(),
+    dosis = $("#dosis_medicamento").val(),
+    via_aplicacion = $("#via_aplicacion_medicamento").val(),
+    frecuencia = $("#frecuencia_medicamento").val(),
+    duracion = $("#duracion_medicamento").val();
+    
+ $.ajax({
+   url: url,
+   method: "POST",
+   data: {
+     doctor: doctor,
+     paciente: paciente,
+     medicamento: medicamento,
+     cantidad: cantidad,
+     dosis: dosis,
+     via_aplicacion: via_aplicacion,
+     frecuencia: frecuencia,
+     duracion: duracion
+   },
+   success: function() {
+     $("body").overhang({
+        type: "success",
+        message: "El medicamento se ha registrado correctamente"
+     });
+   },
+   error: function() {
+     $("body").overhang({
+        type: "error",
+        message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+     }); 
+   }
+ });
+}
 
 const reloadPage = () => {
     location.reload();

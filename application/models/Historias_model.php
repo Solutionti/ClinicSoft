@@ -278,6 +278,30 @@ class Historias_model extends CI_model {
         return $result;
 
     }
+
+    public function crearAlergias($datos) {
+	  $alergias = [
+        "dni_paciente" => $datos["dni_paciente"],
+        "tipo_alergia" => $datos["tipo_alergia"],
+        "descripcion" => $datos["descripcion"],
+      ];
+      $this->db->insert('alergias', $alergias);
+	}
+
+    public function crearMedicamento($datos) {
+      $medicamento = [
+        "doctor" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
+        "paciente" => $datos["paciente"],
+        "medicamento" => $datos["medicamento"],
+        "cantidad" => $datos["cantidad"],
+        "dosis" => $datos["dosis"],
+        "via_aplicacion" => $datos["via_aplicacion"],
+        "frecuencia" => $datos["frecuencia"],
+        "duracion" => $datos["duracion"],
+        "fecha" => date("Y-m-d"),
+      ];
+      $this->db->insert('medicamentos', $medicamento);
+    }
     
 }
 
