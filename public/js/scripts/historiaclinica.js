@@ -21,8 +21,8 @@
         "language":{
           "processing": "Procesando",
           "search": "Buscar:",
-          "lengthMenu": "Ver _MENU_  Diagnosticos",
-          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "lengthMenu": "Ver _MENU_  Procedimientos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
           "zeroRecords": "No encontraron resultados",
           "paginate": {
             "first":      "Primera",
@@ -38,8 +38,8 @@
         "language":{
           "processing": "Procesando",
           "search": "Buscar:",
-          "lengthMenu": "Ver _MENU_  Diagnosticos",
-          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "lengthMenu": "Ver _MENU_  Procedimientos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
           "zeroRecords": "No encontraron resultados",
           "paginate": {
             "first":      "Primera",
@@ -74,8 +74,8 @@ var table_lab_mini = $("#items-ginecologia-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Diagnosticos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -91,8 +91,8 @@ var table_lab_mini2 = $("#items-general-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Diagnosticos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -108,8 +108,8 @@ var table_lab_mini3 = $("#items-procedimientos-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Procedimientos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -125,8 +125,8 @@ var table_lab_mini4 = $("#items-procedimientos2-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Procedimientos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -531,28 +531,59 @@ $("#ecografias").on("change", function() {
 });
 
 $(document).ready(function (){
-    var url1 = baseurl + "administracion/triajehistorias",
-        documento = '1110542802';
+   var url1 = baseurl + "administracion/triajehistorias",
+       documento = '1110542802';
 
-        $.ajax( {
-          url: url1,
-          method: "POST",
-          data: { documento: documento  },
-          success: function (data) {
-            data = JSON.parse(data);
-              console.log(data);
-              
-              document.getElementById('estatura').innerHTML = data.talla + ' Mts';
-              document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
-              document.getElementById('peso').innerHTML = data.peso + ' Kg';
-              document.getElementById('imc').innerHTML = data.imc + ' IMC';
-              document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
-              document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
+   $.ajax( {
+      url: url1,
+      method: "POST",
+      data: { documento: documento  },
+      success: function (data) {
+        data = JSON.parse(data);
+        document.getElementById('estatura').innerHTML = data.talla + ' Mts';
+        document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
+        document.getElementById('peso').innerHTML = data.peso + ' Kg';
+        document.getElementById('imc').innerHTML = data.imc + ' IMC';
+        document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
+        document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
 
-          }
-        });
-  
+      }
+   });
 })
+
+$("#tphistoria").on("change", function() {
+  let tphistoria = $("#tphistoria").val();
+
+  if(tphistoria == 1) {
+
+    $("#nav-antecedentesgine-tab").prop("hidden", true);
+    $("#nav-fisicogine-tab").prop("hidden", true);
+    $("#nav-consultagine-tab").prop("hidden", true);
+
+    $("#nav-home-tab").prop("hidden", false);
+    $("#nav-profile-tab").prop("hidden", false);
+    $("#nav-contact-tab").prop("hidden", false);
+  }
+  else if(tphistoria == 2) {
+
+    $("#nav-home-tab").prop("hidden", true);
+    $("#nav-profile-tab").prop("hidden", true);
+    $("#nav-contact-tab").prop("hidden", true);
+
+    $("#nav-antecedentesgine-tab").prop("hidden", false);
+    $("#nav-fisicogine-tab").prop("hidden", false);
+    $("#nav-consultagine-tab").prop("hidden", false);
+  }
+  else {
+    $("#nav-home-tab").prop("hidden", true);
+    $("#nav-profile-tab").prop("hidden", true);
+    $("#nav-contact-tab").prop("hidden", true);
+
+    $("#nav-antecedentesgine-tab").prop("hidden", true);
+    $("#nav-fisicogine-tab").prop("hidden", true);
+    $("#nav-consultagine-tab").prop("hidden", true);
+  }
+});
 
 const reloadPage = () => {
     location.reload();
