@@ -6,4 +6,9 @@
 <link href="<?php echo base_url(); ?>public/fontawesome/css/brands.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>public/fontawesome/css/solid.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>public/css/datatable.css" rel="stylesheet">
+<style>
+  .color_ginecologia {
+    color: #FF5594 !important;
+  }
+</style>
     

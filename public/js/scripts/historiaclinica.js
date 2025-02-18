@@ -21,8 +21,8 @@
         "language":{
           "processing": "Procesando",
           "search": "Buscar:",
-          "lengthMenu": "Ver _MENU_  Diagnosticos",
-          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "lengthMenu": "Ver _MENU_  Procedimientos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
           "zeroRecords": "No encontraron resultados",
           "paginate": {
             "first":      "Primera",
@@ -38,8 +38,8 @@
         "language":{
           "processing": "Procesando",
           "search": "Buscar:",
-          "lengthMenu": "Ver _MENU_  Diagnosticos",
-          "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
+          "lengthMenu": "Ver _MENU_  Procedimientos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
           "zeroRecords": "No encontraron resultados",
           "paginate": {
             "first":      "Primera",
@@ -74,8 +74,8 @@ var table_lab_mini = $("#items-ginecologia-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Diagnosticos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -91,8 +91,8 @@ var table_lab_mini2 = $("#items-general-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Diagnosticos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Diagnosticos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -108,8 +108,8 @@ var table_lab_mini3 = $("#items-procedimientos-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Procedimientos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -125,8 +125,8 @@ var table_lab_mini4 = $("#items-procedimientos2-table").DataTable({
     "language": {
         "processing": "Procesando",
         "search": "Buscar:",
-        "lengthMenu": "Ver _MENU_ Laboratorio",
-        "info": "Mirando _START_ a _END_ de _TOTAL_ Laboratorio",
+        "lengthMenu": "Ver _MENU_ Procedimientos",
+        "info": "Mirando _START_ a _END_ de _TOTAL_ Procedimientos",
         "zeroRecords": "No encontraron resultados",
         "paginate": {
             "first": "Primera",
@@ -413,45 +413,50 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
 
 $("#guardarhistoriageneral").on("click", function (){
     var url2 = baseurl + "administracion/crearhistoriageneral",
-    dni = $("#dni1").val(),
+    dni = $("#documento_historia").val(),
     doctorid = $("#doctorid1").val(),
     triaje = $("#triajeid1").val(),
-    anamnesis = $("#anamnesis2").val(),
-    empresa = $("#empresa2").val(),
-    compania = $("#compania2").val(),
-    iafa = $("#iafa2").val(),
-    acompanante = $("#acompanante2").val(),
-    dni3 = $("#dni3").val(),
-    celular = $("#celular2").val(),
-    motivo_consulta = $("#motivo_consulta2").val(),
-    tratamiento_anterior = $("#tratamiento_anterior2").val(),
-    enfermedad_actual = $("#enfermedad_actual2").val(),
-    tp_enfermedad = $("#tp_enfermedad2").val(),
-    inicio = $("#inicio2").val(),
-    curso = $("#curso2").val(),
-    sintomas = $("#sintomas2").val(),
-    cabeza = $("#cabeza2").val(),
-    cuello = $("#cuello2").val(),
-    ap_respiratorio = $("#ap_respiratorio2").val(),
-    ap_cardio = $("#ap_cardio2").val(),
-    abdomen = $("#abdomen2").val(),
+    // 
+    anamnesis = $("#anamnesis_directa").val(),
+    empresa = $("#anamnesis_empresa").val(),
+    compania = $("#anamnesis_compañia").val(),
+    iafa = $("#anamnesis_iafa").val(),
+    acompanante = $("#anamnesis_acompanante").val(),
+    dni3 = $("#anamnesis_dni").val(),
+    celular = $("#anamnesis_celular").val(),
+    motivo_consulta = $("#anamnesis_consulta").val(),
+    tratamiento_anterior = $("#anamnesis_tratamiento").val(),
+    enfermedad_actual = $("#anamnesis_enfermedad").val(),
+    tp_enfermedad = $("#anamnesis_tiempo").val(),
+    inicio = $("#anamnesis_inicio").val(),
+    curso = $("#anamnesis_curso").val(),
+    sintomas = $("#anamnesis_sintomas").val(),
+    // 
+    cuello = $("#fisico_cuello").val(),
+    abdomen = $("#fisico_abdomen").val(),
+    ap_respiratorio = $("#fisico_respiratorio").val(),
+    ap_cardio = $("#fisico_cardio").val(),
+    sistema_nervioso = $("#fisico_sistema").val(),
+    cabeza = $("#fisico_cabeza").val(),
+    locomotor = $("#fisico_locomotor").val(),
+    apetito = $("#fisico_apetito").val(),
+    sed = $("#fisico_sed").val(),
+    orina = $("#fisico_orina").val(),
+    
     ap_genito = $("#ap_genito2").val(),
-    locomotor = $("#locomotor2").val(),
-    sistema_nervioso = $("#sistema_nervioso2").val(),
-    apetito = $("#apetito2").val(),
-    sed = $("#sed2").val(),
-    orina = $("#orina2").val(),
-    examendx = $("#examendx2").val(),
-    procedimientos = $("#procedimientos2").val(),
-    interconsultas = $("#interconsultas2").val(),
-    tratamiento = $("#tratamiento2").val(),
-    referencia = $("#referencia2").val(),
-    cita = $("#cita2").val(),
-    firma = $("#firma2").val();
+    // 
+    examendx = $("#plan_examen").val(),
+    procedimientos = $("#plan_procedimiento").val(),
+    interconsultas = $("#plan_interconsulta").val(),
+    tratamiento = $("#plan_tratamiento").val(),
+    referencia = $("#plan_referencia").val(),
+    firma = $("#plan_firma").val();
+
     let diagnosticosgeneral = [];
     for (let i = 0; i < elementos_general.length; i++) {
         diagnosticosgeneral [i] = elementos_general[i][0];
     }
+
     $.ajax({
         url: url2,
         method: "POST",
@@ -490,7 +495,6 @@ $("#guardarhistoriageneral").on("click", function (){
             interconsultas: interconsultas,
             tratamiento: tratamiento,
             referencia: referencia,
-            cita: cita,
             firma: firma
         },
         success: function () {
@@ -531,28 +535,127 @@ $("#ecografias").on("change", function() {
 });
 
 $(document).ready(function (){
-    var url1 = baseurl + "administracion/triajehistorias",
-        documento = '1110542802';
+   var url1 = baseurl + "administracion/triajehistorias",
+       documento = '1110542802';
 
-        $.ajax( {
-          url: url1,
-          method: "POST",
-          data: { documento: documento  },
-          success: function (data) {
-            data = JSON.parse(data);
-              console.log(data);
-              
-              document.getElementById('estatura').innerHTML = data.talla + ' Mts';
-              document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
-              document.getElementById('peso').innerHTML = data.peso + ' Kg';
-              document.getElementById('imc').innerHTML = data.imc + ' IMC';
-              document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
-              document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
-
-          }
-        });
-  
+   $.ajax( {
+      url: url1,
+      method: "POST",
+      data: { documento: documento  },
+      success: function (data) {
+        data = JSON.parse(data);
+        document.getElementById('estatura').innerHTML = data.talla + ' Mts';
+        document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
+        document.getElementById('peso').innerHTML = data.peso + ' Kg';
+        document.getElementById('imc').innerHTML = data.imc + ' IMC';
+        document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
+        document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
+        $("#documento_historia").val(data.documento);
+      }
+   });
 })
+
+$("#tphistoria").on("change", function() {
+  let tphistoria = $("#tphistoria").val();
+
+  if(tphistoria == 1) {
+
+    $("#nav-antecedentesgine-tab").prop("hidden", true);
+    $("#nav-fisicogine-tab").prop("hidden", true);
+    $("#nav-consultagine-tab").prop("hidden", true);
+
+    $("#nav-home-tab").prop("hidden", false);
+    $("#nav-profile-tab").prop("hidden", false);
+    $("#nav-contact-tab").prop("hidden", false);
+  }
+  else if(tphistoria == 2) {
+
+    $("#nav-home-tab").prop("hidden", true);
+    $("#nav-profile-tab").prop("hidden", true);
+    $("#nav-contact-tab").prop("hidden", true);
+
+    $("#nav-antecedentesgine-tab").prop("hidden", false);
+    $("#nav-fisicogine-tab").prop("hidden", false);
+    $("#nav-consultagine-tab").prop("hidden", false);
+  }
+  else {
+    $("#nav-home-tab").prop("hidden", true);
+    $("#nav-profile-tab").prop("hidden", true);
+    $("#nav-contact-tab").prop("hidden", true);
+
+    $("#nav-antecedentesgine-tab").prop("hidden", true);
+    $("#nav-fisicogine-tab").prop("hidden", true);
+    $("#nav-consultagine-tab").prop("hidden", true);
+  }
+});
+
+function crearAlergias() {
+  var url = baseurl + "administracion/crearalergias",
+      dni_paciente = $("#documento_historia").val(),
+      tpalergia = $("#tpalergia").val(),
+      descripcion_alergia = $("#descripcion_alergia").val();
+      
+   $.ajax({
+     url: url,
+     method: "POST",
+     data: {
+       dni_paciente: dni_paciente,
+       tipo_alergia: tpalergia,
+       descripcion: descripcion_alergia
+     },
+     success: function() {
+       $("body").overhang({
+          type: "success",
+          message: "la alergia se ha registrado correctamente"
+       });
+     },
+     error: function() {
+       $("body").overhang({
+          type: "error",
+          message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+       }); 
+     }
+   });
+}
+
+function crearMedicamento() {
+    var url = baseurl + "administracion/crearmedicamento",
+    doctor = $("#documento_historia").val(),
+    paciente = $("#documento_historia").val(),
+    medicamento = $("#medicamento_medicamento").val(),
+    cantidad = $("#cantidad_medicamento").val(),
+    dosis = $("#dosis_medicamento").val(),
+    via_aplicacion = $("#via_aplicacion_medicamento").val(),
+    frecuencia = $("#frecuencia_medicamento").val(),
+    duracion = $("#duracion_medicamento").val();
+    
+ $.ajax({
+   url: url,
+   method: "POST",
+   data: {
+     doctor: doctor,
+     paciente: paciente,
+     medicamento: medicamento,
+     cantidad: cantidad,
+     dosis: dosis,
+     via_aplicacion: via_aplicacion,
+     frecuencia: frecuencia,
+     duracion: duracion
+   },
+   success: function() {
+     $("body").overhang({
+        type: "success",
+        message: "El medicamento se ha registrado correctamente"
+     });
+   },
+   error: function() {
+     $("body").overhang({
+        type: "error",
+        message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+     }); 
+   }
+ });
+}
 
 const reloadPage = () => {
     location.reload();

@@ -278,6 +278,81 @@ class Historias_model extends CI_model {
         return $result;
 
     }
+
+    public function getconsecutivoGeneral($documento) {
+      $this->db->select("count(*) as general");
+      $this->db->from("historial_pacientes");
+      $this->db->where("paciente", $documento);
+      $this->db->where("tipo_consulta", 1);
+      $result = $this->db->get();
+
+      return $result;
+	}
+
+	public function getConsecutivoGinecologica($documento) {
+        $this->db->select("count(*) as gineco");
+        $this->db->from("historial_pacientes");
+        $this->db->where("paciente", $documento);
+        $this->db->where("tipo_consulta", 2);
+        $result = $this->db->get();
+  
+        return $result;
+	}
+
+    public function crearAlergias($datos) {
+	  $alergias = [
+        "dni_paciente" => $datos["dni_paciente"],
+        "tipo_alergia" => $datos["tipo_alergia"],
+        "descripcion" => $datos["descripcion"],
+      ];
+      $this->db->insert('alergias', $alergias);
+	}
+
+    public function crearMedicamento($datos) {
+      $medicamento = [
+        "doctor" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
+        "paciente" => $datos["paciente"],
+        "medicamento" => $datos["medicamento"],
+        "cantidad" => $datos["cantidad"],
+        "dosis" => $datos["dosis"],
+        "via_aplicacion" => $datos["via_aplicacion"],
+        "frecuencia" => $datos["frecuencia"],
+        "duracion" => $datos["duracion"],
+        "fecha" => date("Y-m-d"),
+      ];
+      $this->db->insert('medicamentos', $medicamento);
+    }
+
+    public function consultaIniciadaGeneral($documento) {
+        $this->db->select("*");
+        $this->db->from("historial_pacientes");
+        $this->db->where("paciente", $documento);
+        $this->db->where("tipo_consulta", 1);
+        $result = $this->db->get();
+  
+        return $result;
+    }
+
+    public function consultaIniciadaGineco($documento) {
+        $this->db->select("*");
+        $this->db->from("historial_pacientes");
+        $this->db->where("paciente", $documento);
+        $this->db->where("tipo_consulta", 2);
+        $this->db->order_by('codigo_historial_paciente', 'DESC');
+        $result = $this->db->get();
+  
+        return $result; 
+    }
+
+    public function getPosCita($documento) {
+        $this->db->select("*");
+        $this->db->from("citas");
+        $this->db->where("documento", $documento);
+        $this->db->order_by('codigo_cita', 'DESC');
+        $result = $this->db->get();
+  
+        return $result;  
+    }
     
 }
 
