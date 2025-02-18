@@ -221,7 +221,7 @@
              </div>
              <div class="col-md-6">
                <div class="card card-dashed h-200">
-                 <div class="card-header bg-default"><h6 class="text-white text-uppercase">Procesos clinicos </h6></div> 
+                 <div class="card-header bg-default"><h6 class="text-white text-uppercase">seguimiento de Procesos clinicos anteriores</h6></div> 
                    <div class="card-body">
                      <div class="accordion accordion-btn-icon-start" id="accordionBtnIconStartExample">
                        <div class="accordion-item">
@@ -417,10 +417,10 @@
                           <div class="d-grid gap-2">
                             <button
                               class="btn btn-primary rounded-pill"
+                              data-bs-toggle="modal"
+                              data-bs-target="#citasmedicas"
                               >
-                              <!-- data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop" -->
-                            <i class="fas fa-calendar-alt"></i> Nueva Consulta
+                            <i class="fas fa-calendar-alt"></i> Agendar Cita
                             </button>
                           </div>
                         </div>
@@ -432,7 +432,8 @@
                           </span>
                         </small>
                           <?php  if(!$poscita) {?>
-                            <P>Aun no hay citas agendadas utiliza la <a class="text-danger">agenda</a>  para calendarizarla</P>
+                            <P>Aun no hay citas agendadas utiliza la <a class="text-danger" data-bs-toggle="modal"
+                            data-bs-target="#citasmedicas">agenda</a>  para calendarizarla</P>
                             <?php } else { ?>
                               <div
                                 class="alert alert-danger text-white"
@@ -453,6 +454,7 @@
                         <small class="text-bold mb-2">CONSULTAS INICIADAS</small>
                          
                         <?php if(!$generaliniciada) {?>
+                          <P>Paciente no presenta atencion en <a class="text-primary">Consulta General</a></P>
                         <?php } else {?>
                           <div
                             class="alert alert-info text-white"
@@ -474,7 +476,7 @@
 
                         <!--  -->
                         <?php if(!$ginecoiniciada) {?>
-                          
+                          <P>Paciente no presenta atencion en <a class="text-danger">Consulta Ginecologica</a></P>
                           <?php } else {?>
                             <div
                               class="alert alert-warning text-white"
@@ -1195,7 +1197,7 @@
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
             <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
-            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>DIETA NUTRICIONAL</button>
+            <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>DIETA NUTRICIONAL</button> -->
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -1438,6 +1440,25 @@
     </div>
   </div>
 </div>
+<!-- CITAS MEDICAS -->
+<div class="modal fade" id="citasmedicas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="citasmedicasLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="citasmedicasLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
       <?php require_once("componentes/scripts.php"); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
    </body>
