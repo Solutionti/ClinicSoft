@@ -24,19 +24,33 @@ class Historiaclinica extends Admin_Controller {
 		$docEcografias = $this->Historias_model->getDocumentos($documento, "ecografias");
 		$diagnosticos = $this->Historias_model->getDiagnosticos();
 		$procedimientos = $this->Historias_model->getProcedimientos();
-		// $lineas = $this->Lineatiempo_model->getLineaClientes_DNI($documento);
-
+		$alergiaMedicas = $this->Historias_model->getalergiasMedicamentos($documento);
+		$alergiaotros = $this->Historias_model->getalergiasOtros($documento);
+		$medicamentos = $this->Historias_model->getMedicamentos($documento);
+		$diagpacientes = $this->Historias_model->getDiagnosticoHistoria($documento);
+		$procepacientes = $this->Historias_model->getProcedimientosHistoria($documento);
+		$generaliniciadas = $this->Historias_model->consultaIniciadaGeneral($documento);
+		$ginecoiniciadas = $this->Historias_model->consultaIniciadaGineco($documento);
+		$poscitas = $this->Historias_model->getPosCita($documento);
+		
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
 			"especialidad" => $especialidades,
-			"receta" => $recetas,
+			"medicamento" => $medicamentos,
 			"documento" => $docFisico,
 			"docLaboratorio" => $docLaboratorios,
 			"docPatologia" => $docPatologias,
 			"docEcografia" => $docEcografias,
 			"diagnostico" => $diagnosticos,
-			"procedimiento" => $procedimientos
+			"procedimiento" => $procedimientos,
+			"alergiamedica" => $alergiaMedicas,
+			"alergiaotro" => $alergiaotros,
+			"diagpaciente" => $diagpacientes,
+			"procepaciente" => $procepacientes,
+			"generaliniciada" => $generaliniciadas,
+			"ginecoiniciada" => $ginecoiniciadas,
+			"poscita" => $poscitas
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
