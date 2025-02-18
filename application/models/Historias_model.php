@@ -13,7 +13,7 @@ class Historias_model extends CI_model {
     }
 
     public function getTriajeId($paciente) {
-        $this->db->select("t.*, p.nombre as paciente,p.apellido,p.documento,d.nombre as medico,d.codigo_doctor,p.edad,p.sexo,e.descripcion, e.codigo_especialidad");
+        $this->db->select("t.*, p.nombre as paciente,p.apellido,p.documento,d.nombre as medico,d.codigo_doctor,p.edad,p.sexo,e.descripcion, e.codigo_especialidad, p.telefono");
         $this->db->from("triajes t");
         $this->db->join("pacientes p", "t.paciente = p.documento");
         $this->db->join("doctores d", "t.doctor = d.codigo_doctor");

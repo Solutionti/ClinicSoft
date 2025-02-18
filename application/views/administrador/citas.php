@@ -697,215 +697,110 @@
                </div>
 
                <div class="modal-body">
-
                   <div class="messageError"></div>
-
                   <div class="row">
-
                      <div class="col-md-1" style="opacity: 0;">
-
                      </div>
-
                      <div class="col-md-10">
-
                         <div class="row">
-
                            <div class="col-md-8">
-
                               <div class="form-group input-group-sm">
-
                                  <label>Medico</label>
-
                                  <select class="form-control" id="medico" required>
-
                                     <option value="">Seleccione un doctor</option>
-
                                     <?php foreach($doctor->result() as $doctores) { ?>
-
                                     <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil." )"; ?></option>
-
                                     <?php } ?>
-
                                  </select>
-
                               </div>
-
                            </div>
-
                            <div class="col-md-4" >
-
                               <div class="form-group input-group-sm">
-
                                  <label>Fecha</label>
-
                                  <div class="input-group">
-
                                     <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;" required class="form-control" id="fecha" min="<?php echo date("Y-m-d"); ?>">
-
                                     <div class="input-group-append">
-
-                                       <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
-
+                                      <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
                                     </div>
-
                                  </div>
-
                               </div>
-
                            </div>
-
                            <div class="col-md-12">
-
                               <div class="" id="Cont_Horas" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
-
                               </div>
-
                            </div>
-
                            <div class="col-md-6">
-
                            </div>
-
                            <div class="col-md-1" style="opacity: 0;">
-
                               <select class="form-control" id="hora" required style="height: 32px;padding: 0px;">
-
                                  <option value="">Seleccionar</option>
-
                               </select>
-
                            </div>
-
                         </div>
-
                         <div class="row">
-
                            <div class="col-md-3">
-
                               <div class="form-group input-group-sm">
-
                                  <label>DNI Paciente</label>
-
                                  <div class="input-group">
-
                                     <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
-
                                     <div class="input-group-append">
-
                                        <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
-
                                     </div>
-
                                  </div>
-
                               </div>
-
                            </div>
-
                            <div class="col-md-6">
-
                               <div class="form-group input-group-sm">
-
                                  <label>Apellidos y Nombres  Paciente</label>
-
                                  <input type="text" class="form-control" id="nombre" required>
-
                               </div>
-
                            </div>
-
                            <div class="col-md-3">
-
                               <div class="form-group input-group-sm">
-
                                  <label>Celular</label>
-
                                  <input type="text" class="form-control" id="telefono">
-
                               </div>
-
                            </div>
-
                            <div class="col-md-6">
-
                               <div class="form-group input-group-sm">
-
                                  <label>Estado Cita</label>
-
                                  <select class="form-control" id="estado" required>
-
                                     <option value="Pendiente">Pendiente</option>
-
                                     <option value="Confirmado">Confirmado</option>
-
                                     <option value="Tratado">Tratado</option>
-
                                     <option value="Cancelado">Cancelado</option>
-
                                  </select>
-
                               </div>
-
                            </div>
-
                            <div class="col-md-6">
-
                               <div class="form-group input-group-sm">
-
                                  <label>observaciones</label>
-
                                  <input type="text" class="form-control" id="observaciones">
-
                               </div>
-
                            </div>
-
                         </div>
-
                      </div>
-
                      <div class="col-md-1" style="opacity: 0;">
-
                         <div class="form-group input-group-sm">
-
                            <label>statee</label>
-
                            <div class="input-group">
-
                               <select class="form-control" id="statee" required style="height: 32px;padding: 0px;">
-
                                  <option value="Registrar">Registrar</option>
-
                                  <option value="Actualizar">Actualizar</option>
-
                               </select>
-
                               <div class="input-group-append">
-
                                  <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
-
                               </div>
-
                            </div>
-
                         </div>
-
                      </div>
-
                   </div>
-
                   <div class="col-md-1" style="display:none;">
-
                      <div class="form-group input-group-sm">
-
                         <label>Horario</label>
-
                         <input type="number"  class="form-control" id="idee" style="height: 32px;padding: 0px;">
-
                      </div>
-
                   </div>
-
                </div>
 
                <div class="modal-footer">
