@@ -9,6 +9,7 @@
       
    </head>
    <body class="g-sidenav-show bg-gray-100">
+    
    <div class="min-height-300 bg-default position-absolute w-100"></div>
    <?php $pacientes = $paciente->result()[0]; ?>
 <main class="main-content position-relative border-radius-lg">
@@ -234,12 +235,16 @@
           <div class="alert alert-primary text-white" role="alert">
             <h6 class="alert-heading">Alergia a Medicamentos</h6>
             <ul class="list-inline ">
-              <li ></li>
+              <?php foreach($alergiamedica->result() as $alergiame){ ?>
+                <li class="mx-4 text-capitalize"><?php echo $alergiame->descripcion; ?></li>
+              <?php } ?>
             </ul>
             <hr>
             <h6 class="alert-heading">Otras Alergias</h6>
             <ul class="list-inline ">
-              <li ></li>
+              <?php foreach($alergiaotro->result() as $alergiaotro){ ?>
+                <li class="mx-4 text-capitalize"><?php echo $alergiaotro->descripcion; ?></li>
+              <?php } ?>
             </ul>
           </div>
         </div>
@@ -286,10 +291,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr *ngFor="let diagnosticos of getdiagnostico">
-                        <td> {{ diagnosticos.codigo_diagnosti }}</td>
-                        <td> {{  diagnosticos.descripcion }}</td>
-                      </tr> -->
+                      <?php foreach($diagpaciente->result() as $diagnosticos){ ?>
+                      <tr class="text-capitalize">
+                        <td> <?php echo  $diagnosticos->clave; ?> </td>
+                        <td> <?php echo $diagnosticos->descripcion;  ?> </td>
+                      </tr>
+                      <?php }?>
                     </tbody>
                   </table>
                 </div>
@@ -317,10 +324,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr *ngFor="let procedimiento of getprocedimiento">
-                        <td>{{ procedimiento.codigo_procedimiento }}</td>
-                        <td>{{ procedimiento.nombre }}</td>
-                      </tr> -->
+                      <?php foreach($procepaciente->result() as $procedimientoss) { ?>
+                      <tr class="text-capitalize">
+                        <td><?php echo $procedimientoss->codigo_cpt; ?>  </td>
+                        <td><?php echo $procedimientoss->nombre; ?>  </td>
+                      </tr>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>
@@ -342,7 +351,7 @@
               <table class="table table-striped table-hover">
                 <thead>
                   <tr class="bg-dark text-white">
-                    <th class="text-uppercase text-xs">Descripcion Medicamento</th>
+                    <th class="text-uppercase text-xs">Medicamento</th>
                     <th class="text-uppercase text-xs">Cant</th>
                     <th class="text-uppercase text-xs">Dosis</th>
                     <th class="text-uppercase text-xs">Via</th>
@@ -351,14 +360,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr *ngFor="let medicamentos of getMedicamento">
-                    <td>{{ medicamentos.codigo_medicamento }}</td>
-                    <td>{{ medicamentos.cantidad }}</td>
-                    <td>{{ medicamentos.dosis }}</td>
-                    <td>{{ medicamentos.via }}</td>
-                    <td>{{ medicamentos.frecuencia }}</td>
-                    <td>{{ medicamentos.duracion }}</td>
-                  </tr> -->
+                  <?php foreach($medicamento->result() as $medicamentos){ ?>
+                  <tr class="text-capitalize">
+                    <td><?php echo $medicamentos->medicamento; ?></td>
+                    <td><?php echo $medicamentos->cantidad; ?></td>
+                    <td><?php echo $medicamentos->dosis; ?></td>
+                    <td><?php echo $medicamentos->via_aplicacion; ?> </td>
+                    <td><?php echo $medicamentos->frecuencia; ?></td>
+                    <td><?php echo $medicamentos->duracion; ?></td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -420,49 +431,68 @@
                             <i class="fas fa-plus text-danger mx-1 "></i>
                           </span>
                         </small>
+                          <?php  if(!$poscita) {?>
+                            <P>Aun no hay citas agendadas utiliza la <a class="text-danger">agenda</a>  para calendarizarla</P>
+                            <?php } else { ?>
+                              <div
+                                class="alert alert-danger text-white"
+                                role="alert"
+                              >
+                                <h6 class="alert-heading text-uppercase"><?php echo $poscita->estado; ?></h6>
+                                <hr>
+                                <small>
+                                  <i class="fas fa-calendar"></i>
+                                  <?php echo substr($poscita->fecha,0,10); ?>   <?php echo $poscita->hora; ?>
+                                </small>
+                              </div>
 
-                          <div
-                            class="alert alert-danger text-white"
-                            role="alert"
-                          >
-                            <h6 class="alert-heading">CITA DE GINECOLOGIA</h6>
-                            <hr>
-                            <small>
-                              <i class="fas fa-calendar"></i> 26-12-1993   12:30PM
-                            </small>
-                          </div>
+                            <?php } ?>
 
-                        <P>Aun no hay citas agendadas utiliza la <a class="text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">agenda</a>  para calendarizarla</P>
                       </div>
                       <div class="row mt-4">
                         <small class="text-bold mb-2">CONSULTAS INICIADAS</small>
-                        <div
-                          class="alert alert-info text-white"
-                          role="alert"
-                        >
-                          <h6 class="alert-heading">
-                            Dolor de garganta ||<small> Cancer de cabeza</small>
-                          </h6>
-                          <hr>
-                          <ul class="list-inline">
-                            <li>Amoxicilina</li>
-                          </ul>
-                          <small> <i class="fas fa-calendar"></i> 26/12/1993 12:30 PM</small>
-                        </div>
+                         
+                        <?php if(!$generaliniciada) {?>
+                        <?php } else {?>
+                          <div
+                            class="alert alert-info text-white"
+                            role="alert"
+                          >
+                            <h6 class="alert-heading">
+                              Consulta<small> General</small>
+                            </h6>
+                            <hr>
+                            <ul class="list-inline">
+                              <!-- <li>Amoxicilina</li> -->
+                            </ul>
+                            <small> <i class="fas fa-calendar"></i>
+                            <?php echo $generaliniciada->fecha; ?> <?php echo $generaliniciada->hora; ?> 
+                            </small>
+                          </div>
+                        <?php }?>
+
+
                         <!--  -->
-                        <div
-                          class="alert alert-warning text-white"
-                          role="alert"
-                        >
-                          <h6 class="alert-heading">
-                            Dolor de garganta ||<small> Cancer de cabeza</small>
-                          </h6>
-                          <hr>
-                          <ul class="list-inline">
-                            <li>Amoxicilina</li>
-                          </ul>
-                          <small> <i class="fas fa-calendar"></i> 26/12/1993 12:30 PM</small>
-                        </div>
+                        <?php if(!$ginecoiniciada) {?>
+                          
+                          <?php } else {?>
+                            <div
+                              class="alert alert-warning text-white"
+                              role="alert"
+                            >
+                              <h6 class="alert-heading">
+                                Consulta<small> Ginecologica</small>
+                              </h6>
+                              <hr>
+                              <ul class="list-inline">
+                                <!-- <li>Amoxicilina</li> -->
+                              </ul>
+                              <small> <i class="fas fa-calendar"></i>
+                                <?php echo $ginecoiniciada->fecha; ?> <?php echo $ginecoiniciada->hora; ?> 
+                              </small>
+                            </div>
+
+                          <?php } ?>
                       </div>
                     </div>
                   </div>
@@ -503,7 +533,7 @@
             >
           </div>
           <div class="col-md-2">
-            <label>Cons Historia</label>
+            <label>Cons Triage</label>
             <input
               type="number"
               class="form-control"

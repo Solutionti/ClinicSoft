@@ -308,6 +308,26 @@ class Historias_model extends CI_model {
       $this->db->insert('alergias', $alergias);
 	}
 
+    public function getalergiasMedicamentos($documento) {
+        $this->db->select("*");
+        $this->db->from("alergias");
+        $this->db->where("dni_paciente", $documento);
+        $this->db->where("tipo_alergia", 'Medicamentos');
+        $result = $this->db->get();
+  
+        return $result;
+    }
+
+    public function getalergiasOtros($documento) {
+        $this->db->select("*");
+        $this->db->from("alergias");
+        $this->db->where("dni_paciente", $documento);
+        $this->db->where("tipo_alergia", 'Otras');
+        $result = $this->db->get();
+  
+        return $result;
+    }
+
     public function crearMedicamento($datos) {
       $medicamento = [
         "doctor" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
@@ -323,14 +343,29 @@ class Historias_model extends CI_model {
       $this->db->insert('medicamentos', $medicamento);
     }
 
+    public function getMedicamentos($documento) {
+        $this->db->select("*");
+        $this->db->from("medicamentos");
+        $this->db->where("paciente", $documento);
+        $result = $this->db->get();
+  
+        return $result;
+    }
+
     public function consultaIniciadaGeneral($documento) {
         $this->db->select("*");
         $this->db->from("historial_pacientes");
         $this->db->where("paciente", $documento);
         $this->db->where("tipo_consulta", 1);
+        $this->db->order_by('codigo_historial_paciente', 'DESC');
         $result = $this->db->get();
-  
-        return $result;
+        
+        if($result->num_rows() > 0) {
+          return $result->row();
+        }
+        else {
+          return false;
+        }
     }
 
     public function consultaIniciadaGineco($documento) {
@@ -340,18 +375,50 @@ class Historias_model extends CI_model {
         $this->db->where("tipo_consulta", 2);
         $this->db->order_by('codigo_historial_paciente', 'DESC');
         $result = $this->db->get();
-  
-        return $result; 
+        
+        if($result->num_rows() > 0) {
+            return $result->row();
+          }
+          else {
+            return false;
+          }
     }
 
     public function getPosCita($documento) {
         $this->db->select("*");
         $this->db->from("citas");
         $this->db->where("documento", $documento);
+        $this->db->where("estado", "Pendiente");
         $this->db->order_by('codigo_cita', 'DESC');
         $result = $this->db->get();
+
+        if($result->num_rows() > 0) {
+            return $result->row();
+          }
+          else {
+            return false;
+          }
   
-        return $result;  
+    }
+
+    public function getDiagnosticoHistoria($documento) {
+        $this->db->select("d.*, ci.descripcion, ci.clave");
+        $this->db->from("diagnosticos d");
+        $this->db->join("diagnosticoscie10 ci", "d.codigo_diagnosti = ci.id");
+        $this->db->where("d.paciente", $documento);
+        $result = $this->db->get();
+
+        return $result;
+    }
+
+    public function getProcedimientosHistoria($documento) {
+        $this->db->select("d.*, ci.nombre, ci.codigo_cpt");
+        $this->db->from("procedimiento_historias d");
+        $this->db->join("procedimientos ci", "d.codigo_procedimiento = ci.codigo_cpt");
+        $this->db->where("d.paciente", $documento);
+        $result = $this->db->get();
+
+        return $result;
     }
     
 }

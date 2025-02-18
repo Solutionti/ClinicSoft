@@ -544,6 +544,7 @@ $(document).ready(function (){
       data: { documento: documento  },
       success: function (data) {
         data = JSON.parse(data);
+        console.log(data);
         document.getElementById('estatura').innerHTML = data.talla + ' Mts';
         document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
         document.getElementById('peso').innerHTML = data.peso + ' Kg';
@@ -551,6 +552,7 @@ $(document).ready(function (){
         document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
         document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
         $("#documento_historia").val(data.documento);
+        $("#consecutivo_historia").val(data.codigo_triaje);
       }
    });
 })
