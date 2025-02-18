@@ -1527,7 +1527,7 @@
                            <div class="col-md-6">
                               <div class="form-group input-group-sm">
                                  <label>observaciones</label>
-                                 <input type="text" class="form-control" id="observaciones" value="cita pendiente para verificacion">
+                                 <input type="text" class="form-control" id="observaciones" value="cita pendiente para confirmacion de hora ">
                               </div>
                               </div>
                               </div>
