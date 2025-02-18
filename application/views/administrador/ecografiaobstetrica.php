@@ -355,7 +355,7 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-danger">pdf</button>
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" onclick="createEcografiaObstetrica()">Guardar</button>
                </div>
             </div>
          </div>

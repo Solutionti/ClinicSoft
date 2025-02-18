@@ -50,4 +50,4 @@ function calcularEdad(fechanacimiento) {
   }
   
   $("#edad").val(age);
-}
+  }

@@ -97,9 +97,60 @@ class Ecografias extends Admin_Controller {
         $this->load->view("administrador/ecografias/ecografia_transvaginal");
     }
 
+    // ECOGRAFIA OBSTETRICA
+
+    public function createEcografiaObstetrica() {
+      // Recibir datos del formulario enviado por AJAX
+      $documento_paciente = $this->input->post("documento_paciente");
+      $codigo_doctor = $this->input->post("codigo_doctor");
+      $fetoembrion = $this->input->post("fetoembrion");
+      $situacion = $this->input->post("situacion");
+      $estadoFeto = $this->input->post("estadoFeto");
+      $placenta = $this->input->post("placenta");
+      $dpb = $this->input->post("dpb");
+      $lcf = $this->input->post("lcf");
+      $min = $this->input->post("min");
+      $cc = $this->input->post("cc");
+      $ca = $this->input->post("ca");
+      $lf = $this->input->post("lf");
+      $ila = $this->input->post("ila");
+      $percentil = $this->input->post("percentil");
+      $tipoParto = $this->input->post("tipoParto");
+      $conclusion = $this->input->post("conclusion");
+      $sugerencia = $this->input->post("sugerencia");
+  
+      // Agrupar los datos en un array
+      $datos = [
+          "documento_paciente" => $documento_paciente,
+          "codigo_doctor" => $codigo_doctor,
+          "fetoembrion" => $fetoembrion,
+          "situacion" => $situacion,
+          "estadoFeto" => $estadoFeto,
+          "placenta" => $placenta,
+          "dpb" => $dpb,
+          "lcf" => $lcf,
+          "min" => $min,
+          "cc" => $cc,
+          "ca" => $ca,
+          "lf" => $lf,
+          "ila" => $ila,
+          "percentil" => $percentil,
+          "tipoParto" => $tipoParto,
+          "conclusion" => $conclusion,
+          "sugerencia" => $sugerencia,
+      ];
+  
+      // Insertar en la base de datos utilizando el modelo
+      $this->Ecografias_model->createEcografiaObstetrica($datos);
+  
+      // Enviar respuesta JSON para que el frontend sepa que todo salió bien
+      echo json_encode(["status" => "success", "message" => "Ecografía Obstétrica registrada correctamente"]);
+  }
+  
+
     // ECOGRAFIA TRANSVAGINAL
 
-    public function createEcografiaTransvaginal() {
+    public function createEcografiaTrasvaginal() {
       
     }
 

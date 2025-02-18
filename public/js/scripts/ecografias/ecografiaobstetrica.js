@@ -1,4 +1,4 @@
-function ecografiaObstetrica() {
+function createEcografiaObstetrica() {
     var url = baseurl + "administracion/ecografiaobstetrica"; // Ajusta la URL según tu necesidad
     var documento_paciente = $("#documento_paciente").val(),
         codigo_doctor = $("#codigo_doctor").val(),
@@ -22,6 +22,7 @@ function ecografiaObstetrica() {
       url: url,
       method: "POST",
       data: {
+        
         documento_paciente: documento_paciente,
         codigo_doctor: codigo_doctor,
         fetoembrion: fetoembrion,

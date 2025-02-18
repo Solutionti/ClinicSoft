@@ -78,13 +78,31 @@ class Ecografias_model extends CI_model {
 
     public function createEcografiaObstetrica($data) {
       $datos = [
-        "documento_paciente" => $data["documento_paciente"],
-        "codigo_doctor" => $data["codigo_doctor"],
-        "fecha" => date("Y-m-d"),
-        "hora" => date("h:i A"),
-        "usuario" => $this->session->userdata("nombre"),
+          "documento_paciente" => $data["documento_paciente"],
+          "codigo_doctor" => $data["codigo_doctor"],
+          "fetoembrion" => $data["fetoembrion"],
+          "situacion" => $data["situacion"],
+          "estadoFeto" => $data["estadoFeto"],
+          "placenta" => $data["placenta"],
+          "dpb" => $data["dpb"],
+          "lcf" => $data["lcf"],
+          "min" => $data["min"],
+          "cc" => $data["cc"],
+          "ca" => $data["ca"],
+          "lf" => $data["lf"],
+          "ila" => $data["ila"],
+          "percentil" => $data["percentil"],
+          "tipoParto" => $data["tipoParto"],
+          "conclusion" => $data["conclusion"],
+          "sugerencia" => $data["sugerencia"],
+          "fecha" => date("Y-m-d"),
+          "hora" => date("h:i A"),
+          "usuario" => $this->session->userdata("nombre"),
       ];
-    }
+      
+      $this->db->insert("ecografia_obstetrica", $datos);
+  }
+  
 
     public function subirDocumentoEcografias($data) {
 

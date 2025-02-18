@@ -406,9 +406,9 @@
                           <div class="d-grid gap-2">
                             <button
                               class="btn btn-primary rounded-pill"
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                            >
+                              >
+                              <!-- data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop" -->
                             <i class="fas fa-calendar-alt"></i> Nueva Consulta
                             </button>
                           </div>
@@ -537,7 +537,7 @@
                   <label class="text-primary">Tipo </label>
                   <select
                     class="form-select form-select-sm form-control form-control-sm"
-                    formControlName="anamnesis_directa"
+                    id="anamnesis_directa"
                   >
                     <option value="D">DIRECTA</option>
                     <option value="I">INDIRECTA</option>
@@ -549,7 +549,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_empresa"
+                    id="anamnesis_empresa"
                   >
                 </div>
                 <div class="col-md-3">
@@ -557,7 +557,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_compañia"
+                    id="anamnesis_compañia"
                   >
                 </div>
                 <div class="col-md-2">
@@ -565,7 +565,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_iafa"
+                    id="anamnesis_iafa"
                   >
                 </div>
               </div>
@@ -575,7 +575,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_acompañante"
+                    id="anamnesis_acompanante"
                   >
                 </div>
                 <div class="col-md-3">
@@ -583,7 +583,7 @@
                   <input
                     type="number"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_dni"
+                    id="anamnesis_dni"
                   >
                 </div>
                 <div class="col-md-3">
@@ -591,7 +591,7 @@
                   <input
                     type="number"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_celular"
+                    id="anamnesis_celular"
                   >
                 </div>
               </div>
@@ -600,14 +600,14 @@
                   <label class="text-primary">MOTIVO CONSULTA</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_consulta"
+                    id="anamnesis_consulta"
                   ></textarea>
                 </div>
                 <div class="col-md-6">
                   <label class="text-primary">TRATAMIENTO ANTERIOR</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_tratamiento"
+                    id="anamnesis_tratamiento"
                   ></textarea>
                 </div>
               </div>
@@ -617,7 +617,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_enfermedad"
+                    id="anamnesis_enfermedad"
                   >
                 </div>
                 <div class="col-md-3">
@@ -625,7 +625,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_tiempo"
+                    id="anamnesis_tiempo"
                   >
                 </div>
                 <div class="col-md-3">
@@ -633,7 +633,7 @@
                   <input
                     type="date"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_inicio"
+                    id="anamnesis_inicio"
                   >
                 </div>
                 <div class="col-md-3">
@@ -641,7 +641,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_curso"
+                    id="anamnesis_curso"
                   >
                 </div>
               </div>
@@ -650,7 +650,7 @@
                   <label class="text-primary">SINTOMAS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="anamnesis_sintomas"
+                    id="anamnesis_sintomas"
                   ></textarea>
                 </div>
               </div>
@@ -1366,8 +1366,8 @@
 <div class="modal fade" id="archivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="archivosLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="archivosLabel">SUBIR ARCHIVOS</h1>
+      <div class="modal-header bg-default">
+        <h1 class="modal-title fs-5 text-white" id="archivosLabel">SUBIR ARCHIVOS</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
