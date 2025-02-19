@@ -176,7 +176,7 @@
             <div class="input-group">
               <input type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
            <div class="input-group-append">
-          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
+          <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI" onclick="buscarPaciente()"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -187,7 +187,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="nombre_ecografia_abdomninal"
+            id="nombre"
+            readonly
         >
     </div>
 
@@ -196,7 +197,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="apellido_ecografia_abdomninal"
+            id="apellidos"
+            readonly
         >
     </div>
 
@@ -205,7 +207,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="edad_ecografia_abdomninal"
+            id="edad"
+            readonly
         >
     </div>
 
@@ -214,7 +217,8 @@
         <input
             type="text"
             class="form-control form-control-sm"
-            formControlName="hc_ecografia_abdomninal"
+            id="hc"
+            readonly
         >
         </div>
         </div>
@@ -362,5 +366,7 @@
   </main>
 
   <?php require_once("componentes/scripts.php"); ?>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/ecografiaarterial.js"></script>
 </body>
 </html>

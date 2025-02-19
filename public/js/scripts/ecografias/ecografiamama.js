@@ -55,6 +55,9 @@ function createEcografiaMama() {
       $("#comentario_der").val('');
       $("#conclusion_mama").val('');
       $("#sugerencias_mama").val('');
+      setTimeout(function() {
+        location.reload();
+      }, 2000);
     },
     error: function() {
       $("body").overhang({

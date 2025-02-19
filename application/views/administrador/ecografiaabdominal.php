@@ -188,6 +188,7 @@
             type="text"
             class="form-control form-control-sm"
             id="nombre"
+            readonly
 
         >
     </div>
@@ -198,6 +199,7 @@
             type="text"
             class="form-control form-control-sm"
             id="apellidos"
+            readonly
         >
     </div>
 
@@ -207,6 +209,7 @@
             type="text"
             class="form-control form-control-sm"
             id="edad"
+            readonly
         >
     </div>
 
@@ -216,6 +219,7 @@
             type="text"
             class="form-control form-control-sm"
             id="hc"
+            readonly
         >
         </div>
         </div>

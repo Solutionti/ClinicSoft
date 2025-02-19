@@ -1,6 +1,6 @@
 function createEcografiaObstetrica() {
     var url = baseurl + "administracion/ecografiaobstetrica"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         fetoembrion = $("input[name='fetoembrion']:checked").val(),
         situacion = $("input[name='situacion']:checked").val(),
@@ -65,6 +65,9 @@ function createEcografiaObstetrica() {
         $("#tipoParto").val('');
         $("#conclusion").val('');
         $("#sugerencia").val('');
+        setTimeout(function() {
+          location.reload();
+      }, 2000);
       },
       error: function() {
         $("body").overhang({
