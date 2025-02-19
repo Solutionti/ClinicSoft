@@ -324,7 +324,7 @@ class Ecografias extends Admin_Controller {
       $superficie = $this->input->post("superficie");
       $endometrio = $this->input->post("endometrio");
       $tumoraxial = $this->input->post("tumoraxial");
-      $tumorAnexialCom = $this->input->post("tumorAnexialCom");
+      $tumor_anexial_com = $this->input->post("tumor_anexial_com");
       $uteroMedidas = $this->input->post("uteroMedidas");
       $medidaUtero1 = $this->input->post("medidaUtero1");
       $medidaUtero2 = $this->input->post("medidaUtero2");
