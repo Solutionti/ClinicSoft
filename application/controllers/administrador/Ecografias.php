@@ -313,7 +313,66 @@ class Ecografias extends Admin_Controller {
     
     // Enviar respuesta JSON al frontend
     echo json_encode(["status" => "success", "message" => "Ecografía Trasvaginal registrada correctamente"]);
-}
+    }
+
+    // ECOGRAFIA PELVICA
+
+    public function createEcografiaPelvica() {
+      $documento_paciente = $this->input->post("documento_paciente");
+      $codigo_doctor = $this->input->post("codigo_doctor");
+      $uteroTipo = $this->input->post("uteroTipo");
+      $superficie = $this->input->post("superficie");
+      $endometrio = $this->input->post("endometrio");
+      $tumoraxial = $this->input->post("tumoraxial");
+      $tumorAnexialCom = $this->input->post("tumorAnexialCom");
+      $uteroMedidas = $this->input->post("uteroMedidas");
+      $medidaUtero1 = $this->input->post("medidaUtero1");
+      $medidaUtero2 = $this->input->post("medidaUtero2");
+      $comentarioUtero = $this->input->post("comentarioUtero");
+      $ovarioDer1 = $this->input->post("ovarioDer1");
+      $ovarioDer2 = $this->input->post("ovarioDer2");
+      $comentarioOvarioDer = $this->input->post("comentarioOvarioDer");
+      $ovarioIz1 = $this->input->post("ovarioIz1");
+      $ovarioIz2 = $this->input->post("ovarioIz2");
+      $comentarioOvarioIzq = $this->input->post("comentarioOvarioIzq");
+      $fondosaco = $this->input->post("fondosaco");
+      $miometrio = $this->input->post("miometrio");
+      $conclusion = $this->input->post("conclusion");
+      $sugerencias = $this->input->post("sugerencias");
+  
+      $datos = [
+          "documento_paciente" => $documento_paciente,
+          "codigo_doctor" => $codigo_doctor,
+          "utero_tipo" => $uteroTipo,
+          "superficie" => $superficie,
+          "endometrio" => $endometrio,
+          "tumoraxial" => $tumoraxial,
+          "tumor_anexial_com" => $tumor_anexial_com,
+          "utero_medidas" => $uteroMedidas,
+          "medida_utero1" => $medidaUtero1,
+          "medida_utero2" => $medidaUtero2,
+          "comentario_utero" => $comentarioUtero,
+          "ovario_der1" => $ovarioDer1,
+          "ovario_der2" => $ovarioDer2,
+          "comentario_ovario_der" => $comentarioOvarioDer,
+          "ovario_iz1" => $ovarioIz1,
+          "ovario_iz2" => $ovarioIz2,
+          "comentario_ovario_izq" => $comentarioOvarioIzq,
+          "fondosaco" => $fondosaco,
+          "miometrio" => $miometrio,
+          "conclusion" => $conclusion,
+          "sugerencias" => $sugerencias,
+          "fecha" => date("Y-m-d"),
+          "hora" => date("H:i:s"),
+          "usuario" => $this->session->userdata("nombre"),
+      ];
+  
+      $this->Ecografias_model->createEcografiaPelvica($datos);
+  
+      // Enviar respuesta JSON para que el frontend sepa que todo salió bien
+      echo json_encode(["status" => "success", "message" => "Ecografía Pélvica registrada correctamente"]);
+  }
+  
 
 
 

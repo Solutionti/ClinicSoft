@@ -153,6 +153,7 @@ $route["administracion/ecografiaobstetrica"] = "administrador/ecografias/createE
 $route["administracion/ecografiagenetica"] = "administrador/ecografias/createEcografiaGenetica";
 $route["administracion/ecografiamorfologica"] = "administrador/ecografias/createEcografiaMorfologica";
 $route["administracion/ecografiatrasvaginal"] = "administrador/ecografias/createEcografiaTrasvaginal";
+$route["administracion/ecografiapelvica"] = "administrador/ecografias/createEcografiaPelvica";
 //
 $route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 //PQRS

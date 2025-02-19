@@ -76,6 +76,9 @@ function createEcografiaTrasvaginal() {
         $("#miometrio").val('Homogenio');
         $("#conclusion").val('');
         $("#sugerencias").val('');
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
       error: function() {
         $("body").overhang({

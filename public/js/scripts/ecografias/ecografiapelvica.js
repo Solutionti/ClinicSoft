@@ -6,7 +6,7 @@ function createEcografiaPelvica() {
         superficie = $("input[name='superficie']:checked").val();
         endometrio = $("#endometrio").val();
         tumoraxial = $("input[name='tumoraxial']:checked").val(); // ID corregido
-        tumorAnexialCom = $("#tumorAnexial-com").val();
+        tumor_anexial_com = $("#tumor_anexial_com").val();
         uteroMedidas = $("#utero-medidas").val();
         medidaUtero1 = $("#medidaUtero1").val();
         medidaUtero2 = $("#medidaUtero2").val();
@@ -21,6 +21,7 @@ function createEcografiaPelvica() {
         miometrio = $("#miometrio").val();
         conclusion = $("#conclusion").val();
         sugerencias = $("#sugerencias").val();  
+
     $.ajax({
       url: url,
       method: "POST",
@@ -31,7 +32,7 @@ function createEcografiaPelvica() {
         superficie: superficie,
         endometrio: endometrio,
         tumoraxial: tumoraxial, // ID corregido
-        tumorAnexialCom: tumorAnexialCom,
+        tumor_anexial_com: tumor_anexial_com,
         uteroMedidas: uteroMedidas,
         medidaUtero1: medidaUtero1,
         medidaUtero2: medidaUtero2,
@@ -47,20 +48,22 @@ function createEcografiaPelvica() {
         conclusion: conclusion,
         sugerencias: sugerencias  
       },
+
+    
       success: function() {
         $("body").overhang({
           type: "success",
-          message: "Ecografía de Mama registrada correctamente"
+          message: "Ecografía de Pelvica registrada correctamente"
         });
   
         // Limpiar los campos después de un insert exitoso
-        $("#documento_paciente").val('');
+        $("#dni").val('');
         $("#codigo_doctor").val('');
         $("#utero-tipo").val('Anteverso');
         $("input[name='superficie']").prop('checked', false);
         $("#endometrio").val('Grosor mm libre');
         $("input[name='tumoraxial']").prop('checked', false); // ID corregido
-        $("#tumorAnexial-com").val('No hay masas solidas ni quisticas');
+        $("#tumor_anexial_com").val('No hay masas solidas ni quisticas');
         $("#utero-medidas").val('');
         $("#medidaUtero1").val('');
         $("#medidaUtero2").val('');
@@ -75,7 +78,12 @@ function createEcografiaPelvica() {
         $("#miometrio").val('Homogenio');
         $("#conclusion").val('');
         $("#sugerencias").val('');   
+        setTimeout(function() {
+          location.reload();
+      }, 2000);
+  
       },
+      
       error: function() {
         $("body").overhang({
           type: "error",

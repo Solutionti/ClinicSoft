@@ -80,6 +80,9 @@ function createEcografiaMorfologica() {
             $("#ponderadoFetal").val('');
             $("#lcf").val(''); 
             $("#conclusiones").val('');
+            setTimeout(function() {
+              location.reload();
+          }, 2000);
         },
         error: function() {
             $("body").overhang({
