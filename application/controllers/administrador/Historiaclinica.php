@@ -8,7 +8,7 @@ class Historiaclinica extends Admin_Controller {
 		$this->load->model("Pacientes_model");
 		$this->load->model("Historias_model");
 		$this->load->model("Generic_model");
-		$this->load->model("Lineatiempo_model");
+		$this->load->model("Doctores_model");
 	}
 
 	public function historiasClinicas()
@@ -32,7 +32,7 @@ class Historiaclinica extends Admin_Controller {
 		$generaliniciadas = $this->Historias_model->consultaIniciadaGeneral($documento);
 		$ginecoiniciadas = $this->Historias_model->consultaIniciadaGineco($documento);
 		$poscitas = $this->Historias_model->getPosCita($documento);
-		
+		$doctores = $this->Doctores_model->getDoctores();
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -50,7 +50,8 @@ class Historiaclinica extends Admin_Controller {
 			"procepaciente" => $procepacientes,
 			"generaliniciada" => $generaliniciadas,
 			"ginecoiniciada" => $ginecoiniciadas,
-			"poscita" => $poscitas
+			"poscita" => $poscitas,
+			"doctor"=> $doctores,
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}

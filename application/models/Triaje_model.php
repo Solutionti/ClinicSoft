@@ -3,7 +3,7 @@
 class Triaje_model extends CI_model {
 
     public function getTriaje() {
-        $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido, m.nombre, e.descripcion");
+        $this->db->select(" a.*,p.nombre as paciente,p.documento,p.apellido, m.nombre, e.descripcion, p.telefono");
         $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores m", "a.medico = m.codigo_doctor");
@@ -16,7 +16,7 @@ class Triaje_model extends CI_model {
     }
 
     public function getTriajeId($id) {
-        $this->db->select(" a.*,p.codigo_paciente,p.nombre as paciente,p.apellido, p.edad,p.documento,m.codigo_doctor ,m.nombre, e.descripcion");
+        $this->db->select(" a.*,p.codigo_paciente,p.nombre as paciente,p.apellido, p.edad,p.documento,m.codigo_doctor ,m.nombre, e.descripcion, p.telefono");
         $this->db->from("admisiones a");
         $this->db->join("pacientes p", "a.paciente = p.documento");
         $this->db->join("doctores m", "a.medico = m.codigo_doctor");

@@ -553,6 +553,12 @@ $(document).ready(function (){
         document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
         $("#documento_historia").val(data.documento);
         $("#consecutivo_historia").val(data.codigo_triaje);
+
+        // DATOS PARA LA CITAS
+        $("#medico").val(data.codigo_doctor);
+        $("#dni").val(data.documento);
+        $("#nombre").val(data.apellido + ' ' + data.paciente);
+        $("#telefono").val(data.telefono);
       }
    });
 })
