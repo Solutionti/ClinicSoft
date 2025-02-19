@@ -1,6 +1,7 @@
 function createEcografiaMorfologica() {
-    var url = baseurl + "administracion/ecografiammorfologica";
-    var documento_paciente = $("#documento_paciente").val();
+    var url = baseurl + "administracion/ecografiamorfologica";
+    var documento_paciente = $("#dni").val();
+    var codigo_doctor = $("#codigo_doctor").val();
     var sexo = $("input[name='sexo']:checked").val();
     var formacabeza = $("#formacabeza").val();
     var cerebelo = $("#cerebelo").val();
@@ -27,7 +28,8 @@ function createEcografiaMorfologica() {
         url: url,
         method: "POST",
         data: {
-            
+            documento_paciente: documento_paciente,
+            codigo_doctor: codigo_doctor,
             sexo: sexo,
             formacabeza: formacabeza,
             cerebelo: cerebelo,

@@ -1,6 +1,6 @@
 function createEcografiaMama() {
   var url = baseurl + "administracion/ecografiamama";
-  var documento_paciente = $("#documento_paciente").val(),
+  var documento_paciente = $("#dni").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       pezon_izq = $("#pezon_izq").val(),
       tcsc_izq = $("#tcsc_izq").val(),

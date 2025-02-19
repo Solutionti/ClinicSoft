@@ -284,19 +284,19 @@
                               <label>UTERO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="utero-medidas">
+                              <input  class="form-control form-control-sm" id="utero-medidas">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="medidaUtero1">
+                              <input  class="form-control form-control-sm" id="medidaUtero1">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="medidaUtero2">>
+                              <input  class="form-control form-control-sm" id="medidaUtero2">
                            </div>
                            <div class="col-md-3">
                               <textarea id="comentarioUtero" class="form-control form-control-sm" rows="1">DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
@@ -308,13 +308,13 @@
                               <label>OVARIO DERECHO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-der1">
+                              <input  class="form-control form-control-sm" id="ovario-der1">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-der2">
+                              <input  class="form-control form-control-sm" id="ovario-der2">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
@@ -329,13 +329,13 @@
                               <label>OVARIO IZQUIERDO</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-iz1">
+                              <input  class="form-control form-control-sm" id="ovario-iz1">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
                            </div>
                            <div class="col-md-1">
-                              <input type="number" class="form-control form-control-sm" id="ovario-iz2">
+                              <input  class="form-control form-control-sm" id="ovario-iz2">
                            </div>
                            <div class="col-md-1">
                               <label class="mt-3">mm</label>
@@ -361,7 +361,7 @@
                   <div class="row">
                      <div class="col-md-6">
                         <label>Conclusión</label>
-                        <textarea id="conclusion_izq" class="form-control form-control-sm" rows="2"></textarea>
+                        <textarea id="conclusion" class="form-control form-control-sm" rows="2"></textarea>
                      </div>
                      <div class="col-md-6">
                         <label>Sugerencias</label>
@@ -372,7 +372,7 @@
                <br>
                <div class="modal-footer">
                   <button type="button" class="btn btn-danger">pdf</button>
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" onclick="createEcografiaTrasvaginal()">Guardar</button>
                </div>
             </div>
          </div>

@@ -1,6 +1,6 @@
-function createEcografiaVaginal() {
-    var url = baseurl + "administracion/ecografiavaginal";
-    var documento_paciente = $("#documento_paciente").val(),
+function createEcografiaTrasvaginal() {
+    var url = baseurl + "administracion/ecografiatrasvaginal";
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val();
          uteroTipo = $("#utero-tipo").val();
          superficie = $("input[name='superficie']:checked").val();
@@ -19,7 +19,7 @@ function createEcografiaVaginal() {
          comentarioOvarioIzq = $("#comentarioOvario-izq").val();
          fondosaco = $("#fondosaco").val();
          miometrio = $("#miometrio").val();
-         conclusion = $("#conclusion").val(); // ID repetido, asegúrate de que sea correcto
+         conclusion = $("#conclusion").val();
          sugerencias = $("#sugerencias").val();
   
     $.ajax({
@@ -45,13 +45,13 @@ function createEcografiaVaginal() {
         comentarioOvarioIzq: comentarioOvarioIzq,
         fondosaco: fondosaco,
         miometrio: miometrio,
-        conclusion: conclusion, 
+        conclusion: conclusion,
         sugerencias: sugerencias
       },
       success: function() {
         $("body").overhang({
           type: "success",
-          message: "Ecografía de Mama registrada correctamente"
+          message: "Ecografía de Trasvaginal registrada correctamente"
         });
   
         // Limpiar los campos después de un insert exitoso
@@ -74,7 +74,7 @@ function createEcografiaVaginal() {
         $("#comentarioOvario-izq").val('DE ASPECTO NORMAL.');
         $("#fondosaco").val('Libre');
         $("#miometrio").val('Homogenio');
-        $("#conclusion").val(''); // ID repetido, asegúrate de que sea correcto
+        $("#conclusion").val('');
         $("#sugerencias").val('');
       },
       error: function() {

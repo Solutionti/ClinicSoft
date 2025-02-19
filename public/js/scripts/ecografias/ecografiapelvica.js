@@ -1,6 +1,6 @@
 function createEcografiaPelvica() {
     var url = baseurl + "administracion/ecografiapelvica";
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         uteroTipo = $("#utero-tipo").val();
         superficie = $("input[name='superficie']:checked").val();
