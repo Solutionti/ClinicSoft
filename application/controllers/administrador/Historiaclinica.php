@@ -96,6 +96,7 @@ class Historiaclinica extends Admin_Controller {
 		$proxima_cita = $this->input->post("proxima_cita");
 		$firma_medico = $this->input->post("firma_medico");
 		$tratamiento = $this->input->post("tratamientos_gine");
+		
 		$data1 = [
 			"paciente" => $paciente,
 			"doctor" => $doctor,
