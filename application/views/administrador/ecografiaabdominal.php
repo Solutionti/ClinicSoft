@@ -293,7 +293,7 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                  <button class="btn btn-primary btn-xs mt-2">
+                  <button class="btn btn-primary btn-xs mt-2" onclick="createEcografiaAbdominal()">
                     Guardar
                   </button>
                   <button

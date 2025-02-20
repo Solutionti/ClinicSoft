@@ -183,6 +183,63 @@ public function createEcografiaPelvica($data) {
   $this->db->insert("ecografia_pelvica", $datos);
 }
 
+//ECOGRAFIA ABDOMINAL
+public function createEcografiaAbdominal($data) {
+  $datos = [
+      "documento_paciente" => $data["documento_paciente"],
+      "codigo_doctor" => $data["codigo_doctor"],
+      "motivo" => $data["motivo"],
+      "estomago" => $data["estomago"],
+      "higado" => $data["higado"],
+      "coledoco_diametro" => $data["coledoco_diametro"],
+      "vesicula_volumen" => $data["vesicula_volumen"],
+      "vesicula_paredes" => $data["vesicula_paredes"],
+      "bazo" => $data["bazo"],
+      "rinon_derecho" => $data["rinon_derecho"],
+      "rinon_izquierdo" => $data["rinon_izquierdo"],
+      "otros_hallazgos" => $data["otros_hallazgos"],
+      "conclusiones" => $data["conclusiones"],
+      "sugerencias" => $data["sugerencias"],
+      "fecha" => date("Y-m-d"),
+      "hora" => date("H:i:s"),
+      "usuario" => $this->session->userdata("nombre"),
+  ];
+  $this->db->insert("ecografia_abdominal", $datos);
+}
+
+// ECOGRAFIA PROSTATICA
+
+public function createEcografiaProstatica($data) {
+  $datos = [
+      "documento_paciente" => $data["documento_paciente"],
+      "codigo_doctor" => $data["codigo_doctor"],
+      "motivo" => $data["motivo"],
+      "replicacion" => $data["replicacion"],
+      "paredes" => $data["paredes"],
+      "contenido" => $data["contenido"],
+      "detalle_contenido" => $data["detalle_contenido"],
+      "imagenes_expansivas" => $data["imagenes_expansivas"],
+      "detalle_imagenes" => $data["detalle_imagenes"],
+      "calculos" => $data["calculos"],
+      "detalle_calculos" => $data["detalle_calculos"],
+      "vol_pre" => $data["vol_pre"],
+      "vol_post" => $data["vol_post"],
+      "retencion" => $data["retencion"],
+      "descripcion" => $data["descripcion"],
+      "bordes" => $data["bordes"],
+      "transverso" => $data["transverso"],
+      "antero_posterior" => $data["antero_posterior"],
+      "longitudinal" => $data["longitudinal"],
+      "volumen" => $data["volumen"],
+      "otra" => $data["otra"],
+      "observacion_textarea" => $data["observacion_textarea"],
+      "conclusiones" => $data["conclusiones"],
+      "fecha" => date("Y-m-d"),
+      "hora" => date("H:i:s"),
+      "usuario" => $this->session->userdata("nombre"),
+  ];
+  $this->db->insert("ecografia_prostatica", $datos);
+}
 
 
 

@@ -373,10 +373,110 @@ class Ecografias extends Admin_Controller {
       echo json_encode(["status" => "success", "message" => "Ecografía Pélvica registrada correctamente"]);
   }
   
+// ECOGRAFIA ABDOMINAL
+public function createEcografiaAbdominal() {
+  $documento_paciente = $this->input->post("documento_paciente");
+  $codigo_doctor = $this->input->post("codigo_doctor");
+  $motivo = $this->input->post("motivo");
+  $estomago = $this->input->post("estomago");
+  $higado = $this->input->post("higado");
+  $coledoco_diametro = $this->input->post("coledoco_diametro");
+  $vesicula_volumen = $this->input->post("vesicula_volumen");
+  $vesicula_paredes = $this->input->post("vesicula_paredes");
+  $bazo = $this->input->post("bazo");
+  $rinonDerecho = $this->input->post("rinonDerecho");
+  $rinonIzquierdo = $this->input->post("rinonIzquierdo");
+  $otrosHallazgos = $this->input->post("otrosHallazgos");
+  $conclusiones = $this->input->post("conclusiones");
+  $sugerencias = $this->input->post("sugerencias");
+
+  $datos = [
+      "documento_paciente" => $documento_paciente,
+      "codigo_doctor" => $codigo_doctor,
+      "motivo" => $motivo,
+      "estomago" => $estomago,
+      "higado" => $higado,
+      "coledoco_diametro" => $coledoco_diametro,
+      "vesicula_volumen" => $vesicula_volumen,
+      "vesicula_paredes" => $vesicula_paredes,
+      "bazo" => $bazo,
+      "rinonDerecho" => $rinonDerecho,
+      "rinonIzquierdo" => $rinonIzquierdo,
+      "otrosHallazgos" => $otrosHallazgos,
+      "conclusiones" => $conclusiones,
+      "sugerencias" => $sugerencias,
+      "fecha" => date("Y-m-d"),
+      "hora" => date("H:i:s"),
+      "usuario" => $this->session->userdata("nombre"),
+  ];
+
+  $this->Ecografias_model->createEcografiaAbdominal($datos);
+
+  echo json_encode(["status" => "success", "message" => "Ecografía Abdominal registrada correctamente"]);
+}
+
+// ECOGRAFIA PROSTATICA
+
+public function createEcografiaProstatica() {
+  $documento_paciente = $this->input->post("documento_paciente");
+  $codigo_doctor = $this->input->post("codigo_doctor");
+  $motivo = $this->input->post("motivo");
+  $replicacion = $this->input->post("replicacion");
+  $paredes = $this->input->post("paredes");
+  $contenido = $this->input->post("contenido");
+  $detalle_contenido = $this->input->post("detalle_contenido");
+  $imagenes_expansivas = $this->input->post("imagenes_expansivas");
+  $detalle_imagenes = $this->input->post("detalle_imagenes");
+  $calculos = $this->input->post("calculos");
+  $detalle_calculos = $this->input->post("detalle_calculos");
+  $vol_pre = $this->input->post("vol_pre");
+  $vol_post = $this->input->post("vol_post");
+  $retencion = $this->input->post("retencion");
+  $descripcion = $this->input->post("descripcion");
+  $bordes = $this->input->post("bordes");
+  $transverso = $this->input->post("transverso");
+  $antero_posterior = $this->input->post("antero_posterior");
+  $longitudinal = $this->input->post("longitudinal");
+  $volumen = $this->input->post("volumen");
+  $otra = $this->input->post("otra");
+  $observacion_textarea = $this->input->post("observacion_textarea");
+  $conclusiones = $this->input->post("conclusiones");
+
+  $datos = [
+      "documento_paciente" => $documento_paciente,
+      "codigo_doctor" => $codigo_doctor,
+      "motivo" => $motivo,
+      "replicacion" => $replicacion,
+      "paredes" => $paredes,
+      "contenido" => $contenido,
+      "detalle_contenido" => $detalle_contenido,
+      "imagenes_expansivas" => $imagenes_expansivas,
+      "detalle_imagenes" => $detalle_imagenes,
+      "calculos" => $calculos,
+      "detalle_calculos" => $detalle_calculos,
+      "vol_pre" => $vol_pre,
+      "vol_post" => $vol_post,
+      "retencion" => $retencion,
+      "descripcion" => $descripcion,
+      "bordes" => $bordes,
+      "transverso" => $transverso,
+      "antero_posterior" => $antero_posterior,
+      "longitudinal" => $longitudinal,
+      "volumen" => $volumen,
+      "otra" => $otra,
+      "observacion_textarea" => $observacion_textarea,
+      "conclusiones" => $conclusiones,
+      "fecha" => date("Y-m-d"),
+      "hora" => date("H:i:s"),
+      "usuario" => $this->session->userdata("nombre"),
+  ];
+
+  $this->Ecografias_model->createEcografiaProstatica($datos);
+
+  echo json_encode(["status" => "success", "message" => "Ecografía Prostática registrada correctamente"]);
+}
 
 
-
-    
 
     public function subirDocumentoEcografias() {
 
