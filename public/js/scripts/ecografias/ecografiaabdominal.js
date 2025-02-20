@@ -1,6 +1,6 @@
-function ecografiaAbdominal() {
+function createEcografiaAbdominal() {
     var url = baseurl + "administracion/ecografiaabdominal"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         estomago = $("#estomago").val(),
@@ -55,7 +55,11 @@ function ecografiaAbdominal() {
         $("#otrosHallazgos").val('');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
+      
       error: function() {
         $("body").overhang({
           type: "error",

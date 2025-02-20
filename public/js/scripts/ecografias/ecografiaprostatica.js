@@ -1,6 +1,6 @@
-function ecografiaVejigaProstatica() {
+function createEcografiaProstatica() {
     var url = baseurl + "administracion/ecografiaprostatica"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         replicacion = $("#replicacion").val(),
@@ -55,7 +55,7 @@ function ecografiaVejigaProstatica() {
       success: function() {
         $("body").overhang({
           type: "success",
-          message: "Ecografía de Vejiga y Próstata registrada correctamente"
+          message: "Ecografía Prostática registrada correctamente"
         });
   
         // Limpiar los campos después de un insert exitoso
@@ -82,6 +82,9 @@ function ecografiaVejigaProstatica() {
         $("#otra").prop("checked", false);
         $("#observacion_textarea").val('');
         $("#conclusiones").val('');
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
       error: function() {
         $("body").overhang({
