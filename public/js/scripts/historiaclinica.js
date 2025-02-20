@@ -199,50 +199,56 @@ $('#items-ginecologia-table').on('dblclick', 'tr', function(e) {
     $("#total").val((total_).toFixed(2));
     table_lab_mini.draw(false);
 });
-$("#guardarhistoriaginecologia").on("click", function(){
+
+$("#btn-gineco").on("click", function(){
     
     var url1 = baseurl + "administracion/crearhistoriaginecologia",
-        dni = $("#dni1").val(),
+        dni = $("#documento_historia").val(),
         doctorid = $("#doctorid1").val(),
-        triaje = $("#triajeid1").val(),
-        familiares = $("#familiares1").val(),
-        patologicos = $("#patologicos1").val(),
-        gine_obste = $("#gine_obste1").val(),
-        fum = $("#fum1").val(),
-        rm = $("#rm1").val(),
-        flujo_genital = $("#flujo_genital1").val(),
-        parejas = $("#parejas1").val(),
-        gestas = $("#gestas1").val(),
-        partos = $("#partos1").val(),
-        abortos = $("#abortos1").val(),
-        anticonceptivos = $("#anticonceptivos1").val(),
-        tipo = $("#tipo1").val(),
-        tiempo = $("#tiempo1").val(),
-        cirugia_ginecologica = $("#cirugia_ginecologica1").val(),
-        otros = $("#otros1").val(),
-        pap = $("#pap1").val(),
-        hijos = $("#hijos1").val(),
-        motivo_consulta = $("#motivo_consulta1").val(),
-        signos_sintomas = $("#signos_sintomas1").val(),
-        piel_tscs = $("#piel_tscs1").val(),
-        tiroides = $("#tiroides1").val(),
-        mamas = $("#mamas1").val(),
-        a_respiratorio = $("#a_respiratorio1").val(),
-        a_cardiovascular = $("#a_cardiovascular1").val(),
-        abdomen = $("#abdomen1").val(),
-        genito = $("#genito1").val(),
-        tacto = $("#tacto1").val(),
-        locomotor = $("#locomotor1").val(),
-        sistema_nervioso = $("#sistema_nervioso1").val(),
+        triaje = $("#consecutivo_historia").val(),
+        // 
+        familiares = $("#antecedentes_familiares").val(),
+        patologicos = $("#antecedentes_patologicos").val(),
+        gine_obste = $("#antecedentes_gineco").val(),
+        fum = $("#antecedentes_fum").val(),
+        rm = $("#antecedentes_rm").val(),
+        flujo_genital = $("#antecedentes_flujo").val(),
+        parejas = $("#antecedentes_parejas").val(),
+        gestas = $("#antecedentes_gestas").val(),
+        partos = $("#antecedentes_partos").val(),
+        abortos = $("#antecedentes_abortos").val(),
+        anticonceptivos = $("#antecedentes_anticonceptivos").val(),
+        tipo = $("#antecedentes_tipos").val(),
+        tiempo = $("#antecedentes_tiempo").val(),
+        cirugia_ginecologica = $("#antecedentes_cirugia").val(),
+        otros = $("#antecedentes_otros").val(),
+        pap = $("#antecedentes_fecha").val(),
+        hijos = $("#antecedentes_hijos").val(),
+        // 
+        motivo_consulta = $("#consulta_motivo").val(),
+        signos_sintomas = $("#consulta_sintomas").val(),
+        // 
+        piel_tscs = $("#examen_piel").val(),
+        tiroides = $("#examen_tiroides").val(),
+        mamas = $("#examen_mamas").val(),
+        a_respiratorio = $("#examen_respiratorio").val(),
+        a_cardiovascular = $("#examen_cardiovascular").val(),
+        abdomen = $("#examen_abdomen").val(),
+        genito = $("#examen_genito").val(),
+        tacto = $("#examen_tacto").val(),
+        locomotor = $("#examen_locomotor").val(),
+        sistema_nervioso = $("#examen_sistema").val(),
+        // 
         exa_auxiliares = $("#exa_auxiliares1").val(),
         tratamientos_gine = $("#tratamientos_gine").val(),
         plan_trabajo = $("#plan_trabajo1").val(),
         proxima_cita = $("#proxima_cita1").val(),
         firma_medico = $("#firma_medico1").val();
+
         let diagnosticosginecologia = [];
 
-        for (let i = 0; i < elemntos_ginecologia.length; i++) {
-            diagnosticosginecologia [i] = elemntos_ginecologia[i][0];
+        for (let i = 0; i < elementos_general.length; i++) {
+            diagnosticosginecologia [i] = elementos_general[i][0];
         }
         
         $.ajax({
@@ -411,11 +417,11 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
     table_lab_mini4.draw(false);
 });
 
-$("#guardarhistoriageneral").on("click", function (){
+$("#btn-general").on("click", function (){
     var url2 = baseurl + "administracion/crearhistoriageneral",
     dni = $("#documento_historia").val(),
     doctorid = $("#doctorid1").val(),
-    triaje = $("#triajeid1").val(),
+    triaje = $("#consecutivo_historia").val(),
     // 
     anamnesis = $("#anamnesis_directa").val(),
     empresa = $("#anamnesis_empresa").val(),
@@ -575,6 +581,9 @@ $("#tphistoria").on("change", function() {
     $("#nav-home-tab").prop("hidden", false);
     $("#nav-profile-tab").prop("hidden", false);
     $("#nav-contact-tab").prop("hidden", false);
+
+    $("#btn-gineco").prop("hidden", true);
+    $("#btn-general").prop("hidden", false);
   }
   else if(tphistoria == 2) {
 
@@ -585,6 +594,9 @@ $("#tphistoria").on("change", function() {
     $("#nav-antecedentesgine-tab").prop("hidden", false);
     $("#nav-fisicogine-tab").prop("hidden", false);
     $("#nav-consultagine-tab").prop("hidden", false);
+
+    $("#btn-general").prop("hidden", true);
+    $("#btn-gineco").prop("hidden", false);
   }
   else {
     $("#nav-home-tab").prop("hidden", true);
@@ -594,6 +606,9 @@ $("#tphistoria").on("change", function() {
     $("#nav-antecedentesgine-tab").prop("hidden", true);
     $("#nav-fisicogine-tab").prop("hidden", true);
     $("#nav-consultagine-tab").prop("hidden", true);
+
+    $("#btn-general").prop("hidden", true);
+    $("#btn-gineco").prop("hidden", true);
   }
 });
 

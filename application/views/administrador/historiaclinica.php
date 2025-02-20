@@ -137,8 +137,7 @@
                     <div class="flex-shrink-0">
                       <img
                         class="avatar avatar-xl avatar-circle"
-                        src="https://htmlstream.com/preview/front-v4.2/html/assets/img/160x160/img9.jpg"
-                        alt="Image Description"
+                        src="<?php echo base_url(); ?>public/img/theme/team-41.jpg"
                       >
                     </div>
                     <div class="flex-grow-1 ms-4">
@@ -695,21 +694,21 @@
                   <label class="text-primary">PIEL</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_piel"
+                    id="fisico_piel"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="text-primary">CUELLO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_cuello"
+                    id="fisico_cuello"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="text-primary">ABDOMEN</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_abdomen"
+                    id="fisico_abdomen"
                   ></textarea>
                 </div>
               </div>
@@ -718,21 +717,21 @@
                   <label class="text-primary">AP RESPIRATORIO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_respiratorio"
+                    id="fisico_respiratorio"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="text-primary">AP CARDIO VASCULAR</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_cardio"
+                    id="fisico_cardio"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="text-primary">SISTEMA NERVIOSO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_sistema"
+                    id="fisico_sistema"
                   ></textarea>
                 </div>
               </div>
@@ -744,14 +743,14 @@
                   <label class="text-primary">CABEZA</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_cabeza"
+                    id="fisico_cabeza"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="text-primary">LOCOMOTOR</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="fisico_locomotor"
+                    id="fisico_locomotor"
                   ></textarea>
                 </div>
               </div>
@@ -761,7 +760,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="fisico_apetito"
+                    id="fisico_apetito"
                   >
                 </div>
                 <div class="col-md-4">
@@ -769,7 +768,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="fisico_sed"
+                    id="fisico_sed"
                   >
                 </div>
                 <div class="col-md-4">
@@ -777,7 +776,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="fisico_orina"
+                    id="fisico_orina"
                   >
                 </div>
               </div>
@@ -790,14 +789,14 @@
                   <label class="text-primary">EXAMEN DE AYUDA AL DX</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_examen"
+                    id="plan_examen"
                   ></textarea>
                 </div>
                 <div class="col-md-6">
                   <label class="text-primary">PROCEDIMIENTOS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_procedimiento"
+                    id="plan_procedimiento"
                   ></textarea>
                 </div>
               </div>
@@ -806,14 +805,14 @@
                   <label class="text-primary">INTERCONSULTAS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_interconsulta"
+                    id="plan_interconsulta"
                   ></textarea>
                 </div>
                 <div class="col-md-6">
                   <label class="text-primary">TRATAMIENTO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_tratamiento"
+                    id="plan_tratamiento"
                   ></textarea>
                 </div>
               </div>
@@ -822,14 +821,14 @@
                   <label class="text-primary">REFERENCIA</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_referencia"
+                    id="plan_referencia"
                   ></textarea>
                 </div>
                 <div class="col-md-6">
                   <label class="text-primary">FIRMA DEL MEDICO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="plan_firma"
+                    id="plan_firma"
                   ></textarea>
                 </div>
               </div>
@@ -885,21 +884,21 @@
                 <label class="color_ginecologia">FAMILIARES</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_familiares"
+                    id="antecedentes_familiares"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                 <label class="color_ginecologia">PATOLOGICOS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_patologicos"
+                    id="antecedentes_patologicos"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                 <label class="color_ginecologia">GINECO-OBSTETRICOS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_gineco"
+                    id="antecedentes_gineco"
                   ></textarea>
                 </div>
               </div>
@@ -910,7 +909,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_fum"
+                    id="antecedentes_fum"
                   >
                 </div>
                 <div class="col-md-3">
@@ -918,7 +917,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_rm"
+                    id="antecedentes_rm"
                   >
                 </div>
                 <div class="col-md-3">
@@ -926,15 +925,15 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_flujo"
+                    id="antecedentes_flujo"
                   >
                 </div>
                 <div class="col-md-3">
                   <label class="color_ginecologia">No PAREJAS</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_parejas"
+                    id="antecedentes_parejas"
                   >
                 </div>
               </div>
@@ -945,23 +944,23 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_gestas"
+                    id="antecedentes_gestas"
                   >
                 </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">PARTOS</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_partos"
+                    id="antecedentes_partos"
                   >
                 </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">ABORTOS</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_abortos"
+                    id="antecedentes_abortos"
                   >
                 </div>
               </div>
@@ -972,7 +971,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_anticonceptivos"
+                    id="antecedentes_anticonceptivos"
                   >
                 </div>
                 <div class="col-md-4">
@@ -980,7 +979,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_tipos"
+                    id="antecedentes_tipos"
                   >
                 </div>
                 <div class="col-md-4">
@@ -988,7 +987,7 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_tiempo"
+                    id="antecedentes_tiempo"
                   >
                 </div>
               </div>
@@ -997,14 +996,14 @@
                 <label class="color_ginecologia">CIRUGIA GINECOLOGICA</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_cirugia"
+                    id="antecedentes_cirugia"
                   ></textarea>
                 </div>
                 <div class="col-md-6">
                   <label class="color_ginecologia">OTROS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_otros"
+                    id="antecedentes_otros"
                   ></textarea>
                 </div>
               </div>
@@ -1014,7 +1013,7 @@
                   <input
                     type="date"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_fecha"
+                    id="antecedentes_fecha"
                   >
                 </div>
                 <div class="col-md-6">
@@ -1022,7 +1021,7 @@
                   <input
                     type="number"
                     class="form-control form-control-sm"
-                    formControlName="antecedentes_hijos"
+                    id="antecedentes_hijos"
                   >
                 </div>
               </div>
@@ -1035,21 +1034,21 @@
                   <label class="color_ginecologia">PIEL Y TSCS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_piel"
+                    id="examen_piel"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">TIROIDES</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_tiroides"
+                    id="examen_tiroides"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">MAMAS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_mamas"
+                    id="examen_mamas"
                   ></textarea>
                 </div>
               </div>
@@ -1058,21 +1057,21 @@
                 <label class="color_ginecologia">A RESPIRATORIO</label>
                 <textarea
                   class="form-control form-control-sm"
-                  formControlName="examen_respiratorio"
+                  id="examen_respiratorio"
                 ></textarea>
               </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">A CARDIOVASCULAR</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_cardiovascular"
+                    id="examen_cardiovascular"
                   ></textarea>
                 </div>
                 <div class="col-md-4">
                   <label class="color_ginecologia">ABDOMEN</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_cardiovascular"
+                    id="examen_abdomen"
                   ></textarea>
                 </div>
               </div>
@@ -1081,28 +1080,28 @@
                   <label class="color_ginecologia">A GENITO - URINARIO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_genito"
+                    id="examen_genito"
                   ></textarea>
                 </div>
                 <div class="col-md-3">
                   <label class="color_ginecologia">TACTO RECTAL</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_tacto"
+                    id="examen_tacto"
                   ></textarea>
                 </div>
                 <div class="col-md-3">
                   <label class="color_ginecologia">LOCOMOTOR</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_locomotor"
+                    id="examen_locomotor"
                   ></textarea>
                 </div>
                 <div class="col-md-3">
                   <label class="color_ginecologia">SISTEMA NERVIOSO</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="examen_sistema"
+                    id="examen_sistema"
                   ></textarea>
                 </div>
               </div>
@@ -1115,7 +1114,7 @@
                   <label class="color_ginecologia">MOTIVO CONSULTA</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="consulta_motivo"
+                    id="consulta_motivo"
                     rows="6"
                   ></textarea>
                 </div>
@@ -1126,7 +1125,7 @@
                   <label class="color_ginecologia">SIGNOS Y SINTOMAS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    formControlName="consulta_sintomas"
+                    id="consulta_sintomas"
                     rows="6"
                   ></textarea>
                 </div>
@@ -1177,8 +1176,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btn-general" hidden>Guardar</button>
+        <button type="button" class="btn btn-danger" id="btn-gineco" hidden>Guardar</button>
       </div>
     </div>
   </div>
@@ -1407,7 +1407,7 @@
       <label>Tipo de Archivo</label>
       <select
         class="form-control form-control-sm"
-        formControlName="tparchivo"
+        id="tparchivo"
       >
         <option value="">Seleccione una opcion</option>
         <option value="HF">Historial Fisico</option>
@@ -1419,7 +1419,7 @@
       <input
         type="text"
         class="form-control form-control-sm"
-        formControlName="titulo"
+        id="titulo"
         autocomplete="off"
       />
     </div>
