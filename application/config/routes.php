@@ -156,6 +156,14 @@ $route["administracion/ecografiatrasvaginal"] = "administrador/ecografias/create
 $route["administracion/ecografiapelvica"] = "administrador/ecografias/createEcografiaPelvica";
 $route["administracion/ecografiaabdominal"] = "administrador/ecografias/createEcografiaAbdominal";
 $route["administracion/ecografiaprostatica"] = "administrador/ecografias/createEcografiaProstatica";
+$route["administracion/ecografiarenal"] = "administrador/ecografias/createEcografiaRenal";
+$route["administracion/ecografiatiroides"] = "administrador/ecografias/createEcografiaTiroides";
+$route["administracion/ecografiahisterosonografia"] = "administrador/ecografias/createEcografiaHisterosonografia";
+$route["administracion/ecografiaarterial"] = "administrador/ecografias/createEcografiaArterial";
+$route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcografiaVenosa";
+
+
+
 //
 $route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 //PQRS

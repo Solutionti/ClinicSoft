@@ -1,9 +1,9 @@
-function ecografiaRenal() {
+function createEcografiaRenal() {
     var url = baseurl + "administracion/ecografiarenal"; // Ajusta la URL según tu necesidad
-    var motivo = $("#motivo").val(),
-        // Riñón derecho
-        documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
+        // Riñón derecho
+        motivo = $("#motivo").val(),
         morfologia_movilidad_derecho = $("#morfologia_movilidad_derecho").val(),
         ecogenicidad_derecho = $("#ecogenicidad_derecho").val(),
         medidas_longitud_derecho = $("#medidas_longitud_derecho").val(),
@@ -145,7 +145,12 @@ function ecografiaRenal() {
         $("#otra").prop("checked", false);
         $("#observacion_textarea").val('');
         $("#conclusiones").val('');
+
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
+
       error: function() {
         $("body").overhang({
           type: "error",

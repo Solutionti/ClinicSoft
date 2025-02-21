@@ -1,6 +1,6 @@
-function ecografiaVenosa() {
+function createEcografiaVenosa() {
     var url = baseurl + "administracion/ecografiavenosa"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         descripcionProcedimientoDerecho = $("#descripcionProcedimiento").eq(0).val(),
@@ -121,3 +121,5 @@ function ecografiaVenosa() {
       }
     });  
   }
+
+  

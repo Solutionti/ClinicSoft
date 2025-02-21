@@ -1,6 +1,6 @@
-function ecografiaArterial() {
+function createEcografiaArterial() {
     var url = baseurl + "administracion/ecografiaarterial"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         descripcionProcedimientoDerecho = $("#descripcionProcedimiento").eq(0).val(),
@@ -44,7 +44,6 @@ function ecografiaArterial() {
         motivo: motivo,
         descripcionProcedimientoDerecho: descripcionProcedimientoDerecho,
         descripcionProcedimientoIzquierdo: descripcionProcedimientoIzquierdo,
-        // Miembro inferior derecho
         vps_fc_derecho: vps_fc_derecho,
         onda_fc_derecho: onda_fc_derecho,
         vps_fs_derecho: vps_fs_derecho,
