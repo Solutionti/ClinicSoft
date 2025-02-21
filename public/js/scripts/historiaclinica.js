@@ -680,6 +680,51 @@ function crearMedicamento() {
  });
 }
 
+function crearCita() {
+  var url1 = baseurl + "administracion/crearcita",
+      dni = $("#dni").val(),
+      nombre = $("#nombre").val(),
+      telefono = $("#telefono").val(),
+      medico = $("#medico").val(),
+      fecha = $("#fecha").val(),
+      hora = "00:00",
+      estado = $("#estado").val(),
+      observaciones = $("#observaciones").val();
+
+      $.ajax({
+
+		url: url1,
+		method: "POST",
+		data: {
+		  dni: dni,
+		  nombre: nombre,
+		  telefono: telefono,
+		  medico: medico,
+		  fecha: fecha,
+		  hora: hora,
+		  estado: estado,
+		  observaciones: observaciones,
+		},
+
+		success: function () {
+
+			$("body").overhang({
+				type: "success",
+				message: "Listo",
+			});
+			setTimeout(reloadPage, 3000);
+		},
+		error: function () {
+
+			$("body").overhang({
+				type: "warning",
+				message: "No se realizo la operacion.",
+			});
+		},
+
+	});
+}
+
 const reloadPage = () => {
     location.reload();
   }
