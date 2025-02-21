@@ -234,17 +234,18 @@
                     <textarea class="form-control" id="descripcionTiroides" rows="3">Ubicación central, Parénquima homogéneo, Volumen normal, No se observan lesiones focales</textarea>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="lobuloDerecho">Lóbulo Derecho:</label>
-                    <input type="text" class="form-control" id="lobuloDerecho" placeholder="10x13x28 mm, 1.9 cc">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="lobuloIzquierdo">Lóbulo Izquierdo:</label>
-                    <input type="text" class="form-control" id="lobuloIzquierdo" placeholder="10x13x26 mm, 1.7 cc">
-                </div>
+            <div class="row">
+            <div class="col-md-6">
+            <label for="lobuloDerecho">Lóbulo Derecho:</label>
+            <input type="text" class="form-control" id="lobuloDerecho" placeholder="10x13x28 mm, 1.9 cc">
             </div>
-            <div class="form-row">
+            <div class="col-md-6">
+            <label for="lobuloIzquierdo">Lóbulo Izquierdo:</label>
+            <input type="text" class="form-control" id="lobuloIzquierdo" placeholder="10x13x26 mm, 1.7 cc">
+            </div>
+            </div>
+
+            <div class="row">
                 <div class="form-group col-md-6">
                     <label for="istmo">Istmo:</label>
                     <input type="text" class="form-control" id="istmo" placeholder="Espesor de 2 mm">
@@ -254,7 +255,7 @@
                     <input type="text" class="form-control" id="estructurasVasculares" placeholder="Normales">
                 </div>
             </div>
-            <div class="form-row">
+            <div class="row">
                 <div class="form-group col-md-6">
                     <label for="glandulasSubmaxilares">Glándulas Submaxilares:</label>
                     <input type="text" class="form-control" id="glandulasSubmaxilares" placeholder="Normales">
@@ -285,14 +286,9 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                  <button class="btn btn-primary btn-xs mt-2">
-                    Guardar
-                  </button>
-                  <button
-                    class="btn btn-danger btn-xs mt-2 mx-2"
-                  > <i class="fas fa-file-pdf"></i>
-                    Imprimir
-                  </button>
+                  <button type="button" class="btn btn-danger">pdf</button>
+                  <button type="button" class="btn btn-primary" onclick="createEcografiaTiroides()">Guardar</button>
+               </div>
                 </div>
               </div>
             </form>

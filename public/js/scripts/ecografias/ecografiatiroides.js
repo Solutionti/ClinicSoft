@@ -1,6 +1,6 @@
-function ecografiaTiroides() {
+function createEcografiaTiroides() {
     var url = baseurl + "administracion/ecografiatiroides"; // Ajusta la URL según tu necesidad
-    var documento_paciente = $("#documento_paciente").val(),
+    var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         descripcionTiroides = $("#descripcionTiroides").val(),
@@ -55,7 +55,12 @@ function ecografiaTiroides() {
         $("#tcsc").val('De caracteres normales ecográficamente normales, no se observan quistes, ni nódulos');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
+
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
+     
       error: function() {
         $("body").overhang({
           type: "error",

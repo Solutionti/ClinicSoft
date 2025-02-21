@@ -254,14 +254,8 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                  <button class="btn btn-primary btn-xs mt-2">
-                    Guardar
-                  </button>
-                  <button
-                    class="btn btn-danger btn-xs mt-2 mx-2"
-                  > <i class="fas fa-file-pdf"></i>
-                    Imprimir
-                  </button>
+                <button type="button" class="btn btn-primary" onclick="createEcografiaHisterosonografia()">Guardar</button>
+                <button type="button" class="btn btn-danger">pdf</button>
                 </div>
               </div>
             </form>
