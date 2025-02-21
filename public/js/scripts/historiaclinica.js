@@ -541,8 +541,12 @@ $("#ecografias").on("change", function() {
 });
 
 $(document).ready(function (){
-   var url1 = baseurl + "administracion/triajehistorias",
-       documento = '1110542802';
+    const pathname = window.location.pathname;  // Obtiene la ruta de la URL actual
+    const parts = pathname.split('/');  // Divide la ruta
+    const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
+    
+    var url1 = baseurl + "administracion/triajehistorias",
+       documento = id;
 
    $.ajax( {
       url: url1,
