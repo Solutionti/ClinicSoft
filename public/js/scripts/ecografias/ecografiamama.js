@@ -65,5 +65,12 @@ function createEcografiaMama() {
         message: "Alerta! Tenemos un problema al conectar con la base de datos. Verifica tu red.",
       }); 
     }
-  });  
+  });
+
+}
+
+function generarpdfMama() {
+  let dni = $("#dni").val();
+  let url = baseurl + "administracion/pdfecografiamama/" + dni;
+  window.open(url, "_blank", " width=950, height=1000");
 }

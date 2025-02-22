@@ -328,7 +328,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" id=""> <i class="fas fa-file-pdf"></i> PDF</button>
+                  <button type="button" class="btn btn-danger" onclick="generarpdfMama()"> <i class="fas fa-file-pdf"></i> PDF</button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaMama()">Guardar</button>
                </div>
             </div>
