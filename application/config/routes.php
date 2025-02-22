@@ -147,23 +147,6 @@ $route["administracion/consultarkardex"] = "administrador/inventarios/consultark
 $route["administracion/pdfinventarios"] = "administrador/inventarios/generarpdfinventarios";
 $route["administracion/pdfkardex"] = "administrador/inventarios/generarpdfkardex";
 
-//ECOGRAFIAS CREAR
-$route["administracion/ecografiamama"] = "administrador/ecografias/createEcografiaMama";
-$route["administracion/ecografiaobstetrica"] = "administrador/ecografias/createEcografiaObstetrica";
-$route["administracion/ecografiagenetica"] = "administrador/ecografias/createEcografiaGenetica";
-$route["administracion/ecografiamorfologica"] = "administrador/ecografias/createEcografiaMorfologica";
-$route["administracion/ecografiatrasvaginal"] = "administrador/ecografias/createEcografiaTrasvaginal";
-$route["administracion/ecografiapelvica"] = "administrador/ecografias/createEcografiaPelvica";
-$route["administracion/ecografiaabdominal"] = "administrador/ecografias/createEcografiaAbdominal";
-$route["administracion/ecografiaprostatica"] = "administrador/ecografias/createEcografiaProstatica";
-$route["administracion/ecografiarenal"] = "administrador/ecografias/createEcografiaRenal";
-$route["administracion/ecografiatiroides"] = "administrador/ecografias/createEcografiaTiroides";
-$route["administracion/ecografiahisterosonografia"] = "administrador/ecografias/createEcografiaHisterosonografia";
-$route["administracion/ecografiaarterial"] = "administrador/ecografias/createEcografiaArterial";
-$route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcografiaVenosa";
-
-
-
 //
 $route["administracion/cargararchivoecografias"] = "administrador/ecografias/subirdocumentoecografias";
 //PQRS
@@ -195,6 +178,24 @@ $route["administracion/ecografiaTiroidesview"] = "administrador/ecografias/ecogr
 $route["administracion/ecografiaHisteronosografiaview"] = "administrador/ecografias/ecografiaHisteronosografiaview";
 $route["administracion/ecografiaArterialview"] = "administrador/ecografias/ecografiaArterialview";
 $route["administracion/ecografiaVenosaview"] = "administrador/ecografias/ecografiaVenosaview";
+
+//ECOGRAFIAS CREAR
+$route["administracion/ecografiamama"] = "administrador/ecografias/createEcografiaMama";
+$route["administracion/ecografiaobstetrica"] = "administrador/ecografias/createEcografiaObstetrica";
+$route["administracion/ecografiagenetica"] = "administrador/ecografias/createEcografiaGenetica";
+$route["administracion/ecografiamorfologica"] = "administrador/ecografias/createEcografiaMorfologica";
+$route["administracion/ecografiatrasvaginal"] = "administrador/ecografias/createEcografiaTrasvaginal";
+$route["administracion/ecografiapelvica"] = "administrador/ecografias/createEcografiaPelvica";
+$route["administracion/ecografiaabdominal"] = "administrador/ecografias/createEcografiaAbdominal";
+$route["administracion/ecografiaprostatica"] = "administrador/ecografias/createEcografiaProstatica";
+$route["administracion/ecografiarenal"] = "administrador/ecografias/createEcografiaRenal";
+$route["administracion/ecografiatiroides"] = "administrador/ecografias/createEcografiaTiroides";
+$route["administracion/ecografiahisterosonografia"] = "administrador/ecografias/createEcografiaHisterosonografia";
+$route["administracion/ecografiaarterial"] = "administrador/ecografias/createEcografiaArterial";
+$route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcografiaVenosa";
+
+// PDF DE LAS ECOGRAFIAS
+$route["administracion/pdfecografiamama/(:num)"] = "administrador/PdfController/getEcografiaMamaPdf/$1";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
