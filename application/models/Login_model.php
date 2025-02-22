@@ -4,7 +4,7 @@ class Login_model extends CI_model {
 
     public function iniciarSesion($correo, $password) {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("email", $correo);
         $this->db->or_where("usuario", $correo);
         $this->db->where("estado", "Activo");

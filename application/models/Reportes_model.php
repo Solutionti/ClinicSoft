@@ -62,7 +62,7 @@ class Reportes_model extends CI_model {
 
         $this->db->from("cpe_gastos c");
 
-        $this->db->join("usuarios u", "c.codigo_usuario  = u.codigo_usuario ");
+        $this->db->join("doctores u", "c.codigo_usuario  = u.codigo_doctor ");
 
         $this->db->where('c.codigo_usuario_sys = '.$this->session->userdata("codigo").' AND c.f_recepcion BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
 
@@ -92,7 +92,7 @@ class Reportes_model extends CI_model {
 
         $this->db->from("cpe_gastos c");
 
-        $this->db->join("usuarios u", "c.codigo_usuario  = u.codigo_usuario ");
+        $this->db->join("doctores u", "c.codigo_usuario  = u.codigo_doctor ");
 
         $this->db->where('c.codigo_usuario_sys = '.$this->session->userdata("codigo").' AND c.f_recepcion BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
 
@@ -156,9 +156,9 @@ class Reportes_model extends CI_model {
 
         $this->db->from("cpe_gastos c");
 
-        $this->db->join("usuarios uu", "c.codigo_usuario_sys  = uu.codigo_usuario");
+        $this->db->join("doctores uu", "c.codigo_usuario_sys  = uu.codigo_doctor");
 
-        $this->db->join("usuarios u", "c.codigo_usuario  = u.codigo_usuario ");
+        $this->db->join("doctores u", "c.codigo_usuario  = u.codigo_doctor ");
 
         if($this->session->userdata("rol") == "Administrador"){
 

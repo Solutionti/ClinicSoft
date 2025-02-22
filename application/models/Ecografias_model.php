@@ -425,17 +425,26 @@ public function createEcografiaVenosa($data) {
   $this->db->insert("ecografia_venosa", $datos); // Ajusta el nombre de la tabla
 }
 
-public function subirDocumentoEcografias($data) {
+// CONSULTAS PARA TRAER LA INFO DEL PACIENTE Y LA ECOGRAFIA
+  public function getDatosPaciente($documento) {
+    $this->db->select("*");
+    $this->db->from("pacientes");
+    $this->db->where("documento", $documento);
+    $result = $this->db->get();
 
-      $datos = [
-          "paciente" => $data["paciente"],
-          "titulo" => $data["titulo"],
-          "url_documento" => $data["icono"],
-          "tp_documento" => "ecografias",
-          "fecha" => date("Y-m-d")
-      ];
-      $this->db->insert("documentos_pacientes", $datos);
+    return  $result;
   }
+  public function getEcografiaMamaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_mama");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+
 
     
 }

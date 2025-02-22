@@ -8,8 +8,8 @@ class Usuarios_model extends CI_model {
 	}
 
     public function getAllUsers() {
-        $this->db->select("nombre,apellido,codigo_usuario");
-        $this->db->from("usuarios");
+        $this->db->select("nombre,apellido,codigo_doctor");
+        $this->db->from("doctores");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
         return $result;
@@ -17,7 +17,7 @@ class Usuarios_model extends CI_model {
 
     public function getAdministtradores() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Administrador");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -26,7 +26,7 @@ class Usuarios_model extends CI_model {
 
     public function getAtenciones() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Atencion");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -36,7 +36,7 @@ class Usuarios_model extends CI_model {
 
     public function getEnfermeras() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Enfermera");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -46,7 +46,7 @@ class Usuarios_model extends CI_model {
 
     public function getDoctor() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Doctor");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -56,7 +56,7 @@ class Usuarios_model extends CI_model {
 
     public function getLaboratorista() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Laboratorista");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -66,7 +66,7 @@ class Usuarios_model extends CI_model {
 
     public function getPatologo() {
         $this->db->select("*");
-        $this->db->from("usuarios");
+        $this->db->from("doctores");
         $this->db->where("rol_usuario", "Patologo");
         $this->db->where("estado", "Activo");
         $result = $this->db->get();
@@ -91,13 +91,13 @@ class Usuarios_model extends CI_model {
             "estado" => "Activo",
             "usuario_creacion" => $this->session->userdata("nombre")
         ];
-        $this->db->insert("usuarios", $datos);
+        $this->db->insert("doctores", $datos);
     }
 
     public function getUsuariosId($id) {
         $this->db->select("*");
-        $this->db->from("usuarios");
-        $this->db->where("codigo_usuario", $id);
+        $this->db->from("doctores");
+        $this->db->where("codigo_doctor", $id);
         $result = $this->db->get();
 
         return $result->row();
@@ -110,7 +110,7 @@ class Usuarios_model extends CI_model {
             "email" => $data["correo"],
             "usuario" => $data["usuario"]
         ];
-        $this->db->where("codigo_usuario", $id);
+        $this->db->where("codigo_doctor", $id);
         $this->db->update("usuarios", $datos);
     }
 
@@ -118,14 +118,14 @@ class Usuarios_model extends CI_model {
          $data = [
              "estado" => "Inactivo"
          ];
-         $this->db->where("codigo_usuario", $id);
+         $this->db->where("codigo_doctor", $id);
          $this->db->update("usuarios", $data);
     }
 
     public function getUsuarioInformacion() {
         $this->db->select("*");
-        $this->db->from("usuarios");
-        $this->db->where("codigo_usuario", $this->session->userdata("codigo"));
+        $this->db->from("doctores");
+        $this->db->where("codigo_doctor", $this->session->userdata("codigo"));
         $result = $this->db->get();
 
         return $result;

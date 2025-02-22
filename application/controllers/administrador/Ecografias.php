@@ -813,25 +813,6 @@ public function createEcografiaVenosa() {
 }
 
 
-    public function subirDocumentoEcografias() {
-
-        $paciente = $this->input->post("paciente");
-		$titulo = $this->input->post("titulo");
-        $fecha = date("dmY");
-		$dir_subida = 'public/ecografias/';
-        $fichero_subido = $dir_subida.basename($paciente."-".$fecha."-".$_FILES['icono']['name']);
-
-		move_uploaded_file($_FILES['icono']['tmp_name'], $fichero_subido);
-			$datos = array(
-				"paciente" => $paciente,
-				"titulo" => $titulo,
-				"icono" => $paciente."-".$fecha."-".$_FILES['icono']['name']
-			);
-		
-		$this->Ecografias_model->subirDocumentoEcografias($datos);
-
-		redirect(base_url("administracion/historia/".$paciente));
-    }
 
 
 }

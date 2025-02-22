@@ -5,7 +5,7 @@ class Gastos_model extends CI_model {
     public function getGastos() {
         $this->db->select("c.*,u.nombre,u.apellido,CONCAT('<strong> | S/ </strong>',format(c.monto,2)) as monto_v2,CONCAT(LPAD((c.serie),4,'0'),'-',LPAD((c.numero),8,'0')) as comprobante, DATE_FORMAT(c.f_recepcion, '%d/%m/%Y') as f_recepcion");
         $this->db->from("cpe_gastos c");
-        $this->db->join("usuarios u", "c.codigo_usuario  = u.codigo_usuario ");
+        $this->db->join("doctores u", "c.codigo_usuario  = u.codigo_doctor ");
         $result = $this->db->get();
         return $result;
     }

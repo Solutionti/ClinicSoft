@@ -22,13 +22,13 @@ class Login extends CI_Controller {
 
 		if($result){
 		   $session = [
-			  "codigo" => $result->codigo_usuario,
+			  "codigo" => $result->codigo_doctor,
 			  "nombre" => $result->nombre,
 			  "apellido" => $result->apellido,
 			  "email" => $result->email,
 		      "empresa" => $result->empresa,
 			  "rol" => $result->rol_usuario,
-			  "cmp" => $result->cmp,
+			  "cmp" => $result->cpe,
 			  "ip" => $result->ip,
 			  "login" => true
 		  ];
