@@ -255,7 +255,7 @@
               <div class="row mt-1">
                 <div class="col-md-3">
                 <button type="button" class="btn btn-primary" onclick="createEcografiaHisterosonografia()">Guardar</button>
-                <button type="button" class="btn btn-danger">pdf</button>
+                
                 </div>
               </div>
             </form>
