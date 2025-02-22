@@ -316,13 +316,6 @@ class Historiaclinica extends Admin_Controller {
 		echo json_encode($result);
 	}
 
-	public function getconsecutivoGeneral() {
-
-	}
-
-	public function getConsecutivoGinecologica() {
-
-	}
 
 	public function crearAlergias() {
 	  $dni_paciente = $this->input->post("dni_paciente");	
@@ -361,5 +354,437 @@ class Historiaclinica extends Admin_Controller {
 
 	  $this->Historias_model->crearMedicamento($datos);
 	}
-	
+
+	public function crearPdfHistoriaClinica() {
+		//   2.Datos del triage (signos vitales)
+		//   3.Alergias
+		//   4.Datos de la consulta (genecologia o consulta general)
+		//   5.Diagnosticos
+		//   6.Procedimientos
+		//   7.Formula medica
+		
+		$this->load->library("pdf");
+	  $pdf=new FPDF();
+	  $pdf->addpage();
+      //1.Datos basicos del paciente
+	  $pdf = new Fpdf('p', 'mm', 'A4');
+      $pdf->AddPage();
+      $pdf->SetDrawColor(0,24,0);
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  40,  196,  6, 'F');
+      $pdf->Image("public/img/theme/logo.png", 10, 12, 25, 0, 'PNG');
+      $pdf->Ln(15);
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->cell(128,5, '', 0);
+      $pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
+      $pdf->Ln(5);
+      $pdf->cell(128,5, '', 0);
+      $pdf->cell(40,5, 'HISTORIA CLINICA DEL PACIENTE', 0);
+
+      $pdf->Ln(10);
+      $pdf->SetFont('Courier', 'B', 8);
+      $pdf->SetTextColor(255,255,255);
+      $pdf->cell(65,6, '1. DATOS GENERALES', 0, 0, 'L');
+
+      // DATOS PERSONALES
+      $pdf->Ln(6);
+      $pdf->SetTextColor(0,0,0);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'APELLIDOS Y NOMBRES', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, 'JERSON REINEL GALVEZ ENSUNCHO', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'HC', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, '1110542802', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DNI', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, '1110542802', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'EDAD', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(10,5, '120', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'SEXO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, 'HOMBRE', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'TELEFONO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, '3155639791  -  2666087', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DIRECCION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(45,5, 'AVENIDA LOS OCOBOS 145', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'DEPARTAMENTO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, 'MADRE DE DIOS', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'PROVINCIA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, 'MADRE DE DIOS', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'DISTRITO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(21,5, 'MADRE DE DIOS', 1);
+
+      $pdf->Ln(5);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'OCUPACION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, 'INGENIERO DE SISTEMAS ', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'ESTADO CIVIL', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(36,5, 'SOLTERO', 1);
+      $pdf->Ln(9);
+
+      // DATOS DEL TRIAGE
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  70,  196,  6, 'F');
+      $pdf->SetFont('Courier', 'B', 8);
+      $pdf->SetTextColor(255,255,255);
+      $pdf->cell(196,6, '2. SIGNOS VITALES', 0);
+
+      $pdf->SetTextColor(0,0,0);
+      $pdf->Ln(6);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'ESTATURA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, '172 CM', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'PESO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, '80 KG', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'IMC', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, '15 IMC', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'TEMPERATURA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5,utf8_decode('25 C°'), 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, '% GRASA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(16,5,'20%', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'FRECUENCIA RESPIRATORIA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5,'10 R/M', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'FRECUENCIA CARDIACA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5,'20 MMHG', 1);
+
+      // DATOS DE LA CONSULTA GENERAL
+      $pdf->ln(9);
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  90,  196,  6, 'F');
+      $pdf->SetFont('Courier', 'B', 8);
+      $pdf->SetTextColor(255,255,255);
+      $pdf->cell(196,6, '3. DATOS DE LA CONSULTA GENERAL', 0, 0, 'L');
+
+      $pdf->Ln(6);
+      $pdf->SetTextColor(0,0,0);
+      
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'ANAMNESIS', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5,'DIRECTA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'EMPRESA', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(40,5,'NADA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, utf8_decode('COMPAÑIA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(40,5,'NADA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'IAFA', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(16,5,'NADA', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('NOMBRE ACOMPAÑANTE'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(70,5,'NADA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, utf8_decode('DNI'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(25,5,'1110542802', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, utf8_decode('CELULAR'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(31,5,'3155639791', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('MOTIVO CONSULTA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('TRATAMIENTO ANTERIOR'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('TIEMPO ENFERMEDAD'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(47,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, utf8_decode('INICIO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(40,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, utf8_decode('CURSO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(49,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('SINTOMAS'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'VIENE PARA CONSULTA', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('PIEL'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'VIENE PARA CONSULTA', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('CUELLO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'VIENE PARA CONSULTA', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('AP RESPIRATORIO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('AP CARDIO VASCULAR'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('ABDOMEN'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('CABEZA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('LOCOMOTOR'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('SISTEMA NERVIOSO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('APETITO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5,'FEFEFE', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('SED'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(40,5,'FEFEFE', 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(25,5, utf8_decode('ORINA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(41,5,'FEFEFE', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('AYUDA AL DX'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('INTERCONSULTAS'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('TRATAMIENTO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('REFERENCIA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'FEFEFE', 1);
+
+      // DATOS DE LA CONSULTA GINECOLOGICA
+      $pdf->ln(4);
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  190,  196,  6, 'F');
+      $pdf->SetFont('Courier', 'B', 8);
+      $pdf->SetTextColor(255,255,255);
+      $pdf->cell(196,6, '4. PROCESOS CLINICOS', 0, 0, 'L');
+
+      $pdf->ln(7);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('ALERGIAS'), 0);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('TIPO'), 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(166,5,'ALERGIA', 1);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, utf8_decode('MEDICAMENTO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'ACETAMINOFEN', 1);
+
+      $pdf->ln(7);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('DIAGNOSTICOS'), 0);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('CODIGO'), 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(166,5,'DIAGNOSTICO', 1);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, utf8_decode('R112'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'OTRAS COSAS NO DEFINIDAS', 1);
+
+      $pdf->ln(7);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('PROCEDIMIENTOS'), 0);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('CODIGO'), 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(166,5,'PROCEDIMIENTO', 1);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, utf8_decode('R112'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(166,5,'OTRAS COSAS NO DEFINIDAS', 1);
+
+      $pdf->ln(7);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('MEDICAMENTOS'), 0);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(70,5, utf8_decode('FARMACO'), 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(11,5,'CANT', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5,'DOSIS', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5,'VIA', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5,'FRECUENCIA', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(35,5,'DURACION', 1);
+
+      $pdf->ln(5);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(70,5, utf8_decode('FARMACO'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(11,5,'CANT', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5,'DOSIS', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5,'VIA', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5,'FRECUENCIA', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(35,5,'DURACION', 1);
+
+      $pdf->ln(10);
+      $pdf->SetTextColor(0,0,0);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('          PROXIMA CITA'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, utf8_decode('          26-12-2024'), 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(30,5, utf8_decode('     FIRMA DEL DOCTOR'), 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(106,5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
+
+      $pdf->Output();
+	}
 }

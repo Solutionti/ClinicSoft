@@ -98,6 +98,7 @@ $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTri
 // VERSION 3.0 DE LA APLICACION
 $route["administracion/crearalergias"] = "administrador/historiaclinica/crearAlergias";
 $route["administracion/crearmedicamento"] = "administrador/historiaclinica/crearMedicamento";
+$route["administracion/pdfhistoriaclinica/(:num)"] = "administrador/historiaclinica/crearPdfHistoriaClinica/$1";
 
 
 //COLPOSCOPIA
