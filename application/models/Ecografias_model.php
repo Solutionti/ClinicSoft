@@ -321,7 +321,6 @@ public function createEcografiaTiroides($data) {
 
 
 // ECOGRAFIA HISTEROSONOGRAFIA
-
 public function createEcografiaHisterosonografia($data) {
   $datos = [
       "documento_paciente" => $data["documento_paciente"],
