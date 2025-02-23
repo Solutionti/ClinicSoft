@@ -92,7 +92,7 @@ $route["administracion/crearhistoriageneral"] = "administrador/historiaclinica/c
 $route["administracion/crearreceta"] = "administrador/historiaclinica/crearrecetamedica";
 $route["administracion/subirdocumentos"] = "administrador/historiaclinica/subirdocumentos";
 $route["administracion/pdfginecologia/(:num)/(:any)"] = "administrador/historiaclinica/Generarpdfginecologia";
-$route["administracion/pdfgeneral/(:num)/(:any)"] = "administrador/historiaclinica/generarpdfmedicinageneral";
+$route["administracion/pdfgeneral/(:num)"] = "administrador/historiaclinica/generarpdfmedicinageneral";
 $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTriajeid";
 
 // VERSION 3.0 DE LA APLICACION

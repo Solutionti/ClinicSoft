@@ -195,12 +195,10 @@ class Historias_model extends CI_model {
     }
 
     public function GenerarPdfMedicinaGeneral($id){
-        $this->db->select("h.*, p.*,p.nombre as pacientes,d.*, c.*,t.*");
+        $this->db->select("h.*, c.*,t.*");
         $this->db->from("historial_pacientes h");
-        $this->db->join("pacientes p", "h.paciente = p.documento");
-        $this->db->join("doctores d", "h.doctor = d.codigo_doctor");
         $this->db->join("h_consultas c", "h.codigo_historia = c.codigo_h_consulta");
-        $this->db->where("h.codigo_historial_paciente", $id);
+        $this->db->where("h.codigo_historial_paciente", "11");
         $this->db->join("triajes t", "h.triaje = t.codigo_triaje");
         $this->db->where("h.tipo_consulta", 1);
         $result = $this->db->get();
