@@ -420,6 +420,34 @@ class Historias_model extends CI_model {
 
         return $result;
     }
+
+    public function getUltimoDatoTriage($documento) {
+      $this->db->select("*");
+      $this->db->from("triajes");
+      $this->db->where("paciente", $documento);
+      $this->db->order_by('codigo_triaje', 'DESC');
+
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+    public function getAllAlergias($documento) {
+        $this->db->select("*");
+        $this->db->from("alergias");
+        $this->db->where("dni_paciente", $documento);
+  
+        $result = $this->db->get();
+
+        if($result->num_rows() > 0) {
+          return $result;
+        }
+        else {
+          return false;
+        }
+  
+        return $result;  
+    }
     
 }
 

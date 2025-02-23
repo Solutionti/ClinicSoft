@@ -355,18 +355,16 @@ class Historiaclinica extends Admin_Controller {
 	  $this->Historias_model->crearMedicamento($datos);
 	}
 
-	public function crearPdfHistoriaClinica() {
-		//   2.Datos del triage (signos vitales)
-		//   3.Alergias
-		//   4.Datos de la consulta (genecologia o consulta general)
-		//   5.Diagnosticos
-		//   6.Procedimientos
-		//   7.Formula medica
-		
-		$this->load->library("pdf");
+	public function crearPdfHistoriaClinica($documento) {
+	  $datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+	  $datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
+	  $datosalergias = $this->Historias_model->getAllAlergias($documento);
+	  
+	//   print_r($datostriage);
+
+	  $this->load->library("pdf");
 	  $pdf=new FPDF();
 	  $pdf->addpage();
-      //1.Datos basicos del paciente
 	  $pdf = new Fpdf('p', 'mm', 'A4');
       $pdf->AddPage();
       $pdf->SetDrawColor(0,24,0);
@@ -384,7 +382,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->Ln(10);
       $pdf->SetFont('Courier', 'B', 8);
       $pdf->SetTextColor(255,255,255);
-      $pdf->cell(65,6, '1. DATOS GENERALES', 0, 0, 'L');
+      $pdf->cell(65,6, '1. DATOS DEL PACIENTE', 0, 0, 'L');
 
       // DATOS PERSONALES
       $pdf->Ln(6);
@@ -394,63 +392,63 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(40,5, 'APELLIDOS Y NOMBRES', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(100,5, 'JERSON REINEL GALVEZ ENSUNCHO', 1);
+      $pdf->cell(100,5, $datospaciente->nombre.' '.$datospaciente->apellido, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(10,5, 'HC', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(46,5, '1110542802', 1);
+      $pdf->cell(46,5, $datospaciente->hc, 1);
 
       $pdf->Ln(5);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(40,5, 'DNI', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, '1110542802', 1);
+      $pdf->cell(30,5, $datospaciente->documento, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(10,5, 'EDAD', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(10,5, '120', 1);
+      $pdf->cell(10,5, $datospaciente->edad, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'SEXO', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, 'HOMBRE', 1);
+      $pdf->cell(20,5, $datospaciente->sexo, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'TELEFONO', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(46,5, '3155639791  -  2666087', 1);
+      $pdf->cell(46,5, $datospaciente->telefono, 1);
 
       $pdf->Ln(5);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(40,5, 'DIRECCION', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(45,5, 'AVENIDA LOS OCOBOS 145', 1);
+      $pdf->cell(45,5, $datospaciente->direccion, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'DEPARTAMENTO', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, 'MADRE DE DIOS', 1);
+      $pdf->cell(20,5, $datospaciente->departamento, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(15,5, 'PROVINCIA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, 'MADRE DE DIOS', 1);
+      $pdf->cell(20,5, $datospaciente->provincia, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(15,5, 'DISTRITO', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(21,5, 'MADRE DE DIOS', 1);
+      $pdf->cell(21,5, $datospaciente->distrito, 1);
 
       $pdf->Ln(5);
 
@@ -458,13 +456,13 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(40,5, 'OCUPACION', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(100,5, 'INGENIERO DE SISTEMAS ', 1);
+      $pdf->cell(100,5, $datospaciente->ocupacion, 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'ESTADO CIVIL', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(36,5, 'SOLTERO', 1);
+      $pdf->cell(36,5, $datospaciente->estado_civil, 1);
       $pdf->Ln(9);
 
       // DATOS DEL TRIAGE
@@ -481,44 +479,44 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(20,5, 'ESTATURA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, '172 CM', 1);
+      $pdf->cell(20,5, $datostriage->talla.' CM', 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'PESO', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, '80 KG', 1);
+      $pdf->cell(20,5, $datostriage->peso.' KG', 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'IMC', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, '15 IMC', 1);
+      $pdf->cell(20,5, $datostriage->imc.' IMC', 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, 'TEMPERATURA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5,utf8_decode('25 C°'), 1);
+      $pdf->cell(20,5,utf8_decode($datostriage->temperatura.' C°'), 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, '% GRASA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(16,5,'20%', 1);
+      $pdf->cell(16,5,'0%', 1);
 
       $pdf->Ln(5);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(40,5, 'FRECUENCIA RESPIRATORIA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5,'10 R/M', 1);
+      $pdf->cell(20,5,$datostriage->frecuencia_respiratoria.' R/M', 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(40,5, 'FRECUENCIA CARDIACA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5,'20 MMHG', 1);
+      $pdf->cell(20,5,$datostriage->frecuencia_cardiaca.' MMHG', 1);
 
       // DATOS DE LA CONSULTA GENERAL
       $pdf->ln(9);
@@ -699,12 +697,22 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(30,5, utf8_decode('TIPO'), 1);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(166,5,'ALERGIA', 1);
-
-      $pdf->ln(5);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, utf8_decode('MEDICAMENTO'), 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(166,5,'ACETAMINOFEN', 1);
+      if($datosalergias == false) {
+	    $pdf->ln(5);
+	    $pdf->SetFont('Arial', '', 6);
+		$pdf->cell(30,5, '', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(166,5,'', 1);
+	  }
+	  else {
+		foreach($datosalergias->result() as $alergia) { 
+		  $pdf->ln(5);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(30,5, utf8_decode($alergia->tipo_alergia), 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(166,5,utf8_decode($alergia->descripcion), 1);
+		}
+	  }
 
       $pdf->ln(7);
       $pdf->SetTextColor(0,0,0);
