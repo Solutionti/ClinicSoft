@@ -40,7 +40,7 @@ class Historias_model extends CI_model {
             "tipo_consulta" => $tipo,
             "paciente" => $data["paciente"],
             "doctor" => $data["doctor"],
-            "codigo_historia" => $id,
+            "codigo_historia" => $data["paciente"],
             "triaje" => $data["triaje"],
             "estado" => "Activo",
             "fecha" => date("d-m-Y"),
@@ -99,6 +99,7 @@ class Historias_model extends CI_model {
     public function crearHconsultasGeneral($data) {
 
         $datos = [
+            "codigo_triage" => $data["triaje"],
             "anamnesis" => $data["anamnesis"],
             "empresa" => $data["empresa"],
             "compania" => $data["compania"],

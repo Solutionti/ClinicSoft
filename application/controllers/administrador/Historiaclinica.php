@@ -201,6 +201,7 @@ class Historiaclinica extends Admin_Controller {
 		];
 
 		$data2 = [
+			"triaje" => $triaje,
 			"anamnesis" => $anamnesis,
 			"empresa" => $empresa,
 			"compania" => $compania,
