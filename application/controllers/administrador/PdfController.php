@@ -22,6 +22,7 @@ class PdfController extends CI_Controller {
     $this->load->library('PDF_UTF8');
     $pdf = new PDF_UTF8();
     $pdf->AddPage();
+    $pdf->SetAutoPageBreak(false);
 
     $pdf->SetAlpha(0.1); // Transparencia (0.1 = 10% opacidad)
     $pdf->Image("public/img/theme/logo.png", 70, 90, 120); // Ajusta las coordenadas y tamaño según necesites
@@ -37,8 +38,6 @@ class PdfController extends CI_Controller {
      $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
      
      // Lista de ecografías en la barra lateral
-        // Lista de ecografías en la barra lateral
-          // Lista de ecografías en la barra lateral
     $pdf->SetFont('Arial', 'B', 8);
     $pdf->SetXY(15, 140); // Ajustamos la coordenada X de 12 a 15 para más margen
     $listado = array(
@@ -87,7 +86,6 @@ class PdfController extends CI_Controller {
     $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
     $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
 
-    
      // Título
      $pdf->SetFont('Arial', 'B', 14);
      $pdf->SetXY(70, 10);
@@ -198,19 +196,30 @@ class PdfController extends CI_Controller {
     $pdf->MultiCell(130, 6, $datosecografia->sugerencias_mama, 0);
  
      // Pie de página
-     $pdf->SetFont('Arial', '', 8);
-     $pdf->SetXY(10, 260);
-     $pdf->Cell(190, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 1, 'C');
-     $pdf->Cell(190, 5, ('TELÉFONO: 074322723 - CELULAR: 943037841'), 0, 1, 'C');
-     
-     // Logo de redes sociales
-     //$pdf->Image("public/img/theme/facebook.png", 10, 270, 5, 5);
+     // Borde superior decorativo
+     $pdf->SetFillColor(0,24,0); // Verde oscuro
+     $pdf->Rect(10, 290, 190, 2, 'F');
+ 
+     // Información de contacto
+    // Lado izquierdo - Dirección
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetXY(60, 283);
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+
+    // Lado derecho - Celular e íconos
+    $pdf->SetXY(140, 283);
+    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    
+    // Íconos al lado del celular
+    $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
+    $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
+    $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
  
      $pdf->Output('I', 'ecografia_mama.pdf');
      exit;
  }
-    //  $pdf->Output();
-    //}
+
 
     // public function generarPdfHisterosonografia($dni) {
     //     $ecografia = $this->Ecografias_model->obtener_por_dni($dni);
