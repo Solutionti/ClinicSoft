@@ -360,20 +360,20 @@ class Historiaclinica extends Admin_Controller {
 	  $datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
 	  $datosalergias = $this->Historias_model->getAllAlergias($documento);
 	  $datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral("8")->result()[0];
-	//   print_r($gene);
 
-	  $this->load->library("pdf");
-	  $pdf=new FPDF();
-	  $pdf->addpage();
-	  $pdf = new Fpdf('p', 'mm', 'A4');
+	  $this->load->library('PDF_UTF8');
+      $pdf = new PDF_UTF8();
       $pdf->AddPage();
+	  $pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
+      $pdf->Image("public/img/theme/logo.png", 60, 110, 90); // Ajusta las coordenadas y tamaño según necesites
+      $pdf->SetAlpha(1); // Restauramos la opacidad al 100%
       $pdf->SetDrawColor(0,24,0);
       $pdf->SetFillColor(115,115,115);
       $pdf->Rect(10,  40,  196,  6, 'F');
       $pdf->Image("public/img/theme/logo.png", 10, 12, 25, 0, 'PNG');
       $pdf->Ln(15);
       $pdf->SetFont('Arial', 'B', 10);
-      $pdf->cell(128,5, '', 0);
+      $pdf->cell(124,5, '', 0);
       $pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
       $pdf->Ln(5);
       $pdf->cell(128,5, '', 0);
@@ -793,6 +793,6 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', '', 6);
       $pdf->cell(106,5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
 
-      $pdf->Output();
+      $pdf->Output('I', 'historia clinica .pdf');
 	}
 }
