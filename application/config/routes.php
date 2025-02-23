@@ -197,6 +197,8 @@ $route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcogr
 
 // PDF DE LAS ECOGRAFIAS
 $route["administracion/pdfecografiamama/(:num)"] = "administrador/PdfController/getEcografiaMamaPdf/$1";
+$route["administracion/pdfecografiagenetica/(:num)"] = "administrador/PdfController/getEcografiaGeneticaPdf/$1";
+$route["administracion/pdfecografiamorfologica/(:num)"] = "administrador/PdfController/getEcografiaMorfologicaPdf/$1";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******

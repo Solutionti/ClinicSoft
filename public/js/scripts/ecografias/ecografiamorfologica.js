@@ -3,6 +3,7 @@ function createEcografiaMorfologica() {
     var documento_paciente = $("#dni").val();
     var codigo_doctor = $("#codigo_doctor").val();
     var sexo = $("input[name='sexo']:checked").val();
+    var situacion = $("input[name='situacion']:checked").val(); 
     var formacabeza = $("#formacabeza").val();
     var cerebelo = $("#cerebelo").val();
     var cisternaMagna = $("#cisternaMagna").val();
@@ -31,6 +32,7 @@ function createEcografiaMorfologica() {
             documento_paciente: documento_paciente,
             codigo_doctor: codigo_doctor,
             sexo: sexo,
+            situacion:situacion,
             formacabeza: formacabeza,
             cerebelo: cerebelo,
             cisternaMagna: cisternaMagna,
@@ -55,19 +57,20 @@ function createEcografiaMorfologica() {
         success: function() {
             $("body").overhang({
               type: "success",
-              message: "Ecografía de Mama registrada correctamente"
+              message: "Ecografía Morfologica registrada correctamente"
             });
 
             
             $("input[name='sexo']").prop('checked', false);
+            $("input[name='situacion']").prop('checked', false); 
             $("#formacabeza").val('encefalo, ventriculos, linea media, talamos y cisuras normales, cavum del septum pellucidum y cuerpo calloso visible');
             $("#cerebelo").val('');
             $("#cisternaMagna").val('');
             $("#atrioVentricular").val('');
             $("#perfilCara").val('nariz y fosas nasales, labio superior, orbitas y cristalinos normales');
             $("#cuello").val('no masas');
-            $("#perfiltorax").val('pulmones y corazón de tamaños adecuados, no masas');
-            $("#corazon").val('situs solitus, tamaño, frecuencia cardiaca, 4 camaras y eje cardiaco normales, salida de aorta y arteria pulmonar normales y cruzamiento adecuados (“vasos bien relacionados”');
+            $("#perfiltorax").val('pulmones y corazon de tamaños adecuados, no masas');
+            $("#corazon").val('situs solitus, tamaño, frecuencia cardiaca, 4 camaras y eje cardiaco normales, salida de aorta y arteria pulmonar normales y cruzamiento adecuados (vasos bien relacionados');
             $("#columnaVertebral").val('de aspecto normal en los planos sagital coronal y tranversal.');
             $("#abdomen").val('pared normal, estomago presente, riñones normales, vejiga con 2 vasos (arterias umbilicales). intestinos de  ecogenicidad normal, insercion de cordon normal.');
             $("#dbp").val('');
@@ -91,4 +94,10 @@ function createEcografiaMorfologica() {
             }); 
           }
         });  
+      }
+
+      function generarpdfMorfologica() {
+        let dni = $("#dni").val();
+        let url = baseurl + "administracion/pdfecografiamorfologica/" + dni;
+        window.open(url, "_blank", " width=950, height=1000");
       }
