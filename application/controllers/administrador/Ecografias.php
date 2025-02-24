@@ -90,11 +90,11 @@ class Ecografias extends Admin_Controller {
         $this->Ecografias_model->createEcografiaMama($datos);
     }
 
-    public function ecografiaMama() {
-        $this->load->library("pdf");
-        $pdfAct = new Pdf();
-        $this->load->view("administrador/ecografias/ecografia_transvaginal");
-    }
+    //public function ecografiaMama() {
+        //$this->load->library("pdf");
+        //$pdfAct = new Pdf();
+        //$this->load->view("administrador/ecografias/ecografia_transvaginal");
+    //}
 
     // ECOGRAFIA OBSTETRICA
 
@@ -199,6 +199,7 @@ class Ecografias extends Admin_Controller {
     $documento_paciente = $this->input->post("documento_paciente");
     $codigo_doctor = $this->input->post("codigo_doctor");
     $sexo = $this->input->post("sexo");
+    $situacion = $this->input->post("situacion");
     $formacabeza = $this->input->post("formacabeza");
     $cerebelo = $this->input->post("cerebelo");
     $cisternaMagna = $this->input->post("cisternaMagna");
@@ -224,6 +225,7 @@ class Ecografias extends Admin_Controller {
         "documento_paciente" => $documento_paciente,
         "codigo_doctor" => $codigo_doctor,
         "sexo" => $sexo,
+        "situacion" => $situacion,
         "formacabeza" => $formacabeza,
         "cerebelo" => $cerebelo,
         "cisternaMagna" => $cisternaMagna,

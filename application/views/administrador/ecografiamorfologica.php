@@ -228,19 +228,19 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="masculino" value="M">
+                     <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino">
                      <label class="form-check-label" for="inlineRadio1">Masculino</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="femenino" value="F">
+                     <input class="form-check-input" type="radio" name="sexo" id="femenino" value="Femenino">
                      <label class="form-check-label" for="inlineRadio2">Femenino</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="novisible" value="N">
+                     <input class="form-check-input" type="radio" name="sexo" id="novisible" value="No vsible">
                      <label class="form-check-label" for="inlineRadio2">No visible</label>
                    </div>
                  </div>
@@ -257,7 +257,7 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="poda" value="podolico">
+                     <input class="form-check-input" type="radio" name="situacion" id="poda" value="podalico">
                      <label class="form-check-label" for="inlineRadio2">Podalico</label>
                    </div>
                  </div>
@@ -326,7 +326,7 @@
                         <div class="col-md-12">
                            <div class="form-group">
                               <label>Se observa</label>
-                              <textarea id="perfiltorax" class="form-control">pulmones y corazón de tamaños adecuados, no masas</textarea>
+                              <textarea id="perfiltorax" class="form-control">pulmones y corazon de tamaños adecuados, no masas</textarea>
                            </div>
                         </div>
                      </div>
@@ -440,8 +440,10 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
-                  <button type="button" class="btn btn-primary" onclick="createEcografiaMorfologica()">Guardar</button>
+                     <button type="button" class="btn btn-danger" onclick="generarpdfMorfologica()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
+                     <button type="button" class="btn btn-primary" onclick="createEcografiaMorfologica()">Guardar</button>
                </div>
             </div>
          </div>

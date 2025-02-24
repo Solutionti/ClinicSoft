@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecografia de Mama</title>
+    <title>Ecografia Genteica</title>
     <?php require_once("componentes/head.php"); ?>
     
 </head>
@@ -16,7 +16,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">administración</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">ecografia de mama</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">ecografia Genteica</li>
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">ecografia genetica</h6>
         </nav>
@@ -234,40 +234,40 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="si">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="Unico">
                      <label class="form-check-label" for="inlineRadio1">Unico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="no">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="Multiple">
                      <label class="form-check-label" for="inlineRadio2">Multiple</label>
                    </div>
                  </div>
                </div>
                <div class="row mt-2">
                <div class="col-md-3">
-                    <label>Situaciòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="cefa">
-                     <label class="form-check-label" for="inlineRadio1">Cefalico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="podatico" value="poda">
-                     <label class="form-check-label" for="inlineRadio2">Podatico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="indi">
-                     <label class="form-check-label" for="inlineRadio2">Indiferente</label>
-                   </div>
-                 </div>
-               </div>
+        <label>Situación</label>
+        </div>
+    <div class="col-md-3">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="Cefálico">
+        <label class="form-check-label" for="cefalico">Cefálico</label>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="situacion" id="podalico" value="Podálico">
+        <label class="form-check-label" for="podalico">Podálico</label>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="Indiferente">
+        <label class="form-check-label" for="indiferente">Indiferente</label>
+    </div>
+</div>
+
                <div class="row">
                   <div class="col-md-12">
                      <div class="form-group">
@@ -351,7 +351,7 @@
                </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+                  <button type="button" class="btn btn-danger" onclick="generarpdfGenetica()"> <i class="fas fa-file-pdf"></i> pdf</button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaGenetica()">Guardar</button>
                </div>
             </div>
