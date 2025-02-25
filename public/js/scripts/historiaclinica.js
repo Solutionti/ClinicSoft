@@ -729,6 +729,15 @@ function crearCita() {
 	});
 }
 
+function descargarHistoriaGeneral() {
+  const pathname = window.location.pathname;  // Obtiene la ruta de la URL actual
+  const parts = pathname.split('/');  // Divide la ruta
+  const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
+
+  let url = baseurl + "administracion/pdfhistoriaclinica/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");   
+}
+
 const reloadPage = () => {
     location.reload();
   }
