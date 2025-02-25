@@ -147,7 +147,7 @@
                             <li class="list-inline-item">
                               <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo $pacientes->fecha_nacimiento; ?> - <?php echo $pacientes->edad; ?> años
                             </li>
-                            <li> <a class="btn btn-danger btn-xs mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" > Nueva</a>  <a (click)="imprimirhistoriaclinica()" class="btn btn-success btn-xs mt-3">Imprimir</a> </li>
+                            <li> <a class="btn btn-danger btn-xs mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" > Nueva</a>  <a onclick="descargarHistoriaGeneral()" class="btn btn-primary btn-xs mt-3">Imprimir</a> </li>
                           </ul>
                         </div>
                       </div>
