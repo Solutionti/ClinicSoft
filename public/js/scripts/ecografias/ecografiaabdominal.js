@@ -9,9 +9,9 @@ function createEcografiaAbdominal() {
         vesicula_volumen = $("#vesicula_volumen").val(),
         vesicula_paredes = $("#vesicula_paredes").val(),
         bazo = $("#bazo").val(),
-        rinonDerecho = $("#rinonDerecho").val(),
-        rinonIzquierdo = $("#rinonIzquierdo").val(),
-        otrosHallazgos = $("#otrosHallazgos").val(),
+        rinon_derecho = $("#rinon_derecho").val(),
+        rinon_izquierdo = $("#rinon_izquierdo").val(),
+        otros_hallazgos = $("#otros_hallazgos").val(),
         conclusiones = $("#conclusiones").val(),
         sugerencias = $("#sugerencias").val();
   
@@ -28,9 +28,9 @@ function createEcografiaAbdominal() {
         vesicula_volumen: vesicula_volumen,
         vesicula_paredes: vesicula_paredes,
         bazo: bazo,
-        rinonDerecho: rinonDerecho,
-        rinonIzquierdo: rinonIzquierdo,
-        otrosHallazgos: otrosHallazgos,
+        rinon_derecho: rinon_derecho,
+        rinon_izquierdo: rinon_izquierdo,
+        otros_hallazgos: otros_hallazgos,
         conclusiones: conclusiones,
         sugerencias: sugerencias
       },
@@ -50,9 +50,9 @@ function createEcografiaAbdominal() {
         $("#vesicula_volumen").val('');
         $("#vesicula_paredes").val('');
         $("#bazo").val('');
-        $("#rinonDerecho").val('');
-        $("#rinonIzquierdo").val('');
-        $("#otrosHallazgos").val('');
+        $("#rinon_derecho").val('');
+        $("#rinon_izquierdo").val('');
+        $("#otros_hallazgos").val('');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
         setTimeout(function() {
@@ -68,3 +68,9 @@ function createEcografiaAbdominal() {
       }
     });  
   }
+
+  function generarpdfAbdominal() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiaabdominal/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  }    

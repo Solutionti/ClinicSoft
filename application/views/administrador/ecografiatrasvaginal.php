@@ -237,11 +237,11 @@
                      <label>Superficie</label>
                      <br>
                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="superficie" id="regular" value="R">
+                        <input class="form-check-input" type="radio" name="superficie" id="regular" value="Regular">
                         <label class="form-check-label" for="inlineRadio1">Regular</label> 
                      </div>
                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="superficie" id="modular" value="M">
+                        <input class="form-check-input" type="radio" name="superficie" id="modular" value="Modular">
                         <label class="form-check-label" for="inlineRadio2">Modular</label>
                      </div>
                   </div>
@@ -254,11 +254,11 @@
                            <label>Tumor anexial</label>
                            <br>
                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="tumoranexial" id="si" value="1">
+                              <input class="form-check-input" type="radio" name="tumoranexial" id="si" value="Si">
                               <label class="form-check-label" for="inlineRadio1">Si</label> 
                            </div>
                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="tumoranexial" id="no" value="2">
+                              <input class="form-check-input" type="radio" name="tumoranexial" id="no" value="No">
                               <label class="form-check-label" for="inlineRadio2">No</label>
                            </div>
                            <input type="text" id="tumorAnexial-com" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
@@ -371,7 +371,9 @@
                </div>
                <br>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+                     <button type="button" class="btn btn-danger" onclick="generarpdfTrasvaginal()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaTrasvaginal()">Guardar</button>
                </div>
             </div>

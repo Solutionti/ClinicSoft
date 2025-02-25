@@ -269,19 +269,19 @@
             <!-- Riñones (derecho e izquierdo) en la misma línea -->
             <div class="row mb-3">
                 <div class="form-group col-md-6">
-                    <label for="rinonDerecho">Riñón Derecho:</label>
-                    <input type="text" class="form-control form-control-sm" id="rinonDerecho" placeholder="Ingrese hallazgos">
+                    <label for="rinon_derecho">Riñón Derecho:</label>
+                    <input type="text" class="form-control form-control-sm" id="rinon_derecho" placeholder="Ingrese hallazgos">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="rinonIzquierdo">Riñón Izquierdo:</label>
-                    <input type="text" class="form-control form-control-sm" id="rinonIzquierdo" placeholder="Ingrese hallazgos">
+                    <label for="rinon_izquierdo">Riñón Izquierdo:</label>
+                    <input type="text" class="form-control form-control-sm" id="rinon_izquierdo" placeholder="Ingrese hallazgos">
                 </div>
             </div>
 
             <!-- Otros hallazgos, conclusiones y sugerencias en filas separadas -->
             <div class="form-group">
-                <label for="otrosHallazgos">Otros Hallazgos:</label>
-                <textarea class="form-control form-control-sm" id="otrosHallazgos" rows="2" placeholder="Ingrese otros hallazgos"></textarea>
+                <label for="otros_hallazgos">Otros Hallazgos:</label>
+                <textarea class="form-control form-control-sm" id="otros_hallazgos" rows="2" placeholder="Ingrese otros hallazgos"></textarea>
             </div>
             <div class="form-group">
                 <label for="conclusiones">Conclusiones:</label>
@@ -296,10 +296,8 @@
                   <button class="btn btn-primary btn-xs mt-2" onclick="createEcografiaAbdominal()">
                     Guardar
                   </button>
-                  <button
-                    class="btn btn-danger btn-xs mt-2 mx-2"
-                  > <i class="fas fa-file-pdf"></i>
-                    Imprimir
+                  <button type="button" class="btn btn-danger" onclick="generarpdfAbdominal()">
+                     <i class="fas fa-file-pdf"></i> pdf
                   </button>
                 </div>
               </div>
