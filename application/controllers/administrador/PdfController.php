@@ -232,6 +232,7 @@ public function getEcografiaGeneticaPdf($dni) {
   $this->load->library('PDF_UTF8');
   $pdf = new PDF_UTF8();
   $pdf->AddPage();
+  $pdf->SetAutoPageBreak(false);
 
 // Marca de agua
     $pdf->SetAlpha(0.1);
@@ -423,21 +424,25 @@ public function getEcografiaGeneticaPdf($dni) {
     $pdf->MultiCell(130, 6, $datosecografia->sugerencias_mama, 0);
 
     // Pie de página
-    $pdf->SetFillColor(240,240,240);
-    $pdf->Rect(10, 265, 190, 30, 'F');
+     // Borde superior decorativo
+     $pdf->SetFillColor(0,24,0); // Verde oscuro
+     $pdf->Rect(10, 290, 190, 2, 'F');
+ 
+     // Información de contacto
+    // Lado izquierdo - Dirección
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetXY(60, 283);
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
 
-    // Borde superior decorativo
-    $pdf->SetFillColor(0,24,0);
-    $pdf->Rect(10, 265, 190, 2, 'F');
-
-    // Información de contacto
-    $pdf->SetFont('Arial', '', 8);
-    $pdf->SetTextColor(128,128,128);
-    $pdf->SetXY(10, 268);
-    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
-
-    $pdf->SetXY(140, 268);
+    // Lado derecho - Celular e íconos
+    $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    
+    // Íconos al lado del celular
+    $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
+    $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
+    $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
     $pdf->Output('I', 'ecografia_genetica.pdf');
     exit;
@@ -457,6 +462,7 @@ public function getEcografiaMorfologicaPdf($dni) {
   $this->load->library('PDF_UTF8');
   $pdf = new PDF_UTF8();
   $pdf->AddPage();
+  $pdf->SetAutoPageBreak(false);
 
 // Marca de agua
 $pdf->SetAlpha(0.1);
@@ -644,21 +650,25 @@ $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
 
 
 // Pie de página
-$pdf->SetFillColor(240,240,240);
-$pdf->Rect(10, 265, 190, 30, 'F');
+     // Borde superior decorativo
+     $pdf->SetFillColor(0,24,0); // Verde oscuro
+     $pdf->Rect(10, 290, 190, 2, 'F');
+ 
+     // Información de contacto
+    // Lado izquierdo - Dirección
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetXY(60, 283);
+    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
 
-// Borde superior decorativo
-$pdf->SetFillColor(0,24,0);
-$pdf->Rect(10, 265, 190, 2, 'F');
-
-// Información de contacto
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetTextColor(128,128,128);
-$pdf->SetXY(10, 268);
-$pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
-
-$pdf->SetXY(140, 268);
-$pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    // Lado derecho - Celular e íconos
+    $pdf->SetXY(140, 283);
+    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    
+    // Íconos al lado del celular
+    $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
+    $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
+    $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
 $pdf->Output('I', 'ecografia_morfologica.pdf');
 exit;
