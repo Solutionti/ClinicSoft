@@ -647,6 +647,7 @@ function crearAlergias() {
 
 function crearMedicamento() {
     var url = baseurl + "administracion/crearmedicamento",
+    triaje = $("#consecutivo_historia").val();
     doctor = $("#documento_historia").val(),
     paciente = $("#documento_historia").val(),
     medicamento = $("#medicamento_medicamento").val(),
@@ -660,6 +661,7 @@ function crearMedicamento() {
    url: url,
    method: "POST",
    data: {
+     triaje: triaje,
      doctor: doctor,
      paciente: paciente,
      medicamento: medicamento,
@@ -733,8 +735,9 @@ function descargarHistoriaGeneral() {
   const pathname = window.location.pathname;  // Obtiene la ruta de la URL actual
   const parts = pathname.split('/');  // Divide la ruta
   const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
+  let triage = $("#consecutivo_historia").val();
 
-  let url = baseurl + "administracion/pdfhistoriaclinica/" + id;
+  let url = baseurl + "administracion/pdfhistoriaclinica/" + triage + "/" + id;
   window.open(url, "_blank", " width=1100, height=1000");   
 }
 

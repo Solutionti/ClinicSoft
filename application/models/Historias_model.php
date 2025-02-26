@@ -195,13 +195,13 @@ class Historias_model extends CI_model {
 
     }
 
-    public function GenerarPdfMedicinaGeneral($id){
+    public function GenerarPdfMedicinaGeneral($documento, $triage){
         $this->db->select("h.*, c.*,t.*");
         $this->db->from("historial_pacientes h");
-        $this->db->join("h_consultas c", "h.codigo_historia = c.codigo_h_consulta");
-        $this->db->where("h.codigo_historial_paciente", "11");
+        $this->db->join("h_consultas c", "h.triaje = c.codigo_triage");
         $this->db->join("triajes t", "h.triaje = t.codigo_triaje");
-        $this->db->where("h.tipo_consulta", 1);
+        $this->db->where("h.codigo_historia", $documento);
+        $this->db->where("h.triaje", $triage);
         $result = $this->db->get();
 
         return $result;
@@ -229,10 +229,11 @@ class Historias_model extends CI_model {
 
     public function crearDiagnosticosGeneral($data) {
         $datos = [
+            "codigo_historia" => $data["triaje"],
             "paciente" => $data["paciente"],
             "codigo_diagnosti" => $data["diagnosticos"],
             "tipo_especialidad" => 1,
-            "historia" => $data["historia"],
+            "historia" => $data["paciente"],
             "fecha" =>  date("Y-m-d"),
             "usuario" => $this->session->userdata("nombre")
         ];
@@ -329,6 +330,7 @@ class Historias_model extends CI_model {
 
     public function crearMedicamento($datos) {
       $medicamento = [
+        "triaje" => $datos["triaje"],
         "doctor" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
         "paciente" => $datos["paciente"],
         "medicamento" => $datos["medicamento"],
@@ -447,6 +449,45 @@ class Historias_model extends CI_model {
   
         return $result;  
     }
+
+    public function getMedicamentosHistoria($documento, $triaje) {
+        $this->db->select("*");
+        $this->db->from("medicamentos");
+        $this->db->where("paciente", $documento);
+        $this->db->where("triaje", $triaje);
+  
+        $result = $this->db->get();
+
+        if($result->num_rows() > 0) {
+          return $result;
+        }
+        else {
+          return false;
+        }
+  
+        return $result;  
+    }
+
+    public function getDiagnosticosHistoria($documento, $triaje) {
+        $this->db->select("d.*, dc.clave, dc.descripcion");
+        $this->db->from("diagnosticos d");
+        $this->db->join("diagnosticoscie10 dc", "d.codigo_diagnosti = dc.id");
+        $this->db->where("d.paciente", $documento);
+        $this->db->where("d.codigo_historia", $triaje);
+  
+        $result = $this->db->get();
+
+        if($result->num_rows() > 0) {
+          return $result;
+        }
+        else {
+          return false;
+        }
+  
+        return $result;  
+    }
+
+
     
 }
 
