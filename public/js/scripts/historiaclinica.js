@@ -508,7 +508,7 @@ $("#btn-general").on("click", function (){
                 type: "success",
                 message: "Historia se ha registrado correctamente"
             });
-            setTimeout(reloadPage, 3000);
+            // setTimeout(reloadPage, 3000);
         },
         error: function () {
             $("body").overhang({
@@ -588,6 +588,10 @@ $("#tphistoria").on("change", function() {
 
     $("#btn-gineco").prop("hidden", true);
     $("#btn-general").prop("hidden", false);
+
+    $("#btnhistoriagineco").prop("hidden", true);
+    $("#btnhistoriagene").prop("hidden", false);
+    
   }
   else if(tphistoria == 2) {
 
@@ -601,6 +605,9 @@ $("#tphistoria").on("change", function() {
 
     $("#btn-general").prop("hidden", true);
     $("#btn-gineco").prop("hidden", false);
+
+    $("#btnhistoriagene").prop("hidden", true);
+    $("#btnhistoriagineco").prop("hidden", false);
   }
   else {
     $("#nav-home-tab").prop("hidden", true);
@@ -613,6 +620,9 @@ $("#tphistoria").on("change", function() {
 
     $("#btn-general").prop("hidden", true);
     $("#btn-gineco").prop("hidden", true);
+
+    $("#btnhistoriagene").prop("hidden", true);
+    $("#btnhistoriagineco").prop("hidden", true);
   }
 });
 
@@ -739,6 +749,17 @@ function descargarHistoriaGeneral() {
 
   let url = baseurl + "administracion/pdfhistoriaclinica/" + triage + "/" + id;
   window.open(url, "_blank", " width=1100, height=1000");   
+}
+
+function descargarHistoriaGineco() {
+
+  const pathname = window.location.pathname;  // Obtiene la ruta de la URL actual
+  const parts = pathname.split('/');  // Divide la ruta
+  const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
+  let triage = $("#consecutivo_historia").val();
+
+  let url = baseurl + "" + triage + "/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");  
 }
 
 const reloadPage = () => {

@@ -823,13 +823,13 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(30,5, utf8_decode('          PROXIMA CITA'), 1);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, utf8_decode('          26-12-2024'), 1);
+      $pdf->cell(30,5, utf8_decode('          '), 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(30,5, utf8_decode('     FIRMA DEL DOCTOR'), 1);
       $pdf->SetFont('Arial', '', 6);
       $pdf->cell(106,5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
 
-      $pdf->Output('I', 'historia clinica .pdf');
+      $pdf->Output('I', 'Historia_Clinica_'.$documento.'.pdf');
 	}
 }
