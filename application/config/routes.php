@@ -197,6 +197,12 @@ $route["administracion/ecografiavenosa"] = "administrador/ecografias/createEcogr
 
 // PDF DE LAS ECOGRAFIAS
 $route["administracion/pdfecografiamama/(:num)"] = "administrador/PdfController/getEcografiaMamaPdf/$1";
+$route["administracion/pdfecografiagenetica/(:num)"] = "administrador/PdfController/getEcografiaGeneticaPdf/$1";
+$route["administracion/pdfecografiamorfologica/(:num)"] = "administrador/PdfController/getEcografiaMorfologicaPdf/$1";
+$route["administracion/pdfecografiatrasvaginal/(:num)"] = "administrador/PdfController/getEcografiaTrasvaginalPdf/$1";
+$route["administracion/pdfecografiapelvica/(:num)"] = "administrador/PdfController/getEcografiaPelvicaPdf/$1";
+$route["administracion/pdfecografiaobstetrica/(:num)"] = "administrador/PdfController/getEcografiaObstetricaPdf/$1";
+$route["administracion/pdfecografiaabdominal/(:num)"] = "administrador/PdfController/getEcografiaabdominalPdf/$1";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******

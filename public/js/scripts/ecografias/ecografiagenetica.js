@@ -73,3 +73,8 @@ function createEcografiaGenetica() {
           }
         });  
       }
+      function generarpdfGenetica() {
+        let dni = $("#dni").val();
+        let url = baseurl + "administracion/pdfecografiagenetica/" + dni;
+        window.open(url, "_blank", " width=950, height=1000");
+      }    

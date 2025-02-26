@@ -88,4 +88,8 @@ function createEcografiaTrasvaginal() {
       }
     });  
   }
-  
+  function generarpdfTrasvaginal() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiatrasvaginal/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  }    

@@ -94,6 +94,7 @@ class Ecografias_model extends CI_model {
         "documento_paciente" => $data["documento_paciente"],
         "codigo_doctor" => $data["codigo_doctor"],
         "sexo" => $data["sexo"],
+        "situacion" => $data["situacion"],
         "formacabeza" => $data["formacabeza"],
         "cerebelo" => $data["cerebelo"],
         "cisternaMagna" => $data["cisternaMagna"],
@@ -443,7 +444,65 @@ public function createEcografiaVenosa($data) {
     return  $result;
   }
 
+  public function getEcografiaGeneticaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_genetica");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaMorfologicaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_morfologica");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('id_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaTrasvaginalPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_trasvaginal");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
 
 
+  public function getEcografiaPelvicaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_pelvica");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaObstetricaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_obstetrica");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaabdominalPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_abdominal");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
     
 }
