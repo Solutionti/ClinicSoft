@@ -386,9 +386,9 @@ public function createEcografiaAbdominal() {
   $vesicula_volumen = $this->input->post("vesicula_volumen");
   $vesicula_paredes = $this->input->post("vesicula_paredes");
   $bazo = $this->input->post("bazo");
-  $rinonDerecho = $this->input->post("rinonDerecho");
-  $rinonIzquierdo = $this->input->post("rinonIzquierdo");
-  $otrosHallazgos = $this->input->post("otrosHallazgos");
+  $rinon_derecho = $this->input->post("rinon_derecho");
+  $rinon_izquierdo = $this->input->post("rinon_izquierdo");
+  $otros_hallazgos = $this->input->post("otros_hallazgos");
   $conclusiones = $this->input->post("conclusiones");
   $sugerencias = $this->input->post("sugerencias");
 
@@ -402,9 +402,9 @@ public function createEcografiaAbdominal() {
       "vesicula_volumen" => $vesicula_volumen,
       "vesicula_paredes" => $vesicula_paredes,
       "bazo" => $bazo,
-      "rinonDerecho" => $rinonDerecho,
-      "rinonIzquierdo" => $rinonIzquierdo,
-      "otrosHallazgos" => $otrosHallazgos,
+      "rinon_derecho" => $rinon_derecho,
+      "rinon_izquierdo" => $rinon_izquierdo,
+      "otros_hallazgos" => $otros_hallazgos,
       "conclusiones" => $conclusiones,
       "sugerencias" => $sugerencias,
       "fecha" => date("Y-m-d"),

@@ -228,13 +228,13 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="1">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="Unico">
                      <label class="form-check-label" for="inlineRadio1">Unico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="2">
+                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="Multiple">
                      <label class="form-check-label" for="inlineRadio2">Multiple</label>
                    </div>
                  </div>
@@ -245,19 +245,19 @@
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="cefa">
+                     <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="cefalico">
                      <label class="form-check-label" for="inlineRadio1">Cefalico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="podatico" value="poda">
+                     <input class="form-check-input" type="radio" name="situacion" id="podatico" value="podalico">
                      <label class="form-check-label" for="inlineRadio2">Podatico</label>
                    </div>
                  </div>
                  <div class="col-md-3">
                    <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="indi">
+                     <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="indiferente">
                      <label class="form-check-label" for="inlineRadio2">Indiferente</label>
                    </div>
                  </div>
@@ -354,7 +354,9 @@
                </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger">pdf</button>
+               <button type="button" class="btn btn-danger" onclick="generarpdfObstetrica()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaObstetrica()">Guardar</button>
                </div>
             </div>

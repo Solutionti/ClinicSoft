@@ -92,4 +92,10 @@ function createEcografiaPelvica() {
       }
     });  
   }
+
+  function generarpdfPelvica() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiapelvica/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  }    
   

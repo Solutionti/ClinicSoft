@@ -77,3 +77,9 @@ function createEcografiaObstetrica() {
       }
     });  
   }
+
+  function generarpdfObstetrica() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiaobstetrica/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  }  
