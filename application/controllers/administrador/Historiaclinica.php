@@ -371,7 +371,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf = new PDF_UTF8();
       $pdf->AddPage();
 	  $pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
-      $pdf->Image("public/img/theme/logo.png", 60, 110, 90); // Ajusta las coordenadas y tamaño según necesites
+      $pdf->Image("public/img/theme/logo.png", 60, 110, 80); // Ajusta las coordenadas y tamaño según necesites
       $pdf->SetAlpha(1); // Restauramos la opacidad al 100%
       $pdf->SetDrawColor(0,24,0);
       $pdf->SetFillColor(115,115,115);
