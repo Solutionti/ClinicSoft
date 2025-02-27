@@ -99,7 +99,7 @@ class Historiaclinica extends Admin_Controller {
 		
 		$data1 = [
 			"paciente" => $paciente,
-			"doctor" => $doctor,
+			"doctor" => $this->session->userdata("codigo"),
 			"triaje" => $triaje
 		];
 
@@ -196,7 +196,7 @@ class Historiaclinica extends Admin_Controller {
 
 		$data1 = [
 			"paciente" => $paciente,
-			"doctor" => $doctor,
+			"doctor" => $this->session->userdata("codigo"),
 			"triaje" => $triaje
 		];
 
@@ -242,7 +242,8 @@ class Historiaclinica extends Admin_Controller {
 			$data3 = [
 				"paciente" => $paciente,
 				"diagnosticos" => $diagnosticosgeneral[$i],
-				"historia" => $historia
+				"historia" => $historia,
+				"triaje" => $triaje
 			];
 			$this->Historias_model->crearDiagnosticosGeneral($data3);
 		}
@@ -341,8 +342,10 @@ class Historiaclinica extends Admin_Controller {
 	  $via_aplicacion = $this->input->post("via_aplicacion");		
 	  $frecuencia = $this->input->post("frecuencia");		
 	  $duracion = $this->input->post("duracion");
+	  $triaje = $this->input->post("triaje");
 	  
 	  $datos = [
+	    "triaje" => $triaje,		
 	    "doctor" => $doctor,		
 	    "paciente" => $paciente,		
 	    "medicamento" => $medicamento,		
@@ -356,17 +359,19 @@ class Historiaclinica extends Admin_Controller {
 	  $this->Historias_model->crearMedicamento($datos);
 	}
 
-	public function crearPdfHistoriaClinica($documento) {
+	public function crearPdfHistoriaClinica($triage,$documento) {
 	  $datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
 	  $datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
+	  $datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral($documento,$triage)->result()[0];
 	  $datosalergias = $this->Historias_model->getAllAlergias($documento);
-	  $datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral("8")->result()[0];
+	  $datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento,$triage);
+	  $datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento,$triage);
 
 	  $this->load->library('PDF_UTF8');
       $pdf = new PDF_UTF8();
       $pdf->AddPage();
 	  $pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
-      $pdf->Image("public/img/theme/logo.png", 60, 110, 90); // Ajusta las coordenadas y tamaño según necesites
+      $pdf->Image("public/img/theme/logo.png", 60, 110, 80); // Ajusta las coordenadas y tamaño según necesites
       $pdf->SetAlpha(1); // Restauramos la opacidad al 100%
       $pdf->SetDrawColor(0,24,0);
       $pdf->SetFillColor(115,115,115);
@@ -498,7 +503,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(20,5, 'TEMPERATURA', 1);
 
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5,utf8_decode($datostriage->temperatura.' C°'), 1);
+      $pdf->cell(20,5,$datostriage->temperatura.' C°', 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(20,5, '% GRASA', 1);
@@ -698,6 +703,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(30,5, utf8_decode('TIPO'), 1);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(166,5,'ALERGIA', 1);
+
       if($datosalergias == false) {
 	    $pdf->ln(5);
 	    $pdf->SetFont('Arial', '', 6);
@@ -726,11 +732,22 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(166,5,'DIAGNOSTICO', 1);
 
-      $pdf->ln(5);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, utf8_decode('R112'), 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(166,5,'OTRAS COSAS NO DEFINIDAS', 1);
+	  if($datosdiagnosticos == false) {
+	    $pdf->ln(5);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(30,5, utf8_decode('R112'), 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(166,5,'OTRAS COSAS NO DEFINIDAS', 1);
+	  }
+	  else {
+		foreach($datosdiagnosticos->result() as $diagnostico) {
+		  $pdf->ln(5);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(30,5, $diagnostico->clave, 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(166,5,$diagnostico->descripcion, 1);
+		}
+	  }
 
       $pdf->ln(7);
       $pdf->SetTextColor(0,0,0);
@@ -745,9 +762,9 @@ class Historiaclinica extends Admin_Controller {
 
       $pdf->ln(5);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, utf8_decode('R112'), 1);
+      $pdf->cell(30,5, '', 1);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(166,5,'OTRAS COSAS NO DEFINIDAS', 1);
+      $pdf->cell(166,5,'', 1);
 
       $pdf->ln(7);
       $pdf->SetTextColor(0,0,0);
@@ -768,32 +785,51 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(35,5,'DURACION', 1);
 
-      $pdf->ln(5);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(70,5, utf8_decode('FARMACO'), 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(11,5,'CANT', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5,'DOSIS', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5,'VIA', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5,'FRECUENCIA', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(35,5,'DURACION', 1);
+	  if($datosmedicamentos == false) {
+		  $pdf->ln(5);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(70,5, utf8_decode('FARMACO'), 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(11,5,'CANT', 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(20,5,'DOSIS', 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(30,5,'VIA', 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(30,5,'FRECUENCIA', 1);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(35,5,'DURACION', 1);
+	  }
+	  else {
+		foreach($datosmedicamentos->result() as $medicamento) {
+		  $pdf->ln(5);
+		  $pdf->SetFont('Arial', '', 6);
+		  $pdf->cell(70,5, $medicamento->medicamento, 1);
+		   $pdf->SetFont('Arial', '', 6);
+          $pdf->cell(11,5,$medicamento->cantidad, 1);
+          $pdf->SetFont('Arial', '', 6);
+          $pdf->cell(20,5,$medicamento->dosis, 1);
+          $pdf->SetFont('Arial', '', 6);
+          $pdf->cell(30,5,$medicamento->via_aplicacion, 1);
+          $pdf->SetFont('Arial', '', 6);
+          $pdf->cell(30,5,$medicamento->frecuencia, 1);
+          $pdf->SetFont('Arial', '', 6);
+          $pdf->cell(35,5,$medicamento->duracion, 1);
+		}
+	  }
 
       $pdf->ln(10);
       $pdf->SetTextColor(0,0,0);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(30,5, utf8_decode('          PROXIMA CITA'), 1);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(30,5, utf8_decode('          26-12-2024'), 1);
+      $pdf->cell(30,5, utf8_decode('          '), 1);
 
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(30,5, utf8_decode('     FIRMA DEL DOCTOR'), 1);
       $pdf->SetFont('Arial', '', 6);
       $pdf->cell(106,5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
 
-      $pdf->Output('I', 'historia clinica .pdf');
+      $pdf->Output('I', 'Historia_Clinica_'.$documento.'.pdf');
 	}
 }
