@@ -487,7 +487,9 @@
             </form>
             <div class="row mt-1">
               <div class="col-md-3">
-              <button type="button" class="btn btn-danger">pdf</button>
+              <button type="button" class="btn btn-danger" onclick="generarpdfRenal()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
               <button type="button" class="btn btn-primary" onclick="createEcografiaRenal()">Guardar</button>
               </div>
             </div>
