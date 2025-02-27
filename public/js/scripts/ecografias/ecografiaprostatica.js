@@ -127,3 +127,10 @@ function toggleInput(selectId, inputContainerId) {
 
 // Aplicar la función a este nuevo campo
 toggleInput("calculos", "detalle_calculos_contenedor");
+
+
+function generarpdfProstatica() {
+  let dni = $("#dni").val();
+  let url = baseurl + "administracion/pdfecografiaprostatica/" + dni;
+  window.open(url, "_blank", " width=950, height=1000");
+} 

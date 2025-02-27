@@ -495,9 +495,30 @@ public function createEcografiaVenosa($data) {
     return  $result;
   }
 
-  public function getEcografiaabdominalPdf($documento) {
+  public function getEcografiaAbdominalPdf($documento) {
     $this->db->select("*");
     $this->db->from("ecografia_abdominal");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  
+  public function getEcografiaProstaticaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_prostatica");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('codigo_ecografia', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaRenalPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_renal");
     $this->db->where("documento_paciente", $documento);
     $this->db->order_by('codigo_ecografia', 'DESC');
     $result = $this->db->get();

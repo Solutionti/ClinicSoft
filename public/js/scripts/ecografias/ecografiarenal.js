@@ -159,3 +159,9 @@ function createEcografiaRenal() {
       }
     });  
   }
+
+  function generarpdfRenal() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiarenal/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  } 

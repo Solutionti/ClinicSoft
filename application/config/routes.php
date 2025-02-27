@@ -202,7 +202,9 @@ $route["administracion/pdfecografiamorfologica/(:num)"] = "administrador/PdfCont
 $route["administracion/pdfecografiatrasvaginal/(:num)"] = "administrador/PdfController/getEcografiaTrasvaginalPdf/$1";
 $route["administracion/pdfecografiapelvica/(:num)"] = "administrador/PdfController/getEcografiaPelvicaPdf/$1";
 $route["administracion/pdfecografiaobstetrica/(:num)"] = "administrador/PdfController/getEcografiaObstetricaPdf/$1";
-$route["administracion/pdfecografiaabdominal/(:num)"] = "administrador/PdfController/getEcografiaabdominalPdf/$1";
+$route["administracion/pdfecografiaabdominal/(:num)"] = "administrador/PdfController/getEcografiaAbdominalPdf/$1";
+$route["administracion/pdfecografiaprostatica/(:num)"] = "administrador/PdfController/getEcografiaProstaticaPdf/$1";
+$route["administracion/pdfecografiarenal/(:num)"] = "administrador/PdfController/getEcografiaRenalPdf/$1";
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
