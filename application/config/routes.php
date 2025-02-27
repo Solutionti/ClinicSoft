@@ -206,6 +206,9 @@ $route["administracion/pdfecografiaobstetrica/(:num)"] = "administrador/PdfContr
 $route["administracion/pdfecografiaabdominal/(:num)"] = "administrador/PdfController/getEcografiaAbdominalPdf/$1";
 $route["administracion/pdfecografiaprostatica/(:num)"] = "administrador/PdfController/getEcografiaProstaticaPdf/$1";
 $route["administracion/pdfecografiarenal/(:num)"] = "administrador/PdfController/getEcografiaRenalPdf/$1";
+$route["administracion/pdfecografiatiroides/(:num)"] = "administrador/PdfController/getEcografiaTiroidesPdf/$1";
+$route["administracion/pdfecografiahisterosonografia/(:num)"] = "administrador/PdfController/getEcografiaHisterosonografiaPdf/$1";
+
 /*
 **********************************************************
 ***** SECCION DE CONSULTA DE LABORATORIO PAGINA WEB ******
