@@ -525,5 +525,25 @@ public function createEcografiaVenosa($data) {
 
     return  $result;
   }
+
+  public function getEcografiaTiroidesPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_tiroides");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('id', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaHisterosonografiaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_histerosonografia");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('id', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
     
 }

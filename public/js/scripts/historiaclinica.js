@@ -758,7 +758,7 @@ function descargarHistoriaGineco() {
   const id = parts[parts.length - 1];  // Extrae el último valor, que es el ID
   let triage = $("#consecutivo_historia").val();
 
-  let url = baseurl + "" + triage + "/" + id;
+  let url = baseurl + "administracion/pdfhistoriaclinicaginecologica/" + triage + "/" + id;
   window.open(url, "_blank", " width=1100, height=1000");  
 }
 
