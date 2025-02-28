@@ -247,7 +247,7 @@
                         <tbody>
                             <tr>
                                 <td>F. Común</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="65"></td>
+                                <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="8MM"></td>
                                 <td><input type="text" class="form-control form-control-sm" name="onda_fc" value="Bifásica"></td>
                             </tr>
                             <tr>
@@ -281,7 +281,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <h6>MIEMBRO INFERIOR <span style="color: rgb(128, 15, 0);">IZQUIERDA</span>:</h6>
-                        <textarea class="form-control form-control-sm" id="descripcionProcedimiento" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
+                        <textarea class="form-control form-control-sm" id="descripcionProcedimientoIzquierdo" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
                     </div>
                 </div>
     
@@ -339,7 +339,9 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                <button type="button" class="btn btn-danger" onclick="createEcografiaVenosa()">pdf</button>
+                <button type="button" class="btn btn-danger" onclick="generarpdfVenosa()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
                 <button type="button" class="btn btn-primary" onclick="createEcografiaVenosa()">Guardar</button>
                 </div>
               </div>

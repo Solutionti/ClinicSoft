@@ -281,7 +281,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <h6>MIEMBRO INFERIOR <span style="color: rgb(128, 15, 0);">IZQUIERDA</span>:</h6>
-                        <textarea class="form-control form-control-sm" id="descripcionProcedimiento" rows="3">PLACAS ATEROMATOSA A PREDOMINIO DE PIERNA.</textarea>
+                        <textarea class="form-control form-control-sm" id="descripcionProcedimientoIzquierdo" rows="3">PLACAS ATEROMATOSA A PREDOMINIO DE PIERNA.</textarea>
                     </div>
                 </div>
     
@@ -339,7 +339,9 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                <button type="button" class="btn btn-danger">pdf</button>
+                <button type="button" class="btn btn-danger" onclick="generarpdfArterial()">
+                     <i class="fas fa-file-pdf"></i> pdf
+                     </button>
                 <button type="button" class="btn btn-primary" onclick="createEcografiaArterial()">Guardar</button>
                 </div>
               </div>

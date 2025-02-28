@@ -545,5 +545,25 @@ public function createEcografiaVenosa($data) {
 
     return  $result;
   }
+
+  public function getEcografiaArterialPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_arterial");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('id', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
+
+  public function getEcografiaVenosaPdf($documento) {
+    $this->db->select("*");
+    $this->db->from("ecografia_venosa");
+    $this->db->where("documento_paciente", $documento);
+    $this->db->order_by('id', 'DESC');
+    $result = $this->db->get();
+
+    return  $result;
+  }
     
 }

@@ -4,7 +4,7 @@ function createEcografiaArterial() {
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         descripcionProcedimientoDerecho = $("#descripcionProcedimiento").eq(0).val(),
-        descripcionProcedimientoIzquierdo = $("#descripcionProcedimiento").eq(1).val(),
+        descripcionProcedimientoIzquierdo = $("#descripcionProcedimientoIzquierdo").val(),
         // Miembro inferior derecho
         vps_fc_derecho = $("input[name='vps_fc']").eq(0).val(),
         onda_fc_derecho = $("input[name='onda_fc']").eq(0).val(),
@@ -84,7 +84,7 @@ function createEcografiaArterial() {
         $("#codigo_doctor").val('');
         $("#motivo").val('');
         $("#descripcionProcedimiento").eq(0).val('PLACAS ATEROMATOSAS EN TIBIAL ANTERIOR DISTAL Y PEDIA.');
-        $("#descripcionProcedimiento").eq(1).val('PLACAS ATEROMATOSA A PREDOMINIO DE PIERNA.');
+        $("#descripcionProcedimientoIzquierdo").eq(0).val('PLACAS ATEROMATOSA A PREDOMINIO DE PIERNA.');
         $("input[name='vps_fc']").eq(0).val('65');
         $("input[name='onda_fc']").eq(0).val('Bifásica');
         $("input[name='vps_fs']").eq(0).val('60');
@@ -120,3 +120,9 @@ function createEcografiaArterial() {
       }
     });  
   }
+
+  function generarpdfArterial() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiaarterial/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  } 

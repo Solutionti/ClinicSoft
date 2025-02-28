@@ -4,7 +4,7 @@ function createEcografiaVenosa() {
         codigo_doctor = $("#codigo_doctor").val(),
         motivo = $("#motivo").val(),
         descripcionProcedimientoDerecho = $("#descripcionProcedimiento").eq(0).val(),
-        descripcionProcedimientoIzquierdo = $("#descripcionProcedimiento").eq(1).val(),
+        descripcionProcedimientoIzquierdo = $("#descripcionProcedimientoIzquierdo").val(),
         // Miembro inferior derecho
         medida_fc_derecho = $("input[name='vps_fc']").eq(0).val(),
         reflujo_fc_derecho = $("input[name='onda_fc']").eq(0).val(),
@@ -85,7 +85,7 @@ function createEcografiaVenosa() {
         $("#codigo_doctor").val('');
         $("#motivo").val('');
         $("#descripcionProcedimiento").eq(0).val('PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.');
-        $("#descripcionProcedimiento").eq(1).val('PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.');
+        $("#descripcionProcedimiento").eq(0).val('PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.');
         $("input[name='vps_fc']").eq(0).val('65');
         $("input[name='onda_fc']").eq(0).val('Bifásica');
         $("input[name='vps_fs']").eq(0).val('60');
@@ -122,4 +122,8 @@ function createEcografiaVenosa() {
     });  
   }
 
-  
+  function generarpdfVenosa() {
+    let dni = $("#dni").val();
+    let url = baseurl + "administracion/pdfecografiavenosa/" + dni;
+    window.open(url, "_blank", " width=950, height=1000");
+  } 
