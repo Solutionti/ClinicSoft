@@ -836,11 +836,11 @@ class Historiaclinica extends Admin_Controller {
 	public function crearPdfHistoriaClinicaGinecologica($triage,$documento) {
 		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
 		$datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
-		$datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral($documento,$triage)->result()[0];
+		$datosgineco = $this->Historias_model->GenerarPdfGinecologia($documento,$triage)->result()[0];
 		$datosalergias = $this->Historias_model->getAllAlergias($documento);
 		$datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento,$triage);
 		$datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento,$triage);
-  
+		
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
 		$pdf->AddPage();
@@ -1012,158 +1012,158 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('FAMILIARES'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->tratamiento, 1);
+		$pdf->cell(166,5,$datosgineco->familiares, 1);
 		$pdf->Ln(5);
 		$pdf->SetTextColor(0,0,0);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('PATOLOGICOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->tratamiento, 1);
+		$pdf->cell(166,5,$datosgineco->patologicos, 1);
 		$pdf->Ln(5);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('GINECO-OBSTETRICOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->tratamiento, 1);
+		$pdf->cell(166,5,$datosgineco->gineco_obstetrico, 1);
 		$pdf->Ln(5);
 		// 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15,5, 'FUM', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(45,5,$datosgeneral->empresa, 1);
+		$pdf->cell(45,5,$datosgineco->fum, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(25,5, utf8_decode('RM (RET.MENSTR)'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(47,5,$datosgeneral->compania, 1);
+		$pdf->cell(47,5,$datosgineco->rm, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, 'FLUJO GENITAL', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(44,5,$datosgeneral->iafa, 1);
+		$pdf->cell(44,5,$datosgineco->flujo_genital, 1);
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, 'No PAREJAS', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20,5,$datosgeneral->anamnesis, 1);
+		$pdf->cell(20,5,$datosgineco->no_de_parejas, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, 'GESTAS', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40,5,$datosgeneral->empresa, 1);
+		$pdf->cell(40,5,$datosgineco->gestas, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, utf8_decode('PARTOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40,5,$datosgeneral->compania, 1);
+		$pdf->cell(40,5,$datosgineco->partos, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, 'ABORTOS', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(16,5,$datosgeneral->iafa, 1);
+		$pdf->cell(16,5,$datosgineco->abortos, 1);
   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('ANTICONCEPTIVOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(70,5,$datosgeneral->nombre_acompanante, 1);
+		$pdf->cell(70,5,$datosgineco->anticonceptivos, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, utf8_decode('TIPOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(25,5,$datosgeneral->dni, 1);
+		$pdf->cell(25,5,$datosgineco->tipo, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20,5, utf8_decode('TIEMPO'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(31,5,$datosgeneral->celular, 1);
+		$pdf->cell(31,5,$datosgineco->tiempo, 1);
   
   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('CIRUGIA GINECOLOGICA'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->tratamiento_anterior, 1);
+		$pdf->cell(166,5,$datosgineco->cirugia_ginecologica, 1);
   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('OTROS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(47,5,$datosgeneral->tiempo, 1);
+		$pdf->cell(47,5,$datosgineco->otros, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15,5, utf8_decode('FECHA PAP'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40,5,$datosgeneral->inicio, 1);
+		$pdf->cell(40,5,$datosgineco->fecha_pap, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15,5, 'Nº HIJOS', 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(49,5,$datosgeneral->curso, 1);
+		$pdf->cell(49,5,$datosgineco->no_hijos, 1);
         //   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('PIEL Y TSCS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->sintomas, 1);
+		$pdf->cell(166,5,$datosgineco->piel_tscs, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('TIROIDES'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,"", 1);
+		$pdf->cell(166,5,$datosgineco->tiroides, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('MAMAS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->cuello, 1);
+		$pdf->cell(166,5,$datosgineco->mamas, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('A RESPIRATORIO'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->ap_respiratoria, 1);
+		$pdf->cell(166,5,$datosgineco->arespiratorio, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('A CARDIOVASCULAR'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->ap_cardio, 1);
+		$pdf->cell(166,5,$datosgineco->acardiovascular, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('ABDOMEN'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->abdomen, 1);
+		$pdf->cell(166,5,$datosgineco->abdomen, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('A GENITO - URINARIO'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->cabeza, 1);
+		$pdf->cell(166,5,$datosgineco->genito_urinario, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('TACTO RECTAL'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->loco_motor, 1);
+		$pdf->cell(166,5,$datosgineco->tacto_rectal, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('LOCOMOTOR'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->sistema_nervioso, 1);
+		$pdf->cell(166,5,$datosgineco->locomotor, 1);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('SISTEMA NERVIOSO'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->interconsultas, 1);
+		$pdf->cell(166,5,$datosgineco->sistema_nervioso, 1);
   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('MOTIVO CONSULTA'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->tratamiento, 1);
+		$pdf->cell(166,5,$datosgineco->motivo_consulta, 1);
   
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(30,5, utf8_decode('SIGNOS Y SINTOMAS'), 1);
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166,5,$datosgeneral->referencia, 1);
+		$pdf->cell(166,5,$datosgineco->signossintomas, 1);
   
 		// DATOS DE LA CONSULTA GINECOLOGICA
 		$pdf->ln(4);
