@@ -1189,7 +1189,7 @@
 </div>
 <!-- PROCESOS CLINICOS ALERGIAS, MEDICAMENTOS, DIETA NUTRICIONAL -->
  <!--  -->
-<div class="modal fade" id="procesosclinicos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal fade" id="procesosclinicos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-default">
@@ -1201,86 +1201,62 @@
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
             <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
-            <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>DIETA NUTRICIONAL</button> -->
+            <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>ORD. PATOLOGIA</button>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-alergias" role="tabpanel" aria-labelledby="nav-alergias-tab" tabindex="0">
-           <div class="container">
-            <form [formGroup]="alergiasForm">
-              <div class="row mt-4">
-              <div class="col-md-12">
-                <label>Tipo de alergia</label>
-                <select
-                  class="form-control"
-                  id="tpalergia"
-                >
-                  <option value="">SELECCIONA UNA OPCION</option>
-                  <option value="Medicamentos">ALERGIA A MEDICAMENTOS</option>
-                  <option value="Otras">OTRAS ALERGIAS</option>
-                </select>
-              </div>
-             </div>
-             <div class="row mt-3">
-               <div class="col-md-12">
-                 <label>Descripcion</label>
-                 <textarea
-                   class="form-control"
-                   id="descripcion_alergia"
-                 ></textarea>
-               </div>
-             </div>
-            </form>
-            <div class="row mt-3">
-              <div class="col-md-12">
-                <button
-                  class="btn btn-primary"
-                  onclick="crearAlergias()"
-                >
-                  Guardar
-                </button>
+            <div class="container">
+              <form [formGroup]="alergiasForm">
+                <div class="row mt-4">
+                  <div class="col-md-12">
+                    <label>Tipo de alergia</label>
+                    <select class="form-control" id="tpalergia">
+                      <option value="">SELECCIONA UNA OPCION</option>
+                      <option value="Medicamentos">ALERGIA A MEDICAMENTOS</option>
+                      <option value="Otras">OTRAS ALERGIAS</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label>Descripción</label>
+                    <textarea class="form-control" id="descripcion_alergia"></textarea>
+                  </div>
+                </div>
+              </form>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <button class="btn btn-primary" onclick="crearAlergias()">
+                    Guardar
+                  </button>
+                </div>
               </div>
             </div>
-           </div>
           </div>
           <div class="tab-pane fade" id="nav-medicamentos" role="tabpanel" aria-labelledby="nav-medicamentos-tab" tabindex="0">
             <div class="container">
+              <form [formGroup]="medicamentosForm">
                 <div class="row mt-4">
                   <div class="col-md-7">
                     <label>Medicamento</label>
-                    <div class="input-group ">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="medicamento_medicamento"
-                      >
-                      <!-- <button
-                        class="btn btn-primary"
-                        type="button"
-                      >
-                        <i class="fas fa-eye"></i>
-                      </button> -->
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="medicamento_medicamento">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <label>Cantidad</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="cantidad_medicamento"
-                    >
+                    <input type="number" class="form-control" id="cantidad_medicamento">
                   </div>
                   <div class="col-md-3">
                     <label>Dosis</label>
-                    <select
-                      class="form-control text-uppercase"
-                      id="dosis_medicamento"
-                    >
+                    <select class="form-control text-uppercase" id="dosis_medicamento">
                       <option value="">Seleccione la dosis</option>
-                      <option value="Noespecificada">No especifica</option>
+                      <option value="Noespecificada">No especificada</option>
                       <option value="Ampolla">Ampolla</option>
                       <option value="Aplicación">Aplicación</option>
-                      <option value="Capsula">Capsula</option>
+                      <option value="Capsula">Cápsula</option>
                       <option value="Comprimido">Comprimido</option>
                       <option value="Cucharada">Cucharada</option>
                       <option value="Cucharadita_5ML">Cucharadita 5ML</option>
@@ -1296,99 +1272,89 @@
                     </select>
                   </div>
                 </div>
-                <div class="row ">
+                <div class="row mt-3">
                   <div class="col-md-4">
-                    <label>Via Aplicación</label>
-                    <select
-                      class="form-control text-uppercase"
-                      id="via_aplicacion_medicamento"
-                    >
-                      <option value="">Seleccione la via aplicación</option>
-                        <option value="Via_oral">Via oral</option>
-                        <option value="Via_intramuscular">Via intramuscular</option>
-                        <option value="Via_intravenoso">Via intravenoso</option>
-                        <option value="Vaginal">Vaginal</option>
-                        <option value="Transtraqueal">Transtraqueal</option>
-                        <option value="Transdermica">Transdermica</option>
-                        <option value="Topica">Topica</option>
-                        <option value="Sub_lingual">Sub lingual</option>
-                        <option value="Sub_cutanea">Sub cutanea</option>
-                        <option value="Rectal">Rectal</option>
-                        <option value="Por_sng">Por sng</option>
-                        <option value="Por_gastronomica">Por gastronomica</option>
-                        <option value="Parenteral">Parenteral </option>
-                        <option value="Sub_lingual">Sub lingual</option>
-                        <option value="Sub_cutanea">Sub cutanea</option>
-                        <option value="Ojo_derecha">Ojo derecho</option>
-                        <option value="Ojo_izquierdo">Ojo izquierdo</option>
-                        <option value="Oido_derecho">Oido derecho</option>
-                        <option value="Oido_izquierdo">Oido izquierdo</option>
-                        <option value="No_especifica">No especifica</option>
+                    <label>Vía de aplicación</label>
+                    <select class="form-control text-uppercase" id="via_aplicacion_medicamento">
+                      <option value="">Seleccione la vía de aplicación</option>
+                      <option value="Via_oral">Vía oral</option>
+                      <option value="Via_intramuscular">Vía intramuscular</option>
+                      <option value="Via_intravenoso">Vía intravenoso</option>
+                      <option value="Vaginal">Vaginal</option>
+                      <option value="Transtraqueal">Transtraqueal</option>
+                      <option value="Transdermica">Transdérmica</option>
+                      <option value="Topica">Tópica</option>
+                      <option value="Sub_lingual">Sublingual</option>
+                      <option value="Sub_cutanea">Subcutánea</option>
+                      <option value="Rectal">Rectal</option>
+                      <option value="Por_sng">Por SNG</option>
+                      <option value="Por_gastronomica">Por gastronomía</option>
+                      <option value="Parenteral">Parenteral</option>
+                      <option value="Ojo_derecha">Ojo derecho</option>
+                      <option value="Ojo_izquierdo">Ojo izquierdo</option>
+                      <option value="Oido_derecho">Oído derecho</option>
+                      <option value="Oido_izquierdo">Oído izquierdo</option>
+                      <option value="No_especifica">No especifica</option>
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label>Frecuencia</label>
-                    <select
-                      class="form-control text-uppercase"
-                      id="frecuencia_medicamento"
-                    >
-                    <option value="">Seleccione la frecuencia</option>
-                        <option value="No_especifica">No especifica</option>
-                        <option value="dos_al_dia">2 veces al día</option>
-                        <option value="tres_al_dia">3 veces al día</option>
-                        <option value="al_acostarse">Al acostarse</option>
-                        <option value="al_dia">Al día</option>
-                        <option value="cada_doce_horas">Cada 12 horas</option>
-                        <option value="cada_dos_horas">Cada 2 horas</option>
-                        <option value="cada_tres_horas">Cada 3 horas</option>
-                        <option value="cada_cuatro_horas">Cada 4 horas</option>
-                        <option value="cada_seis_horas">Cada 6 horas</option>
-                        <option value="cada_ocho_horas">Cada 8 horas</option>
-                        <option value="dos_veces_por_semana">Dos veces por semana</option>
-                        <option value="en_ayunas">En ayunas</option>
-                        <option value="en_la_mañana">En la mañana</option>
-                        <option value="mañana_noche">En la mañana, noche</option>
-                        <option value="noche">En la noche</option>
-                        <option value="tarde">En la tarde</option>
-                        <option value="mañana_tarde_noche">Mañana,Tarde,Noche</option>
-                        <option value="tres_veces_semana">Tres veces por semana</option>
-                        <option value="una_vez_semana">Una vez por semana</option> 
+                    <select class="form-control text-uppercase" id="frecuencia_medicamento">
+                      <option value="">Seleccione la frecuencia</option>
+                      <option value="No_especifica">No especifica</option>
+                      <option value="dos_al_dia">2 veces al día</option>
+                      <option value="tres_al_dia">3 veces al día</option>
+                      <option value="al_acostarse">Al acostarse</option>
+                      <option value="al_dia">Al día</option>
+                      <option value="cada_doce_horas">Cada 12 horas</option>
+                      <option value="cada_dos_horas">Cada 2 horas</option>
+                      <option value="cada_tres_horas">Cada 3 horas</option>
+                      <option value="cada_cuatro_horas">Cada 4 horas</option>
+                      <option value="cada_seis_horas">Cada 6 horas</option>
+                      <option value="cada_ocho_horas">Cada 8 horas</option>
+                      <option value="dos_veces_por_semana">Dos veces por semana</option>
+                      <option value="en_ayunas">En ayunas</option>
+                      <option value="en_la_mañana">En la mañana</option>
+                      <option value="mañana_noche">En la mañana, noche</option>
+                      <option value="noche">En la noche</option>
+                      <option value="tarde">En la tarde</option>
+                      <option value="mañana_tarde_noche">Mañana, Tarde, Noche</option>
+                      <option value="tres_veces_semana">Tres veces por semana</option>
+                      <option value="una_vez_semana">Una vez por semana</option>
                     </select>
                   </div>
                   <div class="col-md-4">
                     <label>Duración</label>
-                    <select
-                      class="form-control text-uppercase"
-                      id="duracion_medicamento"
-                    >
+                    <select class="form-control text-uppercase" id="duracion_medicamento">
                       <option value="">Seleccione la duración</option>
-                        <option value="cinco_dias">05 días</option>
-                        <option value="diez_dias">10 días</option>
-                        <option value="quince_dias">15 días</option>
-                        <option value="treinta_dias">30 días</option>
-                        <option value="dos_dias">Dos días</option>
-                        <option value="durante_tres_meses">Durante 3 meses</option>
-                        <option value="tres_dias">Tres días</option>
-                        <option value="un dia">Un día</option>
-                        <option value="una_semana">Una semana</option>
-                        <option value="unica_vez">Unica vez</option>
+                      <option value="cinco_dias">05 días</option>
+                      <option value="diez_dias">10 días</option>
+                      <option value="quince_dias">15 días</option>
+                      <option value="treinta_dias">30 días</option>
+                      <option value="dos_dias">Dos días</option>
+                      <option value="durante_tres_meses">Durante 3 meses</option>
+                      <option value="tres_dias">Tres días</option>
+                      <option value="un_dia">Un día</option>
+                      <option value="una_semana">Una semana</option>
+                      <option value="unica_vez">Única vez</option>
                     </select>
                   </div>
                 </div>
-              <div class="row mt-3">
-                <div class="col-md-12">
-                  <button
-                    class="btn btn-primary"
-                    onclick="crearMedicamento()"
-                  >
-                    Guardar
-                  </button>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary" onclick="crearMedicamento()">
+                      Guardar
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
+          <div class="tab-pane fade" id="nav-ordlab" role="tabpanel" aria-labelledby="nav-ordlab-tab" tabindex="0">
+            <!-- Contenido para orden de laboratorio -->
+          </div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-            <!--  -->
+            <!-- Contenido para orden de patología -->
           </div>
         </div>
       </div>
@@ -1398,6 +1364,9 @@
     </div>
   </div>
 </div>
+
+
+
 <!-- archivos  -->
 <div class="modal fade" id="archivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="archivosLabel" aria-hidden="true">
   <div class="modal-dialog">
