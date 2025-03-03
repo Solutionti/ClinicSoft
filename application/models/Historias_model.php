@@ -180,15 +180,14 @@ class Historias_model extends CI_model {
         return $result;
     }
 
-    public function GenerarPdfGinecologia($id){
-        $this->db->select("h.*, p.*,p.nombre as pacientes,d.*, g.*,t.*");
+    public function GenerarPdfGinecologia($documento, $triage){
+        $this->db->select("h.*, g.*");
         $this->db->from("historial_pacientes h");
-        $this->db->join("pacientes p", "h.paciente = p.documento");
-        $this->db->join("doctores d", "h.doctor = d.codigo_doctor");
-        $this->db->join("h_ginecologias g", "h.codigo_historia = g.codigo_h_ginecologia");
+        $this->db->join("h_ginecologias g", "h.triaje = g.codigo_historia");
         $this->db->join("triajes t", "h.triaje = t.codigo_triaje");
-        $this->db->where("h.codigo_historial_paciente", $id);
-        $this->db->where("h.tipo_consulta", 2);
+        $this->db->where("h.codigo_historia", $documento);
+        $this->db->where("h.triaje", $triage);
+        // $this->db->where("h.tipo_consulta", 2);
         $result = $this->db->get();
 
         return $result;
@@ -202,6 +201,7 @@ class Historias_model extends CI_model {
         $this->db->join("triajes t", "h.triaje = t.codigo_triaje");
         $this->db->where("h.codigo_historia", $documento);
         $this->db->where("h.triaje", $triage);
+        $this->db->where("h.tipo_consulta", 1);
         $result = $this->db->get();
 
         return $result;
