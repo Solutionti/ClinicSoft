@@ -74,3 +74,7 @@ function generarpdfMama() {
   let url = baseurl + "administracion/pdfecografiamama/" + dni;
   window.open(url, "_blank", " width=950, height=1000");
 }
+  
+
+
+
