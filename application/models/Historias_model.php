@@ -54,6 +54,7 @@ class Historias_model extends CI_model {
 
     public function crearHconsultasGinecologicas($data) {
         $datos = [
+            "codigo_historia" => $data["triaje"],
             "familiares" => $data["familiares"],
             "patologicos" => $data["patologicos"],
             "gineco_obstetrico" => $data["gine_obste"],
