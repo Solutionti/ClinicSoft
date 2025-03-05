@@ -92,7 +92,7 @@
       
       
       <div class="text-center">
-        <button type="submit" class="btn color-cyan text-white w-100 my-4 mb-2" id="login">Ingresar</button>
+        <button type="submit" class="btn bg-default text-white w-100 my-4 mb-2" id="login">Ingresar</button>
       </div>
       <p class="text-sm mt-3 mb-0">No tiene usuario y contraseña? <a href="javascript:;" class="text-dark font-weight-bolder">Solicitar</a></p>
     </form>
