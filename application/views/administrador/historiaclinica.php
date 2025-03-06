@@ -1181,8 +1181,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btn-general" hidden>Guardar</button>
-        <button type="button" class="btn btn-danger" id="btn-gineco" hidden>Guardar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  id="btn-general" hidden>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  id="btn-gineco" hidden>Guardar</button>
       </div>
     </div>
   </div>
