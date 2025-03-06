@@ -149,8 +149,14 @@
                             </li>
                             <li>
                               <a class="btn btn-info btn-xs mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" > Nueva</a>
-                              <a onclick="descargarHistoriaGeneral()" class="btn btn-primary btn-xs mt-3" id="btnhistoriagene" hidden>Imprimir</a>
-                              <a onclick="descargarHistoriaGineco()" class="btn btn-danger btn-xs mt-3" id="btnhistoriagineco" hidden>Imprimir</a>
+                              <a
+                                class="btn btn-danger btn-xs mt-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#descargamodalhc"
+                                
+                              >
+                                Imprimir HC
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -1511,6 +1517,74 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- IMPRESION DE LAS HISTORIAS CLINICAS GINECOLOGIA Y CONSULTA GENERAL -->
+<div class="modal fade" id="descargamodalhc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="descargamodalhcLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h1 class="modal-title fs-5 text-white" id="descargamodalhcLabel">DESCARGA DE HISTORIAS CLINICAS DEL PACIENTE</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-hover table-striped">
+              <thead class="bg-default text-white">
+                <tr>
+                  <th>OPC</th>
+                  <th>CODIGO</th>
+                  <th>DOCUMENTO</th>
+                  <th>ATENCION</th>
+                  <th>FECHA</th>
+                  <th>NOMBRE</th>
+                  <th>TRIAGE</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach($historia->result() as $historias){ ?>
+               
+               <tr>
+                 <?php if($historias->tipo_consulta == 1){ ?>
+                 <td>
+                  <div class="row">
+                    <a href="<?php echo base_url(); ?>administracion/pdfgeneral/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4" target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
+                  </div>
+                 </td>
+                 <?php } else { ?>
+                 <td>
+                   <div class="row">
+                     <a href="<?php echo base_url(); ?>administracion/pdfginecologia/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4" target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
+                   </div>
+                 </td>
+                 <?php } ?>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->codigo_historial_paciente; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->paciente; ?></td>
+                 <?php if($historias->tipo_consulta == 1){ ?>
+                   <td class="text-xs text-secondary mb-0">CONSULTA GENERAL</td>
+                 <?php }else { ?>
+                    <td class="text-xs text-secondary mb-0">CONSULTA GINECOLOGICA</td>
+                 <?php } ?>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->fecha; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->apellido." ".$historias->pacientes; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->triaje; ?></td>
+                </tr>
+                <?php }?>
+              </tbody>                      
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
       <?php require_once("componentes/scripts.php"); ?>
