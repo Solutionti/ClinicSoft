@@ -1536,7 +1536,7 @@
             <table class="table table-hover table-striped">
               <thead class="bg-default text-white">
                 <tr>
-                  <th>OPC</th>
+                  <th>OPCION</th>
                   <th>CODIGO</th>
                   <th>DOCUMENTO</th>
                   <th>ATENCION</th>
@@ -1547,18 +1547,29 @@
               </thead>
               <tbody>
               <?php foreach($historia->result() as $historias){ ?>
-               
+                
                <tr>
                  <?php if($historias->tipo_consulta == 1){ ?>
                  <td>
                   <div class="row">
-                    <a href="<?php echo base_url(); ?>administracion/pdfgeneral/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4" target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
+                    <a
+                      href="#"
+                      class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4"
+                      onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)"
+                    > <i class="fas fa-file-pdf"></i>
+                    </a>
                   </div>
                  </td>
                  <?php } else { ?>
                  <td>
                    <div class="row">
-                     <a href="<?php echo base_url(); ?>administracion/pdfginecologia/<?php echo $historias->codigo_historial_paciente; ?>/<?php echo $historias->fecha; ?>" class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4" target="_blank"> <i class="fas fa-file-pdf"></i>  </a>
+                     <a
+                       href="#"
+                       class="icon icon-shape icon-sm me-2 bg-gradient-danger shadow mx-4"
+                       onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)"
+                     >
+                       <i class="fas fa-file-pdf"></i>
+                      </a>
                    </div>
                  </td>
                  <?php } ?>
