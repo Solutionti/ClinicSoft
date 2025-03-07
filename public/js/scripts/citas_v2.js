@@ -564,43 +564,26 @@ const reloadPage = () => {
 
 
 var dias = [
-
 	"Domingo",
-
 	"Lunes",
-
 	"Martes",
-
 	"Miercoles",
-
 	"Jueves",
-
 	"Viernes",
-
 	"Sabado",
-
 ];
 
 
 
 var __colores = [
-
 	"#5bd5f5",
-
 	"#f77a92",
-
 	"#7de78a",
-
 	"#8187dc",
-
 	"#959595",
-
 	"#ffaaf5",
-
 	"#e1c62f",
-
 	"#ff674e",
-
 ];
 
 

@@ -397,11 +397,9 @@
                </div>
 
             </div>
-
-            <div class="col-md-12">
-
+                                         
+            <div class="col-md-12 mt-5">
                <div class="container-fluid py-2" >
-
                   <div class="row" style="padding: 5px;background: #172b4d;border-radius: 10px;">
 
                      <h5 style="
@@ -670,7 +668,7 @@
          </div>
          
       </main>
-      <?php require_once("componentes/footer.php"); ?>
+      <!-- <?php require_once("componentes/footer.php"); ?> -->
 
       <?php require_once("componentes/personalizar.php"); ?>
 
