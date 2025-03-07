@@ -268,23 +268,23 @@
 
                            <table class="table align-items-center table-borderless mb-0" id="table-citas">
 
-                              <thead>
+                              <thead class="bg-default text-white">
 
                                  <tr>
 
-                                    <th colspan="2" class="text-uppercase text-dark text-xs font-weight-bolder opacity-12"><a style="width: 100%;" class="btn  bg-gradient-danger btn-xs" onclick="$('#AddCITA').trigger('reset');$('#Cont_Horas').empty();$('#Cont_Horas').empty();" data-bs-toggle="modal" href="#AgregarPaciente" role="button">Agregar CITA  <i class="fas fa-plus"></i> </a></th>
+                                    <th colspan="2" class="text-uppercase text-white text-xs font-weight-bolder opacity-12 mt-3"><a style="width: 100%;" class="btn  bg-gradient-danger btn-xs mt-3" onclick="$('#AddCITA').trigger('reset');$('#Cont_Horas').empty();$('#Cont_Horas').empty();" data-bs-toggle="modal" href="#AgregarPaciente" role="button">Agregar CITA  <i class="fas fa-plus"></i> </a></th>
 
-                                    <th class="text-dark text-xs font-weight-bolder opacity-12">Para <i class="fa fa-clock"></i> </th>
+                                    <th class="text-white text-xs font-weight-bolder opacity-12">Para <i class="fa fa-clock"></i> </th>
 
-                                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Fecha</th>
+                                    <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Fecha</th>
 
-                                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Documento - Nombre</th>
+                                    <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Documento - Nombre</th>
 
-                                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Telefono</th>
+                                    <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Telefono</th>
 
-                                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Medico</th>
+                                    <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Medico</th>
 
-                                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Observacion</th>
+                                    <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Observacion</th>
 
                                  </tr>
 

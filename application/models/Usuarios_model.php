@@ -85,8 +85,6 @@ class Usuarios_model extends CI_model {
             "apellido" => $data["apellido"],
             "empresa" => "Salud madre y mujer",
             "telefono" => $data["telefono"],
-            "hora" => date("h:i A"),
-            "fecha" => date("Y-m-d"),
             "rol_usuario" => $data["tp_usuario"],
             "estado" => "Activo",
             "usuario_creacion" => $this->session->userdata("nombre")

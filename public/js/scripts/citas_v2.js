@@ -9,7 +9,22 @@ var dias = [
 ];
 
 $(document).ready(function () {
-	$("#table-citas").DataTable();
+	$("#table-citas").DataTable({
+        "lengthMenu": [5, 50, 100, 200],
+        "language":{
+          "processing": "Procesando",
+          "search": "Buscar:",
+          "lengthMenu": "Ver _MENU_ Citas Medicas",
+          "info": "Viendo _START_ a _END_ de _TOTAL_ Citas Medicas",
+          "zeroRecords": "No encontraron resultados",
+          "paginate": {
+            "first":      "Primera",
+            "last":       "Ultima",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          }
+        }
+       });
 });
 
 $("#lupa_DNI").click(function () {
