@@ -1208,7 +1208,7 @@
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
             <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
             <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
-            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" disabled>ORD. PATOLOGIA</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" >ORD. PATOLOGIA</button>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">

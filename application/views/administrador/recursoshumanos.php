@@ -225,13 +225,13 @@
                 <div class="row">
                   <a 
                     class="icon icon-shape icon-sm me-1 bg-gradient-danger shadow mx-3"
-                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $enfermeras->codigo_usuario; ?>"
+                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $enfermeras->codigo_doctor; ?>"
                   >
                     <i class="fas fa-times text-white opacity-10"></i>
                   </a>
                   <a 
                     class="icon icon-shape icon-sm  bg-gradient-info shadow"
-                    onclick="verUsuarios(<?php echo $enfermeras->codigo_usuario; ?>);" 
+                    onclick="verUsuarios(<?php echo $enfermeras->codigo_doctor; ?>);" 
                   >
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
@@ -273,13 +273,13 @@
                 <div class="row">
                   <a 
                     class="icon icon-shape icon-sm me-1 bg-gradient-danger shadow mx-3"
-                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $doctores->codigo_usuario; ?>"
+                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $doctores->codigo_doctor; ?>"
                   >
                     <i class="fas fa-times text-white opacity-10"></i>
                   </a>
                   <a 
                     class="icon icon-shape icon-sm  bg-gradient-info shadow"
-                    onclick="verUsuarios(<?php echo $doctores->codigo_usuario; ?>);" 
+                    onclick="verUsuarios(<?php echo $doctores->codigo_doctor ; ?>);" 
                   >
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
@@ -321,13 +321,13 @@
                 <div class="row">
                   <a 
                     class="icon icon-shape icon-sm me-1 bg-gradient-danger shadow mx-3"
-                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $laboratoristas->codigo_usuario; ?>"
+                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $laboratoristas->codigo_doctor; ?>"
                   >
                     <i class="fas fa-times text-white opacity-10"></i>
                   </a>
                   <a 
                     class="icon icon-shape icon-sm  bg-gradient-info shadow"
-                    onclick="verUsuarios(<?php echo $laboratoristas->codigo_usuario; ?>);" 
+                    onclick="verUsuarios(<?php echo $laboratoristas->codigo_doctor; ?>);" 
                   >
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>
@@ -369,13 +369,13 @@
                 <div class="row">
                   <a 
                     class="icon icon-shape icon-sm me-1 bg-gradient-danger shadow mx-3"
-                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $patologos->codigo_usuario; ?>"
+                    href="<?php echo base_url(); ?>administracion/eliminarusuario/<?php echo $patologos->codigo_doctor; ?>"
                   >
                     <i class="fas fa-times text-white opacity-10"></i>
                   </a>
                   <a 
                     class="icon icon-shape icon-sm  bg-gradient-info shadow"
-                    onclick="verUsuarios(<?php echo $patologos->codigo_usuario; ?>);" 
+                    onclick="verUsuarios(<?php echo $patologos->codigo_doctor; ?>);" 
                   >
                     <i class="fas fa-pen text-white opacity-10"></i>
                   </a>

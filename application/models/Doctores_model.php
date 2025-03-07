@@ -6,6 +6,7 @@ class Doctores_model extends CI_model {
         $this->db->select("*");
         $this->db->from("doctores");
         $this->db->where("estado", "Activo");
+        $this->db->where("rol_usuario", "Doctor");
         $result = $this->db->get();
 
         return $result;
