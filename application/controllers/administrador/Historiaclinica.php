@@ -381,7 +381,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->Ln(15);
       $pdf->SetFont('Arial', 'B', 10);
       $pdf->cell(124,5, '', 0);
-      $pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
+      //$pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
       $pdf->Ln(5);
       $pdf->cell(128,5, '', 0);
       $pdf->cell(40,5, 'HISTORIA CLINICA DEL PACIENTE', 0);

@@ -1542,7 +1542,7 @@
                   <th>ATENCION</th>
                   <th>FECHA</th>
                   <th>NOMBRE</th>
-                  <th>TRIAGE</th>
+                  <th>TRIAJE</th>
                 </tr>
               </thead>
               <tbody>
