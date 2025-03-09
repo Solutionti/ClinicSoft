@@ -1254,33 +1254,33 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->cell(30,5, utf8_decode('MEDICAMENTOS'), 0);
   
 		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(70,5, '', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(11,5,'', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20,5,'', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30,5,'', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30,5,'', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(35,5,'', 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(70,5, utf8_decode('FARMACO'), 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(11,5,'CANT', 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(20,5,'DOSIS', 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(30,5,'VIA', 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(30,5,'FRECUENCIA', 1);
+			$pdf->SetFont('Arial', 'B', 6);
+			$pdf->cell(35,5,'DURACION', 1);
   
 		if($datosmedicamentos == false) {
 			$pdf->ln(5);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(70,5, utf8_decode('FARMACO'), 1);
+			$pdf->cell(70,5, '', 1);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(11,5,'CANT', 1);
+			$pdf->cell(11,5,'', 1);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(20,5,'DOSIS', 1);
+			$pdf->cell(20,5,'', 1);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30,5,'VIA', 1);
+			$pdf->cell(30,5,'', 1);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30,5,'FRECUENCIA', 1);
+			$pdf->cell(30,5,'', 1);
 			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(35,5,'DURACION', 1);
+			$pdf->cell(35,5,'', 1);
 		}
 		else {
 		  foreach($datosmedicamentos->result() as $medicamento) {

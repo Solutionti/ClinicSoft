@@ -282,7 +282,7 @@
 
                                  </a>
 
-                                 <a class="icon icon-shape icon-sm bg-gradient-danger shadow text-center"  href="<?php echo base_url(); ?>administracion/historia/<?php echo $pacientes->documento ?>" title="Historias">
+                                 <a class="icon icon-shape icon-sm bg-gradient-danger shadow text-center" target="_blank"  href="<?php echo base_url(); ?>administracion/historia/<?php echo $pacientes->documento ?>" title="Historias">
 
                                  <i class="fas fa-folder-open text-white opacity-10"></i>
 
