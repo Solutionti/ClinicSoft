@@ -130,14 +130,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="d-flex flex-row-reverse">
-                <!-- <a
-                  class="btn btn-success text-white btn-xs"
-                  hidden
-                  id="btnhistoria"
-                  target="_blank"
-                >
-                  <i class="fas fa-file-medical text-white"></i> HC
-                </a> -->
+                <?php if($this->session->userdata("rol") != "Doctor") { ?>
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
                   hidden
@@ -152,6 +145,7 @@
                 >
                   <i class="fas fa-database text-white"></i> Crear
                 </button>
+                <?php } ?>
               </div>
             </div>
           </div>
