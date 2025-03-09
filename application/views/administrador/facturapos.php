@@ -88,7 +88,7 @@ $pdf->Ln(4);
 
 $pdf->Cell(18,5,'Especialidad:', '', 0,'L', false );
 
-$pdf->Cell(5,5,$atenciones->descripcion, '', 0,'L', false );
+$pdf->Cell(5,5,utf8_decode($atenciones->descripcion), '', 0,'L', false );
 
 $pdf->Ln(4);
 

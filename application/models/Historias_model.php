@@ -218,6 +218,7 @@ class Historias_model extends CI_model {
 
     public function crearDiagnosticos($data) {
         $datos = [
+            "codigo_historia" => $data["triaje"],
             "paciente" => $data["paciente"],
             "codigo_diagnosti" => $data["diagnosticos"],
             "tipo_especialidad" => 2,
