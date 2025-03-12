@@ -278,6 +278,57 @@
                      <span class=" "> Colposcopia</span>
                      </a>
                   </li>
+                  <li class="nav-item ">
+            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
+            <i class="fas text-primary fa-prescription"></i>
+            <span class="sidenav-normal "> Ecografias <b class="caret"></b></span>
+            </a>
+            <div class="collapse " id="ecografias">
+               <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMamaview">
+                     <span class="sidenav-normal"> Ecografia Mama</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaGeneticaview">
+                     <span class="sidenav-normal"> Ecografia Genetica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMorfologicaview">
+                     <span class="sidenav-normal"> Ecografia Morfologica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaTrasvaginalview">
+                     <span class="sidenav-normal"> Ecografia Trasvaginal</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaPelvicaview">
+                     <span class="sidenav-normal"> Ecografia Pelvica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaObstetricaview">
+                     <span class="sidenav-normal"> Ecografia Obstetrica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaAbdominalview">
+                     <span class="sidenav-normal"> Ecografia Abdominal</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaProstaticaview">
+                     <span class="sidenav-normal"> Ecografia Prostatica</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaRenalview">
+                     <span class="sidenav-normal"> Ecografia Renal</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaTiroidesview">
+                     <span class="sidenav-normal"> Ecografia Tiroides</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaHisteronosografiaview">
+                     <span class="sidenav-normal"> Ecografia Histeronosografia</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaArterialview">
+                     <span class="sidenav-normal"> Ecografia Arterial</span>
+                     </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaVenosaview">
+                     <span class="sidenav-normal"> Ecografia Venosa</span>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </li>
                   <!-- MENU ENFERMERA -->
                   <?php } else if($this->session->userdata("rol") == "Enfermera") { ?>
                   <li class="nav-item ">
