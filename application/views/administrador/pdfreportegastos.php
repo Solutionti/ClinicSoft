@@ -16,13 +16,13 @@ $pdf->Ln(1);
 
 $pdf->Cell(65,6,'', '', 0,'L', false );
 
-$pdf->Cell(60,6,'Centro Medico Especializado', '', 0,'L', false );
+$pdf->Cell(60,6,'Clinica', '', 0,'L', false );
 
 $pdf->Ln(5);
 
 $pdf->Cell(72,6,'', '', 0,'L', false );
 
-$pdf->Cell(1,6,'SALUD MADRE & MUJER', '', 0,'L', false );
+$pdf->Cell(1,6,'Mi salud', '', 0,'L', false );
 
 $pdf->Ln(5);
 

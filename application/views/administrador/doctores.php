@@ -280,7 +280,7 @@
                         <div class="row">
                           <div class="col-md-4">
                               <div class="form-group input-group-sm">
-                                <label> Documento CPE</label>
+                                <label> CMP</label>
                                 <input type="number" class="form-control" id="cpe1">
                               </div>
                           </div>

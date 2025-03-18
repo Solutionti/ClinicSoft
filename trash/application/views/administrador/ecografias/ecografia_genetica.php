@@ -7,7 +7,7 @@ $pdf->Image('public/img/theme/baby.png' , 4 ,11, 50 , 35,'png');
 $pdf->SetFont('Times','',10);
 $pdf->Ln(6);
 $pdf->Cell(60,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'CENTRO ESPECIALIZADO SALUD MADRE & MUJER', '', 0,'L', false );
+$pdf->Cell(60,6,' Mi salud', '', 0,'L', false );
 $pdf->Ln(8);
 $pdf->Cell(80,6,'', '', 0,'L', false );
 $pdf->Cell(1,6,'ECOGRAFIA GENETICA', '', 0,'L', false );
