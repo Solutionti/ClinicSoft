@@ -207,6 +207,7 @@
               </div>
             </div>
           </div>
+          <?php if($this->session->userdata("rol") != "Doctor") { ?>
           <div class="row mt-2">
             <h6>Datos de los Pacientes</h6>
           </div>
@@ -446,6 +447,7 @@
           <br>
         </form>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>
