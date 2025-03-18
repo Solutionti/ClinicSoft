@@ -119,7 +119,7 @@ class Atencion_model extends CI_model {
         $datos = [
             "dni_paciente" => $documento,
             "tp_atencion" => $especialidad,
-            "fecha" => date("d-m-Y"),
+            "fecha" => date("Y-m-d"),
             "hora" => date("h:i A"),
             "usuario" => $this->session->userdata("nombre"),
             "id__doctor" => $doctor_ide
@@ -132,7 +132,7 @@ class Atencion_model extends CI_model {
         $datos = [
             "dni_paciente" => $documento,
             "tp_atencion" => $especialidad,
-            "fecha" => date("d-m-Y"),
+            "fecha" => date("Y-m-d"),
             "hora" => date("h:i A"),
             "usuario" => $this->session->userdata("nombre"),
             "id__doctor" => $doctor_ide
