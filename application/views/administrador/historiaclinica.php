@@ -1365,11 +1365,21 @@
                         <div class="row mb-2">
                             <div class="col-6">
                                 <label class="form-label">Nombre:</label>
-                                <input type="text" class="form-control form-control-sm">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                                  readonly
+                                  >
                             </div>
                             <div class="col-2">
                                 <label class="form-label">Edad:</label>
-                                <input type="number" class="form-control form-control-sm">
+                                <input
+                                  type="number"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->edad; ?>"
+                                  readonly
+                                >
                             </div>
                             <div class="col-4">
                                 <label class="form-label">Sexo:</label>
@@ -1388,7 +1398,12 @@
                         <div class="row mb-2">
                             <div class="col-6">
                                 <label class="form-label">Médico Solicitante:</label>
-                                <input type="text" class="form-control form-control-sm">
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                                  readonly
+                                >
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Muestra:</label>
@@ -1463,7 +1478,7 @@
                             </div>
                             <div class="col-6">
                                 <label class="form-label">Fecha:</label>
-                                <input type="date" class="form-control form-control-sm" id="fechaActual">
+                                <input type="date" class="form-control form-control-sm" id="fechaActual" value="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                     </form>
