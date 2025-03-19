@@ -1208,7 +1208,7 @@
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
             <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
             <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
-            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" >ORD. PATOLOGIA</button>
+            <button class="nav-link" id="nav-ordpat-tab" data-bs-toggle="tab" data-bs-target="#nav-ordpat" type="button" role="tab" aria-controls="nav-ordpat" aria-selected="false" >ORD. PATOLOGIA</button>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -1359,8 +1359,115 @@
           <div class="tab-pane fade" id="nav-ordlab" role="tabpanel" aria-labelledby="nav-ordlab-tab" tabindex="0">
             <!-- Contenido para orden de laboratorio -->
           </div>
-          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-            <!-- Contenido para orden de patología -->
+          <div class="tab-pane fade" id="nav-ordpat" role="tabpanel" aria-labelledby="nav-ordpat-tab" tabindex="0">
+          <div class="modal-body">
+                        <form>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Nombre:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-2">
+                                <label class="form-label">Edad:</label>
+                                <input type="number" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Sexo:</label>
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox" id="sexoM" value="M">
+                                        <label class="form-check-label" for="sexoM">M</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="sexoF" value="F">
+                                        <label class="form-check-label" for="sexoF">F</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Médico Solicitante:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Muestra:</label>
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox" id="pap">
+                                        <label class="form-check-label" for="pap">PAP</label>
+                                    </div>
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox" id="citologico">
+                                        <label class="form-check-label" for="citologico">Citológico</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="histo">
+                                        <label class="form-check-label" for="histo">Histopatológico</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label class="form-label">Paridad:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-2">
+                                <label class="form-label">F.U.R:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-2">
+                                <label class="form-label">F.U.P:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">LACT:</label>
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox" id="lactSi">
+                                        <label class="form-check-label" for="lactSi">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="lactNo">
+                                        <label class="form-check-label" for="lactNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Otros Antecedentes:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Resultados de informes anteriores:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <h6 class="mt-3">HALLAZGOS</h6>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Otros:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Datos clínicos o tejidos a examinar:</label>
+                                <input type="text" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label class="form-label">Diagnóstico:</label>
+                                <textarea class="form-control form-control-sm" rows="1"></textarea>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Fecha:</label>
+                                <input type="date" class="form-control form-control-sm" id="fechaActual">
+                            </div>
+                        </div>
+                    </form>
+                </div>
           </div>
         </div>
       </div>
