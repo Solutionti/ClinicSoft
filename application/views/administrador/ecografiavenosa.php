@@ -339,9 +339,6 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                <button type="button" class="btn btn-danger" onclick="generarpdfVenosa()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
                 <button type="button" class="btn btn-primary" onclick="createEcografiaVenosa()">Guardar</button>
                 </div>
               </div>

@@ -60,7 +60,10 @@ function createEcografiaGenetica() {
             $("#ippromedio").val('');
             $("#translucenciaNucal").val('');
             $("#conclusion").val(''); 
-            $("#sugerencia").val(''); 
+            $("#sugerencia").val('');
+
+            generarpdfGenetica()
+            
             setTimeout(function() {
               location.reload();
           }, 2000);

@@ -55,6 +55,9 @@ function createEcografiaAbdominal() {
         $("#otros_hallazgos").val('');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
+        
+        generarpdfAbdominal()
+
         setTimeout(function() {
           location.reload();
         }, 2000);

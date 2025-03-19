@@ -83,6 +83,7 @@ function createEcografiaMorfologica() {
             $("#ponderadoFetal").val('');
             $("#lcf").val(''); 
             $("#conclusiones").val('');
+            generarpdfMorfologica()
             setTimeout(function() {
               location.reload();
           }, 2000);

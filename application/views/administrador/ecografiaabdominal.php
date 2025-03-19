@@ -296,9 +296,6 @@
                   <button class="btn btn-primary btn-xs mt-2" onclick="createEcografiaAbdominal()">
                     Guardar
                   </button>
-                  <button type="button" class="btn btn-danger" onclick="generarpdfAbdominal()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                  </button>
                 </div>
               </div>
             </form>

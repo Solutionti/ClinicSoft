@@ -254,11 +254,7 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                <button type="button" class="btn btn-danger" onclick="generarpdfHisterosonografia()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
                 <button type="button" class="btn btn-primary" onclick="createEcografiaHisterosonografia()">Guardar</button>
-                
                 </div>
               </div>
             </form>

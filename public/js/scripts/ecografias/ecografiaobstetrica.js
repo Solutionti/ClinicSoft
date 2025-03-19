@@ -65,6 +65,7 @@ function createEcografiaObstetrica() {
         $("#tipoParto").val('');
         $("#conclusion").val('');
         $("#sugerencia").val('');
+        generarpdfObstetrica()
         setTimeout(function() {
           location.reload();
       }, 2000);

@@ -82,6 +82,7 @@ function createEcografiaProstatica() {
         $("#otra").prop("checked", false);
         $("#observacion_textarea").val('');
         $("#conclusiones").val('');
+        generarpdfProstatica()
         setTimeout(function() {
           location.reload();
         }, 2000);

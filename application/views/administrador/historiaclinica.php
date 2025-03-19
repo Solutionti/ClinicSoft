@@ -1397,19 +1397,19 @@
                                 >
                             </div>
                             <div class="col-4">
-                                <label class="form-label">Sexo:</label>
+                              <label class="form-label">Sexo:</label>
                                 <div class="d-flex align-items-center">
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="checkbox" id="sexoM" value="M">
-                                        <label class="form-check-label" for="sexoM">M</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sexoF" value="F">
-                                        <label class="form-check-label" for="sexoF">F</label>
-                                    </div>
-                                </div>
+                                <div class="form-check me-2">
+                            <input class="form-check-input" type="radio" name="sexo" id="sexoM" value="M">
+                            <label class="form-check-label" for="sexoM">M</label>
                             </div>
-                        </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="sexo" id="sexoF" value="F">
+                             <label class="form-check-label" for="sexoF">F</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         <div class="row mb-2">
                             <div class="col-6">
                                 <label class="form-label">Médico Solicitante:</label>
@@ -1421,23 +1421,23 @@
                                 >
                             </div>
                             <div class="col-6">
-                                <label class="form-label">Muestra:</label>
-                                <div class="d-flex align-items-center">
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="checkbox" id="pap">
-                                        <label class="form-check-label" for="pap">PAP</label>
-                                    </div>
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="checkbox" id="citologico">
-                                        <label class="form-check-label" for="citologico">Citológico</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="histo">
-                                        <label class="form-check-label" for="histo">Histopatológico</label>
-                                    </div>
-                                </div>
+                            <label class="form-label">Muestra:</label>
+                            <div class="d-flex align-items-center">
+                            <div class="form-check me-2">
+                              <input class="form-check-input" type="radio" name="muestra" id="pap" value="PAP">
+                            <label class="form-check-label" for="pap">PAP</label>
                             </div>
-                        </div>
+                          <div class="form-check me-2">
+                              <input class="form-check-input" type="radio" name="muestra" id="citologico" value="Citológico">
+                            <label class="form-check-label" for="citologico">Citológico</label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="radio" name="muestra" id="histo" value="Histopatológico">
+                            <label class="form-check-label" for="histo">Histopatológico</label>
+                              </div>
+                            </div>
+                          </div>
+
                         <div class="row mb-2">
                             <div class="col-2">
                                 <label class="form-label">Paridad:</label>
@@ -1452,19 +1452,19 @@
                                 <input type="text" class="form-control form-control-sm">
                             </div>
                             <div class="col-6">
-                                <label class="form-label">LACT:</label>
-                                <div class="d-flex align-items-center">
-                                    <div class="form-check me-2">
-                                        <input class="form-check-input" type="checkbox" id="lactSi">
-                                        <label class="form-check-label" for="lactSi">Sí</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="lactNo">
-                                        <label class="form-check-label" for="lactNo">No</label>
+                              <label class="form-label">LACT:</label>
+                            <div class="d-flex align-items-center">
+                            <div class="form-check me-2">
+                                <input class="form-check-input" type="radio" name="lact" id="lactSi" value="S">
+                              <label class="form-check-label" for="lactSi">Sí</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="lact" id="lactNo" value="N">
+                              <label class="form-check-label" for="lactNo">No</label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                         <div class="row mb-2">
                             <div class="col-6">
                                 <label class="form-label">Otros Antecedentes:</label>
@@ -1498,7 +1498,7 @@
                         </div>
                     </form>
                 </div>
-          </div>
+            </div>
         </div>
       </div>
       <div class="modal-footer">

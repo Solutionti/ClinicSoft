@@ -286,9 +286,6 @@
             </div>
               <div class="row mt-1">
                 <div class="col-md-3">
-                <button type="button" class="btn btn-danger" onclick="generarpdfTiroides()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaTiroides()">Guardar</button>
                </div>
                 </div>

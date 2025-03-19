@@ -29,7 +29,7 @@ function createEcografiaHisterosonografia() {
 
         // Limpiar los campos después de un insert exitoso
         $("#dni, #codigo_doctor, #motivo, #descripcionProcedimiento, #conclusiones, #sugerencias, #fecha, #hora, #usuario").val('');
-
+        generarpdfHisterosonografia()
         setTimeout(function() {
           location.reload();
         }, 2000);

@@ -440,9 +440,6 @@
                   </div>
                </div>
                <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" onclick="generarpdfMorfologica()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
                      <button type="button" class="btn btn-primary" onclick="createEcografiaMorfologica()">Guardar</button>
                </div>
             </div>

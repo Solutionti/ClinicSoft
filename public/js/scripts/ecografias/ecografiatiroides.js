@@ -55,7 +55,7 @@ function createEcografiaTiroides() {
         $("#tcsc").val('De caracteres normales ecográficamente normales, no se observan quistes, ni nódulos');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
-
+        generarpdfTiroides()
         setTimeout(function() {
           location.reload();
         }, 2000);

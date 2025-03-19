@@ -111,7 +111,14 @@ function createEcografiaArterial() {
         $("input[name='onda_media']").eq(1).val('Bifásica');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
+
+        generarpdfArterial()
+
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
+
       error: function() {
         $("body").overhang({
           type: "error",

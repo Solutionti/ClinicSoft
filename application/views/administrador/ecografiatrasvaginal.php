@@ -371,9 +371,6 @@
                </div>
                <br>
                <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" onclick="generarpdfTrasvaginal()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
                   <button type="button" class="btn btn-primary" onclick="createEcografiaTrasvaginal()">Guardar</button>
                </div>
             </div>

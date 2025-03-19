@@ -77,7 +77,8 @@ function createEcografiaPelvica() {
         $("#fondosaco").val('Libre');
         $("#miometrio").val('Homogenio');
         $("#conclusion").val('');
-        $("#sugerencias").val('');   
+        $("#sugerencias").val('');
+        generarpdfPelvica()
         setTimeout(function() {
           location.reload();
       }, 2000);

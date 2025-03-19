@@ -378,9 +378,6 @@
             <div class="row mt-1">
               <div class="col-md-3">
               <button type="button" class="btn btn-primary" onclick="createEcografiaProstatica()">Guardar</button>
-              <button type="button" class="btn btn-danger" onclick="generarpdfProstatica()">
-                     <i class="fas fa-file-pdf"></i> pdf
-                     </button>
               </div>
             </div>
               <br>

@@ -112,6 +112,10 @@ function createEcografiaVenosa() {
         $("input[name='onda_media']").eq(1).val('Bifásica');
         $("#conclusiones").val('');
         $("#sugerencias").val('');
+        generarpdfVenosa()
+        setTimeout(function() {
+          location.reload();
+        }, 2000);
       },
       error: function() {
         $("body").overhang({

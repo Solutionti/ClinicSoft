@@ -146,6 +146,8 @@ function createEcografiaRenal() {
         $("#observacion_textarea").val('');
         $("#conclusiones").val('');
 
+        generarpdfRenal()
+
         setTimeout(function() {
           location.reload();
         }, 2000);
