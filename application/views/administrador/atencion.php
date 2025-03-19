@@ -182,7 +182,7 @@
                                   <select class="form-control" id="doctor" name="doctor">
                                     <option value="">Seleccione el doctor</option>
                                     <?php foreach($doctor->result() as $doctores ){ ?>
-                                    <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre; ?></option>
+                                    <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre.' '.$doctores->apellido; ?></option>
                                     <?php } ?>
                                   </select>
                               </div>
