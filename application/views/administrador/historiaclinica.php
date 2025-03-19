@@ -387,17 +387,32 @@
       </div>
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
-          <!-- <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> EXAMENES AUXULIARES</span>
-          </a> -->
+          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#examenesauxiliares" aria-expanded="false" aria-controls="examenesauxiliares">
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-briefcase-medical"></i> ORDENAMIENTOS</span>
+          </a>
         </div>
         <div id="examenesauxiliares" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
           <div class="accordion-body">
             <div class="row">
               <div class="col-md-12">
-                <div class="table-responsive">
-                  
-                </div>
+                
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="accordion-item">
+        <div class="accordion-header" id="btn-icon-start-headingThree">
+          <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#ecografias" aria-expanded="false" aria-controls="ecografias">
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> ECOGRAFIAS</span>
+          </a>
+        </div>
+        <div id="ecografias" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
+          <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-12">
+                
               </div>
               </div>
           </div>
