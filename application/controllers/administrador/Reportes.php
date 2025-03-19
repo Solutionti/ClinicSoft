@@ -16,9 +16,8 @@ class Reportes extends Admin_Controller {
 		$this->load->view('administrador/reportes', $data);
 	}
 
-	public function reporteComisionDiario() {
-		$doctor = $this->input->post("doctor");
-		$fecha  = $this->input->post("fecha");
+	public function reporteComisionDiario($doctor, $fecha) {
+		
 		$this->load->library("pdf");
         $pdfAct = new Pdf();
 		$reportes1 = $this->Reportes_model->reporteComisionDiario($doctor, $fecha);
@@ -30,9 +29,9 @@ class Reportes extends Admin_Controller {
 		$this->load->view('administrador/pdfreportediario', $data);
 	}
 
-	public function  reporteGastos() {
-		$fecha1 = $this->input->post("fecha1");
-		$fecha2 = $this->input->post("fecha2");
+	public function  reporteGastos($fecha1,$fecha2) {
+		// $fecha1 = $this->input->post("fecha1");
+		// $fecha2 = $this->input->post("fecha2");
 		$this->load->library("pdf");
         $pdfAct = new Pdf();
 		$gastos = $this->Reportes_model->reporteGastos($fecha1, $fecha2);//var_dump($gastos);
@@ -41,9 +40,9 @@ class Reportes extends Admin_Controller {
 		$this->load->view('administrador/pdfreportegastos', $data);
 	}
 
-	public function reporteLaboratorio() {
-		$usuario = $this->input->post("usuario");
-	    $fecha = $this->input->post("fecha");
+	public function reporteLaboratorio($fecha) {
+		$usuario = $this->session->userdata("nombre");
+	    // $fecha = $this->input->post("fecha");
 		$this->load->library("pdf");
         $pdfAct = new Pdf();
 		$laboratorios = $this->Reportes_model->reporteLaboratorio($usuario, $fecha);
@@ -56,6 +55,7 @@ class Reportes extends Admin_Controller {
 
 		$fecha1 = $this->input->post("fecha_global_1");
 		$fecha2 = $this->input->post("fecha_global_2");
+
 		$gastos = $this->Reportes_model->reporteGastosGLOBAL($fecha1, $fecha2);//var_dump($gastos->result());
 		$ingresos_comision = $this->Reportes_model->reporteComisionDiarioGLOBAL($fecha1, $fecha2);//var_dump($ingresos_comision->result());
 		$cajas = $this->Reportes_model->reporteComisionDiarioGLOBAL_CAJAS($fecha1, $fecha2);//var_dump($gastos->result());

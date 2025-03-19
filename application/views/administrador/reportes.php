@@ -136,15 +136,15 @@
           <span class="mask bg-gradient-dark"></span>
           <div class="card-body position-relative z-index-1 p-3">
           <i class="fas fa-wifi text-white p-2"></i>
-          <h5 class="text-white mt-4 mb-5 pb-2">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;0001</h5>
+          <h5 class="text-white mt-4 mb-5 pb-2">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;0003</h5>
           <div class="d-flex">
           <div class="d-flex">
           <div class="me-4">
           <p class="text-white text-sm opacity-8 mb-0">Titular de la tarjeta</p>
-          <h6 class="text-white mb-0">Salud Madre y Mujer</h6>
+          <h6 class="text-white mb-0">Mi Salud Clinica</h6>
           </div>
           <div>
-          <p class="text-white text-sm opacity-8 mb-0">Expiracion</p>
+          <p class="text-white text-sm opacity-8 mb-0">Expiración</p>
           <h6 class="text-white mb-0">01/30</h6>
           </div>
           </div>
@@ -214,14 +214,28 @@
           <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
           <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
           <h6 class="mb-0">Atenciones Doctores</h6>
-          <i (click)="generarPdfCaja()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+            <i
+              onclick="reporteDiario()"
+              class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Generar pdf"
+            >
+             </i>
           </div>
           </div>
           <div class="col-md-6">
           <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
           <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
           <h6 class="mb-0">Gastos</h6>
-          <i (click)="generarPdfGastos()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+          <i
+            onclick="reporteGastos()"
+            class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Generar pdf"
+          >
+          </i>
           </div>
           </div>
           </div>
@@ -230,16 +244,40 @@
               <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
               <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
               <h6 class="mb-0">Cierre de Caja (Ing - Gast)</h6>
-              <i class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+              <i
+                class="fas fa-file-excel ms-auto text-success cursor-pointer"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Generar pdf"
+                onclick="Suubtmit()"
+               ></i>
               </div>
               </div>
               <div class="col-md-6">
                 <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
-                <h6 class="mb-0">Laboratorio</h6>
-                <i (click)="generarPdfLaboratorio()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+                  <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+                  <h6 class="mb-0">Laboratorio</h6>
+                  <i
+                    onclick="reporteLaboratorio()"
+                    class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Generar pdf"
+                  >
+                  </i>
                 </div>
-                </div>
+              </div>
+          </div>
+          <div class="row mt-3">
+          <div class="col-md-2"></div>
+          <div class="col-md-7">
+            <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+              <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+              <h6 class="mb-0">Reporte de citas listado dia a dia</h6>
+              <i
+              (click)="generarPdfLaboratorio()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+            </div>
+          </div>
           </div>
           </div>
           </div>
@@ -263,7 +301,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
           <div class="d-flex flex-column">
           <h6 class="mb-1 text-dark font-weight-bold text-sm">Enero, Febrero</h6>
-          <span class="text-xs">#MS-415646</span>
+          <span class="text-xs">#EF-20250102</span>
           </div>
           <div class="d-flex align-items-center text-sm">
           0
@@ -273,7 +311,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
           <div class="d-flex flex-column">
           <h6 class="text-dark mb-1 font-weight-bold text-sm">Marzo, Abril</h6>
-          <span class="text-xs">#RV-126749</span>
+          <span class="text-xs">#MA-20250304</span>
           </div>
           <div class="d-flex align-items-center text-sm">
             0
@@ -283,7 +321,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
           <div class="d-flex flex-column">
           <h6 class="text-dark mb-1 font-weight-bold text-sm">Mayo, Junio</h6>
-          <span class="text-xs">#FB-212562</span>
+          <span class="text-xs">#MJ-20250506</span>
           </div>
           <div class="d-flex align-items-center text-sm">
             0
@@ -293,7 +331,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
           <div class="d-flex flex-column">
           <h6 class="text-dark mb-1 font-weight-bold text-sm">Julio, Agosto</h6>
-          <span class="text-xs">#QW-103578</span>
+          <span class="text-xs">#JA-20250708</span>
           </div>
           <div class="d-flex align-items-center text-sm">
            0
@@ -303,7 +341,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
           <div class="d-flex flex-column">
           <h6 class="text-dark mb-1 font-weight-bold text-sm">Septiembre, Octubre</h6>
-          <span class="text-xs">#AR-803481</span>
+          <span class="text-xs">#SO-20250910</span>
           </div>
           <div class="d-flex align-items-center text-sm">
             0
@@ -313,7 +351,7 @@
           <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
             <div class="d-flex flex-column">
             <h6 class="text-dark mb-1 font-weight-bold text-sm">Noviembre, Diciembre</h6>
-            <span class="text-xs">#AR-803481</span>
+            <span class="text-xs">#ND-20251112</span>
             </div>
             <div class="d-flex align-items-center text-sm">
               0
@@ -326,9 +364,9 @@
         </div>
       </div>
     </div>
-    <div class="row mt-4">
+    <!-- <div class="row mt-4">
       <div class="col-md-7">
-        <!--  -->
+        
       </div>
         <div class="col-md-5 mt-4">
           <div class="card h-100 mb-4">
@@ -381,7 +419,7 @@
           </div>
         </div>
       </div>   
-         </div>
+         </div> -->
 
          <!-- Modal -->
 <div
@@ -405,15 +443,12 @@
           <label>Doctores</label>
           <select
             class="form-control form-control-sm"
-            formControlName="doctor_reportes"
+            id="doctor_reporte_global"
           >
           <option value="">Todos los Doctores</option>
-          <option
-            *ngFor="let doctor of getDoctor"
-            [value]="doctor.codigo_doctor"
-          >
-            {{ doctor.nombre }}
-          </option>
+          <?php foreach($doctor->result() as $doctores){ ?>
+            <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre.' '.$doctores->apellido; ?></option>
+          <?php } ?>
           </select>
         </div>
 
@@ -422,7 +457,8 @@
           <input
             type="date"
             class="form-control form-control-sm"
-            formControlName="fechainicial_reportes"
+            value="<?php echo date("Y-m-d"); ?>"
+            id="fechainicial_reporte_global"
           >
         </div>
 
@@ -431,8 +467,9 @@
           <input
             type="date"
             class="form-control form-control-sm"
-            formControlName="fechafinal_reportes"
-            >
+            value="<?php echo date("Y-m-d"); ?>"
+            id="fechafinal_reporte_global"
+          >
         </div>
        </form>
       </div>

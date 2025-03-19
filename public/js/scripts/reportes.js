@@ -57,13 +57,16 @@
   /*********************************** */
   /*********************************** */
   
-  function Suubtmit(_url__){
-    var data_s = $('#reporteglobal').serializeArray(); // convert form to array
-    console.log(_url__);
+  function Suubtmit(){
+    // var data_s = $('#reporteglobal').serializeArray(); // convert form to array
+    // console.log(_url__);
     $.ajax({
-      url: _url__,
+      url: baseurl + 'administracion/reporteglobal',
       method: "POST",
-      data: data_s,
+      data: {
+        fecha_global_1: fechainicial = $("#fechainicial_reporte_global").val(),
+        fecha_global_2: fechainicial = $("#fechafinal_reporte_global").val()
+      },
       success: function (data) { 
         data_all = JSON.parse(data);
         $("body").overhang({
@@ -88,3 +91,26 @@
       }
     })
   }
+
+  function reporteDiario(){
+    let doctor = $("#doctor_reporte_global").val(),
+        fecha = $("#fechafinal_reporte_global").val();
+    let url = baseurl + "administracion/reportediario/" + doctor + "/" + fecha;
+    window.open(url, "_blank", " width=950, height=1000");
+  }
+
+  function reporteGastos(){
+    let fechainicial = $("#fechainicial_reporte_global").val(),
+        fechafinal = $("#fechafinal_reporte_global").val();
+    let url = baseurl + "administracion/reportegastos/" + fechainicial + "/" + fechafinal;
+    window.open(url, "_blank", " width=950, height=1000");
+  }
+
+  function reporteLaboratorio(){
+    let doctor = $("#doctor_reporte_global").val(),
+        fechafinal = $("#fechafinal_reporte_global").val();
+    let url = baseurl + "administracion/reportelaboratorio/" + fechafinal ;
+    window.open(url, "_blank", " width=950, height=1000");
+  }
+
+  

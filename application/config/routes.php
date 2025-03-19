@@ -118,9 +118,9 @@ $route["administracion/actualizarpagos"] = "administrador/financiero/actualizarp
 
 
 //REPORTES
-$route["administracion/reportediario"] = "administrador/reportes/reportecomisiondiario";
-$route["administracion/reportegastos"] = "administrador/reportes/reportegastos";
-$route["administracion/reportelaboratorio"] = "administrador/reportes/reportelaboratorio";
+$route["administracion/reportediario/(:any)/(:any)"] = "administrador/reportes/reportecomisiondiario/$1/$2";
+$route["administracion/reportegastos/(:any)/(:any)"] = "administrador/reportes/reportegastos/$1/$2";
+$route["administracion/reportelaboratorio/(:any)"] = "administrador/reportes/reportelaboratorio/$1";
 $route["administracion/reporteglobal"] = "administrador/reportes/reporteglobal";
 
 //LABORATORIO
