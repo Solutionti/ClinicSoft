@@ -42,6 +42,11 @@
                      </a>
                   </li>
                   <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
+                     <span class="sidenav-normal">Laboratorio</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>administracion/triaje">
                      <span class="sidenav-normal"> Triaje</span>
                      </a>
@@ -61,11 +66,7 @@
                      <span class="sidenav-normal"> Colposcopia</span>
                      </a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/laboratorio">
-                     <span class="sidenav-normal">Laboratorio</span>
-                     </a>
-                  </li>
+                  
                </ul>
             </div>
          </li>
