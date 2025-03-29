@@ -1439,7 +1439,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', '', 6);
       $pdf->cell(13,5,'10', 1);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(163,5, 'ECOGRAFIA PIPILARGOR DEL PACIENTE', 1);
+      $pdf->cell(163,5, 'ACA VAN LOS EXAMENES DEL PACIENTE', 1);
 
 	  $pdf->Ln(20);
       $pdf->SetFont('Arial', 'B', 8);
@@ -1557,7 +1557,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', '', 6);
       $pdf->cell(13,5,'10', 1);
       $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(163,5, 'ECOGRAFIA PIPILARGOR DEL PACIENTE', 1);
+      $pdf->cell(163,5, 'ACA VAN LOS EXAMENES DEL PACIENTE', 1);
 
 	  $pdf->Ln(20);
       $pdf->SetFont('Arial', 'B', 8);
