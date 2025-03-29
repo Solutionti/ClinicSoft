@@ -1315,4 +1315,272 @@ class Historiaclinica extends Admin_Controller {
 	  }
 
 
+	  public function formatoMedicamentosOrdenamiento() {
+
+	  }
+
+	  public function formatoMedicamentosLaboratorio() {
+		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage();
+		$pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
+      $pdf->Image("public/img/theme/logo.png", 60, 110, 80); // Ajusta las coordenadas y tamaño según necesites
+      $pdf->SetAlpha(1); // Restauramos la opacidad al 100%
+      $pdf->SetDrawColor(0,24,0);
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  40,  196,  6, 'F');
+      $pdf->Rect(10,  145,  196,  6, 'F');
+      $pdf->Image("public/img/theme/logo.png", 10, 20, 25, 0, 'PNG');
+      $pdf->Ln(15);
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->cell(124,5, '', 0);
+      //$pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
+      $pdf->Ln(5);
+      $pdf->cell(110,5, '', 0);
+      $pdf->cell(40,5, 'ORDENAMIENTO DE EXAMEN DE LABORATORIO', 0);
+
+      $pdf->Ln(10);
+      $pdf->SetFont('Courier', 'B', 8);
+
+      // DATOS PERSONALES
+      $pdf->Ln(6);
+      $pdf->SetTextColor(0,0,0);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'APELLIDOS Y NOMBRES', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, $datospaciente->nombre.' '.$datospaciente->apellido, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'HC', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, $datospaciente->hc, 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DNI', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, $datospaciente->documento, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'EDAD', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(10,5, $datospaciente->edad, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'SEXO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->sexo, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'TELEFONO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, $datospaciente->telefono, 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DIRECCION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(45,5, $datospaciente->direccion, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'DEPARTAMENTO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->departamento, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'PROVINCIA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->provincia, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'DISTRITO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(21,5, $datospaciente->distrito, 1);
+
+      $pdf->Ln(5);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'OCUPACION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, $datospaciente->ocupacion, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'ESTADO CIVIL', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(36,5, $datospaciente->estado_civil, 1);
+      $pdf->Ln(9);
+
+	  $pdf->Ln(5);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'CODIGO', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(13,5,'CANTIDAD', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(163,5, 'DESCRIPCION', 1);
+
+      $pdf->Ln(5);
+	  $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, '01', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(13,5,'10', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(163,5, 'ECOGRAFIA PIPILARGOR DEL PACIENTE', 1);
+
+	  $pdf->Ln(20);
+      $pdf->SetFont('Arial', 'B', 8);
+      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(30,5, "", 0);
+      $pdf->Ln(3);
+      $pdf->cell(100,5, '_________________________________________', 0);
+      $pdf->cell(30,5, '_________________________________________', 0);
+      $pdf->Ln(4);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, 'Quien Ordena', 0);
+      $pdf->cell(30,5, 'Quien Recibe', 0);
+      $pdf->Ln(8);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, '', 0);
+      $pdf->cell(30,5, '*** Fin del reporte ***', 0);
+
+	// segunda parte
+	  $pdf->Ln(30);
+      $pdf->SetFont('Courier', 'B', 8);
+
+      // DATOS PERSONALES
+      $pdf->Ln(6);
+      $pdf->SetTextColor(0,0,0);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'APELLIDOS Y NOMBRES', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, $datospaciente->nombre.' '.$datospaciente->apellido, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'HC', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, $datospaciente->hc, 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DNI', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(30,5, $datospaciente->documento, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(10,5, 'EDAD', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(10,5, $datospaciente->edad, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'SEXO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->sexo, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'TELEFONO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(46,5, $datospaciente->telefono, 1);
+
+      $pdf->Ln(5);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'DIRECCION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(45,5, $datospaciente->direccion, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'DEPARTAMENTO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->departamento, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'PROVINCIA', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, $datospaciente->provincia, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(15,5, 'DISTRITO', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(21,5, $datospaciente->distrito, 1);
+
+      $pdf->Ln(5);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(40,5, 'OCUPACION', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(100,5, $datospaciente->ocupacion, 1);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'ESTADO CIVIL', 1);
+
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(36,5, $datospaciente->estado_civil, 1);
+      $pdf->Ln(9);
+
+	  $pdf->Ln(5);
+
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(20,5, 'CODIGO', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(13,5,'CANTIDAD', 1);
+      $pdf->SetFont('Arial', 'B', 6);
+      $pdf->cell(163,5, 'DESCRIPCION', 1);
+
+      $pdf->Ln(5);
+	  $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(20,5, '01', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(13,5,'10', 1);
+      $pdf->SetFont('Arial', '', 6);
+      $pdf->cell(163,5, 'ECOGRAFIA PIPILARGOR DEL PACIENTE', 1);
+
+	  $pdf->Ln(20);
+      $pdf->SetFont('Arial', 'B', 8);
+      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(30,5, "", 0);
+      $pdf->Ln(3);
+      $pdf->cell(100,5, '_________________________________________', 0);
+      $pdf->cell(30,5, '_________________________________________', 0);
+      $pdf->Ln(4);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, 'Quien Ordena', 0);
+      $pdf->cell(30,5, 'Quien Recibe', 0);
+      $pdf->Ln(8);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, '', 0);
+      $pdf->cell(30,5, '*** Fin del reporte ***', 0);
+
+		$pdf->Output('I', 'ordenlaboratorio.pdf');
+	  }
+
+	  public function formatoMedicamentosPatologia() {
+		
+	  }
+
+
 }
