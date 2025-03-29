@@ -1319,7 +1319,7 @@ class Historiaclinica extends Admin_Controller {
 
 	  }
 
-	  public function formatoMedicamentosLaboratorio() {
+	  public function formatoLaboratorioOrdenes() {
 		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
