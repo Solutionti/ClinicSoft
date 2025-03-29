@@ -1316,7 +1316,111 @@ class Historiaclinica extends Admin_Controller {
 
 
 	  public function formatoMedicamentosOrdenamiento() {
+		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage('L');
+		$pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
+		$pdf->Image("public/img/theme/logo.png", 110, 90, 70); // Ajusta las coordenadas y tamaño según necesites
+		$pdf->SetAlpha(1); // Restauramos la opacidad al 100%
+		$pdf->SetDrawColor(0,24,0);
+		$pdf->SetFillColor(115,115,115);
+		$pdf->Rect(10, 35,  270,  2, 'F');
+		$pdf->Image("public/img/theme/logo.png", 10, 18, 25, 0, 'PNG');
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 9);
+		$pdf->cell(200,5, '', 0);
+		$pdf->cell(40,5, 'UNA NUEVA MENERA DE CUIDAR', 0);
+		$pdf->Ln(5);
+		$pdf->cell(195,5, '', 0);
+		$pdf->cell(40,5, 'TU SALUD Y DE LOS QUE MAS QUIERES', 0);
+		$pdf->Ln(10);
+		$pdf->cell(197,5, '', 0);
+		$pdf->cell(20,5, 'RECETA MEDICA DE MEDICAMENTOS', 0);
 
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial', 'B', 8);
+        $pdf->cell(35,5, 'NOMBRE Y APELLIDOS:', 0);
+		$pdf->SetFont('Arial', '', 8);
+        $pdf->cell(70,5, 'JERSON REINEL GALVEZ ENSUNCHO', 0);
+		$pdf->SetFont('Arial', 'B', 8);
+        $pdf->cell(10,5, 'SEXO', 0);
+		$pdf->SetFont('Arial', '', 8);
+        $pdf->cell(20,5, 'MASCULINO', 0);
+
+		$pdf->SetFont('Arial', 'B', 8);
+        $pdf->cell(18,5, 'TELEFONO', 0);
+		$pdf->SetFont('Arial', '', 8);
+        $pdf->cell(20,5, '3155639791', 0);
+
+		$pdf->SetFont('Arial', 'B', 8);
+        $pdf->cell(18,5, 'DIRECCIÓN', 0);
+		$pdf->SetFont('Arial', '', 8);
+        $pdf->cell(60,5, 'DIAGONAL 52 # 42 - 44 NIQUIA APTO 301', 0);
+
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 8);
+        $pdf->cell(40,5, 'ATENCION EN', 0);
+
+		$pdf->Ln(7);
+        $pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(90,5, 'MEDICINA GENERAL', 0);
+		$pdf->cell(70,5, 'ECOGRAFIAS', 0);
+		$pdf->Ln(6);
+		$pdf->cell(90,5, 'GINECOLOGIA', 0);
+		$pdf->cell(70,5, 'FARMACIA', 0);
+		$pdf->cell(70,5, 'EDAD', 0);
+		$pdf->Ln(6);
+		$pdf->cell(90,5, 'OSTETRICA', 0);
+		$pdf->cell(70,5, 'LABORATORIO CLINICO', 0);
+		$pdf->cell(70,5, 'HISTORIA CLINICA', 0);
+		$pdf->Ln(6);
+		$pdf->cell(40,5, 'OTROS _____________________________________________________________________________________________________________________________________________________________________', 0);
+		$pdf->Ln(7);
+		$pdf->cell(90,5, 'DIAGNOSTICO   ( CIE10 )', 0);
+
+		$pdf->Ln(7);
+		$pdf->cell(15,5, 'RP', 1);
+		$pdf->cell(145,5, 'MEDICAMENTO O INSUMO', 1);
+		$pdf->cell(40,5, 'CONCENTRACION', 1);
+		$pdf->cell(50,5, 'FORMA FARMACEUTICA', 1);
+		$pdf->cell(20,5, 'CANTIDAD', 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(15,5, '1', 1);
+		$pdf->cell(145,5, 'ACETAMINOFEN EN JARABE', 1);
+		$pdf->cell(40,5, 'ML', 1);
+		$pdf->cell(50,5, 'QER546828', 1);
+		$pdf->cell(20,5, '10', 1);
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(10,5, 'INDICACIONES', 0);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->Ln(7);
+		$pdf->multicell(270,4, '', 0);
+
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 8);
+      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(90,5, "Juan Manuel Santos Restrepo", 0);
+      $pdf->cell(50,5, "Fecha de Atención", 0);
+      $pdf->cell(50,5, "Valido Hasta", 0);
+      $pdf->Ln(3);
+      $pdf->cell(100,5, '_________________________________________', 0);
+      $pdf->cell(90,5, '_________________________________________', 0);
+      $pdf->cell(50,5, date('Y-m-d'), 0);
+      $pdf->cell(50,5, date('Y-m-d'), 0);
+      $pdf->Ln(4);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, 'Quien Ordena', 0);
+      $pdf->cell(30,5, 'Firma Paciente', 0);
+      $pdf->Ln(8);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(242,5, '', 0);
+      $pdf->cell(30,5, '*** Fin del reporte ***', 0);
+		$pdf->Output('I', 'recetamedica.pdf');
 	  }
 
 	  public function formatoLaboratorioOrdenes() {
@@ -1734,7 +1838,7 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(100,5, '', 0);
       $pdf->cell(30,5, '*** Fin del reporte ***', 0);
 
-	    $pdf->Output('I', 'ordenlaboratorio.pdf');
+	    $pdf->Output('I', 'ordenpatologicos.pdf');
 	  }
 
 

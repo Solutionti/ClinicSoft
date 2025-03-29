@@ -103,6 +103,7 @@ $route["administracion/pdfhistoriaclinicaginecologica/(:num)/(:num)"] = "adminis
 
 $route["administracion/pdflaboratoriorden"] = "administrador/historiaclinica/formatoLaboratorioOrdenes";
 $route["administracion/pdfpatologiaorden"] = "administrador/historiaclinica/formatoPatologiaOrdenamiento";
+$route["administracion/pdfmedicamentosorden"] = "administrador/historiaclinica/formatoMedicamentosOrdenamiento";
 
 
 //COLPOSCOPIA
