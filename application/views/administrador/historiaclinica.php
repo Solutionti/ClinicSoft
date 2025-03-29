@@ -1720,7 +1720,7 @@
                  <?php } ?>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->fecha; ?></td>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->apellido." ".$historias->pacientes; ?></td>
-                 <td class="text-xs text-secondary mb-0"><?php echo $historias->triaje; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo "TRG".$historias->triaje; ?></td>
                 </tr>
                 <?php }?>
               </tbody>                      
