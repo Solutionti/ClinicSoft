@@ -1338,7 +1338,7 @@ class Historiaclinica extends Admin_Controller {
       //$pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
       $pdf->Ln(5);
       $pdf->cell(110,5, '', 0);
-      $pdf->cell(40,5, 'ORDENAMIENTO DE EXAMEN DE LABORATORIO', 0);
+      $pdf->cell(40,5, 'SOLICITUD DE ESTUDIOS DE LABORATORIO', 0);
 
       $pdf->Ln(10);
       $pdf->SetFont('Courier', 'B', 8);
@@ -1578,8 +1578,163 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->Output('I', 'ordenlaboratorio.pdf');
 	  }
 
-	  public function formatoMedicamentosPatologia() {
+	  public function formatoPatologiaOrdenamiento() {
+		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+		$this->load->library('PDF_UTF8');
+		$pdf = new PDF_UTF8();
+		$pdf->AddPage();
+		$pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
+      $pdf->Image("public/img/theme/logo.png", 60, 110, 80); // Ajusta las coordenadas y tamaño según necesites
+      $pdf->SetAlpha(1); // Restauramos la opacidad al 100%
+      $pdf->SetDrawColor(0,24,0);
+      $pdf->SetFillColor(115,115,115);
+      $pdf->Rect(10,  40,  196,  6, 'F');
+      $pdf->Rect(10,  70,  196,  6, 'F');
+	  
+
+      $pdf->Image("public/img/theme/logo.png", 10, 20, 25, 0, 'PNG');
+      $pdf->Ln(15);
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->cell(124,5, '', 0);
+      
+      $pdf->Ln(5);
+      $pdf->cell(110,5, '', 0);
+      $pdf->cell(40,5, 'SOLICITUD DE ESTUDIOS PATOLOGICOS', 0);
+	  $pdf->Ln(10);
+	  $pdf->SetFont('Courier', 'B', 8);
+	  $pdf->SetTextColor(255,255,255);
+	  $pdf->cell(65,6, '1. INFORMACIÓN', 0, 0, 'L');
+
+	    $pdf->Ln(6);
+		$pdf->SetTextColor(0,0,0);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(40,5, 'APELLIDOS Y NOMBRES', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(156,5, $datospaciente->nombre.' '.$datospaciente->apellido, 1);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'EDAD', 1);
+  
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(50,5, $datospaciente->edad.'  '.'AÑOS', 1);
 		
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20,5, 'SEXO', 1);
+  
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(50,5, "MASCULINO", 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20,5, 'TELEFONO', 1);
+  
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(46,5, $datospaciente->telefono, 1);
+  
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(30,5, 'MEDICO SOLICITANTE', 1);
+  
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(110,5, 'JERSON REINEL GALVEZ ENSUNCHO', 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(20,5, 'ESTADO CIVIL', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(36,5, $datospaciente->estado_civil, 1);
+
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(31,5, 'MUESTRA', 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(50,5, 'PAP', 1);
+		$pdf->cell(5,5, 'X', 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(50,5, 'CITOLOGICO', 1);
+		$pdf->cell(5,5, 'X', 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(50,5 ,'HISTOPATOLIGICO', 1);
+		$pdf->cell(5,5, 'X', 1);
+		$pdf->Ln(9);
+		$pdf->SetFont('Courier', 'B', 8);
+		$pdf->SetTextColor(255,255,255);
+		$pdf->cell(65,6, '2. DATOS CLINICOS', 0, 0, 'L');
+
+		$pdf->SetTextColor(0,0,0);
+		$pdf->Ln(6);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15,5, 'PARIDAD', 1);
+		$pdf->cell(42,5, '', 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'F.U.R', 1);
+		$pdf->cell(42,5, '', 1);
+  
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(15,5, 'LACT', 1);
+		$pdf->cell(42,5, '', 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'SI', 1);
+		$pdf->cell(5,5, 'X', 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'NO', 1);
+		$pdf->cell(5,5, 'X', 1);
+
+		$pdf->Ln(10);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'OTROS ANTECEDENTES:', 0);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->MultiCell(195,4, '', 0);
+
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'RESULTADO DE INFORMES ANTERIORES:', 0);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->MultiCell(195,4, '', 0);
+		
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'HALLAZGOS:', 0);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->MultiCell(195,4, 'Otros', 0);
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'DATOS CLINICOS O TEJIDOS A EXAMINAR:', 0);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->MultiCell(195,4, '', 0);
+		$pdf->Ln(7);
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(10,5, 'DIAGNOSTICO:', 0);
+		$pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 7);
+		$pdf->MultiCell(195,4, '', 0);
+
+		$pdf->Ln(10);
+      $pdf->SetFont('Arial', 'B', 8);
+      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(30,5, "", 0);
+      $pdf->Ln(3);
+      $pdf->cell(100,5, '_________________________________________', 0);
+      $pdf->cell(30,5, '_________________________________________', 0);
+      $pdf->Ln(4);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, 'Quien Ordena', 0);
+      $pdf->cell(30,5, 'Quien Recibe', 0);
+      $pdf->Ln(8);
+      $pdf->SetFont('Arial', '', 8);
+      $pdf->cell(100,5, '', 0);
+      $pdf->cell(30,5, '*** Fin del reporte ***', 0);
+
+	    $pdf->Output('I', 'ordenlaboratorio.pdf');
 	  }
 
 
