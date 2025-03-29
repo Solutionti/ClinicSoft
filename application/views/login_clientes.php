@@ -59,7 +59,7 @@
                       <label class="form-check-label" for="rememberMe">Recordarme</label>
                     </div>
                     <div class="text-center">
-                      <button type="button" id="login_clientes" class="btn btn-lg color-cyan text-white btn-lg w-100 mt-4 mb-0">Ingresar</button>
+                      <button type="button" id="login_clientes" class="btn btn-lg bg-default text-white btn-lg w-100 mt-4 mb-0">Ingresar</button>
                     </div>
                   </form>
                 </div>
@@ -78,7 +78,7 @@
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> saludmadremujer.com
+            </script> gofuturedigitalsolution.com
           </p>
         </div>
       </div>
@@ -86,11 +86,11 @@
   </footer>
             </div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://cdn.pixabay.com/photo/2013/11/24/11/10/lab-217043_960_720.jpg');
+              <div class="position-relative bg-gradient-success h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://cdn.prod.website-files.com/63e243301667410e99e1031e/676ac7fee739c7bda40ffd55_Frame%2051560.png');
           background-size: cover;">
                 <span class="mask  opacity-6"></span>
                 <h3 class="mt-5 rosa-text font-weight-bolder position-relative">ZONA  <span class="cyan-text">C</span> </h3>
-                <p class=" font-weight-bold lead position-relative">
+                <p class=" font-weight-bold lead position-relative text-white">
                   En Nuestra plataforma podras consultar tus examenes de laboratorio, patologia
                   y mucho mas...
                 </p>
