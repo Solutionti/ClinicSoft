@@ -1714,9 +1714,9 @@
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->codigo_historial_paciente; ?></td>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->paciente; ?></td>
                  <?php if($historias->tipo_consulta == 1){ ?>
-                   <td class="text-xs text-secondary mb-0">CONSULTA GENERAL</td>
+                   <td class="text-xs text-primary mb-0">CONSULTA GENERAL</td>
                  <?php }else { ?>
-                    <td class="text-xs text-secondary mb-0">CONSULTA GINECOLOGICA</td>
+                    <td class="text-xs text-danger mb-0">CONSULTA GINECOLOGICA</td>
                  <?php } ?>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->fecha; ?></td>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->apellido." ".$historias->pacientes; ?></td>
