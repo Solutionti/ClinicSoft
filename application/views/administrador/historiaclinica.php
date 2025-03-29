@@ -1658,6 +1658,7 @@
 </div>
 </div>
 </div>
+</div>
 
 <!-- IMPRESION DE LAS HISTORIAS CLINICAS GINECOLOGIA Y CONSULTA GENERAL -->
 <div class="modal fade" id="descargamodalhc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="descargamodalhcLabel" aria-hidden="true">
