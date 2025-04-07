@@ -1260,6 +1260,33 @@
             <div class="container">
               <form [formGroup]="medicamentosForm">
                 <div class="row mt-4">
+                <div class="col-6">
+                                <label class="form-label">Nombre:</label>
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                                  readonly
+                                  >
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Edad:</label>
+                                <input
+                                  type="number"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->edad; ?>"
+                                  readonly
+                                >
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label">Médico Solicitante:</label>
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                                  readonly
+                                >
+                            </div>
                   <div class="col-md-7">
                     <label>Medicamento</label>
                     <div class="input-group">
@@ -1372,6 +1399,342 @@
             </div>
           </div>
           <div class="tab-pane fade" id="nav-ordlab" role="tabpanel" aria-labelledby="nav-ordlab-tab" tabindex="0">
+          <div class="row mt-4 mb-4">
+                <div class="col-6">
+                                <label class="form-label">Nombre:</label>
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                                  readonly
+                                  >
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Edad:</label>
+                                <input
+                                  type="number"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $pacientes->edad; ?>"
+                                  readonly
+                                >
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label">Médico Solicitante:</label>
+                                <input
+                                  type="text"
+                                  class="form-control form-control-sm"
+                                  value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                                  readonly
+                                >
+                            </div>
+                  
+    <h4 class="text-center mb-4">Orden de Laboratorio</h4>
+
+<div class="d-grid gap-3" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+    <div class="p-2 border">
+        <h6>HEMATOLOGÍA</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="constantes">
+            <label class="form-check-label" for="constantes">CONSTANTES CORPUSCULARES</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="fibrinogeno">
+            <label class="form-check-label" for="fibrinogeno">FIBRINÓGENO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="frotis">
+            <label class="form-check-label" for="frotis">FROTIS DE SANGRE PERIFÉRICA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hemoglobina">
+            <label class="form-check-label" for="hemoglobina">HEMOGLOBINA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hematocrito">
+            <label class="form-check-label" for="hematocrito">HEMATOCRITO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hemograma">
+            <label class="form-check-label" for="hemograma">HEMOGRAMA COMPLETO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gs_rh">
+            <label class="form-check-label" for="paqlaboratorio">GLÓBULOS ROJOS, HEMOGLOBINA, HEMATOCRITO, FÓRMULA, LEUCOCITOS, RECUENTO DE PLAQUETAS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gs_rh">
+            <label class="form-check-label" for="gs_rh">GS Y RH</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="vsg">
+            <label class="form-check-label" for="vsg">VELOCIDAD DE SEDIMENTACIÓN GLOBULAR</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pcr">
+            <label class="form-check-label" for="pcr">PCR (Proteína C Reactiva)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pruebas_cruzadas">
+            <label class="form-check-label" for="pruebas_cruzadas">PRUEBAS CRUZADAS</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>BIOQUÍMICA</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="acido_urico">
+            <label class="form-check-label" for="acido_urico">ÁCIDO ÚRICO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="bilirrubina">
+            <label class="form-check-label" for="bilirrubina">BILIRRUBINA TOTAL Y FRACCIONADA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="calcio_total">
+            <label class="form-check-label" for="calcio_total">CALCIO SÉRICO TOTAL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="calcio_ionico">
+            <label class="form-check-label" for="calcio_ionico">CALCIO IÓNICO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="colesterol_total">
+            <label class="form-check-label" for="colesterol_total">COLESTEROL TOTAL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="creatinina">
+            <label class="form-check-label" for="creatinina">CREATININA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="electrolitos">
+            <label class="form-check-label" for="electrolitos">ELECTROLITOS SÉRICOS (Na, K, Cl)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="fosfatasa">
+            <label class="form-check-label" for="fosfatasa">FOSFATASA ALCALINA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="glucosa">
+            <label class="form-check-label" for="glucosa">GLUCOSA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="glicosilada">
+            <label class="form-check-label" for="glicosilada">GLICOSILADA (HB)</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>PERFIL LIPÍDICO</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hdl">
+            <label class="form-check-label" for="hdl">HDL Colesterol</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ldl">
+            <label class="form-check-label" for="ldl">LDL Colesterol</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="vldl">
+            <label class="form-check-label" for="vldl">VLDL Colesterol</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="trigliceridos">
+            <label class="form-check-label" for="trigliceridos">TRIGLICÉRIDOS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="lipidos_totales">
+            <label class="form-check-label" for="lipidos_totales">LIPIDOS TOTALES</label>
+        </div>
+        <h6>TUMORALES</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ca_15_3">
+            <label class="form-check-label" for="ca_15_3">CA 15-3 (MAMA)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="aep">
+            <label class="form-check-label" for="aep">AEP ALFA FETOPROTEÍNA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ca_19_9">
+            <label class="form-check-label" for="ca_19_9">CA 19-9 (OVARIO / PANCREAS)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ca_125">
+            <label class="form-check-label" for="ca_125">CA 125 (OVARIO)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="dhl">
+            <label class="form-check-label" for="dhl">DHL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="cea">
+            <label class="form-check-label" for="cea">CEA (Antígeno Carcinoembrionario)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="psa">
+            <label class="form-check-label" for="psa">PSA INICIAL (PSA 1/PSA T)</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>PERFIL HEPÁTICO</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="bilirrubina_hepatico">
+            <label class="form-check-label" for="bilirrubina_hepatico">BILIRRUBINA TOTALES Y FRACCIONADAS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="fosfatasa_hepatico">
+            <label class="form-check-label" for="fosfatasa_hepatico">FOSFATASA ALCALINA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="proteinas_totales">
+            <label class="form-check-label" for="proteinas_totales">PROTEÍNAS TOTALES Y FRACCIONADAS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="tgo">
+            <label class="form-check-label" for="tgo">TRANSAMINASA GLUTÁMICO OXALACÉTICA (TGO)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="tgp">
+            <label class="form-check-label" for="tgp">TRANSAMINASA, GLUTÁMICO PIRÚVICA (TGP)</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>PERFIL PREOPERATORIO</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hemograma_pre">
+            <label class="form-check-label" for="hemograma_pre">HEMOGRAMA COMPLETO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="grupo_sanguineo">
+            <label class="form-check-label" for="grupo_sanguineo">GRUPO SANGUÍNEO Y FACTOR RH</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="glucosa_pre">
+            <label class="form-check-label" for="glucosa_pre">GLUCOSA, CREATININA, ÚREA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="coagulacion">
+            <label class="form-check-label" for="coagulacion">TIEMPO DE COAGULACIÓN Y SANGRÍA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="sifilis">
+            <label class="form-check-label" for="sifilis">Sífilis: SEROLOGÍA –VDRL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hepatitis_b">
+            <label class="form-check-label" for="hepatitis_b">HEPATITIS “B”</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="vih">
+            <label class="form-check-label" for="vih">VIH</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="proteinas_pre">
+            <label class="form-check-label" for="proteinas_pre">PROTEÍNAS TOTALES Y FRACCIONADAS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="perfil_coagulacion">
+            <label class="form-check-label" for="perfil_coagulacion">PERFIL DE COAGULACIÓN</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="examen_orina">
+            <label class="form-check-label" for="examen_orina">EXAMEN ORINA</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>HECES</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pruebas_heces">
+            <label class="form-check-label" for="pruebas_heces">PRUEBAS CRUZADAS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="sangre_oculta">
+            <label class="form-check-label" for="sangre_oculta">SANGRE OCULTA: THEVENON EN HECES (1 M) THEVENON EN HECES (2-3 M)</label>
+        </div>
+        <h6>OTROS</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="insulina">
+            <label class="form-check-label" for="insulina">INSULINA BASAL</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="progesterona">
+            <label class="form-check-label" for="progesterona">PROGESTERONA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="hepatitis_c">
+            <label class="form-check-label" for="hepatitis_c">HEPATITIS C</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="dhea">
+            <label class="form-check-label" for="dhea">DHEA (dehidroepiandrosterona)</label>
+        </div>
+        <h6>ESTERILIDAD HOMBRES</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="espermograma">
+            <label class="form-check-label" for="espermograma">ESPERMATOGRAMA</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>ORINA</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="urocultivo">
+            <label class="form-check-label" for="urocultivo">UROCULTIVO</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ex_orina">
+            <label class="form-check-label" for="ex_orina">EX COMPLETO DE ORINA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="cultivo_sec">
+            <label class="form-check-label" for="cultivo_sec">CULTIVO DE SEC. VAG.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="t4_libre">
+            <label class="form-check-label" for="t4_libre">T4 LIBRE (TIROXINA)</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="torch_igg">
+            <label class="form-check-label" for="torch_igg">TORCH IgG</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="torch_igm">
+            <label class="form-check-label" for="torch_igm">TORCH IgM</label>
+        </div>
+    </div>
+
+    <div class="p-2 border">
+        <h6>PERFIL REUMATOIDEO</h6>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="pcr_reuma">
+            <label class="form-check-label" for="pcr_reuma">PROTEÍNA C. REACTIVA</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="factor_reumatoide">
+            <label class="form-check-label" for="factor_reumatoide">FACTOR REUMATOIDE</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="antipeptidos">
+            <label class="form-check-label" for="antipeptidos">ANTIPEPTIDOS CITRULINADOS</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="antiestreptolisina">
+            <label class="form-check-label" for="antiestreptolisina">ANTIESTREPTOLISINA O</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="vsg_reuma">
+            <label class="form-check-label" for="vsg_reuma">VELOCIDAD DE SEDIMENTACIÓN GLOBULAR</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="torch_reuma">
+            <label class="form-check-label" for="torch_reuma">TORCH</label>
+        </div>
+    </div>
+</div>
+</div>
             <!-- Contenido para orden de laboratorio -->
           </div>
           <div class="tab-pane fade" id="nav-ordpat" role="tabpanel" aria-labelledby="nav-ordpat-tab" tabindex="0">
