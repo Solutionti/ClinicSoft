@@ -1859,5 +1859,50 @@ class Historiaclinica extends Admin_Controller {
 	    $pdf->Output('I', 'ordenpatologicos.pdf');
 	  }
 
+	 //ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
+
+	  public function crearOrdenPatologica() {
+
+		$nombre = $this->input->post("nombre");
+		$edad = $this->input->post("edad");
+		$sexo = $this->input->post("sexo");
+		$medico = $this->input->post("medico");
+		$muestra = $this->input->post("muestra");
+		$paridad = $this->input->post("paridad");
+		$fur = $this->input->post("fur");
+		$fup = $this->input->post("fup");
+		$lactancia = $this->input->post("lactancia");
+		$antecedentes = $this->input->post("antecedentes");
+		$resultados = $this->input->post("resultados");
+		$hallazgos = $this->input->post("hallazgos");
+		$datos = $this->input->post("datos");
+		$diagnostico = $this->input->post("diagnostico");
+		$fecha = $this->input->post("fecha");
+	
+		$data = [
+			"nombre" => $nombre,
+			"edad" => $edad,
+			"sexo" => $sexo,
+			"medico" => $medico,
+			"muestra" => $muestra,
+			"paridad" => $paridad,
+			"fur" => $fur,
+			"fup" => $fup,
+			"lactancia" => $lactancia,
+			"antecedentes" => $antecedentes,
+			"resultados" => $resultados,
+			"hallazgos" => $hallazgos,
+			"datos" => $datos,
+			"diagnostico" => $diagnostico,
+			"fecha" => $fecha
+		];
+		
+		$this->Historias_model->crearOrdenPatologica($data);
+	
+	  }
+
+	  public function crearOrdenLaboratorio() {
+
+	  }
 
 }

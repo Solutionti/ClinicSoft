@@ -90,6 +90,7 @@ $route["administracion/actualizarprecios"] = "administrador/precios/actualizarpr
 $route["administracion/crearhistoriaginecologia"] = "administrador/historiaclinica/crearhistorialpacientesginecologicas";
 $route["administracion/crearhistoriageneral"] = "administrador/historiaclinica/crearhistorialpacientesgeneral";
 $route["administracion/crearreceta"] = "administrador/historiaclinica/crearrecetamedica";
+$route["administracion/crearpatologia"] = "administrador/historiaclinica/crearOrdenPatologica";
 $route["administracion/subirdocumentos"] = "administrador/historiaclinica/subirdocumentos";
 $route["administracion/pdfginecologia/(:num)/(:any)"] = "administrador/historiaclinica/Generarpdfginecologia";
 $route["administracion/pdfgeneral/(:num)"] = "administrador/historiaclinica/generarpdfmedicinageneral";
