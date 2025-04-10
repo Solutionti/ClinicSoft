@@ -491,7 +491,7 @@ class Historias_model extends CI_model {
 
     //ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
 
-    public function crearOrdenPatologica() {
+    public function crearOrdenPatologica($datos) {
         $orden_patologica = [
             "nombre" => $datos["nombre"],
             "edad" => $datos["edad"],
@@ -509,7 +509,7 @@ class Historias_model extends CI_model {
             "diagnostico" => $datos["diagnostico"],
             "fecha" => $datos["fecha"],
             "creado_en" => date("Y-m-d H:i:s"),
-            "creado_por" => $this->session->userdata("id")
+            "creado_por" => $this->session->userdata("codigo")
         ];
         
         $this->db->insert('ordenes_patologicas', $orden_patologica);
