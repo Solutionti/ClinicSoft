@@ -228,6 +228,9 @@ $route["clientes/ecografias"] = "clientes/ecografias";
 $route["iniciarsesionclientes"] = "login/iniciarsesionclientes";
 $route["cerrarsesionclientes"] = "login/cerrarsesionclientes";
 
+// Para el agendamiento de citas que esta en la pagina web
+$route["agendarcitas"] = "clientes/citasDoctores";
+
 
 
 
