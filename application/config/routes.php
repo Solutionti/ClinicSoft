@@ -102,8 +102,8 @@ $route["administracion/crearmedicamento"] = "administrador/historiaclinica/crear
 $route["administracion/pdfhistoriaclinica/(:num)/(:num)"] = "administrador/historiaclinica/crearPdfHistoriaClinica/$1/$2";
 $route["administracion/pdfhistoriaclinicaginecologica/(:num)/(:num)"] = "administrador/historiaclinica/crearPdfHistoriaClinicaGinecologica/$1/$2";
 
-$route["administracion/pdflaboratoriorden"] = "administrador/historiaclinica/formatoLaboratorioOrdenes";
-$route["administracion/pdfpatologiaorden"] = "administrador/historiaclinica/formatoPatologiaOrdenamiento";
+$route["administracion/pdflaboratoriorden/(:num)/(:num)/(:num)"] = "administrador/historiaclinica/formatoLaboratorioOrdenes/$1/$2/$3";
+$route["administracion/pdfpatologiaorden/(:num)/(:num)"] = "administrador/historiaclinica/formatoPatologiaOrdenamiento/$1/$2";
 $route["administracion/pdfmedicamentosorden"] = "administrador/historiaclinica/formatoMedicamentosOrdenamiento";
 $route["administracion/crearOrdenLaboratorio"] = "administrador/historiaclinica/crearOrdenLaboratorio";
 

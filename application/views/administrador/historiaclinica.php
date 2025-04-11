@@ -360,6 +360,7 @@
               <table class="table table-striped table-hover">
                 <thead>
                   <tr class="bg-dark text-white">
+                    <th class="text-uppercase text-xs"></th>
                     <th class="text-uppercase text-xs">Medicamento</th>
                     <th class="text-uppercase text-xs">Cant</th>
                     <th class="text-uppercase text-xs">Dosis</th>
@@ -371,6 +372,19 @@
                 <tbody>
                   <?php foreach($medicamento->result() as $medicamentos){ ?>
                   <tr class="text-capitalize">
+                    <td>
+                      <div class="row">
+                        <a 
+                          href="<?php echo base_url(); ?>administracion/pdfmedicamentosorden"
+                          class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                        >
+                          <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+
+                      </div>
+                    </td>
                     <td><?php echo $medicamentos->medicamento; ?></td>
                     <td><?php echo $medicamentos->cantidad; ?></td>
                     <td><?php echo $medicamentos->dosis; ?></td>
@@ -395,9 +409,59 @@
           <div class="accordion-body">
             <div class="row">
               <div class="col-md-12">
-                
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr class="bg-dark text-white">
+                      <th></th>
+                      <th class="text-uppercase text-xs">Nombre Paciente</th>
+                      <th class="text-uppercase text-xs">Tipo ordenamiento</th>
+                      <th class="text-uppercase text-xs">Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach($ordenpatologica->result() as $ordenpato) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                          <a 
+                            href="<?php echo base_url(); ?>administracion/pdfpatologiaorden/<?php echo $ordenpato->triage ?>/<?php echo $ordenpato->documento ?>"
+                            class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3"
+                            target="_blank"
+                            title="Generar tiquet"
+                          >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                          </a>
+                        </div>
+                      </td>
+                      <td><?php echo $ordenpato->nombre; ?></td>
+                      <td>Orden Patologica</td>
+                      <td><?php echo $ordenpato->fecha; ?></td>
+                    </tr>
+                    <?php } ?>
+                    <!--  -->
+                    <?php foreach($ordenLaboratorio->result() as $ordenlabo) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                          <a 
+                            class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                            target="_blank"
+                            title="Generar tiquet"
+                            href="<?php echo base_url(); ?>administracion/pdflaboratoriorden/<?php echo $ordenlabo->cod_triage ?>/<?php echo $ordenlabo->documento_paciente ?>/<?php echo $ordenlabo->codigo_laboratorio ?>"
+                          >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                          </a>
+                        </div>
+                      </td>
+                      <td><?php echo $ordenlabo->nombre; ?></td>
+                      <td>Orden Laboratorio</td>
+                      <td><?php echo $ordenlabo->fecha; ?></td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
