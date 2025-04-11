@@ -638,6 +638,7 @@ function crearAlergias() {
           type: "success",
           message: "la alergia se ha registrado correctamente"
        });
+       setTimeout(reloadPage, 3000);
      },
      error: function() {
        $("body").overhang({
@@ -679,6 +680,7 @@ function crearMedicamento() {
         type: "success",
         message: "El medicamento se ha registrado correctamente"
      });
+     setTimeout(reloadPage, 3000);
    },
    error: function() {
      $("body").overhang({
@@ -802,6 +804,7 @@ nombre = $("#nombre_paciente").val(),
                 type: "success",
                 message: "La orden patológica se ha registrado correctamente"
             });
+            setTimeout(reloadPage, 3000);
         },
         error: function() {
             $("body").overhang({

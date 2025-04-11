@@ -230,6 +230,7 @@ function crearOrdenLaboratorioHistoria() {
             type: "success",
             message: "La orden de laboratorio se ha creado correctamente"
         });
+        setTimeout(reloadPage, 3000);
     },
     error: function() {
         $("body").overhang({
@@ -240,3 +241,6 @@ function crearOrdenLaboratorioHistoria() {
   });
 }
 
+const reloadPage = () => {
+    location.reload();
+}
