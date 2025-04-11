@@ -516,8 +516,19 @@ class Historias_model extends CI_model {
 
     }
 
-    public function crearOrdenLaboratorio() {
+    public function crearOrdenLaboratorio($data) {
 
+      $orden_laboratorio = [
+        "documento_paciente" => $data["documento"],
+        "nombre" => $data["nombre"],
+        "edad" => $data["edad"],
+        "medico" => $data["medico"],
+        "codigo_orden" => $data["servicio"],
+        "cod_triage" => $data["triage"],
+        "fecha" => $data["fecha"]
+      ];
+
+      $this->db->insert('ordenes_laboratorio', $orden_laboratorio);
     }
     
 }

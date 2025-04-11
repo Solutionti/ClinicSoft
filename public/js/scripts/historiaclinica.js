@@ -808,10 +808,6 @@ nombre = $("#nombre_paciente").val(),
     });
 }
 
-function crearOrdenLaboratorio() {
-
-}
-
 const reloadPage = () => {
     location.reload();
 }

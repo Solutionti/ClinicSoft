@@ -9,6 +9,7 @@ class Historiaclinica extends Admin_Controller {
 		$this->load->model("Historias_model");
 		$this->load->model("Generic_model");
 		$this->load->model("Doctores_model");
+		$this->load->model("Laboratorio_model");
 	}
 
 	public function historiasClinicas()
@@ -33,6 +34,7 @@ class Historiaclinica extends Admin_Controller {
 		$ginecoiniciadas = $this->Historias_model->consultaIniciadaGineco($documento);
 		$poscitas = $this->Historias_model->getPosCita($documento);
 		$doctores = $this->Doctores_model->getDoctores();
+		$laboratorios = $this->Laboratorio_model->getPreciosLaboratorio();
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -52,6 +54,7 @@ class Historiaclinica extends Admin_Controller {
 			"ginecoiniciada" => $ginecoiniciadas,
 			"poscita" => $poscitas,
 			"doctor"=> $doctores,
+			"laboratorio" => $laboratorios
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
@@ -1902,6 +1905,26 @@ class Historiaclinica extends Admin_Controller {
 	  }
 
 	  public function crearOrdenLaboratorio() {
+		$documento = $this->input->post("documento");
+		$nombre = $this->input->post("nombre");
+		$edad = $this->input->post("edad");
+		$medico = $this->input->post("medico");
+		$triage = $this->input->post("triage");
+		$ordenlab = $this->input->post("ordenlab");
+		$fecha = date("Y-m-d");
+
+		for($i=0; $i < sizeof($ordenlab); $i++){
+			$data = [
+			  "documento" => $documento,
+			  "nombre" => $nombre,
+			  "edad" => $edad,
+			  "medico" => $medico,
+			  "triage" => $triage,
+			  "servicio" => $ordenlab[$i],
+		      "fecha" => $fecha
+			];
+			$this->Historias_model->crearOrdenLaboratorio($data);
+		 }
 
 	  }
 
