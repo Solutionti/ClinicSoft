@@ -489,7 +489,36 @@ class Historias_model extends CI_model {
         return $result;  
     }
 
+    //ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
 
+    public function crearOrdenPatologica() {
+        $orden_patologica = [
+            "nombre" => $datos["nombre"],
+            "edad" => $datos["edad"],
+            "sexo" => $datos["sexo"],
+            "medico" => $datos["medico"],
+            "muestra" => $datos["muestra"],
+            "paridad" => $datos["paridad"],
+            "fur" => $datos["fur"],
+            "fup" => $datos["fup"],
+            "lactancia" => $datos["lactancia"],
+            "antecedentes" => $datos["antecedentes"],
+            "resultados" => $datos["resultados"],
+            "hallazgos" => $datos["hallazgos"],
+            "datos" => $datos["datos"],
+            "diagnostico" => $datos["diagnostico"],
+            "fecha" => $datos["fecha"],
+            "creado_en" => date("Y-m-d H:i:s"),
+            "creado_por" => $this->session->userdata("id")
+        ];
+        
+        $this->db->insert('ordenes_patologicas', $orden_patologica);
+
+    }
+
+    public function crearOrdenLaboratorio() {
+
+    }
     
 }
 

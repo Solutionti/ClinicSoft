@@ -753,6 +753,65 @@ function descargarHistoriaGineco(triage) {
   window.open(url, "_blank", " width=1100, height=1000");  
 }
 
+//ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
+
+function crearOrdenPatologica() {
+var url = baseurl + "administracion/crearpatologia",
+nombre = $("#nombre_paciente").val(),
+        edad = $("#edad_paciente").val(),
+        sexo = $("input[name='sexo']:checked").val(),
+        medico = $("#medico_solicitante").val(),
+        muestra = $("input[name='muestra']:checked").val(),
+        paridad = $("#paridad_paciente").val(),
+        fur = $("#fur_paciente").val(),
+        fup = $("#fup_paciente").val(),
+        lactancia = $("input[name='lact']:checked").val(),
+        antecedentes = $("#antecedentes_paciente").val(),
+        resultados = $("#resultados_anteriores").val(),
+        hallazgos = $("#otros_hallazgos").val(),
+        datos = $("#datos_clinicos").val(),
+        diagnostico = $("#diagnostico_patologia").val(),
+        fecha = $("#fechaActual").val();
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+            nombre: nombre,
+            edad: edad,
+            sexo: sexo,
+            medico: medico,
+            muestra: muestra,
+            paridad: paridad,
+            fur: fur,
+            fup: fup,
+            lactancia: lactancia,
+            antecedentes: antecedentes,
+            resultados: resultados,
+            hallazgos: hallazgos,
+            datos: datos,
+            diagnostico: diagnostico,
+            fecha: fecha
+        },
+        success: function() {
+            $("body").overhang({
+                type: "success",
+                message: "La orden patológica se ha registrado correctamente"
+            });
+        },
+        error: function() {
+            $("body").overhang({
+                type: "error",
+                message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+            }); 
+        }
+    });
+}
+
+function crearOrdenLaboratorio() {
+
+}
+
 const reloadPage = () => {
     location.reload();
 }
