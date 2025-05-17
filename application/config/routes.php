@@ -26,6 +26,7 @@ $route["administracion/financiero"] = "administrador/financiero";
 $route["administracion/gastos"] = "administrador/gastos";
 $route["administracion/precios"] = "administrador/precios";
 $route["administracion/reportes"] = "administrador/reportes";
+$route["administracion/reporteComisionDiarioExcel/(:num)/(:any)"] = "administrador/reportes/reporteComisionDiarioExcel/$1/$2";
 $route["administracion/colposcopia"] = "administrador/colposcopia";
 $route["administracion/perfil"] = "administrador/perfil";
 
