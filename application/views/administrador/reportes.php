@@ -148,8 +148,8 @@
           <h6 class="text-white mb-0">01/30</h6>
           </div>
           </div>
-          <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-          <img class="w-60 mt-2" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          <div class="ms-auto">
+            <img class="img-fluid" src="<?php echo base_url('public/img/theme/logo.png'); ?>" alt="Logo de la Clínica" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
           </div>
           </div>
           </div>
@@ -162,29 +162,29 @@
           <div class="card">
           <div class="card-header mx-4 p-3 text-center">
           <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-          <i class="fas fa-landmark opacity-10"></i>
+            <i class="fas fa-money-bill-wave opacity-10"></i>
           </div>
           </div>
           <div class="card-body pt-0 p-3 text-center">
           <h6 class="text-center mb-0">Efectivo</h6>
           <!-- <span class="text-xs">Belong Interactive</span> -->
           <hr class="horizontal dark my-3">
-          <h5 class="mb-0">+$0</h5>
+          <h5 class="mb-0">S/.0</h5>
           </div>
           </div>
           </div>
           <div class="col-md-6 mt-md-0 mt-4">
           <div class="card">
           <div class="card-header mx-4 p-3 text-center">
-          <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-          <i class="fab fa-paypal opacity-10"></i>
+          <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
+            <i class="fas fa-credit-card"></i>
           </div>
           </div>
           <div class="card-body pt-0 p-3 text-center">
           <h6 class="text-center mb-0">Tarjeta</h6>
           <!-- <span class="text-xs">Freelance Payment</span> -->
           <hr class="horizontal dark my-3">
-          <h5 class="mb-0">+$0</h5>
+          <h5 class="mb-0">S/.0</h5>
           </div>
           </div>
           </div>
@@ -212,59 +212,81 @@
           <div class="row">
           <div class="col-md-6 mb-md-0 mb-4">
           <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-          <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          <i class="fas fa-user-md fa-2x me-3 text-primary"></i>
           <h6 class="mb-0">Atenciones Doctores</h6>
-            <i
-              onclick="reporteDiario()"
-              class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="Generar pdf"
-            >
-             </i>
+            <div class="ms-auto d-flex align-items-center">
+              <button 
+                onclick="reporteDiario()"
+                class="btn btn-link p-1 me-2 text-danger"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Generar PDF"
+              >
+                <i class="fas fa-file-pdf fa-lg"></i>
+              </button>
+              <button
+                onclick="reporteComisionExcel()"
+                class="btn btn-link p-1 text-success"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Generar Excel"
+              >
+                <i class="fas fa-file-excel fa-lg"></i>
+              </button>
+            </div>
           </div>
           </div>
           <div class="col-md-6">
           <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-          <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+          <i class="fas fa-file-invoice-dollar fa-2x me-3 text-success"></i>
           <h6 class="mb-0">Gastos</h6>
-          <i
-            onclick="reporteGastos()"
-            class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            title="Generar pdf"
-          >
-          </i>
+          <div class="ms-auto d-flex align-items-center">
+            <button 
+              onclick="reporteGastos()"
+              class="btn btn-link p-1 text-danger"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Generar PDF"
+            >
+              <i class="fas fa-file-pdf fa-lg"></i>
+            </button>
+          </div>
           </div>
           </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-6">
               <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-              <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+              <i class="fas fa-cash-register fa-2x me-3 text-warning"></i>
               <h6 class="mb-0">Cierre de Caja (Ing - Gast)</h6>
-              <i
-                class="fas fa-file-excel ms-auto text-success cursor-pointer"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Generar pdf"
-                onclick="Suubtmit()"
-               ></i>
+              <div class="ms-auto d-flex align-items-center">
+                <button 
+                  class="btn btn-link p-1 text-success"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Generar Excel"
+                  onclick="Suubtmit()"
+                >
+                  <i class="fas fa-file-excel fa-lg"></i>
+                </button>
+              </div>
               </div>
               </div>
               <div class="col-md-6">
                 <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                  <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+                  <i class="fas fa-flask fa-2x me-3 text-info"></i>
                   <h6 class="mb-0">Laboratorio</h6>
-                  <i
-                    onclick="reporteLaboratorio()"
-                    class="fas fa-file-pdf ms-auto text-danger cursor-pointer"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Generar pdf"
-                  >
-                  </i>
+                  <div class="ms-auto d-flex align-items-center">
+                    <button 
+                      onclick="reporteLaboratorio()"
+                      class="btn btn-link p-1 text-danger"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Generar PDF"
+                    >
+                      <i class="fas fa-file-pdf fa-lg"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
           </div>
@@ -272,10 +294,15 @@
           <div class="col-md-2"></div>
           <div class="col-md-7">
             <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-              <img class="w-10 me-3 mb-0" src="http://localhost/CODEIGNITER/ClinicSoft/public/img/theme/logo.png" alt="logo">
+              <i class="fas fa-calendar-day text-primary me-3" style="font-size: 1.5rem;"></i>
               <h6 class="mb-0">Reporte de citas listado dia a dia</h6>
-              <i
-              (click)="generarPdfLaboratorio()" class="fas fa-file-pdf ms-auto text-danger cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar pdf"></i>
+              <i 
+                (click)="generarPdfLaboratorio()" 
+                class="fas fa-file-pdf ms-auto text-danger cursor-pointer" 
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Generar PDF">
+              </i>
             </div>
           </div>
           </div>
@@ -284,83 +311,195 @@
           </div>
           </div>
         </div>
+        <!-- Sección de Facturación Mensual -->
         <div class="col-lg-4">
           <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-          <div class="row">
-          <div class="col-6 d-flex align-items-center">
-          <h6 class="mb-0">Facturas Mes a Mes</h6>
-          </div>
-          <div class="col-6 text-end">
-          <button class="btn btn-outline-primary btn-sm mb-0">Ver todos</button>
-          </div>
-          </div>
-          </div>
-          <div class="card-body p-3 pb-0">
-          <ul class="list-group">
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-          <div class="d-flex flex-column">
-          <h6 class="mb-1 text-dark font-weight-bold text-sm">Enero, Febrero</h6>
-          <span class="text-xs">#EF-20250102</span>
-          </div>
-          <div class="d-flex align-items-center text-sm">
-          0
-          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1 text-danger"></i> PDF</button>
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-          <div class="d-flex flex-column">
-          <h6 class="text-dark mb-1 font-weight-bold text-sm">Marzo, Abril</h6>
-          <span class="text-xs">#MA-20250304</span>
-          </div>
-          <div class="d-flex align-items-center text-sm">
-            0
-          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-          <div class="d-flex flex-column">
-          <h6 class="text-dark mb-1 font-weight-bold text-sm">Mayo, Junio</h6>
-          <span class="text-xs">#MJ-20250506</span>
-          </div>
-          <div class="d-flex align-items-center text-sm">
-            0
-          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-          <div class="d-flex flex-column">
-          <h6 class="text-dark mb-1 font-weight-bold text-sm">Julio, Agosto</h6>
-          <span class="text-xs">#JA-20250708</span>
-          </div>
-          <div class="d-flex align-items-center text-sm">
-           0
-          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-          <div class="d-flex flex-column">
-          <h6 class="text-dark mb-1 font-weight-bold text-sm">Septiembre, Octubre</h6>
-          <span class="text-xs">#SO-20250910</span>
-          </div>
-          <div class="d-flex align-items-center text-sm">
-            0
-          <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
-          </div>
-          </li>
-          <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-            <div class="d-flex flex-column">
-            <h6 class="text-dark mb-1 font-weight-bold text-sm">Noviembre, Diciembre</h6>
-            <span class="text-xs">#ND-20251112</span>
+            <!-- Encabezado -->
+            <div class="card-header pb-0 p-3 bg-transparent">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">Facturación Mensual</h6>
+                <button class="btn btn-sm btn-outline-primary mb-0">
+                  <i class="fas fa-sync-alt me-1"></i> Actualizar
+                </button>
+              </div>
+              <p class="text-sm text-muted mb-0 mt-2">Resumen de facturación por período</p>
             </div>
-            <div class="d-flex align-items-center text-sm">
-              0
-            <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-danger text-lg me-1"></i> PDF</button>
+            
+            <!-- Lista de Períodos -->
+            <div class="card-body p-3">
+              <!-- Año 2025 -->
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="text-uppercase text-xs font-weight-bolder text-secondary mb-0">2025</h6>
+                  <button id="toggleMonths" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-chevron-down"></i> Ver más
+                  </button>
+                </div>
+                <!-- Contenedor de meses ocultos -->
+                <div id="hiddenMonths" style="display: none;">
+                  <!-- Los meses 4-6 se cargarán aquí -->
+                </div>
+                
+                <!-- Período 1: Ene-Feb -->
+                <div class="card card-body border-0 shadow-sm mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-primary text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Enero - Febrero</h6>
+                        <p class="text-xs text-muted mb-0">#EF-20250102</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Período 2: Mar-Abr -->
+                <div class="card card-body border-0 shadow-sm mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-success text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Marzo - Abril</h6>
+                        <p class="text-xs text-muted mb-0">#MA-20250304</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Período 3: May-Jun -->
+                <div class="card card-body border-0 shadow-sm mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Mayo - Junio</h6>
+                        <p class="text-xs text-muted mb-0">#MJ-20250506</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Período 4: Jul-Ago (Oculto inicialmente) -->
+                <div class="card card-body border-0 shadow-sm mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-warning text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Julio - Agosto</h6>
+                        <p class="text-xs text-muted mb-0">#JA-20250708</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Período 5: Sep-Oct (Oculto inicialmente) -->
+                <div class="card card-body border-0 shadow-sm mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-danger text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Septiembre - Octubre</h6>
+                        <p class="text-xs text-muted mb-0">#SO-20250910</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Período 6: Nov-Dic (Oculto inicialmente) -->
+                <div class="card card-body border-0 shadow-sm">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <div class="icon icon-shape bg-gradient-dark text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div>
+                        <h6 class="mb-0 text-sm">Noviembre - Diciembre</h6>
+                        <p class="text-xs text-muted mb-0">#ND-20251112</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <span class="badge bg-light text-dark me-2">S/ 0.00</span>
+                      <button class="btn btn-link text-danger p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar PDF">
+                        <i class="fas fa-file-pdf"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            </li>
-          </ul>
+
+            <!-- Script para manejar el acordeón -->
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              // Mover los meses 4-6 al contenedor oculto
+              const months = document.querySelectorAll('.card.mb-3');
+              const hiddenMonths = document.getElementById('hiddenMonths');
+              const toggleButton = document.getElementById('toggleMonths');
+              
+              // Mover los meses 4-6 al contenedor oculto
+              for (let i = 3; i < months.length; i++) {
+                hiddenMonths.appendChild(months[i]);
+              }
+              
+              // Manejar el clic en el botón
+              toggleButton.addEventListener('click', function() {
+                const isHidden = hiddenMonths.style.display === 'none';
+                const icon = this.querySelector('i');
+                
+                if (isHidden) {
+                  hiddenMonths.style.display = 'block';
+                  icon.className = 'fas fa-chevron-up';
+                  this.innerHTML = '<i class=\'fas fa-chevron-up\'></i> Ver menos';
+                } else {
+                  hiddenMonths.style.display = 'none';
+                  icon.className = 'fas fa-chevron-down';
+                  this.innerHTML = '<i class=\'fas fa-chevron-down\'></i> Ver más';
+                }
+              });
+            });
+            </script>
           </div>
-          </div>
+        </div>
         </div>
       </div>
     </div>

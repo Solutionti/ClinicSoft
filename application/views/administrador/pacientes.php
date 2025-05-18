@@ -414,7 +414,7 @@
                 <input
                   type="text"
                   class="form-control form-control-sm"
-                  
+                  id="documento"
                 >
               </div>
               <div class="col-md-4">
@@ -422,6 +422,7 @@
                 <input
                   type="text"
                   class="form-control form-control-sm"
+                  id="fresponsable"
                   
                 >
               </div>
@@ -437,10 +438,26 @@
                 <label>Parentesco</label>
                 <select
                   class="form-control form-control-sm"
-                  
-                >
-                <option value="">Seleccione una opcion</option>
-              </select>
+                  id="parentesco"
+                  name="parentesco"
+                  >
+                  <option value="">Seleccione una opción</option>
+                  <option value="Padre">Padre</option>
+                  <option value="Madre">Madre</option>
+                  <option value="Hijo">Hijo</option>
+                  <option value="Hija">Hija</option>
+                  <option value="Hermano">Hermano</option>
+                  <option value="Hermana">Hermana</option>
+                  <option value="Abuelo">Abuelo</option>
+                  <option value="Abuela">Abuela</option>
+                  <option value="Tío">Tío</option>
+                  <option value="Tía">Tía</option>
+                  <option value="Primo">Primo</option>
+                  <option value="Prima">Prima</option>
+                  <option value="Esposo">Esposo</option>
+                  <option value="Esposa">Esposa</option>
+                  <option value="Otro">Otro</option>
+                </select>
               </div>
             </div>
           </div>

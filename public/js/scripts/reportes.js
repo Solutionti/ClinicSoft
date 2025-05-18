@@ -99,6 +99,36 @@
     window.open(url, "_blank", " width=950, height=1000");
   }
 
+  function reporteComisionExcel() {
+    let doctor = $("#doctor_reporte_global").val();
+    let fecha = $("#fechafinal_reporte_global").val();
+    
+    if (!doctor) {
+      $("body").overhang({
+        type: "error",
+        message: "Por favor seleccione un médico"
+      });
+      return;
+    }
+    
+    if (!fecha) {
+      $("body").overhang({
+        type: "error",
+        message: "Por favor seleccione una fecha"
+      });
+      return;
+    }
+    
+    // Mostrar mensaje de carga
+    $("body").overhang({
+      type: "warn",
+      message: "Generando reporte en Excel..."
+    });
+    
+    // Redirigir a la URL que genera el Excel
+    window.location.href = baseurl + "administracion/reporteComisionDiarioExcel/" + doctor + "/" + fecha;
+  }
+
   function reporteGastos(){
     let fechainicial = $("#fechainicial_reporte_global").val(),
         fechafinal = $("#fechafinal_reporte_global").val();

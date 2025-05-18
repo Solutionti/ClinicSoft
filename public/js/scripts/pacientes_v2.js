@@ -50,7 +50,8 @@ $("#crearpaciente").on("click", function () {
 		estado_civil = $("#estado_civil").val(),
 		responsable = $("input:radio[name=responsable]").val(),
 		documento = $("#documento").val(),
-		fresponsable = $("#fresponsable").val();
+		fresponsable = $("#fresponsable").val(),
+		parentesco = $("#parentesco").val();
 
 	if (dni === "") {
 
@@ -217,45 +218,96 @@ function Buscar_Paciente(dni) {
 
 /*************** API RENIEC  ***********/
 
-$("#documento").keyup(function (e) {//keyup se Ejecuta al levantar la soltar la tecla presionada
-	e.defaultPrevented;//defaultPrevented anula funciones por default
-	if (e.which == 13) {//valido que la tecla soltada sea 13==Tecla Enter
-	  Buscar_Tutor();
-	}
-  });
-
-  $("#documento").on("blur", function (e) {//keyup se Ejecuta al levantar la soltar la tecla presionada
-	  Buscar_Tutor();
-  });
+// Configurar el evento keydown para el campo documento
+const inputDocumento = document.getElementById('documento');
+inputDocumento.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        Buscar_Tutor();
+    }
+});
 
 function Buscar_Tutor() {
-	url2 =
-		"https://apiperu.dev/api/dni/" +
-		$("#documento").val() +
-		"?api_token=" +
-		"e02a95cc4b8e0d521d447c0786af76cdb424b6a2ba25aea9f7cd9e9bc4712e86";
-
-	$.ajax({
-		"url": "https://api.factiliza.com/pe/v1/dni/info/" + $("#dni").val() ,
-		"method": "GET",
-		"timeout": 0,
-		"headers": {
-		  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzk2MyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImNvbnN1bHRvciJ9.XHG0JHDs8Daik_XHbb6cr90diRfL65qu0IaFJL9GrvY"
-		},
-
-		success: function (data) {
-			response = data.data;
-			$("#fresponsable").val(response.nombres +" "+response.apellido_paterno +" "+response.apellido_materno);
-		},
-
-		error: function () {
-			$("body").overhang({
-				type: "error",
-				message:"Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-			});
-		},
-	});
+    var dni = $("#documento").val().trim();
+    
+    // Validar que el DNI tenga 8 dígitos
+    if (dni.length !== 8 || isNaN(dni)) {
+        $("body").overhang({
+            type: "error",
+            message: "El DNI debe tener 8 dígitos numéricos",
+            duration: 5 // Mostrar por 5 segundos
+        });
+        return;
+    }
+    
+    // Mostrar indicador de carga
+    $("#fresponsable").val("Buscando...").prop('readonly', true);
+    
+    // Hacer la petición directamente a la API de Factiliza
+    $.ajax({
+        url: "https://api.factiliza.com/pe/v1/dni/info/" + dni,
+        method: "GET",
+        timeout: 10000, // 10 segundos de timeout
+        headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzk2MyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImNvbnN1bHRvciJ9.XHG0JHDs8Daik_XHbb6cr90diRfL65qu0IaFJL9GrvY"
+        },
+        success: function(response) {
+            console.log("Respuesta de la API:", response);
+            
+            if (response && response.data) {
+                var data = response.data;
+                var nombreCompleto = '';
+                
+                // Construir el nombre completo: apellidos + nombre
+                if (data.apellido_paterno) nombreCompleto += data.apellido_paterno;
+                if (data.apellido_materno) nombreCompleto += ' ' + data.apellido_materno;
+                if (data.nombres) nombreCompleto += ' ' + data.nombres;
+                
+                // Asignar el nombre al campo de responsable
+                $("#fresponsable").val(nombreCompleto.trim());
+            } else {
+                $("body").overhang({
+                    type: "warning",
+                    message: "No se encontraron datos para el DNI ingresado",
+                    duration: 5 // Mostrar por 5 segundos
+                });
+                $("#fresponsable").val("");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error en la petición:", status, error);
+            
+            var errorMessage = "Error al conectar con el servicio de consulta de DNI";
+            
+            if (xhr.status === 0) {
+                errorMessage = "No se pudo conectar al servidor. Verifica tu conexión a internet.";
+            } else if (xhr.status === 404) {
+                errorMessage = "DNI no encontrado o formato inválido";
+            } else if (xhr.status === 429) {
+                errorMessage = "Límite de consultas excedido. Por favor, intente más tarde.";
+            } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            }
+            
+            $("body").overhang({
+                type: "error",
+                message: errorMessage,
+                duration: 5 // Mostrar por 5 segundos
+            });
+            $("#fresponsable").val("");
+        },
+        complete: function() {
+            // Habilitar el campo nuevamente cuando termine la búsqueda
+            $("#fresponsable").prop('readonly', false);
+        }
+    });
 }
+
+// Evento para actualizar el campo HC cuando se escribe en el campo DNI
+$("#dni").on("keyup", function() {
+    let dni =  $("#dni").val();
+    $("#hc").val(dni);
+});
 
 $("#dni").on("keyup", function() {
 	let dni =  $("#dni").val();
