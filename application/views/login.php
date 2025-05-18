@@ -57,10 +57,17 @@
     <div class="card card-plain">
     <div class="card-header pb-0 text-start">
       <div class="text-center">
-        <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="80px;">
+        <img
+          src="https://img.freepik.com/vector-premium/diseno-logotipo-clinica-medica-concepto-creativo-unico_526458-2787.jpg?semt=ais_hybrid&w=740"
+          class="img-fluid mb-3"
+          width="180px;"
+        >
       </div>
       <div class="text-center">
-        <span class="mx-3 font-weight-bold"> <span class="text-black h6 text-bold">ClinicSoft</span><small class="text-danger text-bold">peru</small></span>
+        <span class="mx-3 font-weight-bold">
+          <span class="text-black h5 text-bold">ClinicSoft</span>
+          <small class="text-primary text-bold">Colombia</small>
+        </span>
       </div>
       <h4 class="font-weight-bolder text-center mt-4">Iniciar sesión</h4>
     </div>
@@ -107,34 +114,28 @@
         Inscribete
       </a>
     </p>
-    </div>
   </div>
- </div>
 </div>
 </div>
 </div>
-</section>
-</main>
-
-
-  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <footer class="footer py-1">
+<footer class="footer py-1">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 mx-auto text-center mb-1">
-        </div> 
-      </div>
-      <div class="row">
-        <div class="col-8 mx-auto text-center mt-1">
+        <div class="col-12 mx-auto  mt-1">
           <p class="mb-0 text-secondary">
             Todos los derechos © <script>
               document.write(new Date().getFullYear())
-            </script> gofuturedigitalsolution.com
+            </script> futuredigitalsolution.com
           </p>
         </div>
       </div>
     </div>
   </footer>
+</div>
+</div>
+</section>
+</main>
+  
   <script src="<?php echo base_url(); ?>public/js/jquery.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/core/popper.min.js"></script>
   <script src="<?php echo base_url(); ?>public/js/core/bootstrap.min.js"></script>
