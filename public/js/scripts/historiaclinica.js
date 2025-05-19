@@ -638,6 +638,7 @@ function crearAlergias() {
           type: "success",
           message: "la alergia se ha registrado correctamente"
        });
+       setTimeout(reloadPage, 3000);
      },
      error: function() {
        $("body").overhang({
@@ -679,6 +680,7 @@ function crearMedicamento() {
         type: "success",
         message: "El medicamento se ha registrado correctamente"
      });
+     setTimeout(reloadPage, 3000);
    },
    error: function() {
      $("body").overhang({
@@ -759,6 +761,8 @@ function crearOrdenPatologica() {
 var url = baseurl + "administracion/crearpatologia",
 nombre = $("#nombre_paciente").val(),
         edad = $("#edad_paciente").val(),
+        documento = $("#documento_historia").val(),
+        triage = $("#consecutivo_historia").val(),
         sexo = $("input[name='sexo']:checked").val(),
         medico = $("#medico_solicitante").val(),
         muestra = $("input[name='muestra']:checked").val(),
@@ -778,6 +782,8 @@ nombre = $("#nombre_paciente").val(),
         method: "POST",
         data: {
             nombre: nombre,
+            documento: documento,
+            triage: triage,
             edad: edad,
             sexo: sexo,
             medico: medico,
@@ -798,6 +804,7 @@ nombre = $("#nombre_paciente").val(),
                 type: "success",
                 message: "La orden patológica se ha registrado correctamente"
             });
+            setTimeout(reloadPage, 3000);
         },
         error: function() {
             $("body").overhang({
@@ -806,10 +813,6 @@ nombre = $("#nombre_paciente").val(),
             }); 
         }
     });
-}
-
-function crearOrdenLaboratorio() {
-
 }
 
 const reloadPage = () => {

@@ -491,9 +491,11 @@ class Historias_model extends CI_model {
 
     //ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
 
-    public function crearOrdenPatologica() {
+    public function crearOrdenPatologica($datos) {
         $orden_patologica = [
             "nombre" => $datos["nombre"],
+            "documento" => $datos["documento"],
+            "triage" => $datos["triage"],
             "edad" => $datos["edad"],
             "sexo" => $datos["sexo"],
             "medico" => $datos["medico"],
@@ -509,16 +511,78 @@ class Historias_model extends CI_model {
             "diagnostico" => $datos["diagnostico"],
             "fecha" => $datos["fecha"],
             "creado_en" => date("Y-m-d H:i:s"),
-            "creado_por" => $this->session->userdata("id")
+            "creado_por" => $this->session->userdata("codigo")
         ];
         
         $this->db->insert('ordenes_patologicas', $orden_patologica);
 
     }
 
-    public function crearOrdenLaboratorio() {
+    public function crearOrdenLaboratorio($data) {
 
+      $orden_laboratorio = [
+        "documento_paciente" => $data["documento"],
+        "nombre" => $data["nombre"],
+        "edad" => $data["edad"],
+        "medico" => $data["medico"],
+        "codigo_orden" => $data["servicio"],
+        "cod_triage" => $data["triage"],
+        "fecha" => $data["fecha"]
+      ];
+
+      $this->db->insert('ordenes_laboratorio', $orden_laboratorio);
+      $id = $this->db->insert_id();
+
+      return $id;
     }
+
+    public function creardetallelaboratorioOrden($data) {
+        $orden_laboratorio = [
+            "codigo_lab" => $data["codigo_lab"],
+            "codigo_procedimiento" => $data["servicio"],
+            "fecha" => $data["fecha"],
+          ];
+    
+        $this->db->insert('ordenes_laboratorio_detalle', $orden_laboratorio);  
+    } 
+
+    public function getOrdenesPatologicas($documento) {
+        $this->db->select("*");
+        $this->db->from("ordenes_patologicas");
+        $this->db->where("documento", $documento);
+        $result = $this->db->get();
+
+        return $result;
+    }
+
+    public function getOrdeneslaboratorio($documento) {
+      $this->db->select("*");
+      $this->db->from("ordenes_laboratorio");
+      $this->db->where("documento_paciente", $documento);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+    public function getPatologiaPdf($triage,$documento) {
+      $this->db->select("*");
+      $this->db->from("ordenes_patologicas");
+      $this->db->where("documento", $documento);
+      $this->db->where("triage", $triage);
+      $result = $this->db->get();
+
+      return $result;  
+    }
+
+    public function getLaboratorioPdf($codigo) {
+        $this->db->select("o.*, pr.nombre as nombre_procedimiento, pr.codigo as codigo_procedimientos");
+        $this->db->from("ordenes_laboratorio_detalle o");
+        $this->db->join("precio_laboratorio pr", "o.codigo_procedimiento = pr.codigo");
+        $this->db->where("o.codigo_lab", $codigo);
+        $result = $this->db->get();
+  
+        return $result;  
+      }
     
 }
 

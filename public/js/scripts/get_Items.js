@@ -198,11 +198,49 @@ function Suubtmit(){
 
 }
 
+function crearOrdenLaboratorioHistoria() {
 
+  var url = baseurl + "administracion/crearOrdenLaboratorio";
 
-$("#crear-laboratorio").on("click", function () {
+  let documento = $("#documento_historia").val(),
+      nombre = $("#nombre_lab").val(),
+      edad = $("#edad_lab").val(),
+      medico = $("#medico_lab").val();
+      triage = $("#consecutivo_historia").val();
 
+  let ordenlab = [];
+  for (let i = 0; i < elementos_lab.length; i++) {
+    ordenlab [i] = elementos_lab[i][0];
+  }
+//   console.log(ordenlab);
 
+  $.ajax({
+    url: url,
+    method: "POST",
+    data: {
+      documento: documento,
+      nombre: nombre,
+      edad: edad,
+      medico: medico,
+      ordenlab: ordenlab,
+      triage:triage
+    },
+    success: function(data) {
+        $("body").overhang({
+            type: "success",
+            message: "La orden de laboratorio se ha creado correctamente"
+        });
+        setTimeout(reloadPage, 3000);
+    },
+    error: function() {
+        $("body").overhang({
+            type: "error",
+            message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+        });
+    }
+  });
+}
 
-})
-
+const reloadPage = () => {
+    location.reload();
+}

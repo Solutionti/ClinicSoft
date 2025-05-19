@@ -9,6 +9,7 @@ class Historiaclinica extends Admin_Controller {
 		$this->load->model("Historias_model");
 		$this->load->model("Generic_model");
 		$this->load->model("Doctores_model");
+		$this->load->model("Laboratorio_model");
 	}
 
 	public function historiasClinicas()
@@ -33,6 +34,9 @@ class Historiaclinica extends Admin_Controller {
 		$ginecoiniciadas = $this->Historias_model->consultaIniciadaGineco($documento);
 		$poscitas = $this->Historias_model->getPosCita($documento);
 		$doctores = $this->Doctores_model->getDoctores();
+		$laboratorios = $this->Laboratorio_model->getPreciosLaboratorio();
+		$ordenPatologicas = $this->Historias_model->getOrdenesPatologicas($documento);
+		$ordenLaboratorios = $this->Historias_model->getOrdeneslaboratorio($documento);
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -52,6 +56,9 @@ class Historiaclinica extends Admin_Controller {
 			"ginecoiniciada" => $ginecoiniciadas,
 			"poscita" => $poscitas,
 			"doctor"=> $doctores,
+			"laboratorio" => $laboratorios,
+			"ordenpatologica" => $ordenPatologicas,
+			"ordenLaboratorio" =>$ordenLaboratorios
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
@@ -1441,8 +1448,10 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->Output('I', 'recetamedica.pdf');
 	  }
 
-	  public function formatoLaboratorioOrdenes() {
-		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+	  public function formatoLaboratorioOrdenes($triage, $documento, $idlaboratorio) {
+		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+		$getLaboratorioPdf = $this->Historias_model->getLaboratorioPdf($idlaboratorio);
+
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
 		$pdf->AddPage();
@@ -1554,18 +1563,20 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(13,5,'CANTIDAD', 1);
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(163,5, 'DESCRIPCION', 1);
-
-      $pdf->Ln(5);
-	  $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, '01', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(13,5,'10', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(163,5, 'ACA VAN LOS EXAMENES DEL PACIENTE', 1);
+	
+	  foreach($getLaboratorioPdf->result() as $labo) {
+	    $pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20,5, '00-'.$labo->codigo_procedimientos, 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(13,5,'1', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(163,5, $labo->nombre_procedimiento, 1);
+	  }
 
 	  $pdf->Ln(20);
       $pdf->SetFont('Arial', 'B', 8);
-      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(100,5, $this->session->userdata('nombre').' '.$this->session->userdata('apellido') , 0);
       $pdf->cell(30,5, "", 0);
       $pdf->Ln(3);
       $pdf->cell(100,5, '_________________________________________', 0);
@@ -1673,17 +1684,19 @@ class Historiaclinica extends Admin_Controller {
       $pdf->SetFont('Arial', 'B', 6);
       $pdf->cell(163,5, 'DESCRIPCION', 1);
 
-      $pdf->Ln(5);
-	  $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(20,5, '01', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(13,5,'10', 1);
-      $pdf->SetFont('Arial', '', 6);
-      $pdf->cell(163,5, 'ACA VAN LOS EXAMENES DEL PACIENTE', 1);
+      foreach($getLaboratorioPdf->result() as $labo) {
+	    $pdf->Ln(5);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(20,5, '00-'.$labo->codigo_procedimientos, 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(13,5,'1', 1);
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(163,5, $labo->nombre_procedimiento, 1);
+	  }
 
 	  $pdf->Ln(20);
       $pdf->SetFont('Arial', 'B', 8);
-      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(100,5, $this->session->userdata('nombre').' '.$this->session->userdata('apellido') , 0);
       $pdf->cell(30,5, "", 0);
       $pdf->Ln(3);
       $pdf->cell(100,5, '_________________________________________', 0);
@@ -1700,8 +1713,10 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->Output('I', 'ordenlaboratorio.pdf');
 	  }
 
-	  public function formatoPatologiaOrdenamiento() {
-		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+	  public function formatoPatologiaOrdenamiento($triage, $documento) {
+		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+		$patologia = $this->Historias_model->getPatologiaPdf($triage, $documento)->result()[0];
+		
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
 		$pdf->AddPage();
@@ -1771,15 +1786,30 @@ class Historiaclinica extends Admin_Controller {
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(50,5, 'PAP', 1);
-		$pdf->cell(5,5, 'X', 1);
+		if($patologia->muestra == 'PAP'){
+		  $pdf->cell(5,5, 'X', 1);
+		}
+		else {
+			$pdf->cell(5,5, '', 1);
+		}
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(50,5, 'CITOLOGICO', 1);
-		$pdf->cell(5,5, 'X', 1);
+		if($patologia->muestra == 'Citológico') {
+		  $pdf->cell(5,5, 'X', 1);
+		}
+		else {
+			$pdf->cell(5,5, '', 1);
+		}
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(50,5 ,'HISTOPATOLIGICO', 1);
-		$pdf->cell(5,5, 'X', 1);
+		if($patologia->muestra == 'Histopatológico') {
+			$pdf->cell(5,5, 'X', 1);
+		}
+		else {
+			$pdf->cell(5,5, '', 1);
+		}
 		$pdf->Ln(9);
 		$pdf->SetFont('Courier', 'B', 8);
 		$pdf->SetTextColor(255,255,255);
@@ -1789,60 +1819,69 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->Ln(6);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15,5, 'PARIDAD', 1);
-		$pdf->cell(42,5, '', 1);
+		$pdf->cell(42,5, $patologia->paridad, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'F.U.R', 1);
-		$pdf->cell(42,5, '', 1);
+		$pdf->cell(42,5, $patologia->fur, 1);
   
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15,5, 'LACT', 1);
-		$pdf->cell(42,5, '', 1);
+		$pdf->cell(15,5, 'FUP', 1);
+		$pdf->cell(42,5, $patologia->fup, 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'SI', 1);
-		$pdf->cell(5,5, 'X', 1);
-
+		if($patologia->lactancia == 'S') {
+		  $pdf->cell(5,5, 'X', 1);
+		}
+		else {
+		  $pdf->cell(5,5, '', 1);
+		}
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'NO', 1);
-		$pdf->cell(5,5, 'X', 1);
+		if($patologia->lactancia == 'N') {
+		  $pdf->cell(5,5, 'X', 1);
+		}
+		else {
+		  $pdf->cell(5,5, '', 1);
+		}
 
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'OTROS ANTECEDENTES:', 0);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->MultiCell(195,4, '', 0);
+		$pdf->MultiCell(195,4, $patologia->antecedentes, 0);
 
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'RESULTADO DE INFORMES ANTERIORES:', 0);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->MultiCell(195,4, '', 0);
+		$pdf->MultiCell(195,4, $patologia->resultados, 0);
 		
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'HALLAZGOS:', 0);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->MultiCell(195,4, 'Otros', 0);
+		$pdf->MultiCell(195,4, 'Otros  ' . $patologia->hallazgos, 0);
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'DATOS CLINICOS O TEJIDOS A EXAMINAR:', 0);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->MultiCell(195,4, '', 0);
+		$pdf->MultiCell(195,4, $patologia->datos, 0);
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10,5, 'DIAGNOSTICO:', 0);
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->MultiCell(195,4, '', 0);
+		$pdf->MultiCell(195,4, $patologia->diagnostico, 0);
 
-		$pdf->Ln(10);
+	  $pdf->Ln(10);
       $pdf->SetFont('Arial', 'B', 8);
-      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
+      $pdf->cell(100,5, $this->session->userdata('nombre').' '.$this->session->userdata('apellido') , 0);
       $pdf->cell(30,5, "", 0);
       $pdf->Ln(3);
       $pdf->cell(100,5, '_________________________________________', 0);
@@ -1856,14 +1895,16 @@ class Historiaclinica extends Admin_Controller {
       $pdf->cell(100,5, '', 0);
       $pdf->cell(30,5, '*** Fin del reporte ***', 0);
 
-	    $pdf->Output('I', 'ordenpatologicos.pdf');
-	  }
+	  $pdf->Output('I', 'ordenpatologicos.pdf');
+	}
 
 	 //ACA CREAR LAS DOS FUNCIONES QUE VAN HACER LOS INSERT
 
 	  public function crearOrdenPatologica() {
 
 		$nombre = $this->input->post("nombre");
+		$documento = $this->input->post("documento");
+		$triage = $this->input->post("triage");
 		$edad = $this->input->post("edad");
 		$sexo = $this->input->post("sexo");
 		$medico = $this->input->post("medico");
@@ -1881,6 +1922,8 @@ class Historiaclinica extends Admin_Controller {
 	
 		$data = [
 			"nombre" => $nombre,
+			"documento" => $documento,
+			"triage" => $triage,
 			"edad" => $edad,
 			"sexo" => $sexo,
 			"medico" => $medico,
@@ -1902,6 +1945,33 @@ class Historiaclinica extends Admin_Controller {
 	  }
 
 	  public function crearOrdenLaboratorio() {
+		$documento = $this->input->post("documento");
+		$nombre = $this->input->post("nombre");
+		$edad = $this->input->post("edad");
+		$medico = $this->input->post("medico");
+		$triage = $this->input->post("triage");
+		$ordenlab = $this->input->post("ordenlab");
+		$fecha = date("Y-m-d");
+
+		$data = [
+			"documento" => $documento,
+			"nombre" => $nombre,
+			"edad" => $edad,
+			"medico" => $medico,
+			"triage" => $triage,
+			"servicio" => 'Laboratorio',
+			"fecha" => $fecha
+		];
+        $id = $this->Historias_model->crearOrdenLaboratorio($data);
+
+		for($i=0; $i < sizeof($ordenlab); $i++){
+			$data2 = [
+			  "codigo_lab" => $id,
+			  "servicio" => $ordenlab[$i],
+		      "fecha" => $fecha
+			];
+			$this->Historias_model->creardetallelaboratorioOrden($data2);
+		 }
 
 	  }
 
