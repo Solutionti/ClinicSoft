@@ -344,7 +344,7 @@
                 <div class="card card-body border-0 shadow-sm mb-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-primary text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-primary text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
@@ -365,7 +365,7 @@
                 <div class="card card-body border-0 shadow-sm mb-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-success text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-success text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
@@ -386,7 +386,7 @@
                 <div class="card card-body border-0 shadow-sm mb-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
@@ -407,7 +407,7 @@
                 <div class="card card-body border-0 shadow-sm mb-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-warning text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-warning text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
@@ -428,7 +428,7 @@
                 <div class="card card-body border-0 shadow-sm mb-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-danger text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-danger text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
@@ -449,7 +449,7 @@
                 <div class="card card-body border-0 shadow-sm">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                      <div class="icon icon-shape bg-gradient-dark text-white rounded-circle me-3 text-center" style="width: 40px; height: 40px; line-height: 40px;">
+                      <div class="icon icon-shape bg-gradient-dark text-white rounded-circle me-3 text-center" >
                         <i class="fas fa-calendar-alt"></i>
                       </div>
                       <div>
