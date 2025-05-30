@@ -55,7 +55,7 @@
       </div>
     </nav>
   
-    <div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card shadow-lg mx-4 mt-5">
       <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
@@ -66,7 +66,7 @@
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
-              <h3 class="mt-3">Examenes de Laboratorio</h3>
+              <h4 class="mt-3">Examenes de Laboratorio</h4>
             </div>
           </div>
         </div>

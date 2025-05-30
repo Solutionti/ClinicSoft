@@ -19,7 +19,7 @@
     <span class="mask bg-default opacity-6"></span>
   </div>
   
-  <div class="main-content position-relative max-height-vh-100 h-100">
+  <div class="main-content position-relative  h-100">
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -55,7 +55,7 @@
       </div>
     </nav>
   
-    <div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card shadow-lg mx-4 mt-5">
       <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
@@ -66,7 +66,7 @@
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
-              <h3 class="mt-3">Ecografias</h3>
+              <h4 class="mt-3">Ecografias</h4>
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
         <br>
         <div class="container">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <h5 class="text-primary">Ecografia Genetica</h5>
               <div class="col-md-6 mt-4">
                 <a href="">
@@ -142,8 +142,7 @@
                 </a>
               </div>
             </div>
-
-            <div class="col-md-6">
+            <div class="col-md-4">
               <h5 class="text-primary">Ecografia Obstertrica</h5>
               <div class="col-md-6 mt-4">
                 <a href="">

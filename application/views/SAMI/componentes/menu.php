@@ -210,27 +210,27 @@
             <div class="collapse " id="resoluciones">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>sami/camas" target="_blank">
-                     <span class="sidenav-normal">Camas</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>sami/acostarpaciente" target="_blank">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/pqrs">
                      <span class="sidenav-normal">Acostar Pacientes</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>sami/solicitudfarmacia" target="_blank">
-                     <span class="sidenav-normal">Solicitud Farmacia</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/pqrs">
+                     <span class="sidenav-normal">Camas</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>sami/despachofarmacia" target="_blank">
-                     <span class="sidenav-normal">Despacho Farmacia</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/rips">
+                     <span class="sidenav-normal">Solicitud</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>sami/aplicacionmedicamentos" target="_blank">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/mipres">
+                     <span class="sidenav-normal">Despacho</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/mipres">
                      <span class="sidenav-normal">Aplicaciòn Medicamento</span>
                      </a>
                   </li>
