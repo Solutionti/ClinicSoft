@@ -208,7 +208,7 @@ class PdfController extends CI_Controller {
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -431,7 +431,7 @@ public function getEcografiaGeneticaPdf($dni) {
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -651,7 +651,7 @@ $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -879,7 +879,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -1103,7 +1103,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -1316,7 +1316,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencia, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -1517,7 +1517,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -1775,7 +1775,7 @@ $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -2133,7 +2133,7 @@ $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -2348,7 +2348,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -2511,7 +2511,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -2772,7 +2772,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
@@ -3040,7 +3040,7 @@ $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
 
     // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 943037841', 0, 0, 'R');
+    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
     // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);

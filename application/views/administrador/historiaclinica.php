@@ -1702,6 +1702,7 @@
         <option value="">Seleccione una opcion</option>
         <option value="HF">Historial Fisico</option>
         <option value="LB">Laboratorio</option>
+        <option value="">Patologia</option>
       </select>
     </div>
     <div class="flex align-items-center gap-3 mb-3">
