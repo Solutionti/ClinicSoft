@@ -818,3 +818,4 @@ nombre = $("#nombre_paciente").val(),
 const reloadPage = () => {
     location.reload();
 }
+
