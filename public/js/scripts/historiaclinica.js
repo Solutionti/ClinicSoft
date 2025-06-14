@@ -137,6 +137,116 @@ var table_lab_mini4 = $("#items-procedimientos2-table").DataTable({
     }
 });
 
+// Variables para almacenar los análisis seleccionados y filas ocultas
+var elementos_laboratorio = [];
+var filasOcultas = {}; // Almacenar referencias a filas ocultas
+
+// Función para manejar la selección de análisis de laboratorio
+$('#table-laboratorio').on('dblclick', 'tr:visible', function() {
+    var row = $(this);
+    var data = [];
+    
+    // Obtener los datos de la fila
+    row.find('td').each(function(i) {
+        data[i] = $(this).text().trim();
+    });
+    
+    // Verificar si el análisis ya está seleccionado
+    var existe = elementos_laboratorio.some(function(item) {
+        return item[0] === data[0]; // Comparar por ID o código
+    });
+    
+    if (!existe) {
+        // Agregar a la lista de seleccionados
+        elementos_laboratorio.push(data);
+        
+        // Agregar a la tabla de seleccionados
+        var table = $('#table-laboratorio-items').DataTable();
+        var rowNode = table.row.add([
+            data[0], // Código
+            data[1]  // Nombre del análisis
+        ]).draw(false).node();
+        
+        // Aplicar estilos consistentes a la fila
+        $(rowNode).addClass('text-xs');
+        $(rowNode).find('td').addClass('text-xs');
+        
+        // Ocultar la fila en la tabla de origen y guardar referencia
+        row.hide();
+        filasOcultas[data[0]] = row;
+    }
+});
+
+// Función para eliminar un análisis seleccionado
+function eliminarAnalisis(elemento) {
+    var row = $(elemento).closest('tr');
+    var table = $('#table-laboratorio-items').DataTable();
+    var rowData = table.row(row).data();
+    
+    if (rowData) {
+        // Mostrar la fila en la tabla de origen
+        var codigo = rowData[0];
+        if (filasOcultas[codigo]) {
+            filasOcultas[codigo].show();
+            delete filasOcultas[codigo];
+        }
+        
+        // Eliminar de la lista de seleccionados
+        elementos_laboratorio = elementos_laboratorio.filter(function(item) {
+            return item[0] !== codigo;
+        });
+        
+        // Eliminar de la tabla de seleccionados
+        table.row(row).remove().draw(false);
+    }
+}
+
+// Manejar doble clic en la fila de la tabla de seleccionados
+$('#table-laboratorio-items').on('dblclick', 'tr', function() {
+    eliminarAnalisis(this);
+});
+
+// Función para guardar la orden de laboratorio
+function crearOrdenLaboratorioHistoria() {
+    if (elementos_laboratorio.length === 0) {
+        $("body").overhang({
+            type: "warn",
+            message: "Debe seleccionar al menos un análisis"
+        });
+        return;
+    }
+    
+    var url = baseurl + "administracion/guardar_orden_laboratorio_historia";
+    var datos = {
+        id_paciente: $("#paciente_id").val(),
+        id_medico: $("#doctorid1").val(),
+        analisis: elementos_laboratorio
+    };
+    
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: datos,
+        success: function(response) {
+            $("body").overhang({
+                type: "success",
+                message: "Orden de laboratorio guardada correctamente"
+            });
+            // Limpiar la tabla de seleccionados
+            $('#table-laboratorio-items').DataTable().clear().draw();
+            elementos_laboratorio = [];
+            // Cerrar el modal si es necesario
+            $("#procesosclinicos").modal("hide");
+        },
+        error: function() {
+            $("body").overhang({
+                type: "error",
+                message: "Error al guardar la orden de laboratorio"
+            });
+        }
+    });
+}
+
 $("#crear_receta").on("click", function () {
     var url3 = baseurl + "administracion/crearreceta",
         paciente = $("#paciente").val(),
