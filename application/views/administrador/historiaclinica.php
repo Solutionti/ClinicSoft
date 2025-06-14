@@ -351,7 +351,7 @@
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
           <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#medicamentosactivos" aria-expanded="false" aria-controls="medicamentosactivos">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-pills"></i> FORMULA DE MEDICAMENTOS</span>
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-pills"></i> RECETA MEDICA</span>
           </a>
         </div>
         <div id="medicamentosactivos" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
@@ -1285,7 +1285,7 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
-            <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
+            <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">RECETA MEDICA</button>
             <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
             <button class="nav-link" id="nav-ordpat-tab" data-bs-toggle="tab" data-bs-target="#nav-ordpat" type="button" role="tab" aria-controls="nav-ordpat" aria-selected="false" >ORD. PATOLOGIA</button>
           </div>

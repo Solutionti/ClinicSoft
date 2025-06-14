@@ -1,74 +1,104 @@
 var elementos_lab = new Array();
 
 $('#table-laboratorio').on('dblclick', 'tr', function(e) {
-
-    elem_lab = new Array();
-
-    elem_lab = table_lab.row(this).data();
-
-    elementos_lab.push(elem_lab);
-
-    table_lab.row(this).remove()
-
-    table_lab_mini.row.add(elem_lab).draw(false);
-
-
-
-    total_ = 0;
-
-    for (let i = 0; i < elementos_lab.length; i++) {
-
-        total_ += elementos_lab[i][2] * 1;
-
+    var $row = $(this);
+    var rowData = table_lab.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Agregar a la matriz de elementos
+    elementos_lab.push(rowData);
+    
+    // Remover la fila de la tabla original
+    table_lab.row(this).remove();
+    
+    // Agregar a la tabla de destino
+    var newRow = table_lab_mini.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
     }
-
-    $("#total").val((total_).toFixed(2));
-
-    table_lab.draw(false);
-
-});
-
-
-
-$('#table-laboratorio-items').on('dblclick', 'tr', function(e) {
-
-    elem_lab = new Array();
-
-    elem_lab = table_lab_mini.row(this).data();
-
-    table_lab_mini.row(this).remove()
-
-    table_lab.row.add(elem_lab).draw(false);
-
-
-
-    for (let i = 0; i < elementos_lab.length; i++) {
-
-        if (elementos_lab[i][0] == elem_lab[0]) {
-
-            elementos_lab.splice(i, 1);
-
-            i = elementos_lab.length;
-
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
         }
-
-    }
-
-    total_ = 0;
-
+    });
+    
+    // Actualizar total
+    var total_ = 0;
     for (let i = 0; i < elementos_lab.length; i++) {
-
         total_ += elementos_lab[i][2] * 1;
-
     }
-
     $("#total").val((total_).toFixed(2));
-
-    table_lab_mini.draw(false);
-
+    
+    table_lab.draw(false);
 });
 
-
+// Evento para deseleccionar un ítem de la tabla de laboratorio
+$('#table-laboratorio-items').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_lab_mini.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Remover la fila de la tabla de ítems
+    table_lab_mini.row(this).remove().draw(false);
+    
+    // Agregar a la tabla original
+    var newRow = table_lab.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    // Eliminar de la matriz de elementos
+    for (let i = 0; i < elementos_lab.length; i++) {
+        if (elementos_lab[i][0] == rowData[0]) {
+            elementos_lab.splice(i, 1);
+            break;
+        }
+    }
+    
+    // Actualizar total
+    var total_ = 0;
+    for (let i = 0; i < elementos_lab.length; i++) {
+        total_ += elementos_lab[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    
+    table_lab_mini.draw(false);
+});
 
 $('#Form_Lab').keypress(function(e) {
 

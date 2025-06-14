@@ -746,7 +746,7 @@ function crearAlergias() {
      success: function() {
        $("body").overhang({
           type: "success",
-          message: "la alergia se ha registrado correctamente"
+          message: "La alergia se ha registrado correctamente"
        });
        setTimeout(reloadPage, 3000);
      },
