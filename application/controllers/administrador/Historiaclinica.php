@@ -3,6 +3,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Historiaclinica extends Admin_Controller {
 
+    public function guardar_orden_laboratorio_historia() {
+        $this->load->model('Laboratorio_model');
+        
+        $id_paciente = $this->input->post('id_paciente');
+        $id_medico = $this->input->post('id_medico');
+        $analisis = $this->input->post('analisis');
+        $fecha_actual = date('Y-m-d H:i:s');
+        
+        try {
+            // Crear la orden de laboratorio
+            $data_orden = [
+                'dni_paciente' => $id_paciente,
+                'id_medico' => $id_medico,
+                'fecha' => $fecha_actual,
+                'estado' => 'Pendiente',
+                'tipo' => 'Historia Clínica',
+                'total' => 0 // Se calcula con los análisis
+            ];
+            
+            $id_orden = $this->Laboratorio_model->crearServicioLaboratorio($data_orden);
+            
+            if (!$id_orden) {
+                throw new Exception('Error al crear la orden de laboratorio');
+            }
+            
+            $total = 0;
+            
+            // Agregar cada análisis a la orden
+            foreach ($analisis as $analis) {
+                $data_detalle = [
+                    'id_laboratorio' => $id_orden,
+                    'servicio' => $analis[0], // ID del análisis
+                    'fecha' => $fecha_actual
+                ];
+                
+                // Obtener el precio del análisis
+                $precio_analisis = $this->db->select('precio')
+                                          ->where('id', $analis[0])
+                                          ->get('precios_laboratorio')
+                                          ->row();
+                
+                if ($precio_analisis) {
+                    $total += $precio_analisis->precio;
+                }
+                
+                $this->Laboratorio_model->crearDetalleLaboratorio($data_detalle);
+            }
+            
+            // Actualizar el total de la orden
+            $this->db->where('id', $id_orden)
+                    ->update('laboratorio', ['total' => $total]);
+            
+            echo json_encode(['success' => true, 'message' => 'Orden de laboratorio guardada correctamente']);
+            
+        } catch (Exception $e) {
+            log_message('error', 'Error al guardar orden de laboratorio: ' . $e->getMessage());
+            echo json_encode(['success' => false, 'message' => 'Error al guardar la orden de laboratorio']);
+        }
+    }
+
 	public function __construct() {
 		parent:: __construct();
 		$this->load->model("Pacientes_model");

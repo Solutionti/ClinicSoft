@@ -15,9 +15,9 @@ class Clientes extends CI_Controller {
     }
 
 	public function inicio(){
-		$lineas = $this->Lineatiempo_model->getLineaClientes();
+		// $lineas = $this->Lineatiempo_model->getLineaClientes();
 		$data = [
-			"linea" => $lineas
+			// "linea" => $lineas
 		];
 		$this->load->view("clientes/inicio", $data);
 	}

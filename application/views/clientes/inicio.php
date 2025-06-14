@@ -17,7 +17,7 @@
     <span class="mask bg-default opacity-6"></span>
   </div>
 
-  <div class="main-content position-relative max-height-vh-100 h-100">
+  <div class="main-content position-relative">
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -52,7 +52,7 @@
         </div>
       </div>
     </nav>
-    <div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card shadow-lg mx-4 mt-5">
       <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
@@ -70,9 +70,21 @@
               </p>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          <div class="col-lg-5 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <li class="nav-item">
+                  <a target="_blank" class="nav-link mb-0 px-0 py-1  d-flex align-items-center justify-content-center disabled"  href="#" >
+                    <i class="ni ni-app"></i>
+                    <span class="ms-2 mx-1">Historia Clinica </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a target="_blank" class="nav-link mb-0 px-0 py-1  d-flex align-items-center justify-content-center disabled"  href="#" >
+                    <i class="ni ni-app"></i>
+                    <span class="ms-2 mx-1">Medicamentos </span>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a target="_blank" class="nav-link mb-0 px-0 py-1  d-flex align-items-center justify-content-center "  href="<?php echo base_url(); ?>clientes/laboratorio" >
                     <i class="ni ni-app"></i>
@@ -86,19 +98,11 @@
                   </a>
                 </li>
                 <li class="nav-item ">
-                  <a target="_blank" class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center disabled"  href="<?php echo base_url(); ?>clientes/ecografias">
+                  <a target="_blank" class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center "  href="<?php echo base_url(); ?>clientes/ecografias">
                     <i class="ni ni-settings-gear-65"></i>
-                    <span class="ms-2 mx-1">Ecografias </span> <small class="text-danger"> Proximamente</small>
+                    <span class="ms-2 mx-1">Ecografias </span>
                   </a>
                 </li>
-                <!--
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                    <i class="ni ni-settings-gear-65"></i>
-                    <span class="ms-2">Recetario</span>
-                  </a>
-                </li>
-                -->
               </ul>
             </div>
           </div>
@@ -226,71 +230,6 @@
             </div>
           </div>
         </div>
-
-        <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card ">
-            <div class="card-header pb-0 p-3">
-              <div class="d-flex justify-content-between">
-                <h6 class="mb-2">Linea de tiempo</h6>
-              </div>
-            </div>
-
-            <div class="table-responsive">
-              
-              <?php foreach($linea->result() as $linea_){ ?>
-                  <table class="table align-items-center ">
-                    <tbody>
-                      <tr>
-                        <td class="w-30">
-                          <div class="d-flex px-2 py-1 align-items-center">
-                            <div>
-                              <img src="<?php echo base_url(); ?>public/img/theme/logo.png" width="33px;" class="img-fluid">
-                            </div>
-                            <div class="ms-4">
-                              <p class="text-xs font-weight-bold mb-0">Lugar:</p>
-                              <h6 class="text-sm mb-0">Salud madre y mujer</h6>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Ultima visita:</p>
-                            <h6 class="text-sm mb-0"><?php echo $linea_->fecha."  ".$linea_->hora; ?></h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Servicio:</p>
-                            <h6 class="text-sm mb-0">
-                              <?php 
-                                if($linea_->tp_atencion == ""){?>
-                                  <?php echo "Laboratorio"; ?>
-                                <?php } else { ?>
-                                  <?php echo $linea_->tp_atencion; ?>
-                                <?php
-                                }
-                              ?>
-                            </h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Médico:</p>
-                            <h6 class="text-sm mb-0"><?php echo $linea_->doctor; ?></h6>
-                          </div>
-                        </td>
-
-
-                      </tr>
-                    </tbody>
-                  </table>
-              <?php } ?>
-
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <script src="<?php echo base_url(); ?>public/js/core/popper.min.js"></script>

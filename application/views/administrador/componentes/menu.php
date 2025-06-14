@@ -3,7 +3,7 @@
       <i class="fas text-primary fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="<?php echo base_url(); ?>administracion/perfil">
       <img src="<?php echo base_url();?>public/img/theme/logo.png" class="navbar-brand-img h-100" alt="main_logo">
-      <span class="ms-1 font-weight-bold">ClinicSoft<small class="text-danger">peru</small></span>
+      <span class="ms-1 font-weight-bold text-primary">Clinic</span><span class="font-weight-bold text-default">Soft<small class="text-danger">Peru</small></span>
       </a>
    </div>
    <hr class="horizontal dark mt-0">
@@ -17,7 +17,6 @@
             <span class=" "> Inicio</span>
             </a>
          </li>
-         
           <li class="nav-item">
             <a class="nav-link " href="<?php echo base_url(); ?>administracion/citas" target="_blank">
               <i class="fa fa-calendar text-primary"></i>
@@ -202,31 +201,42 @@
                </ul>
             </div>
          </li>
-         <!-- <li class="nav-item ">
+         <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resoluciones">
-            <i class="fas text-primary fa-flag"></i>
-            <span class="sidenav-normal"> Resoluciones <b class="caret"></b></span>
+            <i class="fas text-primary fa-pills"></i>
+            <!-- SEGURIDAD EN APLICACION DE MEDICAMENTO INTELIGENTE -->
+            <span class="sidenav-normal">SAMI<b class="caret"></b></span> 
             </a>
             <div class="collapse " id="resoluciones">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/pqrs">
-                     <span class="sidenav-normal">PQRS</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/camas" target="_blank">
+                     <span class="sidenav-normal">Camas</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/rips">
-                     <span class="sidenav-normal">Rips</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/acostarpaciente" target="_blank">
+                     <span class="sidenav-normal">Acostar Pacientes</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="<?php echo base_url(); ?>administracion/mipres">
-                     <span class="sidenav-normal"> Mipres</span>
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/solicitudfarmacia" target="_blank">
+                     <span class="sidenav-normal">Solicitud Farmacia</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/despachofarmacia" target="_blank">
+                     <span class="sidenav-normal">Despacho Farmacia</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/aplicacionmedicamentos" target="_blank">
+                     <span class="sidenav-normal">Aplicaciòn Medicamento</span>
                      </a>
                   </li>
                </ul>
             </div>
-         </li> -->
+         </li>
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/reportes">
             <i class="fas text-primary fa-chart-pie"></i>
@@ -236,7 +246,7 @@
          
          <li class="nav-item">
             <a class="nav-link " href="https://boticasmm.saludmadreymujer.com" target="_blank">
-            <i class="fas text-primary fa-pills"></i>
+            <i class="fas text-primary fa-laptop-medical"></i>
             <span class="">Farmacia</span>
             </a>
          </li>

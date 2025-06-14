@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>laboratorio</title>
+    <title>Patologia</title>
     <link  rel="icon"  href="<?php echo base_url(); ?>public/img/theme/logo2.ico" type="image/ico" />
 <link id="pagestyle" href="<?php echo base_url(); ?>public/css/argon-dashboard.css?v=2.0.2" rel="stylesheet" />
 <link href="<?php echo base_url(); ?>public/css/overhang.min.css" rel="stylesheet">
@@ -25,9 +25,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Zona c</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Laboratorio</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Patologia</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Laboratorio</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Patologia</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -55,7 +55,7 @@
       </div>
     </nav>
   
-    <div class="card shadow-lg mx-4 card-profile-bottom">
+    <div class="card shadow-lg mx-4 mt-5">
       <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
@@ -66,7 +66,7 @@
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
-              <h3 class="mt-3">Examenes de Patologia</h3>
+              <h4 class="mt-3">Examenes de Patologia</h4>
             </div>
           </div>
         </div>
