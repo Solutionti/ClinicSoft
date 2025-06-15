@@ -336,15 +336,41 @@ class Historiaclinica extends Admin_Controller {
 	public function subirDocumentos() {
 		$paciente = $this->input->post("paciente");
 		$titulo = $this->input->post("titulo");
+		$tipo_archivo = $this->input->post("tipo_archivo");
 		$fecha = date("dmY");
-		$dir_subida = 'public/documentos/';
+		
+		// Definir las carpetas según el tipo de archivo
+		switch($tipo_archivo) {
+			case 'HF':
+				$carpeta = 'historial_fisico';
+				break;
+			case 'LB':
+				$carpeta = 'laboratorio';
+				break;
+			case 'PA':
+				$carpeta = 'patologia';
+				break;
+			default:
+				$carpeta = 'otros';
+		}
+		
+		$dir_base = 'public/documentos/';
+		$dir_subida = $dir_base . $carpeta . '/';
         
         // Verificar si se subió un archivo
         if (!isset($_FILES['archivo']) || $_FILES['archivo']['error'] !== UPLOAD_ERR_OK) {
             $error = $_FILES['archivo']['error'] ?? 'Error desconocido';
-            $this->session->set_flashdata('error', 'Error al subir el archivo. Código: ' . $error);
-            redirect(base_url("administracion/historia/".$paciente));
-            return;
+            $mensaje = 'Error al subir el archivo. Código: ' . $error;
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'danger']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'danger');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
         }
 
         // Validar tipo de archivo
@@ -355,12 +381,25 @@ class Historiaclinica extends Admin_Controller {
         // Permitir solo ciertos tipos de archivo
         $extensiones_permitidas = array('pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png');
         if (!in_array($tipo_archivo, $extensiones_permitidas)) {
-            $this->session->set_flashdata('error', 'Tipo de archivo no permitido. Solo se permiten archivos PDF, DOC, DOCX, JPG, JPEG y PNG.');
-            redirect(base_url("administracion/historia/".$paciente));
-            return;
+            $mensaje = 'Tipo de archivo no permitido. Solo se permiten archivos PDF, DOC, DOCX, JPG, JPEG y PNG.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'warning']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'warning');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
         }
 
-        // Crear directorio si no existe
+        // Crear directorio base si no existe
+        if (!is_dir($dir_base)) {
+            mkdir($dir_base, 0777, true);
+        }
+        
+        // Crear subdirectorio según el tipo de archivo si no existe
         if (!is_dir($dir_subida)) {
             mkdir($dir_subida, 0777, true);
         }
@@ -374,16 +413,34 @@ class Historiaclinica extends Admin_Controller {
             $datos = array(
                 "paciente" => $paciente,
                 "titulo" => $titulo,
-                "icono" => $nuevo_nombre
+                "icono" => $carpeta . '/' . $nuevo_nombre
             );
             
             $this->Historias_model->subirDocumentos($datos);
-            $this->session->set_flashdata('exito', 'Archivo subido correctamente.');
+            $mensaje = 'Archivo subido correctamente.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => true, 'alerta' => $mensaje, 'tipo_alerta' => 'success']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'success');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
         } else {
-            $this->session->set_flashdata('error', 'Error al mover el archivo subido.');
+            $mensaje = 'Error al mover el archivo subido.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'danger']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'danger');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
         }
-        
-        redirect(base_url("administracion/historia/".$paciente));
     }
 
 	public function GenerarPdfGinecologia() {

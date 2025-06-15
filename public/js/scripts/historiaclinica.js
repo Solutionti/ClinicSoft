@@ -949,14 +949,27 @@ $('#form-subir-documento').on('submit', function(e) {
         processData: false,
         contentType: false,
         success: function(response) {
-            // Mostrar mensaje de éxito
-            alert('Documento subido correctamente');
-            // Recargar la página para ver los cambios
-            location.reload();
+            // Mostrar notificación de éxito con overhang
+            $("body").overhang({
+                type: "success",
+                message: response.alerta || "Archivo subido correctamente"
+            });
+            
+            // Recargar la página después de 2 segundos
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
         },
         error: function(xhr, status, error) {
-            // Mostrar mensaje de error
-            alert('Error al subir el documento: ' + (xhr.responseJSON?.message || 'Error desconocido'));
+            // Mostrar notificación de error con overhang
+            var errorMessage = 'Error al subir el documento: ' + 
+                             (xhr.responseJSON?.message || error || 'Error desconocido');
+            
+            $("body").overhang({
+                type: "error",
+                message: errorMessage
+            });
+            
             // Habilitar el botón de nuevo
             submitBtn.prop('disabled', false).val(originalBtnText);
         }
