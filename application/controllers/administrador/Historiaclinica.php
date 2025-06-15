@@ -338,19 +338,53 @@ class Historiaclinica extends Admin_Controller {
 		$titulo = $this->input->post("titulo");
 		$fecha = date("dmY");
 		$dir_subida = 'public/documentos/';
-        $fichero_subido = $dir_subida.basename($paciente."-".$fecha."-".$_FILES['icono']['name']);
+        
+        // Verificar si se subió un archivo
+        if (!isset($_FILES['archivo']) || $_FILES['archivo']['error'] !== UPLOAD_ERR_OK) {
+            $error = $_FILES['archivo']['error'] ?? 'Error desconocido';
+            $this->session->set_flashdata('error', 'Error al subir el archivo. Código: ' . $error);
+            redirect(base_url("administracion/historia/".$paciente));
+            return;
+        }
 
-		move_uploaded_file($_FILES['icono']['tmp_name'], $fichero_subido);
+        // Validar tipo de archivo
+        $archivo_temporal = $_FILES['archivo']['tmp_name'];
+        $nombre_archivo = basename($_FILES['archivo']['name']);
+        $tipo_archivo = strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
+        
+        // Permitir solo ciertos tipos de archivo
+        $extensiones_permitidas = array('pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png');
+        if (!in_array($tipo_archivo, $extensiones_permitidas)) {
+            $this->session->set_flashdata('error', 'Tipo de archivo no permitido. Solo se permiten archivos PDF, DOC, DOCX, JPG, JPEG y PNG.');
+            redirect(base_url("administracion/historia/".$paciente));
+            return;
+        }
 
-			$datos = array(
-				"paciente" => $paciente,
-				"titulo" => $titulo,
-				"icono" => $paciente."-".$fecha."-".$_FILES['icono']['name']
-			);
-		
-		$this->Historias_model->subirDocumentos($datos);
-		redirect(base_url("administracion/historia/".$paciente));
-	 }
+        // Crear directorio si no existe
+        if (!is_dir($dir_subida)) {
+            mkdir($dir_subida, 0777, true);
+        }
+
+        // Generar nombre único para el archivo
+        $nuevo_nombre = $paciente."-".$fecha."-".uniqid().".".$tipo_archivo;
+        $ruta_archivo = $dir_subida . $nuevo_nombre;
+
+        // Mover el archivo subido al directorio de destino
+        if (move_uploaded_file($archivo_temporal, $ruta_archivo)) {
+            $datos = array(
+                "paciente" => $paciente,
+                "titulo" => $titulo,
+                "icono" => $nuevo_nombre
+            );
+            
+            $this->Historias_model->subirDocumentos($datos);
+            $this->session->set_flashdata('exito', 'Archivo subido correctamente.');
+        } else {
+            $this->session->set_flashdata('error', 'Error al mover el archivo subido.');
+        }
+        
+        redirect(base_url("administracion/historia/".$paciente));
+    }
 
 	public function GenerarPdfGinecologia() {
 		$id = $this->uri->segment(3);

@@ -14,21 +14,21 @@ $pdf->SetFont('Times','',13);
 
 $pdf->Ln(1);
 
-$pdf->Cell(63,6,'', '', 0,'L', false );
+$pdf->Cell(80,6,'', '', 0,'L', false );
 
 $pdf->Cell(60,6,'"Clinica"', '', 0,'L', false );
 
 $pdf->Ln(5);
 
-$pdf->Cell(67,6,'', '', 0,'L', false );
+$pdf->Cell(80,6,'', '', 0,'L', false );
 
 $pdf->Cell(1,6,'Mi salud', '', 0,'L', false );
 
 $pdf->Ln(5);
 
-$pdf->Cell(70,6,'', '', 0,'L', false );
+$pdf->Cell(60,6,'', '', 0,'L', false );
 
-$pdf->Cell(7,6,'Av. Grau #478', '', 0,'L', false );
+$pdf->Cell(7,6,'Av. Salaverry #1402 - Chiclayo', '', 0,'L', false );
 
 $pdf->Ln(2);
 
@@ -78,7 +78,7 @@ $pdf->Cell(10,6,'No', 1, 0,'L', false );
 
 $pdf->Cell(42,6,'PACIENTE', 1, 0,'L', false );
 
-$pdf->Cell(107,6,'ESPECIALIDAD', 1, 0,'L', false );
+$pdf->Cell(107,6,'SERVICIO', 1, 0,'L', false );
 
 $pdf->Cell(20,6,'PAGO', 1, 0,'L', false );
 

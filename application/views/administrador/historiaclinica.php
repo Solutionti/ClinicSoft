@@ -1693,39 +1693,29 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <div class="flex align-items-center gap-3 mb-3">
-      <label>Tipo de Archivo</label>
-      <select
-        class="form-control form-control-sm"
-        id="tparchivo"
-      >
-        <option value="">Seleccione una opcion</option>
-        <option value="HF">Historial Fisico</option>
-        <option value="LB">Laboratorio</option>
-      </select>
-    </div>
-    <div class="flex align-items-center gap-3 mb-3">
-      <label>Titulo</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="titulo"
-        autocomplete="off"
-      />
-    </div>
-    <div class="flex align-items-center gap-3 mb-5">
-        <label>Archivo</label>
-        <input
-          type="file"
-          class="form-control form-control-sm"
-          (change)="cargueDocumento($event)"
-          accept=".pdf"
-        />
-    </div>
+        <form id="form-subir-documento" action="<?php echo base_url(); ?>administracion/subirdocumentos" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="paciente" value="<?php echo $pacientes->documento; ?>">
+          <div class="mb-3">
+            <label class="form-label">Tipo de Archivo</label>
+            <select class="form-control form-control-sm" name="tipo_archivo" required>
+              <option value="">Seleccione una opción</option>
+              <option value="HF">Historial Físico</option>
+              <option value="LB">Laboratorio</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control form-control-sm" name="titulo" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Archivo</label>
+            <input type="file" class="form-control form-control-sm" name="archivo" accept=".pdf" required>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="submit" form="form-subir-documento" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

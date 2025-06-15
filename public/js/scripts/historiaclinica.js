@@ -929,3 +929,37 @@ const reloadPage = () => {
     location.reload();
 }
 
+// Manejador para el formulario de subida de documentos
+$('#form-subir-documento').on('submit', function(e) {
+    e.preventDefault(); // Prevenir el envío normal del formulario
+    
+    // Mostrar un indicador de carga
+    const submitBtn = $(this).find('input[type="submit"]');
+    const originalBtnText = submitBtn.val();
+    submitBtn.prop('disabled', true).val('Subiendo...');
+    
+    // Crear un FormData para el envío del formulario
+    const formData = new FormData(this);
+    
+    // Enviar el formulario vía AJAX
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // Mostrar mensaje de éxito
+            alert('Documento subido correctamente');
+            // Recargar la página para ver los cambios
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            // Mostrar mensaje de error
+            alert('Error al subir el documento: ' + (xhr.responseJSON?.message || 'Error desconocido'));
+            // Habilitar el botón de nuevo
+            submitBtn.prop('disabled', false).val(originalBtnText);
+        }
+    });
+});
+
