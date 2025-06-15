@@ -3,6 +3,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Historiaclinica extends Admin_Controller {
 
+    public function guardar_orden_laboratorio_historia() {
+        $this->load->model('Laboratorio_model');
+        
+        $id_paciente = $this->input->post('id_paciente');
+        $id_medico = $this->input->post('id_medico');
+        $analisis = $this->input->post('analisis');
+        $fecha_actual = date('Y-m-d H:i:s');
+        
+        try {
+            // Crear la orden de laboratorio
+            $data_orden = [
+                'dni_paciente' => $id_paciente,
+                'id_medico' => $id_medico,
+                'fecha' => $fecha_actual,
+                'estado' => 'Pendiente',
+                'tipo' => 'Historia Clínica',
+                'total' => 0 // Se calcula con los análisis
+            ];
+            
+            $id_orden = $this->Laboratorio_model->crearServicioLaboratorio($data_orden);
+            
+            if (!$id_orden) {
+                throw new Exception('Error al crear la orden de laboratorio');
+            }
+            
+            $total = 0;
+            
+            // Agregar cada análisis a la orden
+            foreach ($analisis as $analis) {
+                $data_detalle = [
+                    'id_laboratorio' => $id_orden,
+                    'servicio' => $analis[0], // ID del análisis
+                    'fecha' => $fecha_actual
+                ];
+                
+                // Obtener el precio del análisis
+                $precio_analisis = $this->db->select('precio')
+                                          ->where('id', $analis[0])
+                                          ->get('precios_laboratorio')
+                                          ->row();
+                
+                if ($precio_analisis) {
+                    $total += $precio_analisis->precio;
+                }
+                
+                $this->Laboratorio_model->crearDetalleLaboratorio($data_detalle);
+            }
+            
+            // Actualizar el total de la orden
+            $this->db->where('id', $id_orden)
+                    ->update('laboratorio', ['total' => $total]);
+            
+            echo json_encode(['success' => true, 'message' => 'Orden de laboratorio guardada correctamente']);
+            
+        } catch (Exception $e) {
+            log_message('error', 'Error al guardar orden de laboratorio: ' . $e->getMessage());
+            echo json_encode(['success' => false, 'message' => 'Error al guardar la orden de laboratorio']);
+        }
+    }
+
 	public function __construct() {
 		parent:: __construct();
 		$this->load->model("Pacientes_model");
@@ -276,21 +336,112 @@ class Historiaclinica extends Admin_Controller {
 	public function subirDocumentos() {
 		$paciente = $this->input->post("paciente");
 		$titulo = $this->input->post("titulo");
+		$tipo_archivo = $this->input->post("tipo_archivo");
 		$fecha = date("dmY");
-		$dir_subida = 'public/documentos/';
-        $fichero_subido = $dir_subida.basename($paciente."-".$fecha."-".$_FILES['icono']['name']);
-
-		move_uploaded_file($_FILES['icono']['tmp_name'], $fichero_subido);
-
-			$datos = array(
-				"paciente" => $paciente,
-				"titulo" => $titulo,
-				"icono" => $paciente."-".$fecha."-".$_FILES['icono']['name']
-			);
 		
-		$this->Historias_model->subirDocumentos($datos);
-		redirect(base_url("administracion/historia/".$paciente));
-	 }
+		// Definir las carpetas según el tipo de archivo
+		switch($tipo_archivo) {
+			case 'HF':
+				$carpeta = 'historial_fisico';
+				break;
+			case 'LB':
+				$carpeta = 'laboratorio';
+				break;
+			case 'PA':
+				$carpeta = 'patologia';
+				break;
+			default:
+				$carpeta = 'otros';
+		}
+		
+		$dir_base = 'public/documentos/';
+		$dir_subida = $dir_base . $carpeta . '/';
+        
+        // Verificar si se subió un archivo
+        if (!isset($_FILES['archivo']) || $_FILES['archivo']['error'] !== UPLOAD_ERR_OK) {
+            $error = $_FILES['archivo']['error'] ?? 'Error desconocido';
+            $mensaje = 'Error al subir el archivo. Código: ' . $error;
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'danger']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'danger');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
+        }
+
+        // Validar tipo de archivo
+        $archivo_temporal = $_FILES['archivo']['tmp_name'];
+        $nombre_archivo = basename($_FILES['archivo']['name']);
+        $tipo_archivo = strtolower(pathinfo($nombre_archivo, PATHINFO_EXTENSION));
+        
+        // Permitir solo ciertos tipos de archivo
+        $extensiones_permitidas = array('pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png');
+        if (!in_array($tipo_archivo, $extensiones_permitidas)) {
+            $mensaje = 'Tipo de archivo no permitido. Solo se permiten archivos PDF, DOC, DOCX, JPG, JPEG y PNG.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'warning']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'warning');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
+        }
+
+        // Crear directorio base si no existe
+        if (!is_dir($dir_base)) {
+            mkdir($dir_base, 0777, true);
+        }
+        
+        // Crear subdirectorio según el tipo de archivo si no existe
+        if (!is_dir($dir_subida)) {
+            mkdir($dir_subida, 0777, true);
+        }
+
+        // Generar nombre único para el archivo
+        $nuevo_nombre = $paciente."-".$fecha."-".uniqid().".".$tipo_archivo;
+        $ruta_archivo = $dir_subida . $nuevo_nombre;
+
+        // Mover el archivo subido al directorio de destino
+        if (move_uploaded_file($archivo_temporal, $ruta_archivo)) {
+            $datos = array(
+                "paciente" => $paciente,
+                "titulo" => $titulo,
+                "icono" => $carpeta . '/' . $nuevo_nombre
+            );
+            
+            $this->Historias_model->subirDocumentos($datos);
+            $mensaje = 'Archivo subido correctamente.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => true, 'alerta' => $mensaje, 'tipo_alerta' => 'success']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'success');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
+        } else {
+            $mensaje = 'Error al mover el archivo subido.';
+            
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['success' => false, 'alerta' => $mensaje, 'tipo_alerta' => 'danger']);
+                return;
+            } else {
+                $this->session->set_flashdata('alerta', $mensaje);
+                $this->session->set_flashdata('tipo_alerta', 'danger');
+                redirect(base_url("administracion/historia/".$paciente));
+                return;
+            }
+        }
+    }
 
 	public function GenerarPdfGinecologia() {
 		$id = $this->uri->segment(3);

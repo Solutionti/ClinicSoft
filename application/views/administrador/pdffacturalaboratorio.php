@@ -32,7 +32,7 @@ $pdf->Ln(5);
 
 $pdf->Cell(4,5,'', '', 0,'L', false );
 
-$pdf->Cell(7,5,'Av. Grau #478', '', 0,'L', false );
+$pdf->Cell(7,5,'Av. Salaverry #1402 - Chiclayo', '', 0,'L', false );
 
 $pdf->Ln(2);
 

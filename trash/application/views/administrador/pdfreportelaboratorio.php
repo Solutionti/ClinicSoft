@@ -38,7 +38,7 @@ $pdf->SetFont('Times','B',9);
 $pdf->Ln(8);
 $pdf->Cell(10,6,'No', 1, 0,'L', false );
 $pdf->Cell(42,6,'PACIENTE', 1, 0,'L', false );
-$pdf->Cell(107,6,'ESPECIALIDAD', 1, 0,'L', false );
+$pdf->Cell(107,6,'SERVICIO', 1, 0,'L', false );
 $pdf->Cell(20,6,'PAGO', 1, 0,'L', false );
 $pdf->Cell(15,6,'VALOR', 1, 0,'L', false );
 

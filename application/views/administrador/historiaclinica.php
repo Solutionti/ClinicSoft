@@ -351,7 +351,7 @@
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
           <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#medicamentosactivos" aria-expanded="false" aria-controls="medicamentosactivos">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-pills"></i> FORMULA DE MEDICAMENTOS</span>
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-pills"></i> RECETA MEDICA</span>
           </a>
         </div>
         <div id="medicamentosactivos" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
@@ -1285,7 +1285,7 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
-            <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">MEDICAMENTOS</button>
+            <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">RECETA MEDICA</button>
             <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
             <button class="nav-link" id="nav-ordpat-tab" data-bs-toggle="tab" data-bs-target="#nav-ordpat" type="button" role="tab" aria-controls="nav-ordpat" aria-selected="false" >ORD. PATOLOGIA</button>
           </div>
@@ -1693,39 +1693,30 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <div class="flex align-items-center gap-3 mb-3">
-      <label>Tipo de Archivo</label>
-      <select
-        class="form-control form-control-sm"
-        id="tparchivo"
-      >
-        <option value="">Seleccione una opcion</option>
-        <option value="HF">Historial Fisico</option>
-        <option value="LB">Laboratorio</option>
-      </select>
-    </div>
-    <div class="flex align-items-center gap-3 mb-3">
-      <label>Titulo</label>
-      <input
-        type="text"
-        class="form-control form-control-sm"
-        id="titulo"
-        autocomplete="off"
-      />
-    </div>
-    <div class="flex align-items-center gap-3 mb-5">
-        <label>Archivo</label>
-        <input
-          type="file"
-          class="form-control form-control-sm"
-          (change)="cargueDocumento($event)"
-          accept=".pdf"
-        />
-    </div>
+        <form id="form-subir-documento" action="<?php echo base_url(); ?>administracion/subirdocumentos" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="paciente" value="<?php echo $pacientes->documento; ?>">
+          <div class="mb-3">
+            <label class="form-label">Tipo de Archivo</label>
+            <select class="form-control form-control-sm" name="tipo_archivo" required>
+              <option value="">Seleccione una opción</option>
+              <option value="HF">Historial Físico</option>
+              <option value="LB">Laboratorio</option>
+              <option value="PA">Patología</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control form-control-sm" name="titulo" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Archivo</label>
+            <input type="file" class="form-control form-control-sm" name="archivo" accept=".pdf" required>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="submit" form="form-subir-documento" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

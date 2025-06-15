@@ -44,7 +44,7 @@ $pdf->Ln(5);
 
 $pdf->Cell(60,6,'', '', 0,'L', false );
 
-$pdf->Cell(7,6,'Av. Grau #478 - Chiclayo', '', 0,'L', false );
+$pdf->Cell(7,6,'Av. Salaverry #1402 - Chiclayo', '', 0,'L', false );
 
 $pdf->Ln(2);
 
