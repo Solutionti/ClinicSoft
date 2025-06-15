@@ -375,7 +375,7 @@
                     <td>
                       <div class="row">
                         <a 
-                          href="<?php echo base_url(); ?>administracion/pdfmedicamentosorden"
+                          href="<?php echo base_url(); ?>administracion/pdfmedicamentosorden/<?php echo $medicamentos->paciente; ?>/<?php echo $medicamentos->triaje; ?>"
                           class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3"
                           target="_blank"
                           title="Generar tiquet"

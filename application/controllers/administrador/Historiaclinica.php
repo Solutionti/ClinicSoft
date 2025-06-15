@@ -1322,8 +1322,9 @@ class Historiaclinica extends Admin_Controller {
 	  }
 
 
-	  public function formatoMedicamentosOrdenamiento() {
-		$datospaciente = $this->Pacientes_model->getPacienteId('1110542802')->result()[0];
+	  public function formatoMedicamentosOrdenamiento($paciente, $triaje) {
+		$datospaciente = $this->Pacientes_model->getPacienteId($paciente)->result()[0];
+		$medicamentos = $this->Historias_model->formatoMedicamentosOrdenamiento($paciente, $triaje);
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
 		$pdf->AddPage('L');
@@ -1403,7 +1404,6 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->cell(40,5, 'OTROS _____________________________________________________________________________________________________________________________________________________________________', 0);
 		$pdf->Ln(7);
 		$pdf->cell(90,5, 'DIAGNOSTICO   ( CIE10 )', 0);
-
 		$pdf->Ln(7);
 		$pdf->cell(15,5, 'RP', 1);
 		$pdf->cell(145,5, 'MEDICAMENTO O INSUMO', 1);
@@ -1412,12 +1412,14 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->cell(20,5, 'CANTIDAD', 1);
 
 		$pdf->Ln(5);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(15,5, '1', 1);
-		$pdf->cell(145,5, 'ACETAMINOFEN EN JARABE', 1);
-		$pdf->cell(40,5, 'ML', 1);
-		$pdf->cell(50,5, 'QER546828', 1);
-		$pdf->cell(20,5, '10', 1);
+		foreach($medicamentos->result() as $medicamento) {
+		  $pdf->SetFont('Arial', '', 8);
+	      $pdf->cell(15,5, '1', 1);
+		  $pdf->cell(145,5, strtoupper($medicamento->medicamento), 1);
+		  $pdf->cell(40,5, strtoupper($medicamento->dosis), 1);
+		  $pdf->cell(50,5, strtoupper('QER546828'), 1);
+		  $pdf->cell(20,5, $medicamento->cantidad, 1);
+		}
 
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial', 'B', 8);
@@ -1428,8 +1430,8 @@ class Historiaclinica extends Admin_Controller {
 
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 8);
-      $pdf->cell(100,5, 'Jerson Galvez Ensuncho' , 0);
-      $pdf->cell(90,5, "Juan Manuel Santos Restrepo", 0);
+      $pdf->cell(100,5, strtoupper($this->session->userdata("nombre").' '.$this->session->userdata("apellido")) , 0);
+      $pdf->cell(90,5, strtoupper($datospaciente->nombre.' '.$datospaciente->apellido), 0);
       $pdf->cell(50,5, "Fecha de Atención", 0);
       $pdf->cell(50,5, "Valido Hasta", 0);
       $pdf->Ln(3);

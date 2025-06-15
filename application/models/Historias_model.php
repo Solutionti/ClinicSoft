@@ -582,7 +582,18 @@ class Historias_model extends CI_model {
         $result = $this->db->get();
   
         return $result;  
-      }
+    }
+
+    public function formatoMedicamentosOrdenamiento($paciente, $triaje) {
+      $this->db->select("*");     
+      $this->db->from("medicamentos");     
+      $this->db->where("paciente", $paciente);     
+      $this->db->where("triaje", $triaje);
+      
+      $result = $this->db->get();
+
+      return $result;
+    }
     
 }
 

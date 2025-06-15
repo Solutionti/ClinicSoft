@@ -257,7 +257,7 @@ $route["administracion/pdfhistoriaclinica/(:num)/(:num)"] = "administrador/histo
 $route["administracion/pdfhistoriaclinicaginecologica/(:num)/(:num)"] = "administrador/historiaclinica/crearPdfHistoriaClinicaGinecologica/$1/$2";
 $route["administracion/pdflaboratoriorden/(:num)/(:num)/(:num)"] = "administrador/historiaclinica/formatoLaboratorioOrdenes/$1/$2/$3";
 $route["administracion/pdfpatologiaorden/(:num)/(:num)"] = "administrador/historiaclinica/formatoPatologiaOrdenamiento/$1/$2";
-$route["administracion/pdfmedicamentosorden"] = "administrador/historiaclinica/formatoMedicamentosOrdenamiento";
+$route["administracion/pdfmedicamentosorden/(:num)/(:num)"] = "administrador/historiaclinica/formatoMedicamentosOrdenamiento/$1/$2";
 $route["administracion/crearOrdenLaboratorio"] = "administrador/historiaclinica/crearOrdenLaboratorio";
 
 /***************************************************************
