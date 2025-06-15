@@ -216,7 +216,7 @@ function crearOrdenLaboratorioHistoria() {
         return;
     }
     
-    var url = baseurl + "administracion/guardar_orden_laboratorio_historia";
+    var url = baseurl + "administracion/crearOrdenLaboratorio";
     var datos = {
         id_paciente: $("#paciente_id").val(),
         id_medico: $("#doctorid1").val(),
