@@ -1536,14 +1536,14 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(37,5, 'ECOGRAFIAS', 0);
-		$pdf->cell(5,5, ' X', 1);
+		// $pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->Ln(6);
 		$pdf->cell(35,5, 'GINECOLOGIA', 0);
-		$pdf->cell(5,5, ' X', 1);
+		// $pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(37,5, 'FARMACIA', 0);
-		$pdf->cell(5,5, ' X', 1);
+		// $pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(10,5, 'EDAD', 0);
 		$pdf->SetFont('Arial', '', 8);
@@ -1551,10 +1551,10 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->Ln(6);
 		$pdf->SetFont('Arial', 'B', 8);
 		$pdf->cell(35,5, 'OSTETRICA', 0);
-		$pdf->cell(5,5, ' X', 1);
+		// $pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(37,5, 'LABORATORIO CLINICO', 0);
-		$pdf->cell(5,5, ' X', 1);
+		// $pdf->cell(5,5, ' X', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(30,5, 'HISTORIA CLINICA', 0);
 		$pdf->SetFont('Arial', '', 8);
@@ -1579,6 +1579,7 @@ class Historiaclinica extends Admin_Controller {
 		  $pdf->cell(40,5, strtoupper($medicamento->dosis), 1);
 		  $pdf->cell(50,5, strtoupper('QER546828'), 1);
 		  $pdf->cell(20,5, $medicamento->cantidad, 1);
+		  $pdf->Ln(5);
 		}
 
 		$pdf->Ln(10);
