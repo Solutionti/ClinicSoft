@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acostar Pacientes</title>
+    <title>Generacion de manilla QR</title>
     <?php require_once("componentes/head.php"); ?>
 </head>
 <body>
@@ -17,9 +17,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">SAMI</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Internación</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Generar manillas</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Internación</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Generar manillas</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">

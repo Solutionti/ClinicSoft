@@ -201,10 +201,10 @@
                </ul>
             </div>
          </li>
-         <li class="nav-item ">
+         <!-- SEGURIDAD EN APLICACION DE MEDICAMENTO INTELIGENTE -->
+         <!-- <li class="nav-item ">
             <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#resoluciones">
             <i class="fas text-primary fa-pills"></i>
-            <!-- SEGURIDAD EN APLICACION DE MEDICAMENTO INTELIGENTE -->
             <span class="sidenav-normal">SAMI<b class="caret"></b></span> 
             </a>
             <div class="collapse " id="resoluciones">
@@ -217,6 +217,11 @@
                   <li class="nav-item">
                      <a class="nav-link " href="<?php echo base_url(); ?>sami/acostarpaciente" target="_blank">
                      <span class="sidenav-normal">Acostar Pacientes</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link " href="<?php echo base_url(); ?>sami/acostarpaciente" target="_blank">
+                     <span class="sidenav-normal">Manillas QR</span>
                      </a>
                   </li>
                   <li class="nav-item">
@@ -236,7 +241,7 @@
                   </li>
                </ul>
             </div>
-         </li>
+         </li> -->
          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>administracion/reportes">
             <i class="fas text-primary fa-chart-pie"></i>
