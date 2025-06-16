@@ -165,7 +165,7 @@ class Historias_model extends CI_model {
             "paciente" => $data["paciente"],
             "titulo" => $data["titulo"],
             "url_documento" => $data["icono"],
-            "tp_documento" => "hfisico",
+            "tp_documento" => $data["tipo_archivo"],
             "fecha" => date("Y-m-d")
         ];
         $this->db->insert("documentos_pacientes", $datos);
@@ -593,6 +593,15 @@ class Historias_model extends CI_model {
       $result = $this->db->get();
 
       return $result;
+    }
+
+    public function getDocumentosPacientes($paciente) {
+      $this->db->select("*");     
+      $this->db->from("documentos_pacientes");     
+      $this->db->where("paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;   
     }
     
 }

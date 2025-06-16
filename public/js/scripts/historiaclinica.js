@@ -217,26 +217,32 @@ function crearOrdenLaboratorioHistoria() {
     }
     
     var url = baseurl + "administracion/crearOrdenLaboratorio";
-    var datos = {
-        id_paciente: $("#paciente_id").val(),
-        id_medico: $("#doctorid1").val(),
-        analisis: elementos_laboratorio
-    };
-    
+    var documento = $("#documento_historia").val(),
+    nombre = $("#nombre_paciente").val(),
+    edad = $("#edad_paciente").val(),
+    medico = $("#medico_solicitante").val(),
+    triage = $("#consecutivo_historia").val(),
+    ordenlab = [];
+    for (let i = 0; i < elementos_laboratorio.length; i++) {
+      ordenlab [i] = elementos_laboratorio[i][0];
+    }
     $.ajax({
         url: url,
         method: "POST",
-        data: datos,
+        data: {
+          documento: documento,
+          nombre: nombre,
+          edad: edad,
+          medico: medico,
+          triage: triage,
+          ordenlab: ordenlab
+        },
         success: function(response) {
             $("body").overhang({
                 type: "success",
                 message: "Orden de laboratorio guardada correctamente"
             });
-            // Limpiar la tabla de seleccionados
-            $('#table-laboratorio-items').DataTable().clear().draw();
-            elementos_laboratorio = [];
-            // Cerrar el modal si es necesario
-            $("#procesosclinicos").modal("hide");
+            setTimeout(reloadPage, 3000);
         },
         error: function() {
             $("body").overhang({

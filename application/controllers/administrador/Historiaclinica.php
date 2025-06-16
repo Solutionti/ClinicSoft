@@ -97,6 +97,8 @@ class Historiaclinica extends Admin_Controller {
 		$laboratorios = $this->Laboratorio_model->getPreciosLaboratorio();
 		$ordenPatologicas = $this->Historias_model->getOrdenesPatologicas($documento);
 		$ordenLaboratorios = $this->Historias_model->getOrdeneslaboratorio($documento);
+        $documentosPacientes = $this->Historias_model->getDocumentosPacientes($documento);
+		
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -118,7 +120,8 @@ class Historiaclinica extends Admin_Controller {
 			"doctor"=> $doctores,
 			"laboratorio" => $laboratorios,
 			"ordenpatologica" => $ordenPatologicas,
-			"ordenLaboratorio" =>$ordenLaboratorios
+			"ordenLaboratorio" =>$ordenLaboratorios,
+			"documentosPacientes" => $documentosPacientes
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
@@ -337,19 +340,20 @@ class Historiaclinica extends Admin_Controller {
 		$paciente = $this->input->post("paciente");
 		$titulo = $this->input->post("titulo");
 		$tipo_archivo = $this->input->post("tipo_archivo");
+		$tipoarc = $this->input->post("tipo_archivo");
 		$fecha = date("dmY");
 		
 		// Definir las carpetas según el tipo de archivo
 		switch($tipo_archivo) {
 			case 'HF':
-				$carpeta = 'historial_fisico';
-				break;
+			  $carpeta = 'historial_fisico';
+			  break;
 			case 'LB':
-				$carpeta = 'laboratorio';
-				break;
+			  $carpeta = 'laboratorio';
+			  break;
 			case 'PA':
-				$carpeta = 'patologia';
-				break;
+			  $carpeta = 'patologia';
+			  break;
 			default:
 				$carpeta = 'otros';
 		}
@@ -413,7 +417,8 @@ class Historiaclinica extends Admin_Controller {
             $datos = array(
                 "paciente" => $paciente,
                 "titulo" => $titulo,
-                "icono" => $carpeta . '/' . $nuevo_nombre
+                "icono" => $carpeta . '/' . $nuevo_nombre,
+				"tipo_archivo" => $tipoarc
             );
             
             $this->Historias_model->subirDocumentos($datos);
@@ -2127,5 +2132,4 @@ class Historiaclinica extends Admin_Controller {
 		 }
 
 	  }
-
 }

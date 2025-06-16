@@ -200,22 +200,40 @@
               <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
-                      <!-- <ul
+                      <ul
                         class="list-inline"
                         *ngFor="let archivos of archivospdf"
                       >
+                        <?php foreach($documentosPacientes->result() as $documentos) { ?>
                         <li>
                           <i class="fas fa-file-pdf mx-1 text-danger"></i>
+                          <?php if($documentos->tp_documento == "HF") { ?>
                           <a
-                            href="http://localhost:8000/archivospdf/{{ archivos.url_documento }}"
                             target="_blank"
+                            href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
                           >
-                            Ecografias
+                            <?php echo $documentos->titulo; ?>
                           </a>
+                          <?php } else if($documentos->tp_documento == "LB") { ?>
+                            <a
+                            target="_blank"
+                            href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
+                          >
+                            <?php echo $documentos->titulo; ?>
+                          </a>
+                          <?php } else if($documentos->tp_documento == "PA") { ?>
+<a
+                            target="_blank"
+                            href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
+                          >
+                            <?php echo $documentos->titulo; ?>
+                          </a>
+                          <?php } ?>
                          </li>
-                        <small>1 mb | 26-12-1993</small>
-                      </ul> -->
+                        <small><?php echo $documentos->codigo_documento_pacientes; ?> | <?php echo $documentos->fecha; ?> </small>
 
+                        <?php } ?>
+                      </ul>
                       <button
                         class="btn btn-primary btn-xs"
                         data-bs-toggle="modal" data-bs-target="#archivos"
