@@ -67,7 +67,9 @@ class Atencion extends Admin_Controller {
 		$total_recibida= $this->input->post("cantidad_recibida");
 		$tipo_deposito = $this->input->post("forma_pago");
         $orden__ = 0;
+		
 		$CountTurnos = $this->Atencion_model->CountTurnos($doctor);
+
 		if ($CountTurnos->num_rows() > 0){
 		  foreach ($CountTurnos->result() as $row){
 		    $orden__ = (($row->Orden)*1)+1;

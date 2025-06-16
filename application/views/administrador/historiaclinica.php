@@ -379,21 +379,19 @@
                 <thead>
                   <tr class="bg-dark text-white">
                     <th class="text-uppercase text-xs"></th>
-                    <th class="text-uppercase text-xs">Medicamento</th>
-                    <th class="text-uppercase text-xs">Cant</th>
-                    <th class="text-uppercase text-xs">Dosis</th>
-                    <th class="text-uppercase text-xs">Via</th>
-                    <th class="text-uppercase text-xs">Frecuencia</th>
-                    <th class="text-uppercase text-xs">Duracion</th>
+                    <th class="text-uppercase text-xs">Codigo</th>
+                    <th class="text-uppercase text-xs">Fecha</th>
+                    <th class="text-uppercase text-xs">triage</th>
+                    <th class="text-uppercase text-xs">Usuario</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($medicamento->result() as $medicamentos){ ?>
+                  <?php foreach($recetas->result() as $medicamentos){ ?>
                   <tr class="text-capitalize">
                     <td>
                       <div class="row">
                         <a 
-                          href="<?php echo base_url(); ?>administracion/pdfmedicamentosorden/<?php echo $medicamentos->paciente; ?>/<?php echo $medicamentos->triaje; ?>"
+                          href="<?php echo base_url(); ?>administracion/pdfmedicamentosorden/<?php echo $medicamentos->paciente; ?>/<?php echo $medicamentos->triage; ?>"
                           class="icon icon-shape icon-sm bg-gradient-danger shadow text-center mx-3"
                           target="_blank"
                           title="Generar tiquet"
@@ -403,12 +401,10 @@
 
                       </div>
                     </td>
-                    <td><?php echo $medicamentos->medicamento; ?></td>
-                    <td><?php echo $medicamentos->cantidad; ?></td>
-                    <td><?php echo $medicamentos->dosis; ?></td>
-                    <td><?php echo $medicamentos->via_aplicacion; ?> </td>
-                    <td><?php echo $medicamentos->frecuencia; ?></td>
-                    <td><?php echo $medicamentos->duracion; ?></td>
+                    <td><?php echo $medicamentos->codigoreceta_medica; ?></td>
+                    <td><?php echo $medicamentos->fecha; ?></td>
+                    <td><?php echo $medicamentos->triage; ?> </td>
+                    <td><?php echo $medicamentos->usuario; ?></td>
                   </tr>
                   <?php } ?>
                 </tbody>
@@ -1502,9 +1498,10 @@
                 </div>
                 <div class="row mt-3">
                   <div class="col-md-12">
-                    <button class="btn btn-primary" onclick="crearMedicamento()">
+                    <button class="btn btn-primary" type="button" onclick="crearMedicamento()">
                       Guardar
                     </button>
+                    
                   </div>
                 </div>
               </form>
@@ -1952,7 +1949,7 @@
 </div>
 
       <?php require_once("componentes/scripts.php"); ?>
-      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.0"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>

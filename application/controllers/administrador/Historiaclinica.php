@@ -124,6 +124,7 @@ class Historiaclinica extends Admin_Controller {
 			"ordenpatologica" => $ordenPatologicas,
 			"ordenLaboratorio" =>$ordenLaboratorios,
 			"documentosPacientes" => $documentosPacientes,
+			"recetas" => $recetas,
 			// 
 			"ecoAbdominales" => $ecoAbdominal
 		];
@@ -512,6 +513,16 @@ class Historiaclinica extends Admin_Controller {
 	  $frecuencia = $this->input->post("frecuencia");		
 	  $duracion = $this->input->post("duracion");
 	  $triaje = $this->input->post("triaje");
+	
+	  $receta = $this->Historias_model->validarExistenciaReceta($paciente,$triaje);
+
+	  if($receta == 0) {
+	    $datosreceta = [
+			"paciente" => $paciente,
+			"triage" => $triaje,
+		];
+		$this->Historias_model->crearReceta($datosreceta);
+	  }
 	  
 	  $datos = [
 	    "triaje" => $triaje,		

@@ -607,12 +607,39 @@ class Historias_model extends CI_model {
     // controladores para listar las ecografias
     
     public function getEcografiaAbdominal($paciente) {
-    $this->db->select("*");     
+      $this->db->select("*");     
       $this->db->from("ecografia_abdominal");     
       $this->db->where("documento_paciente", $paciente);
       $result = $this->db->get();
 
       return $result;
+    }
+
+    public function validarExistenciaReceta($paciente,$triage) {
+      $this->db->select("*");     
+      $this->db->from("recetas_medicas");     
+      $this->db->where("paciente", $paciente);
+      $this->db->where("triage", $triage);
+      $result = $this->db->get();
+
+      if($result->num_rows() > 0) {
+          return 1;
+      }
+      else {
+        return 0;
+      }
+    }
+
+    public function crearReceta($datos) {
+      $receta = [
+        "paciente" => $datos["paciente"],
+        "fecha" => date("Y-m-d"),
+        "triage" => $datos["triage"],
+        "autorizo" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
+        "usuario" => $this->session->userdata("nombre")." ".$this->session->userdata("apellido"),
+      ];
+
+      $this->db->insert("recetas_medicas", $receta);
     }
     
 }
