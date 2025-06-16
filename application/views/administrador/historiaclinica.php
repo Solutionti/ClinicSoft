@@ -494,9 +494,39 @@
           <div class="accordion-body">
             <div class="row">
               <div class="col-md-12">
-                
+                <table class="table table-striped table-hover">
+                  <thead  class="bg-dark text-white">
+                    <th>
+                      
+                    </th>
+                    <th class="text-uppercase text-xs">Tipo de ecografia</th>
+                    <th class="text-uppercase text-xs">Doctor</th>
+                    <th class="text-uppercase text-xs">fecha y hora</th>
+                  </thead>
+                  <tbody>
+                    <?php foreach($ecoAbdominales->result() as $acoabdominal) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiaabdominal/<?php echo $acoabdominal->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Abdominal</td>
+                      <td><?php echo $acoabdominal->codigo_doctor; ?></td>
+                      <td><?php echo $acoabdominal->fecha; ?></td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>

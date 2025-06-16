@@ -98,7 +98,9 @@ class Historiaclinica extends Admin_Controller {
 		$ordenPatologicas = $this->Historias_model->getOrdenesPatologicas($documento);
 		$ordenLaboratorios = $this->Historias_model->getOrdeneslaboratorio($documento);
         $documentosPacientes = $this->Historias_model->getDocumentosPacientes($documento);
-		
+
+		//listar las ecografias en el frontend
+		$ecoAbdominal = $this->Historias_model->getEcografiaAbdominal($documento);
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -121,7 +123,9 @@ class Historiaclinica extends Admin_Controller {
 			"laboratorio" => $laboratorios,
 			"ordenpatologica" => $ordenPatologicas,
 			"ordenLaboratorio" =>$ordenLaboratorios,
-			"documentosPacientes" => $documentosPacientes
+			"documentosPacientes" => $documentosPacientes,
+			// 
+			"ecoAbdominales" => $ecoAbdominal
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}

@@ -603,6 +603,17 @@ class Historias_model extends CI_model {
 
       return $result;   
     }
+
+    // controladores para listar las ecografias
+    
+    public function getEcografiaAbdominal($paciente) {
+    $this->db->select("*");     
+      $this->db->from("ecografia_abdominal");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
     
 }
 
