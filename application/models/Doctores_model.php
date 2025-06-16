@@ -171,7 +171,7 @@ class Doctores_model extends CI_model {
            //"desde" => $data["desde"],
            //"hasta" => $data["hasta"],
         ];
-        $this->db->where("cpe", $data["documento"]);
+        $this->db->where("codigo_doctor ", $data["id"]);
         $this->db->update("doctores", $datos);
     }
 }

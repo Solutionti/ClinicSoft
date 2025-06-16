@@ -640,8 +640,7 @@ class Historias_model extends CI_model {
       ];
 
       $this->db->insert("recetas_medicas", $receta);
-    }
-    
+    } 
 }
 
 ?>

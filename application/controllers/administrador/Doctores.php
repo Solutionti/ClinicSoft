@@ -50,7 +50,7 @@ class Doctores extends Admin_Controller {
 	}
 
 	public function actualizarDoctor() {
-
+		$id = $this->input->post("id");
         $documento = $this->input->post("documento");
         $nombre = $this->input->post("nombre");
         $perfil = $this->input->post("perfil");
@@ -107,6 +107,7 @@ class Doctores extends Admin_Controller {
 			"telefono" => $telefono,
 			"direccion" => $direccion,
 			"correo" => $correo,
+			"id" => $id
 		];
 		$this->Doctores_model->actualizarDoctor($datos);
     }

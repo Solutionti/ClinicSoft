@@ -278,13 +278,19 @@
                   <div class="row mt-4">
                     <div class="col-md-6">
                         <div class="row">
-                          <div class="col-md-4">
+                          <div class="col-md-3">
+                              <div class="form-group input-group-sm">
+                                <label>ID</label>
+                                <input type="number" class="form-control" id="id_doctor1" readonly>
+                              </div>
+                          </div>
+                          <div class="col-md-3">
                               <div class="form-group input-group-sm">
                                 <label>CMP</label>
                                 <input type="number" class="form-control" id="cpe1">
                               </div>
                           </div>
-                          <div class="col-md-8">
+                          <div class="col-md-6">
                               <div class="form-group input-group-sm">
                                 <label>Nombre completo</label>
                                 <input type="text" class="form-control" id="nombre1">

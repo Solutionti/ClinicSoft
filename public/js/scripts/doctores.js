@@ -82,8 +82,9 @@
             data = JSON.parse(data);
             console.log(data);
             $("#Doctorparametrizar").modal("show");
+             $("#id_doctor1").val(data.codigo_doctor );
              $("#cpe1").val(data.cpe);
-             $("#nombre1").val(data.nombre);
+             $("#nombre1").val(data.nombre + ' ' + data.apellido);
              $("#perfil1").val(data.perfil);
              $("#telefono1").val(data.telefono);
              $("#direccion1").val(data.direccion);
@@ -317,6 +318,7 @@ $("#actualizardoctor").on("click", function () {
         telefono = $("#telefono1").val();
         direccion = $("#direccion1").val();
         correo = $("#correo1").val();
+        id = $("#id_doctor1").val();
         $("#Horas_lunes").val(($("#Horas_lunes").val()).replace(" ", ""));    Horas_lunes = $("#Horas_lunes").val()
         $("#Horas_martes").val(($("#Horas_martes").val()).replace(" ", ""));     Horas_martes = $("#Horas_martes").val()
         $("#Horas_miercoles").val(($("#Horas_miercoles").val()).replace(" ", ""));    Horas_miercoles = $("#Horas_miercoles").val()
@@ -419,7 +421,8 @@ $("#actualizardoctor").on("click", function () {
             perfil: perfil,
             telefono: telefono,
             direccion: direccion,
-            correo: correo
+            correo: correo,
+            id: id
           },
         
           success: function (){
