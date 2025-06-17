@@ -51,7 +51,7 @@
         <div class="row gx-4">
           <div class="col-auto">
             <br>
-            <div class="avatar avatar-xl position-relative text-primary mx-4">
+            <div class="avatar avatar-xl position-relative text-primary ms-5">
               <img src="<?php echo base_url(); ?>public/img/theme/team-41.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
           </div>
@@ -62,21 +62,27 @@
             </div>
           </div>
         </div>
-        <br>
         <div class="container-fluid">
           <div class="row mt-3">
             <div class="col-md-2">
               <div class="card  mb-3" >
                 <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
+                  <h5 class="card-title text-primary text-center"><i class="fas fa-bed"></i> #0102</h5>
+                    <p class="card-text">
+                     <span class="text-danger">Pabellon de la cama</span>
                     <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
+                     <span class="text-dark">Modulo 
+                     <br>
+                     <span class="text-danger text-uppercase">consulta</span></span>
                   </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-success btn-xs" title="Estado de la cama">LIBRE</a>
+                    </div>
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-dark btn-xs">VER</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,114 +90,49 @@
             <div class="col-md-2">
               <div class="card  mb-3" >
                 <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
+                  <h5 class="card-title text-primary text-center"><i class="fas fa-bed"></i> #0103</h5>
                   <p class="card-text">
-                    1110542802
+                     <span class="text-danger">Pabellon de la cama</span>
                     <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
+                    <span class="text-dark">Modulo: 
+                      <br>
+                      <span class="text-danger text-uppercase">Cirugia</span></span>
                   </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-danger btn-xs" title="Estado de la cama">OCUPADA</a>
+                    </div>
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-dark btn-xs">VER</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <!--  -->
             <div class="col-md-2">
-              <div class="card  mb-3" >
+              <div class="card mb-3" >
                 <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
+                  <h5 class="card-title text-primary text-center"><i class="fas fa-bed"></i> #0104</h5>
                   <p class="card-text">
-                    1110542802
+                    <span class="text-danger text-uppercase">Pabellon cama</span>
                     <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
+                    <span class="text-dark">Modulo:
+                      <br>
+                      <span class="text-danger text-uppercase">Piso 3</span></span>
                   </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-warning btn-xs" title="Estado de la cama">MANTENI</a>
+                    </div>
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-dark btn-xs">VER </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <!--  -->
-            <div class="col-md-2">
-              <div class="card  mb-3">
-                <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
-                    <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
-                  </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
-                </div>
-              </div>
-            </div>
-            <!--  -->
-            <div class="col-md-2">
-              <div class="card  mb-3">
-                <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
-                    <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
-                  </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
-                </div>
-              </div>
-            </div>
-            <!--  -->
-            <div class="col-md-2">
-              <div class="card  mb-3">
-                <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
-                    <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
-                  </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
-                </div>
-              </div>
-            </div>
-            <!--  -->
-            <div class="col-md-2">
-              <div class="card  mb-3">
-                <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
-                    <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
-                  </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
-                </div>
-              </div>
-            </div>
-            <!--  -->
-            <div class="col-md-2">
-              <div class="card  mb-3">
-                <div class="card-body">
-                  <h5 class="card-title text-primary"> Cama #0102 <i class="fas fa-bed"></i></h5>
-                  <p class="card-text">
-                    1110542802
-                    <br>
-                    Jerson  Galvez Ensuncho
-                    <br>
-                    Consecutivo: 0012
-                  </p>
-                  <a href="#" class="btn btn-danger btn-sm">Acostar paciente</a>
-                </div>
-              </div>
-            </div>
             <!--  -->
           </div>
       </div>
