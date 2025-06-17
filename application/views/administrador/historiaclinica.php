@@ -540,6 +540,232 @@
                     </tr>
                     <?php }?>
 
+                     <?php foreach($ecoGeneticas->result() as $ecoGenetica) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiagenetica/<?php echo $ecoGenetica->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Genetica</td>
+                      <td><?php  echo $ecoGenetica->codigo_doctor ?></td>
+                      <td><?php  echo $ecoGenetica->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
+                     <?php foreach($ecoMorfologicas->result() as $ecoMorfologica) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiamorfologica/<?php echo $ecoMorfologica->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Morfologica</td>
+                      <td><?php  echo $ecoMorfologica->codigo_doctor ?></td>
+                      <td><?php  echo $ecoMorfologica->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
+                     <?php foreach($ecoTrasvaginals->result() as $ecoTrasvaginal) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiatrasvaginal/<?php echo $ecoTrasvaginal->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Trasvaginal</td>
+                      <td><?php  echo $ecoTrasvaginal->codigo_doctor ?></td>
+                      <td><?php  echo $ecoTrasvaginal->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                    <?php foreach($ecoPelvicas->result() as $ecoPelvica) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiapelvica/<?php echo $ecoPelvica->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Pelvica</td>
+                      <td><?php  echo $ecoPelvica->codigo_doctor ?></td>
+                      <td><?php  echo $ecoPelvica->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                    <?php foreach($ecoObstetricas->result() as $ecoObstetrica) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiaobstetrica/<?php echo $ecoObstetrica->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Obstetrica</td>
+                      <td><?php  echo $ecoObstetrica->codigo_doctor ?></td>
+                      <td><?php  echo $ecoObstetrica->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                     <?php foreach($ecoProstaticas->result() as $ecoProstatica) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiaprostatica/<?php echo $ecoProstatica->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Prostatica</td>
+                      <td><?php  echo $ecoProstatica->codigo_doctor ?></td>
+                      <td><?php  echo $ecoProstatica->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                    <?php foreach($ecoRenals->result() as $ecoRenal) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiarenal/<?php echo $ecoRenal->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Renal</td>
+                      <td><?php  echo $ecoRenal->codigo_doctor ?></td>
+                      <td><?php  echo $ecoRenal->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
+                     <?php foreach($ecoTiroidess->result() as $ecoTiroides) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiatiroides/<?php echo $ecoTiroides->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Tiroides</td>
+                      <td><?php  echo $ecoTiroides->codigo_doctor ?></td>
+                      <td><?php  echo $ecoTiroides->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                     <?php foreach($ecoHisterosonografias->result() as $ecoHisterosonografia) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiaHisterosonografia/<?php echo $ecoHisterosonografia->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Histerosonografia</td>
+                      <td><?php  echo $ecoHisterosonografia->codigo_doctor ?></td>
+                      <td><?php  echo $ecoHisterosonografia->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+                      <?php foreach($ecoArterials->result() as $ecoArterial) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiaarterial/<?php echo $ecoArterial->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Arterial</td>
+                      <td><?php  echo $ecoArterial->codigo_doctor ?></td>
+                      <td><?php  echo $ecoArterial->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
+                      <?php foreach($ecoVenosas->result() as $ecoVenosa) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiavenosa/<?php echo $ecoVenosa->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Venosa</td>
+                      <td><?php  echo $ecoVenosa->codigo_doctor ?></td>
+                      <td><?php  echo $ecoVenosa->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
+
 
                   </tbody>
                 </table>

@@ -55,7 +55,7 @@ function createEcografiaPelvica() {
           type: "success",
           message: "Ecografía de Pelvica registrada correctamente"
         });
-  
+        generarpdfPelvica()
         // Limpiar los campos después de un insert exitoso
         $("#dni").val('');
         $("#codigo_doctor").val('');
@@ -78,7 +78,7 @@ function createEcografiaPelvica() {
         $("#miometrio").val('Homogenio');
         $("#conclusion").val('');
         $("#sugerencias").val('');
-        generarpdfPelvica()
+      
         setTimeout(function() {
           location.reload();
       }, 2000);

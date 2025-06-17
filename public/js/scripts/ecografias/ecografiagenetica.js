@@ -43,8 +43,7 @@ function createEcografiaGenetica() {
               type: "success",
               message: "Ecografía de Mama registrada correctamente"
             });
-            
-
+            generarpdfGenetica();
             $("#dni").val(''); 
             $("#codigo_doctor").val('');
             $("input[name='fetoembrion']").prop('checked', false); 
@@ -62,7 +61,7 @@ function createEcografiaGenetica() {
             $("#conclusion").val(''); 
             $("#sugerencia").val('');
 
-            generarpdfGenetica()
+            
             
             setTimeout(function() {
               location.reload();
@@ -76,6 +75,7 @@ function createEcografiaGenetica() {
           }
         });  
       }
+
       function generarpdfGenetica() {
         let dni = $("#dni").val();
         let url = baseurl + "administracion/pdfecografiagenetica/" + dni;

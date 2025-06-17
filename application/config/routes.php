@@ -183,7 +183,7 @@ $route["administracion/cargararchivoecografias"] = "administrador/ecografias/sub
 $route["administracion/crearpagoadicional"] = "administrador/financiero/crearpagoadicional";
 
 /***********************************************************
-************************ VISTA DE COGRAFIAS*****************
+************************ VISTA DE ECOGRAFIAS*****************
 ************************************************************/
 $route["administracion/ecografiaMamaview"] = "administrador/ecografias/ecografiaMamaview";
 $route["administracion/ecografiaGeneticaview"] = "administrador/ecografias/ecografiaGeneticaview";

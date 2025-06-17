@@ -102,6 +102,17 @@ class Historiaclinica extends Admin_Controller {
 		//listar las ecografias en el frontend
 		$ecoAbdominal = $this->Historias_model->getEcografiaAbdominal($documento);
 		$ecoMama = $this->Historias_model->getEcografiaMama($documento);
+		$ecoGenetica = $this->Historias_model->getEcografiaGenetica($documento);
+		$ecoMorfologica = $this->Historias_model->getEcografiaMorfologica($documento);
+		$ecoTrasvaginal = $this->Historias_model->getEcografiaTrasvaginal($documento);
+		$ecoPelvica = $this->Historias_model->getEcografiaPelvica($documento);
+		$ecoObstetrica = $this->Historias_model->getEcografiaObstetrica($documento);
+		$ecoProstatica = $this->Historias_model->getEcografiaProstatica($documento);
+		$ecoRenal = $this->Historias_model->getEcografiaRenal($documento);
+		$ecoTiroides = $this->Historias_model->getEcografiaTiroides($documento);
+		$ecoHisterosonografia = $this->Historias_model->getEcografiaHisterosonografia($documento);
+		$ecoArterial = $this->Historias_model->getEcografiaArterial($documento);
+		$ecoVenosa = $this->Historias_model->getEcografiaVenosa($documento);
 
 		$data = [
 			"paciente" => $pacientes,
@@ -129,7 +140,19 @@ class Historiaclinica extends Admin_Controller {
 			"recetas" => $recetas,
 			// 
 			"ecoAbdominales" => $ecoAbdominal,
-			"ecoMamas" => $ecoMama
+			"ecoMamas" => $ecoMama,
+			"ecoGeneticas" => $ecoGenetica,
+			"ecoMorfologicas" => $ecoMorfologica,
+			"ecoTrasvaginals" => $ecoTrasvaginal,
+			"ecoPelvicas" => $ecoPelvica,
+			"ecoObstetricas" => $ecoObstetrica,
+			"ecoProstaticas" => $ecoProstatica,
+			"ecoRenals" => $ecoRenal,
+			"ecoTiroidess" => $ecoTiroides,
+			"ecoHisterosonografias" => $ecoHisterosonografia,
+			"ecoArterials" => $ecoArterial,
+			"ecoVenosas" => $ecoVenosa,
+
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}
@@ -1501,98 +1524,102 @@ class Historiaclinica extends Admin_Controller {
 		$medicamentos = $this->Historias_model->formatoMedicamentosOrdenamiento($paciente, $triaje);
 		$this->load->library('PDF_UTF8');
 		$pdf = new PDF_UTF8();
-		$pdf->AddPage('L');
-		$pdf->SetAlpha(0.2); // Transparencia (0.1 = 10% opacidad)
-		$pdf->Image("public/img/theme/logo.png", 110, 90, 70); // Ajusta las coordenadas y tamaño según necesites
+		$pdf->AddPage('P');
+		$pdf->SetAlpha(0.1); // Transparencia (0.1 = 10% opacidad)
+		$pdf->Image("public/img/theme/logo.png", 70, 80, 70); // Ajusta las coordenadas y tamaño según necesites
 		$pdf->SetAlpha(1); // Restauramos la opacidad al 100%
 		$pdf->SetDrawColor(0,24,0);
 		$pdf->SetFillColor(115,115,115);
-		$pdf->Rect(10, 35,  270,  2, 'F');
+		$pdf->Rect(10, 35,  198,  2, 'F');
 		$pdf->Image("public/img/theme/logo.png", 10, 18, 25, 0, 'PNG');
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 9);
-		$pdf->cell(200,5, '', 0);
-		$pdf->cell(40,5, 'UNA NUEVA MENERA DE CUIDAR', 0);
+		$pdf->cell(135,5, '', 0);
+		$pdf->cell(40,5, 'UNA NUEVA MANERA DE CUIDAR', 0);
 		$pdf->Ln(5);
-		$pdf->cell(195,5, '', 0);
+		$pdf->cell(130,5, '', 0);
 		$pdf->cell(40,5, 'TU SALUD Y DE LOS QUE MAS QUIERES', 0);
 		$pdf->Ln(10);
-		$pdf->cell(197,5, '', 0);
-		$pdf->cell(20,5, 'RECETA MEDICA DE MEDICAMENTOS', 0);
+		$pdf->cell(80,5, '', 0);
+		$pdf->cell(20,5, 'RECETA DE MEDICAMENTOS', 0);
 
 		$pdf->Ln(10);
 		$pdf->SetFont('Arial', 'B', 8);
-        $pdf->cell(35,5, 'NOMBRE Y APELLIDOS:', 0);
+        $pdf->cell(34,5, 'NOMBRE Y APELLIDOS:', 0);
 		$pdf->SetFont('Arial', '', 8);
-        $pdf->cell(70,5, $datospaciente->nombre.' '.$datospaciente->apellido, 0);
+        $pdf->cell(70,5, $datospaciente->nombre.''.$datospaciente->apellido, 0);
 		$pdf->SetFont('Arial', 'B', 8);
-        $pdf->cell(10,5, 'SEXO', 0);
+        $pdf->cell(10,5, 'SEXO:', 0);
 		$pdf->SetFont('Arial', '', 8);
         $pdf->cell(20,5, $datospaciente->sexo, 0);
-
 		$pdf->SetFont('Arial', 'B', 8);
-        $pdf->cell(18,5, 'TELEFONO', 0);
+        $pdf->cell(15,5, 'CELULAR:', 0);
 		$pdf->SetFont('Arial', '', 8);
-        $pdf->cell(20,5, $datospaciente->telefono, 0);
-
+        $pdf->cell(15,5, $datospaciente->telefono, 0);
+		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 8);
-        $pdf->cell(18,5, 'DIRECCIÓN', 0);
+        $pdf->cell(18,5, 'DIRECCIÓN:', 0);
 		$pdf->SetFont('Arial', '', 8);
-        $pdf->cell(60,5, $datospaciente->direccion, 0);
+        $pdf->cell(86,5, $datospaciente->direccion, 0);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(10,5, 'EDAD:', 0);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(20,5, $datospaciente->edad." AÑOS", 0);
+		$pdf->SetFont('Arial', 'B', 8);
+		$pdf->cell(27,5, 'HISTORIA CLINICA:', 0);
+		$pdf->SetFont('Arial', '', 8);
+		$pdf->cell(70,5, $datospaciente->hc, 0);
 
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 8);
         $pdf->cell(40,5, 'ATENCION EN', 0);
-
 		$pdf->Ln(7);
         $pdf->SetFont('Arial', 'B', 8);
 		$pdf->cell(35,5, 'MEDICINA GENERAL', 0);
-		$pdf->cell(5,5, ' X', 1);
-		$pdf->cell(50,5, '', 0);
+		$pdf->cell(5,5, ' ', 1);
+		$pdf->cell(40,5, '', 0);
+		$pdf->SetX($pdf->GetX() + 10);
 		$pdf->cell(37,5, 'ECOGRAFIAS', 0);
-		// $pdf->cell(5,5, ' X', 1);
+	 	$pdf->cell(5,5, ' ', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->Ln(6);
 		$pdf->cell(35,5, 'GINECOLOGIA', 0);
-		// $pdf->cell(5,5, ' X', 1);
+		$pdf->cell(5,5, '', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(37,5, 'FARMACIA', 0);
-		// $pdf->cell(5,5, ' X', 1);
+		$pdf->cell(5,5, '', 1);
 		$pdf->cell(50,5, '', 0);
-		$pdf->cell(10,5, 'EDAD', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(70,5, $datospaciente->edad." AÑOS", 0);
 		$pdf->Ln(6);
 		$pdf->SetFont('Arial', 'B', 8);
 		$pdf->cell(35,5, 'OSTETRICA', 0);
-		// $pdf->cell(5,5, ' X', 1);
+		$pdf->cell(5,5, '', 1);
 		$pdf->cell(50,5, '', 0);
 		$pdf->cell(37,5, 'LABORATORIO CLINICO', 0);
-		// $pdf->cell(5,5, ' X', 1);
+		$pdf->cell(5,5, '', 1);
 		$pdf->cell(50,5, '', 0);
-		$pdf->cell(30,5, 'HISTORIA CLINICA', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(70,5, $datospaciente->hc, 0);
-		$pdf->Ln(6);
+		
+		$pdf->Ln(13);
 		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(40,5, 'OTROS _____________________________________________________________________________________________________________________________________________________________________', 0);
+		$pdf->cell(40,5, 'OTROS ________________________________________________________________________________________________', 0);
 		$pdf->Ln(7);
 		$pdf->cell(90,5, 'DIAGNOSTICO   ( CIE10 )', 0);
 		$pdf->Ln(7);
-		$pdf->cell(15,5, 'RP', 1);
-		$pdf->cell(145,5, 'MEDICAMENTO O INSUMO', 1);
-		$pdf->cell(40,5, 'CONCENTRACION', 1);
-		$pdf->cell(50,5, 'FORMA FARMACEUTICA', 1);
-		$pdf->cell(20,5, 'CANTIDAD', 1);
+		$pdf->cell(10,5, 'CANT', 1);
+		$pdf->cell(55,5, 'MEDICAMENTO O INSUMO', 1);
+		$pdf->cell(30,5, 'DOSIS', 1);
+		$pdf->cell(40,5, 'VIA DE APLICACION', 1);
+		$pdf->cell(30,5, 'FRECUENCIA', 1);
+		$pdf->cell(30,5, 'DURACION', 1);
 
 		$pdf->Ln(5);
 		foreach($medicamentos->result() as $medicamento) {
 		  $pdf->SetFont('Arial', '', 8);
-	      $pdf->cell(15,5, '1', 1);
-		  $pdf->cell(145,5, strtoupper($medicamento->medicamento), 1);
-		  $pdf->cell(40,5, strtoupper($medicamento->dosis), 1);
-		  $pdf->cell(50,5, strtoupper('QER546828'), 1);
-		  $pdf->cell(20,5, $medicamento->cantidad, 1);
+	      $pdf->cell(10,5, $medicamento->cantidad, 1);
+		  $pdf->cell(55,5, strtoupper($medicamento->medicamento), 1);
+		  $pdf->cell(30,5, strtoupper($medicamento->dosis), 1);
+		  $pdf->cell(40,5, strtoupper($medicamento->via_aplicacion), 1);
+		  $pdf->cell(30,5, $medicamento->frecuencia, 1);
+		  $pdf->cell(30,5, $medicamento->duracion, 1);
 		  $pdf->Ln(5);
 		}
 
@@ -1600,28 +1627,23 @@ class Historiaclinica extends Admin_Controller {
 		$pdf->SetFont('Arial', 'B', 8);
 		$pdf->cell(10,5, 'INDICACIONES', 0);
 		$pdf->SetFont('Arial', '', 7);
-		$pdf->Ln(7);
+		$pdf->Ln(10);
 		$pdf->multicell(270,4, '', 0);
 
 		$pdf->Ln(7);
 		$pdf->SetFont('Arial', 'B', 8);
       $pdf->cell(100,5, strtoupper($this->session->userdata("nombre").' '.$this->session->userdata("apellido")) , 0);
-      $pdf->cell(90,5, strtoupper($datospaciente->nombre.' '.$datospaciente->apellido), 0);
       $pdf->cell(50,5, "Fecha de Atención", 0);
-      $pdf->cell(50,5, "Valido Hasta", 0);
       $pdf->Ln(3);
       $pdf->cell(100,5, '_________________________________________', 0);
-      $pdf->cell(90,5, '_________________________________________', 0);
-      $pdf->cell(50,5, date('Y-m-d'), 0);
       $pdf->cell(50,5, date('Y-m-d'), 0);
       $pdf->Ln(4);
       $pdf->SetFont('Arial', '', 8);
       $pdf->cell(100,5, 'Quien Ordena', 0);
-      $pdf->cell(30,5, 'Firma Paciente', 0);
       $pdf->Ln(8);
       $pdf->SetFont('Arial', '', 8);
-      $pdf->cell(242,5, '', 0);
-      $pdf->cell(30,5, '*** Fin del reporte ***', 0);
+      $pdf->cell(80,5, '', 0);
+      $pdf->cell(30,5, '*** Fin del receta ***', 0);
 		$pdf->Output('I', 'recetamedica.pdf');
 	  }
 

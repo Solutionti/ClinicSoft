@@ -624,6 +624,105 @@ class Historias_model extends CI_model {
       return $result;
     }
 
+     public function getEcografiaGenetica($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_genetica");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaMorfologica($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_morfologica");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaTrasvaginal($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_trasvaginal");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaPelvica($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_pelvica");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+    public function getEcografiaObstetrica($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_obstetrica");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaProstatica($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_prostatica");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+      public function getEcografiaRenal($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_renal");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaTiroides($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_tiroides");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+     public function getEcografiaHisterosonografia($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_histerosonografia");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+    public function getEcografiaArterial($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_arterial");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+    public function getEcografiaVenosa($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_venosa");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
 
     //**********************************************************
 
