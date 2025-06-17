@@ -101,6 +101,8 @@ class Historiaclinica extends Admin_Controller {
 
 		//listar las ecografias en el frontend
 		$ecoAbdominal = $this->Historias_model->getEcografiaAbdominal($documento);
+		$ecoMama = $this->Historias_model->getEcografiaMama($documento);
+
 		$data = [
 			"paciente" => $pacientes,
 			"historia" => $historias,		
@@ -126,7 +128,8 @@ class Historiaclinica extends Admin_Controller {
 			"documentosPacientes" => $documentosPacientes,
 			"recetas" => $recetas,
 			// 
-			"ecoAbdominales" => $ecoAbdominal
+			"ecoAbdominales" => $ecoAbdominal,
+			"ecoMamas" => $ecoMama
 		];
 		$this->load->view('administrador/historiaclinica', $data);
 	}

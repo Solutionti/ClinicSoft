@@ -519,6 +519,28 @@
                       <td><?php echo $acoabdominal->fecha; ?></td>
                     </tr>
                     <?php } ?>
+                      
+                    <?php foreach($ecoMamas->result() as $ecoMama) { ?>
+                    <tr>
+                      <td>
+                        <div class="row">
+                        <a 
+                          class="icon icon-shape icon-sm bg-gradient-primary shadow text-center mx-3"
+                          target="_blank"
+                          title="Generar tiquet"
+                          href="<?php echo base_url(); ?>administracion/pdfecografiamama/<?php echo $ecoMama->documento_paciente; ?>"
+                        >
+                            <i class="fas fa-file-pdf text-white opacity-10"></i>
+                        </a>
+                        </div>
+                      </td>
+                      <td>Ecografia Mama</td>
+                      <td><?php  echo $ecoMama->codigo_doctor ?></td>
+                      <td><?php  echo $ecoMama->fecha ?></td>
+                    </tr>
+                    <?php }?>
+
+
                   </tbody>
                 </table>
               </div>
@@ -1949,7 +1971,7 @@
 </div>
 
       <?php require_once("componentes/scripts.php"); ?>
-      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.0"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>

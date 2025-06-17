@@ -615,6 +615,18 @@ class Historias_model extends CI_model {
       return $result;
     }
 
+      public function getEcografiaMama($paciente) {
+      $this->db->select("*");     
+      $this->db->from("ecografia_mama");     
+      $this->db->where("documento_paciente", $paciente);
+      $result = $this->db->get();
+
+      return $result;
+    }
+
+
+    //**********************************************************
+
     public function validarExistenciaReceta($paciente,$triage) {
       $this->db->select("*");     
       $this->db->from("recetas_medicas");     
