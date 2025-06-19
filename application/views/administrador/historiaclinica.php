@@ -1646,7 +1646,10 @@
                   <div class="col-md-7">
                     <label>Medicamento</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" id="medicamento_medicamento">
+                      <a href=""  data-bs-toggle="modal" data-bs-target="#modalmedicamentos">
+                        <span class="input-group-text" id="basic-addon1"> <i class="fas fa-eye"></i> </span>
+                      </a>
+                      <input type="text" class="form-control" id="medicamento_medicamento" readonly>
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -2196,8 +2199,58 @@
 </div>
 </div>
 
+<!-- modal de medicamentos -->
+<div class="modal fade" id="modalmedicamentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalmedicamentosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-default">
+        <h1 class="modal-title fs-5 text-white text-uppercase" id="modalmedicamentosLabel">Medicamentos disponibles en Farmacia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-hover table-striped table-borderless" id="table-medicamentos-farmacia">
+              <thead class="bg-default text-white">
+                <tr>
+                  <th></th>
+                  <th>Codigo</th>
+                  <th>Medicamento</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach($medicamentofarmacias->result() as $farmacia) { ?>
+                <tr>
+                  <td>
+                    <div class="form-check mb-3">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        name="formRadio"
+                        onchange="asociarmedicamentoFarmacia('<?php  echo $farmacia->codigo_producto.' - '.utf8_decode($farmacia->nombre_producto); ?>')"
+                      >
+                    </div> 
+                  </td>
+                  <td><?php echo utf8_decode($farmacia->codigo_producto); ?></td>
+                  <td><?php echo utf8_decode($farmacia->nombre_producto); ?></td>
+                  <td>Disponible</td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#procesosclinicos" >Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
       <?php require_once("componentes/scripts.php"); ?>
-      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.2"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>

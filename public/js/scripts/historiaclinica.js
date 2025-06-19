@@ -137,6 +137,24 @@ var table_lab_mini4 = $("#items-procedimientos2-table").DataTable({
     }
 });
 
+
+    $("#table-medicamentos-farmacia").DataTable({
+        "lengthMenu": [5,10, 50, 100, 200],
+        "language":{
+          "processing": "Procesando",
+          "search": "Buscar:",
+          "lengthMenu": "Ver _MENU_  Medicamentos",
+          "info": "Mirando _START_ a _END_ de _TOTAL_ Medicamentos",
+          "zeroRecords": "No encontraron resultados",
+          "paginate": {
+            "first":      "Primera",
+            "last":       "Ultima",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          }
+        }
+    });
+
 // Variables para almacenar los análisis seleccionados y filas ocultas
 var elementos_laboratorio = [];
 var filasOcultas = {}; // Almacenar referencias a filas ocultas
@@ -796,6 +814,12 @@ function crearMedicamento() {
         type: "success",
         message: "El medicamento se ha registrado correctamente"
      });
+      $("#medicamento_medicamento").val(''),
+      $("#cantidad_medicamento").val(''),
+      $("#dosis_medicamento").val(''),
+      $("#via_aplicacion_medicamento").val(''),
+      $("#frecuencia_medicamento").val(''),
+      $("#duracion_medicamento").val('');
     //  setTimeout(reloadPage, 3000);
    },
    error: function() {
@@ -981,4 +1005,8 @@ $('#form-subir-documento').on('submit', function(e) {
         }
     });
 });
+
+function asociarmedicamentoFarmacia(nombre) {
+  $("#medicamento_medicamento").val(nombre);
+}
 
