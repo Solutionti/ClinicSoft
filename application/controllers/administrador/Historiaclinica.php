@@ -2176,4 +2176,23 @@ class Historiaclinica extends Admin_Controller {
 		 }
 
 	  }
+
+	  public function borrarArchivoPdf() {
+		$codigo = $this->input->post("codigo");
+		$tipoarchivo = $this->input->post("tipoarchivo");
+		$archivo = $this->input->post("archivo");
+
+		if($tipoarchivo == "HF") {
+		  $link = "public/documentos/".$archivo;
+		}
+		else if($tipoarchivo == "LB") {
+          $link = "public/documentos/".$archivo;
+		}
+		else if($tipoarchivo == "PA") {
+          $link = "public/documentos/".$archivo;
+		}
+
+		$this->Historias_model->borrarArchivoPdf($codigo);
+		unlink($link);
+	  }
 }

@@ -1010,3 +1010,41 @@ function asociarmedicamentoFarmacia(nombre) {
   $("#medicamento_medicamento").val(nombre);
 }
 
+function CancelarMedicamento() {
+  $("#medicamento_medicamento").val('');
+}
+
+function borrarDocumento(codigo,tipoarchivo,archivo) {
+$("body").overhang({
+  type: "confirm",
+  primary: "#40D47E",
+  accent: "#27AE60",
+  yesColor: "#3498DB",
+  message: "Desea eliminar el archivo por completo?",
+  overlay: true,
+  callback: function (value) {
+    if (value) {
+      let url =  baseurl + "administracion/eliminararchivo";
+      $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+         codigo: codigo,
+         tipoarchivo: tipoarchivo,
+         archivo: archivo,
+        },
+        success: function(response) {
+          $("body").overhang({
+            type: "success",
+            message: "Archivo eliminado correctamente"
+          });
+          setTimeout(reloadPage, 3000);
+        },
+      });
+
+    } else {
+    }
+  }
+});
+}
+

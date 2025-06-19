@@ -206,13 +206,22 @@
                       >
                         <?php foreach($documentosPacientes->result() as $documentos) { ?>
                         <li>
+                          <a
+                            href="#"
+                            class="mx-1 text-danger"
+                            title="Borrar documento"
+                            onclick="borrarDocumento('<?php echo  $documentos->codigo_documento_pacientes;?>','<?php echo  $documentos->tp_documento;?>', '<?php echo  $documentos->url_documento;?>')"
+                          >
+                            <i class="fas fa-times fa-1x"></i>
+                          </a>
+                          |
                           <i class="fas fa-file-pdf mx-1 text-danger"></i>
                           <?php if($documentos->tp_documento == "HF") { ?>
                           <a
                             target="_blank"
                             href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
                           >
-                            <?php echo $documentos->titulo; ?>
+                            <?php echo $documentos->titulo; ?> 
                           </a>
                           <?php } else if($documentos->tp_documento == "LB") { ?>
                             <a
@@ -230,8 +239,8 @@
                           </a>
                           <?php } ?>
                          </li>
-                        <small><?php echo $documentos->codigo_documento_pacientes; ?> | <?php echo $documentos->fecha; ?> </small>
-
+                          <small><?php echo $documentos->codigo_documento_pacientes; ?> | <?php echo $documentos->fecha; ?> </small>
+                          
                         <?php } ?>
                       </ul>
                       <button
@@ -1649,7 +1658,7 @@
                       <a href=""  data-bs-toggle="modal" data-bs-target="#modalmedicamentos">
                         <span class="input-group-text" id="basic-addon1"> <i class="fas fa-eye"></i> </span>
                       </a>
-                      <input type="text" class="form-control" id="medicamento_medicamento" readonly>
+                      <input type="text" class="form-control" id="medicamento_medicamento">
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -2244,13 +2253,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#procesosclinicos" >Aceptar</button>
+        <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#procesosclinicos" onclick="CancelarMedicamento()">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
 
       <?php require_once("componentes/scripts.php"); ?>
-      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.2"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.3"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>

@@ -764,6 +764,11 @@ class Historias_model extends CI_model {
 
       return $result;
     }
+
+    public function borrarArchivoPdf($codigo) {
+      $this->db->where('codigo_documento_pacientes', $codigo);
+      $this->db->delete('documentos_pacientes');
+    }
 }
 
 ?>
