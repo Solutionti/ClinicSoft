@@ -206,6 +206,7 @@
                       >
                         <?php foreach($documentosPacientes->result() as $documentos) { ?>
                         <li>
+                          <?php  if($this->session->userdata("rol") == "Administrador") {?>
                           <a
                             href="#"
                             class="mx-1 text-danger"
@@ -215,6 +216,7 @@
                             <i class="fas fa-times fa-1x"></i>
                           </a>
                           |
+                          <?php } ?>
                           <i class="fas fa-file-pdf mx-1 text-danger"></i>
                           <?php if($documentos->tp_documento == "HF") { ?>
                           <a
