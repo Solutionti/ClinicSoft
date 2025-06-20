@@ -439,7 +439,10 @@ function buscarPacienteBaseDatos() {
        divInfo.classList.add('d-flex', 'px-2', 'py-1');
        const divImg = document.createElement('div');
        const img = document.createElement('img');
-       img.src = 'https://radiarte.com/application/files/6917/0923/2244/depositphotos_134255588-stock-illustration-empty-photo-of-male-profile.jpg';
+       // Usar imagen según el género del paciente
+       const genero = pacientes.sexo ? pacientes.sexo.toLowerCase() : '';
+       const esMujer = genero.includes('femenino') || genero === 'f';
+       img.src = baseurl + 'public/img/theme/' + (esMujer ? 'avatar-mujer.jpg' : 'team-41.jpg');
        img.classList.add('avatar', 'avatar-sm', 'me-3');
        divImg.appendChild(img);
        const divText = document.createElement('div');

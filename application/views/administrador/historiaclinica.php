@@ -5,7 +5,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Administracion / historias</title>
-      <?php require_once("componentes/head.php"); ?>
+      <?php require_once ('componentes/head.php'); ?>
       
    </head>
    <body class="g-sidenav-show bg-gray-100">
@@ -48,78 +48,10 @@
                         <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                         </a>
                      </li>
-                     <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                     <li class="nav-item pe-2 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-white p-0">
                         <i class="fa fa-bell cursor-pointer"></i>
                         </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                           <li class="mb-2">
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                 <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                       <img src="<?php echo base_url();?>img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                       <h6 class="text-sm font-weight-normal mb-1">
-                                          <span class="font-weight-bold">New message</span> from Laur
-                                       </h6>
-                                       <p class="text-xs text-secondary mb-0">
-                                          <i class="fa fa-clock me-1"></i>
-                                          13 minutes ago
-                                       </p>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                           <li class="mb-2">
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                 <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                       <img src="<?php echo base_url();?>public/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                       <h6 class="text-sm font-weight-normal mb-1">
-                                          <span class="font-weight-bold">New album</span> by Travis Scott
-                                       </h6>
-                                       <p class="text-xs text-secondary mb-0">
-                                          <i class="fa fa-clock me-1"></i>
-                                          1 day
-                                       </p>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                           <li>
-                              <a class="dropdown-item border-radius-md" href="javascript:;">
-                                 <div class="d-flex py-1">
-                                    <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                       <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                          <title>credit-card</title>
-                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                                <g transform="translate(1716.000000, 291.000000)">
-                                                   <g transform="translate(453.000000, 454.000000)">
-                                                      <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                                      <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                                   </g>
-                                                </g>
-                                             </g>
-                                          </g>
-                                       </svg>
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                       <h6 class="text-sm font-weight-normal mb-1">
-                                          Payment successfully completed
-                                       </h6>
-                                       <p class="text-xs text-secondary mb-0">
-                                          <i class="fa fa-clock me-1"></i>
-                                          2 days
-                                       </p>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                        </ul>
                      </li>
                   </ul>
                </div>
@@ -131,14 +63,21 @@
         <div class="container-fluid mt-3">
           <div class="row">
             <div class="col-md-3">
-               <h4 class="page-header-title h6"> <?php echo $pacientes->nombre." ".$pacientes->apellido; ?></h4>
+               <h4 class="page-header-title h6"> <?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?></h4>
                 <div class="page-header">
                   <div class="d-flex align-items-lg-center">
                     <div class="flex-shrink-0">
-                      <img
-                        class="avatar avatar-xl avatar-circle"
-                        src="<?php echo base_url(); ?>public/img/theme/team-41.jpg"
-                      >
+                      <?php 
+                        $genero = isset($pacientes->sexo) ? strtolower($pacientes->sexo) : '';
+                        $imagen = (strpos($genero, 'femenino') !== false || $genero === 'f') 
+                                ? 'avatar-mujer.jpg' 
+                                : 'team-41.jpg';
+                        ?>
+                        <img
+                            class="avatar avatar-xl avatar-circle"
+                            src="<?php echo base_url('public/img/theme/' . $imagen); ?>"
+                            alt="Foto de perfil de <?php echo htmlspecialchars($pacientes->nombre . ' ' . $pacientes->apellido); ?>"
+                        >
                     </div>
                     <div class="flex-grow-1 ms-4">
                       <div class="row">
@@ -167,28 +106,28 @@
             <!--  -->
             <div class="card card-dashed h-900">
               <div class="card-header bg-default"><h6 class="text-white text-uppercase">Ultimos signos vitales</h6></div>
-              <div class="card-body">
-                <div class="row">
-                    <div class="col-md-7">
-                        <ul class="list-inline ">
-                          <li><i class="fas fa-ruler-vertical mt-2 text-danger"></i> Estatura</li>
-                          <li><i class="fas fa-weight text-dark mt-2"></i> Peso</li>
-                          <li><i class="fas fa-child mt-2 text-warning"></i> Masa Corporal</li>
-                          <li><i class="fas fa-thermometer mt-2 text-success"></i> Temperatura</li>
-                          <li><i class="fas fa-diagnoses text-dark"></i> Frec. Respiratoria</li>
-                          <li><i class="fas fa-heartbeat mt-2 text-danger"></i> Frec. Cardiaca</li>
-                          <li><i class="fas fa-child mt-2 text-danger"></i> Porcentaje Grasa</li>
+              <div class="card-body px-2">
+                <div class="row gx-0">
+                    <div class="col-5 ps-1">
+                        <ul class="list-inline mb-0">
+                          <li class="align-middle me-2"><i class="fas fa-ruler-vertical me-1 text-danger"></i>Estatura</li>
+                          <li class="align-middle me-2"><i class="fas fa-weight me-1 text-dark"></i>Peso</li>
+                          <li class="align-middle me-2"><i class="fas fa-child me-1 text-warning"></i>Masa</li>
+                          <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>Temp</li>
+                          <li class="align-middle me-2"><i class="fas fa-diagnoses me-1 text-dark"></i>F. Resp</li>
+                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Card</li>
+                          <li class="align-middle"><i class="fas fa-child me-1 text-danger"></i>% Grasa</li>
                         </ul>
                     </div>
-                    <div class="col-md-5">
-                        <ul class="list-inline ">
-                            <li class="mt-1" id="estatura"></li>
-                            <li class="mt-0" id="peso"> </li>
-                            <li class="mt-1" id="imc"> </li>
-                            <li class="mt-0" id="temperatura"></li>
-                            <li class="mt-2" id="respiratoria"></li>
-                            <li class="mt-1" id="cardiaca"> </li>
-                            <li class="mt-0">0 %</li>
+                    <div class="col-7 ps-0">
+                        <ul class="list-inline mb-0">
+                            <li class="align-middle" id="estatura"></li>
+                            <li class="align-middle" id="peso"> </li>
+                            <li class="align-middle" id="imc"> </li>
+                            <li class="align-middle" id="temperatura"></li>
+                            <li class="align-middle" id="respiratoria"></li>
+                            <li class="align-middle" id="cardiaca"> </li>
+                            <li class="align-middle" id="grasa"></li>
                           </ul>
                     </div>
                 </div>
@@ -204,35 +143,35 @@
                         class="list-inline"
                         *ngFor="let archivos of archivospdf"
                       >
-                        <?php foreach($documentosPacientes->result() as $documentos) { ?>
+                        <?php foreach ($documentosPacientes->result() as $documentos) { ?>
                         <li>
-                          <?php  if($this->session->userdata("rol") == "Administrador") {?>
+                          <?php if ($this->session->userdata('rol') == 'Administrador') { ?>
                           <a
                             href="#"
                             class="mx-1 text-danger"
                             title="Borrar documento"
-                            onclick="borrarDocumento('<?php echo  $documentos->codigo_documento_pacientes;?>','<?php echo  $documentos->tp_documento;?>', '<?php echo  $documentos->url_documento;?>')"
+                            onclick="borrarDocumento('<?php echo $documentos->codigo_documento_pacientes; ?>','<?php echo $documentos->tp_documento; ?>', '<?php echo $documentos->url_documento; ?>')"
                           >
                             <i class="fas fa-times fa-1x"></i>
                           </a>
                           |
                           <?php } ?>
                           <i class="fas fa-file-pdf mx-1 text-danger"></i>
-                          <?php if($documentos->tp_documento == "HF") { ?>
+                          <?php if ($documentos->tp_documento == 'HF') { ?>
                           <a
                             target="_blank"
                             href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
                           >
                             <?php echo $documentos->titulo; ?> 
                           </a>
-                          <?php } else if($documentos->tp_documento == "LB") { ?>
+                          <?php } else if ($documentos->tp_documento == 'LB') { ?>
                             <a
                             target="_blank"
                             href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
                           >
                             <?php echo $documentos->titulo; ?>
                           </a>
-                          <?php } else if($documentos->tp_documento == "PA") { ?>
+                          <?php } else if ($documentos->tp_documento == 'PA') { ?>
 <a
                             target="_blank"
                             href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
@@ -273,14 +212,14 @@
           <div class="alert alert-primary text-white" role="alert">
             <h6 class="alert-heading">Alergia a Medicamentos</h6>
             <ul class="list-inline ">
-              <?php foreach($alergiamedica->result() as $alergiame){ ?>
+              <?php foreach ($alergiamedica->result() as $alergiame) { ?>
                 <li class="mx-4 text-capitalize"><?php echo $alergiame->descripcion; ?></li>
               <?php } ?>
             </ul>
             <hr>
             <h6 class="alert-heading">Otras Alergias</h6>
             <ul class="list-inline ">
-              <?php foreach($alergiaotro->result() as $alergiaotro){ ?>
+              <?php foreach ($alergiaotro->result() as $alergiaotro) { ?>
                 <li class="mx-4 text-capitalize"><?php echo $alergiaotro->descripcion; ?></li>
               <?php } ?>
             </ul>
@@ -329,12 +268,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <?php foreach($diagpaciente->result() as $diagnosticos){ ?>
+                      <?php foreach ($diagpaciente->result() as $diagnosticos) { ?>
                       <tr class="text-capitalize">
-                        <td> <?php echo  $diagnosticos->clave; ?> </td>
-                        <td> <?php echo $diagnosticos->descripcion;  ?> </td>
+                        <td> <?php echo $diagnosticos->clave; ?> </td>
+                        <td> <?php echo $diagnosticos->descripcion; ?> </td>
                       </tr>
-                      <?php }?>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>
@@ -362,7 +301,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <?php foreach($procepaciente->result() as $procedimientoss) { ?>
+                      <?php foreach ($procepaciente->result() as $procedimientoss) { ?>
                       <tr class="text-capitalize">
                         <td><?php echo $procedimientoss->codigo_cpt; ?>  </td>
                         <td><?php echo $procedimientoss->nombre; ?>  </td>
@@ -397,7 +336,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($recetas->result() as $medicamentos){ ?>
+                  <?php foreach ($recetas->result() as $medicamentos) { ?>
                   <tr class="text-capitalize">
                     <td>
                       <div class="row">
@@ -444,7 +383,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($ordenpatologica->result() as $ordenpato) { ?>
+                    <?php foreach ($ordenpatologica->result() as $ordenpato) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -464,7 +403,7 @@
                     </tr>
                     <?php } ?>
                     <!--  -->
-                    <?php foreach($ordenLaboratorio->result() as $ordenlabo) { ?>
+                    <?php foreach ($ordenLaboratorio->result() as $ordenlabo) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -511,7 +450,7 @@
                     <th class="text-uppercase text-xs">fecha y hora</th>
                   </thead>
                   <tbody>
-                    <?php foreach($ecoAbdominales->result() as $acoabdominal) { ?>
+                    <?php foreach ($ecoAbdominales->result() as $acoabdominal) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -531,7 +470,7 @@
                     </tr>
                     <?php } ?>
                       
-                    <?php foreach($ecoMamas->result() as $ecoMama) { ?>
+                    <?php foreach ($ecoMamas->result() as $ecoMama) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -546,12 +485,12 @@
                         </div>
                       </td>
                       <td>Ecografia Mama</td>
-                      <td><?php  echo $ecoMama->codigo_doctor ?></td>
-                      <td><?php  echo $ecoMama->fecha ?></td>
+                      <td><?php echo $ecoMama->codigo_doctor ?></td>
+                      <td><?php echo $ecoMama->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                     <?php foreach($ecoGeneticas->result() as $ecoGenetica) { ?>
+                     <?php foreach ($ecoGeneticas->result() as $ecoGenetica) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -566,13 +505,13 @@
                         </div>
                       </td>
                       <td>Ecografia Genetica</td>
-                      <td><?php  echo $ecoGenetica->codigo_doctor ?></td>
-                      <td><?php  echo $ecoGenetica->fecha ?></td>
+                      <td><?php echo $ecoGenetica->codigo_doctor ?></td>
+                      <td><?php echo $ecoGenetica->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
 
-                     <?php foreach($ecoMorfologicas->result() as $ecoMorfologica) { ?>
+                     <?php foreach ($ecoMorfologicas->result() as $ecoMorfologica) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -587,13 +526,13 @@
                         </div>
                       </td>
                       <td>Ecografia Morfologica</td>
-                      <td><?php  echo $ecoMorfologica->codigo_doctor ?></td>
-                      <td><?php  echo $ecoMorfologica->fecha ?></td>
+                      <td><?php echo $ecoMorfologica->codigo_doctor ?></td>
+                      <td><?php echo $ecoMorfologica->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
 
-                     <?php foreach($ecoTrasvaginals->result() as $ecoTrasvaginal) { ?>
+                     <?php foreach ($ecoTrasvaginals->result() as $ecoTrasvaginal) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -608,12 +547,12 @@
                         </div>
                       </td>
                       <td>Ecografia Trasvaginal</td>
-                      <td><?php  echo $ecoTrasvaginal->codigo_doctor ?></td>
-                      <td><?php  echo $ecoTrasvaginal->fecha ?></td>
+                      <td><?php echo $ecoTrasvaginal->codigo_doctor ?></td>
+                      <td><?php echo $ecoTrasvaginal->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                    <?php foreach($ecoPelvicas->result() as $ecoPelvica) { ?>
+                    <?php foreach ($ecoPelvicas->result() as $ecoPelvica) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -628,12 +567,12 @@
                         </div>
                       </td>
                       <td>Ecografia Pelvica</td>
-                      <td><?php  echo $ecoPelvica->codigo_doctor ?></td>
-                      <td><?php  echo $ecoPelvica->fecha ?></td>
+                      <td><?php echo $ecoPelvica->codigo_doctor ?></td>
+                      <td><?php echo $ecoPelvica->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                    <?php foreach($ecoObstetricas->result() as $ecoObstetrica) { ?>
+                    <?php foreach ($ecoObstetricas->result() as $ecoObstetrica) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -648,12 +587,12 @@
                         </div>
                       </td>
                       <td>Ecografia Obstetrica</td>
-                      <td><?php  echo $ecoObstetrica->codigo_doctor ?></td>
-                      <td><?php  echo $ecoObstetrica->fecha ?></td>
+                      <td><?php echo $ecoObstetrica->codigo_doctor ?></td>
+                      <td><?php echo $ecoObstetrica->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                     <?php foreach($ecoProstaticas->result() as $ecoProstatica) { ?>
+                     <?php foreach ($ecoProstaticas->result() as $ecoProstatica) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -668,12 +607,12 @@
                         </div>
                       </td>
                       <td>Ecografia Prostatica</td>
-                      <td><?php  echo $ecoProstatica->codigo_doctor ?></td>
-                      <td><?php  echo $ecoProstatica->fecha ?></td>
+                      <td><?php echo $ecoProstatica->codigo_doctor ?></td>
+                      <td><?php echo $ecoProstatica->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                    <?php foreach($ecoRenals->result() as $ecoRenal) { ?>
+                    <?php foreach ($ecoRenals->result() as $ecoRenal) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -688,13 +627,13 @@
                         </div>
                       </td>
                       <td>Ecografia Renal</td>
-                      <td><?php  echo $ecoRenal->codigo_doctor ?></td>
-                      <td><?php  echo $ecoRenal->fecha ?></td>
+                      <td><?php echo $ecoRenal->codigo_doctor ?></td>
+                      <td><?php echo $ecoRenal->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
 
-                     <?php foreach($ecoTiroidess->result() as $ecoTiroides) { ?>
+                     <?php foreach ($ecoTiroidess->result() as $ecoTiroides) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -709,12 +648,12 @@
                         </div>
                       </td>
                       <td>Ecografia Tiroides</td>
-                      <td><?php  echo $ecoTiroides->codigo_doctor ?></td>
-                      <td><?php  echo $ecoTiroides->fecha ?></td>
+                      <td><?php echo $ecoTiroides->codigo_doctor ?></td>
+                      <td><?php echo $ecoTiroides->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                     <?php foreach($ecoHisterosonografias->result() as $ecoHisterosonografia) { ?>
+                     <?php foreach ($ecoHisterosonografias->result() as $ecoHisterosonografia) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -729,12 +668,12 @@
                         </div>
                       </td>
                       <td>Ecografia Histerosonografia</td>
-                      <td><?php  echo $ecoHisterosonografia->codigo_doctor ?></td>
-                      <td><?php  echo $ecoHisterosonografia->fecha ?></td>
+                      <td><?php echo $ecoHisterosonografia->codigo_doctor ?></td>
+                      <td><?php echo $ecoHisterosonografia->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
-                      <?php foreach($ecoArterials->result() as $ecoArterial) { ?>
+                      <?php foreach ($ecoArterials->result() as $ecoArterial) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -749,13 +688,13 @@
                         </div>
                       </td>
                       <td>Ecografia Arterial</td>
-                      <td><?php  echo $ecoArterial->codigo_doctor ?></td>
-                      <td><?php  echo $ecoArterial->fecha ?></td>
+                      <td><?php echo $ecoArterial->codigo_doctor ?></td>
+                      <td><?php echo $ecoArterial->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
 
-                      <?php foreach($ecoVenosas->result() as $ecoVenosa) { ?>
+                      <?php foreach ($ecoVenosas->result() as $ecoVenosa) { ?>
                     <tr>
                       <td>
                         <div class="row">
@@ -770,10 +709,10 @@
                         </div>
                       </td>
                       <td>Ecografia Venosa</td>
-                      <td><?php  echo $ecoVenosa->codigo_doctor ?></td>
-                      <td><?php  echo $ecoVenosa->fecha ?></td>
+                      <td><?php echo $ecoVenosa->codigo_doctor ?></td>
+                      <td><?php echo $ecoVenosa->fecha ?></td>
                     </tr>
-                    <?php }?>
+                    <?php } ?>
 
 
 
@@ -822,7 +761,7 @@
                             <i class="fas fa-plus text-danger mx-1 "></i>
                           </span>
                         </small>
-                          <?php  if(!$poscita) {?>
+                          <?php if (!$poscita) { ?>
                             <P>Aun no hay citas agendadas utiliza la <a class="text-danger" data-bs-toggle="modal"
                             data-bs-target="#citasmedicas">agenda</a>  para calendarizarla</P>
                             <?php } else { ?>
@@ -834,7 +773,7 @@
                                 <hr>
                                 <small>
                                   <i class="fas fa-calendar"></i>
-                                  <?php echo substr($poscita->fecha,0,10); ?>   <?php echo $poscita->hora; ?>
+                                  <?php echo substr($poscita->fecha, 0, 10); ?>   <?php echo $poscita->hora; ?>
                                 </small>
                               </div>
 
@@ -844,9 +783,9 @@
                       <div class="row mt-4">
                         <small class="text-bold mb-2">CONSULTAS INICIADAS</small>
                          
-                        <?php if(!$generaliniciada) {?>
+                        <?php if (!$generaliniciada) { ?>
                           <P>Paciente no presenta atencion en <a class="text-primary">Consulta General</a></P>
-                        <?php } else {?>
+                        <?php } else { ?>
                           <div
                             class="alert alert-info text-white"
                             role="alert"
@@ -862,13 +801,13 @@
                             <?php echo $generaliniciada->fecha; ?> <?php echo $generaliniciada->hora; ?> 
                             </small>
                           </div>
-                        <?php }?>
+                        <?php } ?>
 
 
                         <!--  -->
-                        <?php if(!$ginecoiniciada) {?>
+                        <?php if (!$ginecoiniciada) { ?>
                           <P>Paciente no presenta atencion en <a class="text-danger">Consulta Ginecologica</a></P>
-                          <?php } else {?>
+                          <?php } else { ?>
                             <div
                               class="alert alert-warning text-white"
                               role="alert"
@@ -1240,7 +1179,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php foreach($diagnostico->result() as $diagnosticos){ ?>
+                      <?php foreach ($diagnostico->result() as $diagnosticos) { ?>
                         <tr>
                           <td class="budget"><?php echo $diagnosticos->id; ?></td>
                           <td class="budget"><?php echo $diagnosticos->clave; ?></td>
@@ -1537,7 +1476,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php foreach($procedimiento->result() as $procedimientos){ ?>
+                      <?php foreach ($procedimiento->result() as $procedimientos) { ?>
                         <tr>
                           <td> <?php echo $procedimientos->codigo_cpt; ?> </td>
                           <td> <?php echo $procedimientos->nombre; ?> </td>
@@ -1632,7 +1571,7 @@
                                 <input
                                   type="text"
                                   class="form-control form-control-sm"
-                                  value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                                  value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
                                   readonly
                                   >
                             </div>
@@ -1650,15 +1589,15 @@
                                 <input
                                   type="text"
                                   class="form-control form-control-sm"
-                                  value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                                  value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
                                   readonly
                                 >
                             </div>
                   <div class="col-md-7">
                     <label>Medicamento</label>
                     <div class="input-group">
-                      <a href=""  data-bs-toggle="modal" data-bs-target="#modalmedicamentos">
-                        <span class="input-group-text" id="basic-addon1"> <i class="fas fa-eye"></i> </span>
+                      <a href="" class="input-group-text" data-bs-toggle="modal" data-bs-target="#modalmedicamentos" style="padding: 0.375rem 0.75rem;">
+                        <i class="fas fa-eye"></i>
                       </a>
                       <input type="text" class="form-control" id="medicamento_medicamento">
                     </div>
@@ -1776,7 +1715,7 @@
                  <input
                    type="text"
                    class="form-control form-control-sm"
-                   value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                   value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
                    id="nombre_lab"
                    readonly
                  >
@@ -1796,7 +1735,7 @@
                  <input
                    type="text"
                    class="form-control form-control-sm"
-                   value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                   value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
                    id="medico_lab"
                    readonly
                  >
@@ -1814,7 +1753,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <?php foreach($laboratorio->result() as $laboratorios){ ?>
+                        <?php foreach ($laboratorio->result() as $laboratorios) { ?>
                         <tr>
                            <td class="text-xs"><?php echo $laboratorios->codigo; ?></td>
                            <td class="text-xs"><?php echo $laboratorios->nombre; ?></td>
@@ -1854,7 +1793,7 @@
                         type="text"
                         class="form-control form-control-sm"
                         id="nombre_paciente"
-                        value="<?php echo $pacientes->nombre." ".$pacientes->apellido; ?>"
+                        value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
                         readonly
                     >
                 </div>
@@ -1889,7 +1828,7 @@
                         type="text"
                         class="form-control form-control-sm"
                         id="medico_solicitante"
-                        value="<?php echo $this->session->userdata("nombre").' '.$this->session->userdata("apellido") ?>"
+                        value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
                         readonly
                     >
                 </div>
@@ -1961,17 +1900,17 @@
                     <input type="text" class="form-control form-control-sm" id="datos_clinicos">
                 </div>
             </div>
-            <div class="row mb-2">
+              <div class="row mb-2">
                 <div class="col-6">
                     <label class="form-label">Diagnóstico:</label>
                     <textarea class="form-control form-control-sm" rows="1" id="diagnostico_patologia"></textarea>
                 </div>
                 <div class="col-6">
                     <label class="form-label">Fecha:</label>
-                    <input type="date" class="form-control form-control-sm" id="fechaActual" value="<?php echo date("Y-m-d"); ?>">
+                    <input type="date" class="form-control form-control-sm" id="fechaActual" value="<?php echo date('Y-m-d'); ?>">
                 </div>
             </div>
-            <div class="row mt-3">
+              <div class="row mt-3">
                 <div class="col-12 text-end">
                     <button type="button" class="btn btn-primary" id="btn_guardar_patologia" onclick="crearOrdenPatologica()">Guardar</button>
                 </div>
@@ -2050,8 +1989,8 @@
                                  <label>Medico</label>
                                  <select class="form-control" id="medico" required disabled>
                                     <option value="">Seleccione un doctor</option>
-                                    <?php foreach($doctor->result() as $doctores) { ?>
-                                    <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre." (".$doctores->perfil." )"; ?></option>
+                                    <?php foreach ($doctor->result() as $doctores) { ?>
+                                    <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre . ' (' . $doctores->perfil . ' )'; ?></option>
                                     <?php } ?>
                                  </select>
                               </div>
@@ -2060,7 +1999,7 @@
                               <div class="form-group input-group-sm">
                                  <label>Fecha</label>
                                  <div class="input-group">
-                                    <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;" required class="form-control" id="fecha" min="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;" required class="form-control" id="fecha" min="<?php echo date('Y-m-d'); ?>">
                                     <!-- <div class="input-group-append">
                                       <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
                                     </div> -->
@@ -2158,10 +2097,10 @@
                 </tr>
               </thead>
               <tbody>
-              <?php foreach($historia->result() as $historias){ ?>
+              <?php foreach ($historia->result() as $historias) { ?>
                 
                <tr>
-                 <?php if($historias->tipo_consulta == 1){ ?>
+                 <?php if ($historias->tipo_consulta == 1) { ?>
                  <td>
                   <div class="row">
                     <a
@@ -2187,16 +2126,16 @@
                  <?php } ?>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->codigo_historial_paciente; ?></td>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->paciente; ?></td>
-                 <?php if($historias->tipo_consulta == 1){ ?>
+                 <?php if ($historias->tipo_consulta == 1) { ?>
                    <td class="text-xs text-primary mb-0">CONSULTA GENERAL</td>
-                 <?php }else { ?>
+                 <?php } else { ?>
                     <td class="text-xs text-danger mb-0">CONSULTA GINECOLOGICA</td>
                  <?php } ?>
                  <td class="text-xs text-secondary mb-0"><?php echo $historias->fecha; ?></td>
-                 <td class="text-xs text-secondary mb-0"><?php echo $historias->apellido." ".$historias->pacientes; ?></td>
-                 <td class="text-xs text-secondary mb-0"><?php echo "TRG".$historias->triaje; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo $historias->apellido . ' ' . $historias->pacientes; ?></td>
+                 <td class="text-xs text-secondary mb-0"><?php echo 'TRG' . $historias->triaje; ?></td>
                 </tr>
-                <?php }?>
+                <?php } ?>
               </tbody>                      
             </table>
           </div>
@@ -2231,7 +2170,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach($medicamentofarmacias->result() as $farmacia) { ?>
+                <?php foreach ($medicamentofarmacias->result() as $farmacia) { ?>
                 <tr>
                   <td>
                     <div class="form-check mb-3">
@@ -2239,7 +2178,7 @@
                         type="radio"
                         class="form-check-input"
                         name="formRadio"
-                        onchange="asociarmedicamentoFarmacia('<?php  echo $farmacia->codigo_producto.' - '.utf8_decode($farmacia->nombre_producto); ?>')"
+                        onchange="asociarmedicamentoFarmacia('<?php echo $farmacia->codigo_producto . ' - ' . utf8_decode($farmacia->nombre_producto); ?>')"
                       >
                     </div> 
                   </td>
@@ -2261,9 +2200,10 @@
   </div>
 </div>
 
-      <?php require_once("componentes/scripts.php"); ?>
+      <?php require_once ('componentes/scripts.php'); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.3"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>
 </html>
+

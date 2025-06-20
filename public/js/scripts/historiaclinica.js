@@ -689,12 +689,24 @@ $(document).ready(function (){
       success: function (data) {
         data = JSON.parse(data);
         console.log(data);
-        document.getElementById('estatura').innerHTML = data.talla + ' Mts';
-        document.getElementById('cardiaca').innerHTML = data.presion_arterial + ' mmHg';
-        document.getElementById('peso').innerHTML = data.peso + ' Kg';
-        document.getElementById('imc').innerHTML = data.imc + ' IMC';
-        document.getElementById('respiratoria').innerHTML = data.frecuencia_respiratoria + ' r/m';
-        document.getElementById('temperatura').innerHTML = data.temperatura + ' C';
+        document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' Cm</span>';
+        document.getElementById('cardiaca').innerHTML = '<span class="small">' + data.presion_arterial + ' mmHg</span>';
+        document.getElementById('peso').innerHTML = '<span class="small">' + data.peso + ' Kg</span>';
+        document.getElementById('imc').innerHTML = '<span class="small">' + data.imc + ' IMC</span>';
+        document.getElementById('respiratoria').innerHTML = '<span class="small">' + data.frecuencia_respiratoria + ' r/m</span>';
+        document.getElementById('temperatura').innerHTML = '<span class="small">' + data.temperatura + ' °C</span>';
+        
+        // Calcular porcentaje de grasa (fórmula de Deurenberg)
+        if(data.edad && data.sexo) {
+            const edad = parseInt(data.edad);
+            const genero = data.sexo.toLowerCase();
+            // Fórmula: (1.20 × IMC) + (0.23 × edad) - (10.8 × sexo) - 5.4
+            // Donde sexo es 1 para masculino y 0 para femenino
+            const factorGenero = (genero === 'masculino' || genero === 'm') ? 1 : 0;
+            const porcentajeGrasa = ((1.20 * parseFloat(data.imc)) + (0.23 * edad) - (10.8 * factorGenero) - 5.4).toFixed(1);
+            document.getElementById('grasa').innerHTML = '<span class="small">' + porcentajeGrasa + ' %</span>';
+        }
+        
         $("#documento_historia").val(data.documento);
         $("#consecutivo_historia").val(data.codigo_triaje);
 
