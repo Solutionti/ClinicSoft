@@ -1740,9 +1740,21 @@
                    readonly
                  >
               </div>
-              <div class="row mt-5">
+              <div class="row mt-3">
+                <div class="col-md-12 mb-3">
+                  <div class="form-group">
+                    <label class="form-label">Seleccionar Perfil:</label>
+                    <select class="form-control form-control-sm" id="selectPerfil" onchange="if(window.seleccionarPerfil) { seleccionarPerfil(); } else { console.error('seleccionarPerfil function not found'); }">
+                      <option value="">-- Seleccione un perfil --</option>
+                      <option value="preoperatorio">Perfil Preoperatorio</option>
+                      <option value="perfil_lipidico">Perfil Lipídico</option>
+                      <option value="perfil_hepatico">Perfil Hepático</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6">
-                  <!--  -->
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
                      <thead  class="bg-default text-white">
                         <tr>
@@ -2203,6 +2215,7 @@
       <?php require_once ('componentes/scripts.php'); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.3"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/seleccionarPerfil.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
    </body>
 </html>
