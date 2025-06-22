@@ -185,8 +185,7 @@ $('#table-laboratorio').on('dblclick', 'tr:visible', function() {
             data[1]  // Nombre del análisis
         ]).draw(false).node();
         
-        // Aplicar estilos consistentes a la fila
-        $(rowNode).addClass('text-xs');
+        // Aplicar estilos consistentes a la fila (se heredan de la tabla padre)
         $(rowNode).find('td').addClass('text-xs');
         
         // Ocultar la fila en la tabla de origen y guardar referencia

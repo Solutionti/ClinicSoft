@@ -3,54 +3,95 @@ var table_lab;
 var table_lab_mini;
 var elementos_laboratorio = [];
 
+// Función para limpiar la selección de análisis
+function limpiarSeleccion() {
+    // Limpiar la tabla de seleccionados si existe
+    if (table_lab_mini && $.fn.DataTable.isDataTable('#table-laboratorio-items')) {
+        table_lab_mini.clear().draw();
+    }
+    
+    // Limpiar selección actual
+    elementos_laboratorio = [];
+    if (table_lab_mini && $.fn.DataTable.isDataTable('#table-laboratorio-items')) {
+        table_lab_mini.clear().draw();
+    }
+    
+    // Mostrar todas las filas en la tabla de origen
+    if (table_lab && $.fn.DataTable.isDataTable('#table-laboratorio')) {
+        table_lab.rows().every(function() {
+            $(this.node()).show();
+        });
+    }
+    
+    // Limpiar el array de elementos
+    elementos_laboratorio = [];
+    
+    // Resetear el selector de perfiles
+    $('#selectPerfil').val('');
+    
+    console.log('Se han deseleccionado todos los análisis');
+}
+
 // Función para seleccionar perfiles de laboratorio
 function seleccionarPerfil() {
     // Obtener el perfil seleccionado
     var perfilSeleccionado = $('#selectPerfil').val();
     
-    // Definir perfiles de laboratorio con nombres normalizados
+    // Validar perfil seleccionado
+    if (!perfilSeleccionado) {
+        console.warn('No se seleccionó ningún perfil');
+        return;
+    }
+    
+    // Limpiar solo la selección actual (no la tabla de origen)
+    elementos_laboratorio = [];
+    if (table_lab_mini && $.fn.DataTable.isDataTable('#table-laboratorio-items')) {
+        table_lab_mini.clear().draw();
+    }
+    
+    // Mostrar todas las filas en la tabla de origen
+    if (table_lab && $.fn.DataTable.isDataTable('#table-laboratorio')) {
+        table_lab.rows().every(function() {
+            $(this.node()).show();
+        });
+    }
+    
+    // Definir perfiles de laboratorio con códigos de análisis
     var perfilesLaboratorio = {
         'preoperatorio': [
-            'HEMOGRAMA COMPLETO', 
-            'GRUPO SANGUINEO', 
-            'COAGULACION', 
-            'SANGRIA', 
-            'FACTOR RH',
-            'HEMOGLOBINA',
-            'HEMATOCRITO',
-            'LEUCOCITOS',
-            'PLAQUETAS',
-            'GLUCOSA',
-            'CREATININA',
-            'NITROGENO UREICO',
-            'TP',
-            'TPT',
-            'INR'
+            '238', //hemograma 
+            '224',  //grupo sanguineo y factor Rh
+            '402',  //coagulacion
+            '404',  //sangria
+            '221', //glucosa
+            '430', //urea
+            '150', //creatinina
+            '259',  //hiv
+            '247',  //hbsag
+            '448'  //examen orina
         ],
-        'perfil_lipidico': [
-            'COLESTEROL',
-            'HDL',
-            'LDL',
-            'TRIGLICERIDOS',
-            'VLDL',
-            'PERFIL LIPIDICO'
+        'perfil_prenatal': [
+            '238',  
+            '224',    
+            '221', 
+            '430', 
+            '150', 
+            '259',  
+            '247',  
+            '448'   
         ],
-        'perfil_hepatico': [
-            'BILIRRUBINA',
-            'TGO',
-            'AST',
-            'TGP',
-            'ALT',
-            'FOSFATASA ALCALINA',
-            'ALBUMINA',
-            'PROTEINAS TOTALES',
-            'PERFIL HEPATICO'
+        'perfil_recien_nacido': [
+            '238',
+            '224',
+            '221',
+            '96',
+            '64'
         ]
     };
     
     // Validar perfil seleccionado
-    if (!perfilSeleccionado || !perfilesLaboratorio[perfilSeleccionado]) {
-        console.warn('No se seleccionó un perfil válido');
+    if (!perfilesLaboratorio[perfilSeleccionado]) {
+        console.warn('No se encontró el perfil seleccionado');
         return;
     }
     
@@ -81,11 +122,9 @@ function seleccionarPerfil() {
                     }
                 ],
                 "drawCallback": function(settings) {
-                    // Asegurar que el contenedor de la tabla tenga la clase small
                     $(this).closest('.dataTables_wrapper').addClass('small');
                 },
                 "initComplete": function() {
-                    // Aplicar estilos directamente a la tabla
                     var table = this.api().table().container();
                     $(table).addClass('table-sm small');
                     $(table).find('th, td').addClass('small');
@@ -94,16 +133,8 @@ function seleccionarPerfil() {
         } else if (!table_lab) {
             table_lab = $('#table-laboratorio').DataTable();
             
-            // Aplicar estilos si la tabla ya estaba inicializada
             var table = table_lab.table().container();
             $(table).addClass('table-sm');
-            // Aplicar estilos en línea para el tamaño de fuente
-            $(table).css('font-size', '12px');
-            $(table).find('th, td').css({
-                'font-size': '12px',
-                'padding': '4px 8px'
-            });
-            // Asegurar que los inputs de búsqueda y select tengan el mismo tamaño
             $(table).closest('.dataTables_wrapper')
                 .find('.dataTables_length select, .dataTables_filter input')
                 .addClass('form-control form-control-sm')
@@ -137,11 +168,9 @@ function seleccionarPerfil() {
                     }
                 ],
                 "drawCallback": function(settings) {
-                    // Asegurar que el contenedor de la tabla tenga la clase small
                     $(this).closest('.dataTables_wrapper').addClass('small');
                 },
                 "initComplete": function() {
-                    // Aplicar estilos directamente a la tabla
                     var table = this.api().table().container();
                     $(table).addClass('table-sm small');
                     $(table).find('th, td').addClass('small');
@@ -150,16 +179,9 @@ function seleccionarPerfil() {
         } else if (!table_lab_mini) {
             table_lab_mini = $('#table-laboratorio-items').DataTable();
             
-            // Aplicar estilos si la tabla ya estaba inicializada
             var table = table_lab_mini.table().container();
             $(table).addClass('table-sm');
-            // Aplicar estilos en línea para el tamaño de fuente
-            $(table).css('font-size', '12px');
-            $(table).find('th, td').css({
-                'font-size': '12px',
-                'padding': '4px 8px'
-            });
-            // Asegurar que los inputs de búsqueda y select tengan el mismo tamaño
+            $(table).find('th, td').addClass('text-xs');
             $(table).closest('.dataTables_wrapper')
                 .find('.dataTables_length select, .dataTables_filter input')
                 .addClass('form-control form-control-sm')
@@ -170,161 +192,61 @@ function seleccionarPerfil() {
                 });
         }
         
-        // Limpiar selección actual
-        elementos_laboratorio = [];
-        table_lab_mini.clear().draw();
-        
-        // Mostrar todas las filas en la tabla de origen
-        table_lab.rows().every(function() {
-            $(this.node()).show();
-        });
-        
         // Obtener pruebas para el perfil seleccionado
         var pruebasPerfil = perfilesLaboratorio[perfilSeleccionado];
         console.log('Pruebas en el perfil:', pruebasPerfil);
         
-        // Objeto para almacenar las pruebas encontradas, usando el nombre original como clave
-        var pruebasEncontradas = {};
-        
-        // Inicializar el objeto de pruebas encontradas
-        pruebasPerfil.forEach(function(clave) {
-            pruebasEncontradas[clave] = [];
-        });
-        
-        // Primera pasada: Búsqueda exacta
-        console.group('Búsqueda exacta');
-        table_lab.rows().every(function() {
-            var rowData = this.data();
-            var rowNode = this.node();
-            var nombrePrueba = (rowData[1] || '').toString().trim().toUpperCase();
-            
-            // Buscar coincidencia exacta
-            if (pruebasPerfil.includes(nombrePrueba)) {
-                console.log('Coincidencia exacta encontrada:', nombrePrueba);
-                pruebasEncontradas[nombrePrueba].push({
-                    row: this,
-                    data: rowData,
-                    node: rowNode,
-                    tipo: 'exacta',
-                    keyword: nombrePrueba
-                });
-            }
-            
-            return true; // Continuar con la siguiente fila
-        });
-        console.groupEnd();
-        
-        // Segunda pasada: Búsqueda de frases completas (solo si no se encontró coincidencia exacta)
-        console.group('Búsqueda de frases');
-        table_lab.rows().every(function() {
-            var rowData = this.data();
-            var rowNode = this.node();
-            var nombrePrueba = (rowData[1] || '').toString().trim().toUpperCase();
-            
-            // Solo procesar si no está ya en pruebasEncontradas
-            var yaEncontrado = Object.values(pruebasEncontradas).some(pruebas => 
-                pruebas.some(p => p.data[0] === rowData[0])
-            );
-            
-            if (!yaEncontrado) {
-                pruebasPerfil.forEach(function(palabraClave) {
-                    // Solo buscar frases (con espacios) que no tengan ya resultados
-                    if (palabraClave.includes(' ') && pruebasEncontradas[palabraClave].length === 0) {
-                        if (nombrePrueba.includes(palabraClave)) {
-                            console.log('Frase encontrada:', palabraClave, 'en', nombrePrueba);
-                            pruebasEncontradas[palabraClave].push({
-                                row: this,
-                                data: rowData,
-                                node: rowNode,
-                                tipo: 'frase',
-                                keyword: palabraClave
-                            });
-                        }
-                    }
-                }.bind(this));
-            }
-            
-            return true; // Continuar con la siguiente fila
-        });
-        console.groupEnd();
-        
-        // Tercera pasada: Búsqueda de palabras individuales (solo si no se encontró coincidencia)
-        console.group('Búsqueda de palabras');
-        table_lab.rows().every(function() {
-            var rowData = this.data();
-            var rowNode = this.node();
-            var nombrePrueba = (rowData[1] || '').toString().trim().toUpperCase();
-            
-            // Solo procesar si no está ya en pruebasEncontradas
-            var yaEncontrado = Object.values(pruebasEncontradas).some(pruebas => 
-                pruebas.some(p => p.data[0] === rowData[0])
-            );
-            
-            if (!yaEncontrado) {
-                pruebasPerfil.forEach(function(palabraClave) {
-                    // Solo buscar palabras individuales (sin espacios) que no tengan ya resultados
-                    if (!palabraClave.includes(' ') && pruebasEncontradas[palabraClave].length === 0) {
-                        var regex = new RegExp('\\b' + palabraClave + '\\b', 'i');
-                        if (regex.test(nombrePrueba)) {
-                            console.log('Palabra encontrada:', palabraClave, 'en', nombrePrueba);
-                            pruebasEncontradas[palabraClave].push({
-                                row: this,
-                                data: rowData,
-                                node: rowNode,
-                                tipo: 'palabra',
-                                keyword: palabraClave
-                            });
-                        }
-                    }
-                }.bind(this));
-            }
-            
-            return true; // Continuar con la siguiente fila
-        });
-        console.groupEnd();
-        
-        // Procesar resultados en el orden del perfil
-        console.group('Procesando resultados');
+        // Búsqueda por códigos de análisis
+        console.group('Búsqueda por códigos');
         var totalAgregados = 0;
         var idsProcesados = new Set();
         
-        pruebasPerfil.forEach(function(palabraClave) {
-            var pruebas = pruebasEncontradas[palabraClave] || [];
-            console.log(`Procesando "${palabraClave}": ${pruebas.length} coincidencias`);
-            
-            pruebas.forEach(function(item) {
-                var idPrueba = item.data[0];
+        // Buscar cada código en la tabla
+        pruebasPerfil.forEach(function(codigoBuscado) {
+            table_lab.rows().every(function() {
+                var rowData = this.data();
+                var rowNode = this.node();
+                var codigoPrueba = String(rowData[0] || '').trim();
                 
-                // Evitar duplicados
-                if (!idsProcesados.has(idPrueba)) {
-                    // Agregar a la tabla de seleccionados
-                    var rowNode = table_lab_mini.row.add([
-                        item.data[0], // Código
-                        item.data[1]  // Nombre del análisis
-                    ]).draw(false).node();
-                    
-                    // Aplicar estilo de fuente más pequeño
-                    $(rowNode).css('font-size', '11px');
-                    $(rowNode).find('td').css('font-size', '11px');
-                    
-                    // Agregar al array de elementos
-                    elementos_laboratorio.push({
-                        id: idPrueba,
-                        nombre: item.data[1],
-                        precio: item.data[2]
+                // Si coincide el código y no ha sido procesado
+                if (codigoBuscado === codigoPrueba && !idsProcesados.has(codigoPrueba)) {
+                    console.log('Análisis encontrado por código:', {
+                        codigo: codigoPrueba,
+                        nombre: rowData[1]
                     });
                     
+                    // Agregar a la tabla de seleccionados
+                    var newRow = table_lab_mini.row.add([
+                        rowData[0], // Código
+                        rowData[1]  // Nombre
+                    ]).draw(false).node();
+                    
+                    // Aplicar estilos
+                    $(newRow).find('td').addClass('text-xs');
+                    
+                    // Verificar si ya existe en el array de elementos
+                    var existe = elementos_laboratorio.some(function(item) {
+                        return item.id === rowData[0];
+                    });
+                    
+                    // Solo agregar si no existe ya
+                    if (!existe) {
+                        elementos_laboratorio.push({
+                            id: rowData[0],
+                            nombre: rowData[1],
+                            precio: rowData[2] || 0
+                        });
+                    }
+                    
                     // Ocultar en la tabla de origen
-                    $(item.node).hide();
+                    $(rowNode).hide();
                     
                     // Marcar como procesado
-                    idsProcesados.add(idPrueba);
+                    idsProcesados.add(codigoPrueba);
                     totalAgregados++;
-                    
-                    console.log(`✅ Añadido: ${item.data[1]}`);
-                } else {
-                    console.log(`⏩ Ya procesado: ${item.data[1]}`);
                 }
+                
+                return true; // Continuar con la siguiente fila
             });
         });
         
@@ -370,6 +292,11 @@ function seleccionarPerfil() {
 
 // Inicializar las tablas cuando el documento esté listo
 $(document).ready(function() {
+    // Configurar manejador de eventos para el botón de limpieza
+    $(document).on('click', '#btnLimpiarSeleccion', function() {
+        limpiarSeleccion();
+    });
+    
     // Inicializar las tablas si no lo están
     if ($.fn.DataTable.isDataTable('#table-laboratorio')) {
         table_lab = $('#table-laboratorio').DataTable();
@@ -395,9 +322,8 @@ $(document).ready(function() {
                 rowData[1]  // Nombre del análisis
             ]).draw(false).node();
             
-            // Aplicar estilo de fuente más pequeño
-            $(rowNode).css('font-size', '11px');
-            $(rowNode).find('td').css('font-size', '11px');
+            // Aplicamos text-xs para que coincida con la tabla de origen
+            $(rowNode).find('td').addClass('text-xs');
             
             // Ocultar de la tabla de origen
             $(this).hide();

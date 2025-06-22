@@ -67,12 +67,12 @@
                 <div class="page-header">
                   <div class="d-flex align-items-lg-center">
                     <div class="flex-shrink-0">
-                      <?php 
-                        $genero = isset($pacientes->sexo) ? strtolower($pacientes->sexo) : '';
-                        $imagen = (strpos($genero, 'femenino') !== false || $genero === 'f') 
-                                ? 'avatar-mujer.jpg' 
-                                : 'team-41.jpg';
-                        ?>
+                      <?php
+                      $genero = isset($pacientes->sexo) ? strtolower($pacientes->sexo) : '';
+                      $imagen = (strpos($genero, 'femenino') !== false || $genero === 'f')
+                        ? 'avatar-mujer.jpg'
+                        : 'team-41.jpg';
+                      ?>
                         <img
                             class="avatar avatar-xl avatar-circle"
                             src="<?php echo base_url('public/img/theme/' . $imagen); ?>"
@@ -1715,7 +1715,7 @@
                  <input
                    type="text"
                    class="form-control form-control-sm"
-                   value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
+                   value="<?php echo $pacientes->nombre . '' . $pacientes->apellido; ?>"
                    id="nombre_lab"
                    readonly
                  >
@@ -1742,14 +1742,18 @@
               </div>
               <div class="row mt-3">
                 <div class="col-md-12 mb-3">
-                  <div class="form-group">
-                    <label class="form-label">Seleccionar Perfil:</label>
-                    <select class="form-control form-control-sm" id="selectPerfil" onchange="if(window.seleccionarPerfil) { seleccionarPerfil(); } else { console.error('seleccionarPerfil function not found'); }">
-                      <option value="">-- Seleccione un perfil --</option>
-                      <option value="preoperatorio">Perfil Preoperatorio</option>
-                      <option value="perfil_lipidico">Perfil Lipídico</option>
-                      <option value="perfil_hepatico">Perfil Hepático</option>
-                    </select>
+                  <div class="form-group mb-0">
+                    <div class="d-flex align-items-center">
+                      <label class="form-label mb-0 me-2" style="min-width: 120px;">Perfiles:</label>
+                      <div class="d-flex align-items-center" style="width: 100%; max-width: 300px;">
+                        <select class="form-select form-select-sm" id="selectPerfil" onchange="if(window.seleccionarPerfil) { seleccionarPerfil(); } else { console.error('seleccionarPerfil function not found'); }" style="width: 100%;">
+                          <option value="">-- Seleccione un perfil --</option>
+                          <option value="preoperatorio">Perfil Preoperatorio</option>
+                          <option value="perfil_prenatal">Perfil Prenatal</option>
+                          <option value="perfil_recien_nacido">Perfil Recien Nacido</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1769,7 +1773,7 @@
                         <tr>
                            <td class="text-xs"><?php echo $laboratorios->codigo; ?></td>
                            <td class="text-xs"><?php echo $laboratorios->nombre; ?></td>
-                           <!-- <td class="text-xs"><?php echo $laboratorios->precio; ?></td> -->
+                           <!-- <td class="text-xs"/td> -->
                            <!-- <td class="text-xs">ACTIVO</td> -->
                         </tr>
                         <?php } ?>
@@ -1789,7 +1793,14 @@
                     <tbody>
                     </tbody>
                   </table>
-                  <button class="btn btn-primary mt-3" onclick="crearOrdenLaboratorioHistoria()">Guardar</button>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="crearOrdenLaboratorioHistoria()">
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="limpiarSeleccion()">
+                      <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                  </div>
                 </div>
               </div>  
            </div>
