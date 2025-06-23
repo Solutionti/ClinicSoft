@@ -86,6 +86,111 @@ function seleccionarPerfil() {
             '221',
             '96',
             '64'
+        ],
+        'perfil_coagulacion': [
+            '402',
+            '404',
+            '403',
+            '406',
+            '405',
+            '374',
+            '209',
+            '178',
+            '47',
+            '363'
+
+        ],
+        'perfil_cardiaco': [
+            '134',
+            '96',
+            '230',
+            '356',
+            '362',
+            '426',
+
+        ],
+        'perfil_torch': [
+            '413',
+            '117',
+            '379',
+            '252',
+            
+        ],
+        'perfil_hepatico': [
+            '416',
+            '417',
+            '210',
+            '64',   
+            '216',
+            '403',
+            '365',
+            
+        ],
+        'perfil_lipidico': [
+            '134',
+            '230',
+            '290',
+            '442',  
+            
+        ],
+        'perfil_prostatico': [
+            '371',
+            '370', 
+            
+        ],
+        'perfil_reumatico': [
+            '207',
+            '437', 
+            '9',
+            '361',
+            '45',
+            '202',
+            '44',
+
+            
+        ],
+        'perfil_diabetes': [
+            '221',
+            '222', 
+            '287',
+            '288',
+            '237',
+            '236',
+            '307',
+            '397',
+
+            
+        ],
+        'perfil_renal': [
+            '150',
+            '170', 
+            '368',
+            '307',
+            '430',
+            '308',
+            '366',
+            '9',
+            
+
+            
+        ],
+        'perfil_fertilidad': [
+            '267',
+            '268', 
+            '196',
+            '358',
+            '354',
+            '228',
+            '229',
+            '450',
+            '400',
+            '27',
+            '173',
+            '193',
+            '401',
+            '265',
+            '359',
+            
         ]
     };
     
@@ -231,11 +336,13 @@ function seleccionarPerfil() {
                     
                     // Solo agregar si no existe ya
                     if (!existe) {
-                        elementos_laboratorio.push({
+                        var nuevoElemento = {
                             id: rowData[0],
                             nombre: rowData[1],
                             precio: rowData[2] || 0
-                        });
+                        };
+                        elementos_laboratorio.push(nuevoElemento);
+                        console.log('Elemento agregado:', nuevoElemento);
                     }
                     
                     // Ocultar en la tabla de origen
@@ -288,6 +395,21 @@ function seleccionarPerfil() {
     } finally {
         console.groupEnd();
     }
+}
+
+// Función para actualizar el total de la orden
+function actualizarTotal() {
+    var total = 0;
+    
+    // Sumar los precios de todos los elementos seleccionados
+    elementos_laboratorio.forEach(function(item) {
+        total += parseFloat(item.precio) || 0;
+    });
+    
+    // Actualizar el elemento que muestra el total
+    $('#totalOrden').text('S/ ' + total.toFixed(2));
+    
+    console.log('Total actualizado:', total);
 }
 
 // Inicializar las tablas cuando el documento esté listo

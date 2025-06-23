@@ -4,9 +4,11 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Administracion / historias</title>
+      <title>HISTORIA CLINICA</title>
       <?php require_once ('componentes/head.php'); ?>
-      
+      <link rel="stylesheet" href="<?php echo base_url('public/css/custom.css'); ?>">
+      <!-- Script de reconocimiento de voz -->
+      <script src="<?php echo base_url(); ?>public/js/scripts/speechRecognition.js"></script>
    </head>
    <body class="g-sidenav-show bg-gray-100">
     
@@ -1751,6 +1753,16 @@
                           <option value="preoperatorio">Perfil Preoperatorio</option>
                           <option value="perfil_prenatal">Perfil Prenatal</option>
                           <option value="perfil_recien_nacido">Perfil Recien Nacido</option>
+                          <option value="perfil_coagulacion">Perfil Coagulación</option>
+                          <option value="perfil_cardiaco">Perfil Cardiaco</option>
+                          <option value="perfil_torch">Perfil Torch</option>
+                          <option value="perfil_hepatico">Perfil Hepatico</option>
+                          <option value="perfil_lipidico">Perfil Lipidico</option>
+                          <option value="perfil_prostatico">Perfil Prostático</option>
+                          <option value="perfil_reumatico">Perfil Reumatico</option>
+                          <option value="perfil_diabetes">Perfil Diabetes</option>
+                          <option value="perfil_renal">Perfil Renal</option>
+                          <option value="perfil_fertilidad">Perfil Fertilidad</option>
                         </select>
                       </div>
                     </div>

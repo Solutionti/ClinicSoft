@@ -235,13 +235,18 @@ function crearOrdenLaboratorioHistoria() {
     
     var url = baseurl + "administracion/crearOrdenLaboratorio";
     var documento = $("#documento_historia").val(),
-    nombre = $("#nombre_paciente").val(),
-    edad = $("#edad_paciente").val(),
-    medico = $("#medico_solicitante").val(),
-    triage = $("#consecutivo_historia").val(),
-    ordenlab = [];
+        nombre = $("#nombre_paciente").val(),
+        edad = $("#edad_paciente").val(),
+        medico = $("#medico_solicitante").val(),
+        triage = $("#consecutivo_historia").val(),
+        ordenlab = [];
+    
+    // Recorrer los elementos del laboratorio seleccionados
     for (let i = 0; i < elementos_laboratorio.length; i++) {
-      ordenlab [i] = elementos_laboratorio[i][0];
+        // Asegurarse de que el elemento tenga un ID antes de agregarlo
+        if (elementos_laboratorio[i] && elementos_laboratorio[i].id) {
+            ordenlab.push(elementos_laboratorio[i].id);
+        }
     }
     $.ajax({
         url: url,
