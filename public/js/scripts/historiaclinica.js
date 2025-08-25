@@ -1030,6 +1030,13 @@ function CancelarMedicamento() {
   $("#medicamento_medicamento").val('');
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("otra").addEventListener("change", function() {
+        let textareaContainer = document.getElementById("observacion_container");
+        textareaContainer.style.display = this.checked ? "block" : "none";
+    });
+});
+
 function borrarDocumento(codigo,tipoarchivo,archivo) {
 $("body").overhang({
   type: "confirm",

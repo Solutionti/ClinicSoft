@@ -1238,7 +1238,7 @@ class Historiaclinica extends Admin_Controller
 		$pdf->Ln(5);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('GINECO-OBSTETRICOS'), 1);
+		$pdf->cell(30, 5, utf8_decode('MENARQUIA'), 1);
 		$pdf->SetFont('Arial', '', 6);
 		$pdf->cell(166, 5, $datosgineco->gineco_obstetrico, 1);
 		$pdf->Ln(5);
@@ -1254,7 +1254,7 @@ class Historiaclinica extends Admin_Controller
 		$pdf->cell(47, 5, $datosgineco->rm, 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'FLUJO GENITAL', 1);
+		$pdf->cell(20, 5, 'IRS', 1);
 		$pdf->SetFont('Arial', '', 6);
 		$pdf->cell(44, 5, $datosgineco->flujo_genital, 1);
 
@@ -1297,7 +1297,7 @@ class Historiaclinica extends Admin_Controller
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CIRUGIA GINECOLOGICA'), 1);
+		$pdf->cell(30, 5, utf8_decode('QUIRURGICOS'), 1);
 		$pdf->SetFont('Arial', '', 6);
 		$pdf->cell(166, 5, $datosgineco->cirugia_ginecologica, 1);
 

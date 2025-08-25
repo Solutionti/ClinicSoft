@@ -174,7 +174,7 @@
                             <?php echo $documentos->titulo; ?>
                           </a>
                           <?php } else if ($documentos->tp_documento == 'PA') { ?>
-<a
+                            <a
                             target="_blank"
                             href="<?php echo base_url(); ?>public/documentos/<?php echo $documentos->url_documento; ?>"
                           >
@@ -885,8 +885,9 @@
             <button class="nav-link text-primary text-uppercase" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" hidden>Plan de trabajo</button>
             <!--  -->
             <button class="nav-link text-danger text-uppercase"   id="nav-antecedentesgine-tab" data-bs-toggle="tab" data-bs-target="#nav-antecedentesgine" type="button" role="tab" aria-controls="nav-antecedentesgine" aria-selected="false" hidden>Antecedentes</button>
-            <button class="nav-link text-danger text-uppercase"   id="nav-fisicogine-tab" data-bs-toggle="tab" data-bs-target="#nav-fisicogine" type="button" role="tab" aria-controls="nav-fisicogine" aria-selected="false" hidden>Examen fisico</button>
             <button class="nav-link text-danger text-uppercase"   id="nav-consultagine-tab" data-bs-toggle="tab" data-bs-target="#nav-consultagine" type="button" role="tab" aria-controls="nav-consultagine" aria-selected="false" hidden>Consulta</button>
+            <button class="nav-link text-danger text-uppercase"   id="nav-fisicogine-tab" data-bs-toggle="tab" data-bs-target="#nav-fisicogine" type="button" role="tab" aria-controls="nav-fisicogine" aria-selected="false" hidden>Examen fisico</button>
+            
             <!--  -->
             <button class="nav-link text-dark text-uppercase"   id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Diagnosticos</button>
             <button class="nav-link text-dark text-uppercase"   id="nav-procedimientos-tab" data-bs-toggle="tab" data-bs-target="#nav-procedimientos" type="button" role="tab" aria-controls="nav-procedimientos" aria-selected="false">Procedimientos</button>
@@ -1200,6 +1201,7 @@
                         <th scope="col" class="sort  text-sm text-white">ID</th>
                         <th scope="col" class="sort  text-sm text-white" data-sort="name">Codigo</th>
                         <th scope="col" class="sort  text-sm text-white" data-sort="budget">Nombre diagnostico</th>
+                        <th scope="col" class="sort  text-sm text-white" data-sort="budget">Tipo</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1228,24 +1230,35 @@
                   ></textarea>
                 </div>
                 <div class="col-md-4">
-                <label class="color_ginecologia">GINECO-OBSTETRICOS</label>
+                <label class="color_ginecologia">QUIRURGICOS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    id="antecedentes_gineco"
+                    id="antecedentes_cirugia"
                   ></textarea>
                 </div>
               </div>
               <!--  -->
+              <div class="row mt-3">
+                <div class="col-12">
+                  <h6 class="color_ginecologia">GINECO-OBSTETRICOS</h6>
+                </div>
+              </div>
               <div class="row mt-2">
-                <div class="col-md-3">
-                  <label class="color_ginecologia">FUM</label>
+                <div class="col">
+                  <label class="color_ginecologia">MENARQUIA</label>
+                  <input type="text"
+                    class="form-control form-control-sm"
+                    id="antecedentes_gineco">
+                </div>
+                <div class="col">
+                  <label class="color_ginecologia">FUR</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="antecedentes_fum"
                   >
                 </div>
-                <div class="col-md-3">
+                <div class="col">
                   <label class="color_ginecologia">RM (RET.MENSTR)</label>
                   <input
                     type="text"
@@ -1253,15 +1266,15 @@
                     id="antecedentes_rm"
                   >
                 </div>
-                <div class="col-md-3">
-                  <label class="color_ginecologia">FLUJO GENITAL</label>
+                <div class="col">
+                  <label class="color_ginecologia">IRS</label>
                   <input
                     type="text"
                     class="form-control form-control-sm"
                     id="antecedentes_flujo"
                   >
                 </div>
-                <div class="col-md-3">
+                <div class="col">
                   <label class="color_ginecologia">No PAREJAS</label>
                   <input
                     type="number"
@@ -1325,14 +1338,7 @@
                 </div>
               </div>
               <div class="row mt-2">
-                <div class="col-md-6">
-                <label class="color_ginecologia">CIRUGIA GINECOLOGICA</label>
-                  <textarea
-                    class="form-control form-control-sm"
-                    id="antecedentes_cirugia"
-                  ></textarea>
-                </div>
-                <div class="col-md-6">
+                <div class="col-12">
                   <label class="color_ginecologia">OTROS</label>
                   <textarea
                     class="form-control form-control-sm"
@@ -1448,7 +1454,7 @@
                   <textarea
                     class="form-control form-control-sm"
                     id="consulta_motivo"
-                    rows="6"
+                    rows="4"
                   ></textarea>
                 </div>
               </div>
@@ -1459,7 +1465,7 @@
                   <textarea
                     class="form-control form-control-sm"
                     id="consulta_sintomas"
-                    rows="6"
+                    rows="4"
                   ></textarea>
                 </div>
               </div>
