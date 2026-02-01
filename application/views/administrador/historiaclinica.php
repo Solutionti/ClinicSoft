@@ -61,12 +61,12 @@
          </nav>
   <div class="container-fluid py-1">
     <div class="row">
-      <div class="card">
+      <div class="card" style="overflow: visible;">
         <div class="container-fluid mt-3">
           <div class="row">
             <div class="col-md-3">
                <h4 class="page-header-title h6"> <?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?></h4>
-                <div class="page-header">
+                <div class="page-header" style="position: relative; z-index: 20; overflow: visible;">
                   <div class="d-flex align-items-lg-center">
                     <div class="flex-shrink-0">
                       <?php
@@ -88,15 +88,24 @@
                             <li class="list-inline-item">
                               <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo $pacientes->fecha_nacimiento; ?> - <?php echo $pacientes->edad; ?> años
                             </li>
-                            <li>
-                              <a class="btn btn-info btn-xs mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" > Nueva</a>
+                            <li style="position: relative; z-index: 30;">
+                              <div class="dropdown d-inline-block">
+                                <button class="btn btn-info btn-xs mt-3" type="button" id="dropdownNuevaConsulta" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                  Nueva Consulta <i class="fas fa-chevron-down ms-1"></i>
+                                </button>
+                                <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownNuevaConsulta" style="z-index: 1000;">
+                                  <style>.dropdown-menu::before, .dropdown-menu::after { display: none !important; content: none !important; }</style>
+                                  <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('1')">Consulta General</a></li>
+                                  <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('2')">Consulta de Ginecología</a></li>
+                                </ul>
+                              </div>
                               <a
                                 class="btn btn-danger btn-xs mt-3"
                                 data-bs-toggle="modal"
                                 data-bs-target="#descargamodalhc"
                                 
                               >
-                                Imprimir HC
+                                Ver HC
                               </a>
                             </li>
                           </ul>
@@ -106,7 +115,7 @@
                 </div>
             </div>
             <!--  -->
-            <div class="card card-dashed h-900">
+            <div class="card card-dashed h-900" style="position: relative; z-index: 1;">
               <div class="card-header bg-default"><h6 class="text-white text-uppercase">Ultimos signos vitales</h6></div>
               <div class="card-body px-2">
                 <div class="row gx-0">
@@ -2246,6 +2255,26 @@
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/seleccionarPerfil.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
+      
+      <script>
+        $(document).ready(function() {
+          // Hacer la función global para que esté disponible en onclick
+          window.abrirHistoriaClinica = function(tipo) {
+            // Preseleccionar el tipo de historia clínica
+            document.getElementById('tphistoria').value = tipo;
+            
+            // Disparar el evento change para activar la lógica de mostrar/ocultar tabs
+            $('#tphistoria').trigger('change');
+            
+            // Abrir el modal
+            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            modal.show();
+            
+            // Prevenir que el enlace se comporte como un enlace normal
+            return false;
+          };
+        });
+      </script>
    </body>
 </html>
 
