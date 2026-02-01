@@ -1,4 +1,63 @@
-var elementos_lab = new Array();
+// Global variables
+var elementos_lab = [];
+var table_lab;
+var table_lab_mini;
+
+// Predefined profiles with test names that should match with the database
+var perfilesLaboratorio = {
+    'preoperatorio': [
+        'HEMOGRAMA', 
+        'GRUPO SANGUINEO', 
+        'COAGULACION', 
+        'SANGRIA', 
+        'FACTOR RH',
+        'HEMOGLOBINA',
+        'HEMATOCRITO',
+        'LEUCOCITOS',
+        'PLAQUETAS',
+        'GLUCOSA',
+        'CREATININA',
+        'NITROGENO UREICO',
+        'TP',
+        'TPT',
+        'INR'
+    ],
+    'perfil_lipidico': [
+        'COLESTEROL',
+        'HDL',
+        'LDL',
+        'TRIGLICERIDOS',
+        'VLDL',
+        'PERFIL LIPIDICO'
+    ],
+    'perfil_hepatico': [
+        'BILIRRUBINA',
+        'TGO',
+        'AST',
+        'TGP',
+        'ALT',
+        'FOSFATASA ALCALINA',
+        'ALBUMINA',
+        'PROTEINAS TOTALES',
+        'PERFIL HEPATICO'
+    ]
+};
+
+// La función seleccionarPerfil ahora está definida como una propiedad de window al inicio del archivo
+
+// Initialize DataTables when document is ready
+$(document).ready(function() {
+    if ($.fn.DataTable.isDataTable('#table-laboratorio')) {
+        table_lab = $('#table-laboratorio').DataTable();
+    }
+    if ($.fn.DataTable.isDataTable('#table-laboratorio-items')) {
+        table_lab_mini = $('#table-laboratorio-items').DataTable();
+    }
+    
+    // La función seleccionarPerfil ha sido movida a historiaclinica.js
+});
+
+// La función ya está disponible globalmente a través de la asignación al inicio
 
 $('#table-laboratorio').on('dblclick', 'tr', function(e) {
     var $row = $(this);

@@ -5,11 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Administracion / Inicio</title>
-  <?php require_once("componentes/head.php"); ?>
+  <?php require_once ('componentes/head.php'); ?>
 </head>
 <body class="g-sidenav-show bg-gray-100">
   <div class="min-height-300 bg-default position-absolute w-100"></div>
-  <?php require("componentes/menu.php"); ?>
+  <?php require ('componentes/menu.php'); ?>
   <main class="main-content position-relative border-radius-lg">
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
             <div class="container-fluid py-1 px-3">
@@ -55,7 +55,7 @@
                               <a class="dropdown-item border-radius-md" href="javascript:;">
                                  <div class="d-flex py-1">
                                     <div class="my-auto">
-                                       <img src="<?php echo base_url();?>img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                       <img src="<?php echo base_url(); ?>img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                        <h6 class="text-sm font-weight-normal mb-1">
@@ -73,7 +73,7 @@
                               <a class="dropdown-item border-radius-md" href="javascript:;">
                                  <div class="d-flex py-1">
                                     <div class="my-auto">
-                                       <img src="<?php echo base_url();?>public/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                       <img src="<?php echo base_url(); ?>public/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                        <h6 class="text-sm font-weight-normal mb-1">
@@ -130,7 +130,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="d-flex flex-row-reverse">
-                <?php if($this->session->userdata("rol") != "Doctor") { ?>
+                <?php if ($this->session->userdata('rol') != 'Doctor') { ?>
                 <a
                   class="btn btn-danger text-white btn-xs mx-2"
                   hidden
@@ -207,7 +207,7 @@
               </div>
             </div>
           </div>
-          <?php if($this->session->userdata("rol") != "Doctor") { ?>
+          <?php if ($this->session->userdata('rol') != 'Doctor') { ?>
           <div class="row mt-2">
             <h6>Datos de los Pacientes</h6>
           </div>
@@ -323,7 +323,7 @@
                 id="departamento"
               >
                 <option value="">Seleccione el departamento</option>
-                <?php foreach($departamento->result() as $departamentos) { ?>
+                <?php foreach ($departamento->result() as $departamentos) { ?>
                     <option value="<?php echo $departamentos->id; ?>"><?php echo $departamentos->name; ?></option>
                   <?php } ?>
               </select>
@@ -335,7 +335,7 @@
                 id="provincia"
               >
                 <option value="">Seleccione la provincia</option>
-                <?php foreach($provincia->result() as $provincias) { ?>
+                <?php foreach ($provincia->result() as $provincias) { ?>
                   <option value="<?php echo $provincias->id; ?>"><?php echo $provincias->name; ?></option>
                 <?php } ?>
               </select>
@@ -348,8 +348,8 @@
                 id="distrito"
               >
                 <option value="">Seleccione el distrito</option>
-                <?php foreach($distrito->result() as $distritos) { ?>
-                  <option value="<?php echo $distritos->id; ?>"><?php echo $distritos->name;  ?></option>
+                <?php foreach ($distrito->result() as $distritos) { ?>
+                  <option value="<?php echo $distritos->id; ?>"><?php echo $distritos->name; ?></option>
                 <?php } ?>
               </select>
             </div>
@@ -468,8 +468,8 @@
       </div>
     </div>
   </div>
-  <?php require_once("componentes/personalizar.php"); ?>
-  <?php require_once("componentes/scripts.php"); ?>
+  <?php require_once ('componentes/personalizar.php'); ?>
+  <?php require_once ('componentes/scripts.php'); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/pacientes_v2.js"></script>
   
   <script>

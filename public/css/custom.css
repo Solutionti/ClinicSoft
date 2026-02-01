@@ -1,0 +1,54 @@
+/* Estilos mejorados para pestañas en la historia clínica */
+
+/* Estilo base para las pestañas */
+.nav-tabs .nav-link {
+  color: #6c757d;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-right: 15px;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+/* Estilo para la pestaña activa - más sutil */
+.nav-tabs .nav-link.active {
+  color: #5e72e4;
+  background-color: transparent;
+  border-bottom-color: #5e72e4;
+  font-weight: 500;
+}
+
+/* Estilo específico para pestañas de ginecología */
+.nav-tabs .nav-link.text-danger {
+  color: #d63384 !important; /* Color fucsia para las pestañas de ginecología */
+}
+
+.nav-tabs .nav-link.text-danger.active {
+  color: #d63384 !important;
+  border-bottom-color: #d63384; /* Línea inferior fucsia para pestaña activa */
+}
+
+.nav-tabs .nav-link.text-danger:hover:not(.active) {
+  color: #d63384 !important;
+  border-bottom-color: #f8d7da; /* Color de hover más claro */
+}
+
+/* Efecto hover sutil */
+.nav-tabs .nav-link:hover:not(.active) {
+  color: #5e72e4;
+  border-bottom-color: #e9ecef;
+}
+
+/* Contenido de las pestañas */
+.tab-content {
+  padding: 1.25rem 0;
+  background-color: transparent;
+}
+
+/* Contenedor de pestañas - línea inferior sutil */
+.nav-tabs {
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 1rem;
+}
