@@ -855,7 +855,7 @@
       <div class="modal-body">
         <!--  -->
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-3" hidden>
             <label>Tipo de historia clinica</label>
             <select
               class="form-control"
@@ -875,14 +875,73 @@
               readonly
             >
           </div>
-          <div class="col-md-2">
-            <label>Cons Triage</label>
+          <div class="col-md-1" hidden>
+            <label>Triaje</label>
             <input
               type="number"
               class="form-control"
               id="consecutivo_historia"
               readonly
             >
+          </div>
+          <div class="col-md-6">
+            <label>Nombre del Paciente</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre_historia"
+              readonly
+            >
+          </div>
+          <div class="col-md-2">
+            <label>Edad</label>
+            <input
+              type="text"
+              class="form-control"
+              id="edad_historia"
+              readonly
+            >
+          </div>
+          <div class="col-md-2">
+            <label>Sexo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sexo_historia"
+              readonly
+            >
+          </div>
+          
+        </div>
+        <!-- Signos Vitales del Paciente -->
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <div class="card bg-light">
+              <div class="card-body py-2">
+                <div class="row text-center">
+                  <div class="col">
+                    <small class="text-muted">Temperatura</small>
+                    <p class="mb-0 fw-bold text-danger" id="temperatura_historia">--</p>
+                  </div>
+                  <div class="col">
+                    <small class="text-muted">Peso</small>
+                    <p class="mb-0 fw-bold text-primary" id="peso_historia">--</p>
+                  </div>
+                  <div class="col">
+                    <small class="text-muted">Estatura</small>
+                    <p class="mb-0 fw-bold text-success" id="estatura_historia">--</p>
+                  </div>
+                  <div class="col">
+                    <small class="text-muted">P. Arterial</small>
+                    <p class="mb-0 fw-bold text-warning" id="pa_historia">--</p>
+                  </div>
+                  <div class="col">
+                    <small class="text-muted">F. Cardiaca</small>
+                    <p class="mb-0 fw-bold text-info" id="fc_historia">--</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!--  -->
@@ -900,6 +959,9 @@
             <!--  -->
             <button class="nav-link text-dark text-uppercase"   id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Diagnosticos</button>
             <button class="nav-link text-dark text-uppercase"   id="nav-procedimientos-tab" data-bs-toggle="tab" data-bs-target="#nav-procedimientos" type="button" role="tab" aria-controls="nav-procedimientos" aria-selected="false">Procedimientos</button>
+            <button class="nav-link text-success text-uppercase" id="nav-receta-tab" data-bs-toggle="tab" data-bs-target="#nav-receta" type="button" role="tab" aria-controls="nav-receta" aria-selected="false">Receta Médica</button>
+            <button class="nav-link text-info text-uppercase" id="nav-auxiliares-tab" data-bs-toggle="tab" data-bs-target="#nav-auxiliares" type="button" role="tab" aria-controls="nav-auxiliares" aria-selected="false">Exámenes Auxiliares</button>
+            <button class="nav-link text-secondary text-uppercase" id="nav-cierre-tab" data-bs-toggle="tab" data-bs-target="#nav-cierre" type="button" role="tab" aria-controls="nav-cierre" aria-selected="false">Cierre atencion</button>
           </div>
         </nav>
         <br>
@@ -1517,6 +1579,96 @@
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- TAB RECETA MÉDICA -->
+          <div class="tab-pane fade" id="nav-receta" role="tabpanel" aria-labelledby="nav-receta-tab" tabindex="0">
+            <div class="container-fluid">
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <!-- formulario de medicamentos -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 class="text-success text-uppercase">Medicamentos Recetados en esta Consulta</h6>
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="table-receta-consulta">
+                      <thead class="bg-success text-white">
+                        <tr>
+                          <th>Medicamento</th>
+                          <th>Cantidad</th>
+                          <th>Dosis</th>
+                          <th>Vía</th>
+                          <th>Frecuencia</th>
+                          <th>Duración</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Los medicamentos se cargan dinámicamente -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- TAB EXÁMENES AUXILIARES -->
+          <div class="tab-pane fade" id="nav-auxiliares" role="tabpanel" aria-labelledby="nav-auxiliares-tab" tabindex="0">
+            <div class="container-fluid">
+              <div class="row mt-1">
+                <div class="col-md-12">
+                  <div class="accordion accordion-flush" id="accordionExamenesAux">
+                    <!-- Orden de Laboratorio -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-default text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLabAux" aria-expanded="false" aria-controls="collapseLabAux">
+                          <i class="fas fa-flask me-2"></i> ORDEN DE LABORATORIO
+                        </button>
+                      </h2>
+                      <div id="collapseLabAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <p class="text-muted">Para crear órdenes de laboratorio, utilice el botón <strong>"Procesos Clínicos"</strong> y seleccione la pestaña <strong>"ORD. LABORATORIO"</strong>.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Orden de Patología -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-default text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePatAux" aria-expanded="false" aria-controls="collapsePatAux">
+                          <i class="fas fa-microscope me-2"></i> ORDEN DE PATOLOGÍA
+                        </button>
+                      </h2>
+                      <div id="collapsePatAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <p class="text-muted">Para crear órdenes de patología, utilice el botón <strong>"Procesos Clínicos"</strong> y seleccione la pestaña <strong>"ORD. PATOLOGIA"</strong>.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- TAB CIERRE -->
+          <div class="tab-pane fade" id="nav-cierre" role="tabpanel" aria-labelledby="nav-cierre-tab" tabindex="0">
+            <div class="container-fluid">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label class="text-secondary">Próxima Cita</label>
+                  <input type="date" class="form-control" id="proxima_cita_cierre">
+                </div>
+                <div class="col-md-6">
+                  <label class="text-secondary">Observaciones de Cierre</label>
+                  <textarea class="form-control" id="observaciones_cierre" rows="2" placeholder="Observaciones adicionales..."></textarea>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label class="text-secondary">Firma del Médico</label>
+                  <input type="text" class="form-control" id="firma_medico_cierre" value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'); ?>" readonly>
                 </div>
               </div>
             </div>
