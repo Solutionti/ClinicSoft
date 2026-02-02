@@ -958,9 +958,9 @@
             
             <!--  -->
             <button class="nav-link text-dark text-uppercase"   id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">Diagnosticos</button>
+            <button class="nav-link text-info text-uppercase" id="nav-auxiliares-tab" data-bs-toggle="tab" data-bs-target="#nav-auxiliares" type="button" role="tab" aria-controls="nav-auxiliares" aria-selected="false">Exámenes Auxiliares</button>
             <button class="nav-link text-dark text-uppercase"   id="nav-procedimientos-tab" data-bs-toggle="tab" data-bs-target="#nav-procedimientos" type="button" role="tab" aria-controls="nav-procedimientos" aria-selected="false">Procedimientos</button>
             <button class="nav-link text-success text-uppercase" id="nav-receta-tab" data-bs-toggle="tab" data-bs-target="#nav-receta" type="button" role="tab" aria-controls="nav-receta" aria-selected="false">Receta Médica</button>
-            <button class="nav-link text-info text-uppercase" id="nav-auxiliares-tab" data-bs-toggle="tab" data-bs-target="#nav-auxiliares" type="button" role="tab" aria-controls="nav-auxiliares" aria-selected="false">Exámenes Auxiliares</button>
             <button class="nav-link text-secondary text-uppercase" id="nav-cierre-tab" data-bs-toggle="tab" data-bs-target="#nav-cierre" type="button" role="tab" aria-controls="nav-cierre" aria-selected="false">Cierre atencion</button>
           </div>
         </nav>
@@ -2497,8 +2497,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#procesosclinicos" >Aceptar</button>
-        <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#procesosclinicos" onclick="CancelarMedicamento()">Cancelar</button>
+        <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Aceptar</button>
+        <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="CancelarMedicamento()">Cancelar</button>
       </div>
     </div>
   </div>
