@@ -968,7 +968,7 @@
         </nav>
         <br>
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+          <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-4">
@@ -2043,22 +2043,7 @@
           <!-- TAB CIERRE -->
           <div class="tab-pane fade" id="nav-cierre" role="tabpanel" aria-labelledby="nav-cierre-tab" tabindex="0">
             <div class="container-fluid">
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <label class="text-secondary">Próxima Cita</label>
-                  <input type="date" class="form-control" id="proxima_cita_cierre">
-                </div>
-                <div class="col-md-6">
-                  <label class="text-secondary">Observaciones de Cierre</label>
-                  <textarea class="form-control" id="observaciones_cierre" rows="2" placeholder="Observaciones adicionales..."></textarea>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-12">
-                  <label class="text-secondary">Firma del Médico</label>
-                  <input type="text" class="form-control" id="firma_medico_cierre" value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido'); ?>" readonly>
-                </div>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -2258,8 +2243,8 @@
                               </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="crearCita()">Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="crearCita()">Aceptar</button>
       </div>
     </div>
   </div>
@@ -2408,14 +2393,22 @@
           window.abrirHistoriaClinica = function(tipo) {
             // Preseleccionar el tipo de historia clínica
             document.getElementById('tphistoria').value = tipo;
-            
             // Disparar el evento change para activar la lógica de mostrar/ocultar tabs
             $('#tphistoria').trigger('change');
-            
             // Abrir el modal
             var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
             modal.show();
+
+            if(tipo == 1) {
+             $("#nav-antecedentesgine").removeClass("show active");
+             $("#nav-home").addClass("show active");
+
+            }
+            else if(tipo == 2) {
+              $("#nav-home").removeClass("show active");
+             $("#nav-antecedentesgine").addClass("show active");
             
+            }
             // Prevenir que el enlace se comporte como un enlace normal
             return false;
           };
