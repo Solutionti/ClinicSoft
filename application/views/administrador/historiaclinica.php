@@ -1821,7 +1821,7 @@
                       <div id="collapsePatAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
                         <div class="accordion-body">
                           <form id="form_orden_patologica">
-            <div class="row mb-2">
+                         <div class="row mb-2">
                 <div class="col-6">
                     <label class="form-label">Nombre:</label>
                     <input
@@ -1954,6 +1954,49 @@
                         </div>
                       </div>
                     </div>
+                    <!--  -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#tomografia" aria-expanded="false" aria-controls="tomografia">
+                          <i class="fas fa-microscope me-2"></i> TOMOGRAFIA
+                        </button>
+                      </h2>
+                      <div id="tomografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <!-- TOMOGRAFIA -->
+                           ACA VA EL CONTENIDO DE TOMOGRAFIA
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#resonancia" aria-expanded="false" aria-controls="resonancia">
+                          <i class="fas fa-microscope me-2"></i> RESONANCIA
+                        </button>
+                      </h2>
+                      <div id="resonancia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <!-- RESONANCIA -->
+                           ACA VA EL CONTENIDO DE RESONANCIA
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#ecografia" aria-expanded="false" aria-controls="ecografia">
+                          <i class="fas fa-microscope me-2"></i> ECOGRAFIA
+                        </button>
+                      </h2>
+                      <div id="ecografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <!-- ECOGRAFIA -->
+                           ACA VA EL CONTENIDO DE ECOGRAFIA
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
                   </div>
                 </div>
               </div>
@@ -2003,9 +2046,6 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-alergias-tab" data-bs-toggle="tab" data-bs-target="#nav-alergias" type="button" role="tab" aria-controls="nav-alergias" aria-selected="true">ALERGIAS</button>
-            <button class="nav-link" id="nav-medicamentos-tab" data-bs-toggle="tab" data-bs-target="#nav-medicamentos" type="button" role="tab" aria-controls="nav-medicamentos" aria-selected="false">RECETA MEDICA</button>
-            <button class="nav-link" id="nav-ordlab-tab" data-bs-toggle="tab" data-bs-target="#nav-ordlab" type="button" role="tab" aria-controls="nav-ordlab" aria-selected="false">ORD. LABORATORIO</button>
-            <button class="nav-link" id="nav-ordpat-tab" data-bs-toggle="tab" data-bs-target="#nav-ordpat" type="button" role="tab" aria-controls="nav-ordpat" aria-selected="false" >ORD. PATOLOGIA</button>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -2038,394 +2078,6 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="nav-medicamentos" role="tabpanel" aria-labelledby="nav-medicamentos-tab" tabindex="0">
-            <div class="container">
-              <form [formGroup]="medicamentosForm">
-                <div class="row mt-4">
-                <div class="col-6">
-                                <label class="form-label">Nombre:</label>
-                                <input
-                                  type="text"
-                                  class="form-control form-control-sm"
-                                  value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
-                                  readonly
-                                  >
-                            </div>
-                            <div class="col-1">
-                                <label class="form-label">Edad:</label>
-                                <input
-                                  type="number"
-                                  class="form-control form-control-sm"
-                                  value="<?php echo $pacientes->edad; ?>"
-                                  readonly
-                                >
-                            </div>
-                            <div class="col-5">
-                                <label class="form-label">Médico Solicitante:</label>
-                                <input
-                                  type="text"
-                                  class="form-control form-control-sm"
-                                  value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
-                                  readonly
-                                >
-                            </div>
-                  <div class="col-md-7">
-                    <label>Medicamento</label>
-                    <div class="input-group">
-                      <a href="" class="input-group-text" data-bs-toggle="modal" data-bs-target="#modalmedicamentos" style="padding: 0.375rem 0.75rem;">
-                        <i class="fas fa-eye"></i>
-                      </a>
-                      <input type="text" class="form-control" id="medicamento_medicamento">
-                    </div>
-                  </div>
-                  <div class="col-md-2">
-                    <label>Cantidad</label>
-                    <input type="number" class="form-control" id="cantidad_medicamento">
-                  </div>
-                  <div class="col-md-3">
-                    <label>Dosis</label>
-                    <select class="form-control text-uppercase" id="dosis_medicamento">
-                      <option value="">Seleccione la dosis</option>
-                      <option value="Noespecificada">No especificada</option>
-                      <option value="Ampolla">Ampolla</option>
-                      <option value="Aplicación">Aplicación</option>
-                      <option value="Capsula">Cápsula</option>
-                      <option value="Comprimido">Comprimido</option>
-                      <option value="Cucharada">Cucharada</option>
-                      <option value="Cucharadita_5ML">Cucharadita 5ML</option>
-                      <option value="Dosis">Dosis</option>
-                      <option value="Exposición">Exposición</option>
-                      <option value="Gota">Gota</option>
-                      <option value="Gragea">Gragea</option>
-                      <option value="Mililitros">Mililitros</option>
-                      <option value="Puff">Puff</option>
-                      <option value="Sesión">Sesión</option>
-                      <option value="Sobre">Sobre</option>
-                      <option value="Tableta">Tableta</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-4">
-                    <label>Vía de aplicación</label>
-                    <select class="form-control text-uppercase" id="via_aplicacion_medicamento">
-                      <option value="">Seleccione la vía de aplicación</option>
-                      <option value="Via_oral">Vía oral</option>
-                      <option value="Via_intramuscular">Vía intramuscular</option>
-                      <option value="Via_intravenoso">Vía intravenoso</option>
-                      <option value="Vaginal">Vaginal</option>
-                      <option value="Transtraqueal">Transtraqueal</option>
-                      <option value="Transdermica">Transdérmica</option>
-                      <option value="Topica">Tópica</option>
-                      <option value="Sub_lingual">Sublingual</option>
-                      <option value="Sub_cutanea">Subcutánea</option>
-                      <option value="Rectal">Rectal</option>
-                      <option value="Por_sng">Por SNG</option>
-                      <option value="Por_gastronomica">Por gastronomía</option>
-                      <option value="Parenteral">Parenteral</option>
-                      <option value="Ojo_derecha">Ojo derecho</option>
-                      <option value="Ojo_izquierdo">Ojo izquierdo</option>
-                      <option value="Oido_derecho">Oído derecho</option>
-                      <option value="Oido_izquierdo">Oído izquierdo</option>
-                      <option value="No_especifica">No especifica</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label>Frecuencia</label>
-                    <select class="form-control text-uppercase" id="frecuencia_medicamento">
-                      <option value="">Seleccione la frecuencia</option>
-                      <option value="No_especifica">No especifica</option>
-                      <option value="dos_al_dia">2 veces al día</option>
-                      <option value="tres_al_dia">3 veces al día</option>
-                      <option value="al_acostarse">Al acostarse</option>
-                      <option value="al_dia">Al día</option>
-                      <option value="cada_doce_horas">Cada 12 horas</option>
-                      <option value="cada_dos_horas">Cada 2 horas</option>
-                      <option value="cada_tres_horas">Cada 3 horas</option>
-                      <option value="cada_cuatro_horas">Cada 4 horas</option>
-                      <option value="cada_seis_horas">Cada 6 horas</option>
-                      <option value="cada_ocho_horas">Cada 8 horas</option>
-                      <option value="dos_veces_por_semana">Dos veces por semana</option>
-                      <option value="en_ayunas">En ayunas</option>
-                      <option value="en_la_mañana">En la mañana</option>
-                      <option value="mañana_noche">En la mañana, noche</option>
-                      <option value="noche">En la noche</option>
-                      <option value="tarde">En la tarde</option>
-                      <option value="mañana_tarde_noche">Mañana, Tarde, Noche</option>
-                      <option value="tres_veces_semana">Tres veces por semana</option>
-                      <option value="una_vez_semana">Una vez por semana</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label>Duración</label>
-                    <select class="form-control text-uppercase" id="duracion_medicamento">
-                      <option value="">Seleccione la duración</option>
-                      <option value="cinco_dias">05 días</option>
-                      <option value="diez_dias">10 días</option>
-                      <option value="quince_dias">15 días</option>
-                      <option value="treinta_dias">30 días</option>
-                      <option value="dos_dias">Dos días</option>
-                      <option value="durante_tres_meses">Durante 3 meses</option>
-                      <option value="tres_dias">Tres días</option>
-                      <option value="un_dia">Un día</option>
-                      <option value="una_semana">Una semana</option>
-                      <option value="unica_vez">Única vez</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-md-12">
-                    <button class="btn btn-primary" type="button" onclick="crearMedicamento()">
-                      Guardar
-                    </button>
-                    
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-ordlab" role="tabpanel" aria-labelledby="nav-ordlab-tab" tabindex="0">
-            <div class="row mt-4 mb-4">
-              <div class="col-6">
-                 <label class="form-label">Nombre:</label>
-                 <input
-                   type="text"
-                   class="form-control form-control-sm"
-                   value="<?php echo $pacientes->nombre . '' . $pacientes->apellido; ?>"
-                   id="nombre_lab"
-                   readonly
-                 >
-              </div>
-              <div class="col-1">
-                <label class="form-label">Edad:</label>
-                <input
-                  type="number"
-                  class="form-control form-control-sm"
-                  value="<?php echo $pacientes->edad; ?>"
-                  id="edad_lab"
-                  readonly
-                >
-              </div>
-              <div class="col-5">
-                 <label class="form-label">Médico Solicitante:</label>
-                 <input
-                   type="text"
-                   class="form-control form-control-sm"
-                   value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
-                   id="medico_lab"
-                   readonly
-                 >
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6 mb-3">
-                  <div class="form-group mb-0">
-                      <label class="form-label" style="min-width: 120px;">Perfiles:</label>
-                      <div class="d-flex align-items-center" style="width: 100%; max-width: 300px;">
-                        <select class="form-select form-select-sm" id="selectPerfil" onchange="if(window.seleccionarPerfil) { seleccionarPerfil(); } else { console.error('seleccionarPerfil function not found'); }" style="width: 100%;">
-                          <option value="">-- Seleccione un perfil --</option>
-                          <option value="preoperatorio">Perfil Preoperatorio</option>
-                          <option value="perfil_prenatal">Perfil Prenatal</option>
-                          <option value="perfil_recien_nacido">Perfil Recien Nacido</option>
-                          <option value="perfil_coagulacion">Perfil Coagulación</option>
-                          <option value="perfil_cardiaco">Perfil Cardiaco</option>
-                          <option value="perfil_torch">Perfil Torch</option>
-                          <option value="perfil_hepatico">Perfil Hepatico</option>
-                          <option value="perfil_lipidico">Perfil Lipidico</option>
-                          <option value="perfil_prostatico">Perfil Prostático</option>
-                          <option value="perfil_reumatico">Perfil Reumatico</option>
-                          <option value="perfil_diabetes">Perfil Diabetes</option>
-                          <option value="perfil_renal">Perfil Renal</option>
-                          <option value="perfil_fertilidad">Perfil Fertilidad</option>
-                        </select>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">
-                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
-                     <thead  class="bg-default text-white">
-                        <tr>
-                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
-                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
-                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Precio</th> -->
-                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 ps-2">Estado</th> -->
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <?php foreach ($laboratorio->result() as $laboratorios) { ?>
-                        <tr>
-                           <td class="text-xs"><?php echo $laboratorios->codigo; ?></td>
-                           <td class="text-xs"><?php echo $laboratorios->nombre; ?></td>
-                           <!-- <td class="text-xs"/td> -->
-                           <!-- <td class="text-xs">ACTIVO</td> -->
-                        </tr>
-                        <?php } ?>
-                     </tbody>
-                   </table>
-                </div>
-                <div class="col-md-6">
-                  <!--  -->
-                  <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
-                    <thead>
-                      <tr class="bg-default text-white">
-                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
-                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                  <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-primary" onclick="crearOrdenLaboratorioHistoria()">
-                      <i class="fas fa-save me-1"></i> Guardar
-                    </button>
-                    <button type="button" class="btn btn-warning" onclick="limpiarSeleccion()">
-                      <i class="fas fa-broom me-1"></i> Limpiar
-                    </button>
-                  </div>
-                </div>
-                </div>
-              </div>  
-           </div>
-            <!-- Contenido para orden de laboratorio -->
-          </div>
-          <div class="tab-pane fade" id="nav-ordpat" role="tabpanel" aria-labelledby="nav-ordpat-tab" tabindex="0">
-    <div class="modal-body">
-        <form id="form_orden_patologica">
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label class="form-label">Nombre:</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        id="nombre_paciente"
-                        value="<?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?>"
-                        readonly
-                    >
-                </div>
-                <div class="col-2">
-                    <label class="form-label">Edad:</label>
-                    <input
-                        type="number"
-                        class="form-control form-control-sm"
-                        id="edad_paciente"
-                        value="<?php echo $pacientes->edad; ?>"
-                        readonly
-                    >
-                </div>
-                <div class="col-4">
-                    <label class="form-label">Sexo:</label>
-                    <div class="d-flex align-items-center">
-                        <div class="form-check me-2">
-                            <input class="form-check-input" type="radio" name="sexo" id="sexoM" value="M">
-                            <label class="form-check-label" for="sexoM">M</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="sexoF" value="F">
-                            <label class="form-check-label" for="sexoF">F</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label class="form-label">Médico Solicitante:</label>
-                    <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        id="medico_solicitante"
-                        value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
-                        readonly
-                    >
-                </div>
-                <div class="col-6">
-                    <label class="form-label">Muestra:</label>
-                    <div class="d-flex align-items-center">
-                        <div class="form-check me-2">
-                            <input class="form-check-input" type="radio" name="muestra" id="pap" value="PAP">
-                            <label class="form-check-label" for="pap">PAP</label>
-                        </div>
-                        <div class="form-check me-2">
-                            <input class="form-check-input" type="radio" name="muestra" id="citologico" value="Citológico">
-                            <label class="form-check-label" for="citologico">Citológico</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="muestra" id="histo" value="Histopatológico">
-                            <label class="form-check-label" for="histo">Histopatológico</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mb-2">
-                <div class="col-2">
-                    <label class="form-label">Paridad:</label>
-                    <input type="text" class="form-control form-control-sm" id="paridad_paciente">
-                </div>
-                <div class="col-2">
-                    <label class="form-label">F.U.R:</label>
-                    <input type="text" class="form-control form-control-sm" id="fur_paciente">
-                </div>
-                <div class="col-2">
-                    <label class="form-label">F.U.P:</label>
-                    <input type="text" class="form-control form-control-sm" id="fup_paciente">
-                </div>
-                <div class="col-6">
-                    <label class="form-label">LACT:</label>
-                    <div class="d-flex align-items-center">
-                        <div class="form-check me-2">
-                            <input class="form-check-input" type="radio" name="lact" id="lactSi" value="S">
-                            <label class="form-check-label" for="lactSi">Sí</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="lact" id="lactNo" value="N">
-                            <label class="form-check-label" for="lactNo">No</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label class="form-label">Otros Antecedentes:</label>
-                    <input type="text" class="form-control form-control-sm" id="antecedentes_paciente">
-                </div>
-                <div class="col-6">
-                    <label class="form-label">Resultados de informes anteriores:</label>
-                    <input type="text" class="form-control form-control-sm" id="resultados_anteriores">
-                </div>
-            </div>
-            <h6 class="mt-3">HALLAZGOS</h6>
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label class="form-label">Otros:</label>
-                    <input type="text" class="form-control form-control-sm" id="otros_hallazgos">
-                </div>
-                <div class="col-6">
-                    <label class="form-label">Datos clínicos o tejidos a examinar:</label>
-                    <input type="text" class="form-control form-control-sm" id="datos_clinicos">
-                </div>
-            </div>
-              <div class="row mb-2">
-                <div class="col-6">
-                    <label class="form-label">Diagnóstico:</label>
-                    <textarea class="form-control form-control-sm" rows="1" id="diagnostico_patologia"></textarea>
-                </div>
-                <div class="col-6">
-                    <label class="form-label">Fecha:</label>
-                    <input type="date" class="form-control form-control-sm" id="fechaActual" value="<?php echo date('Y-m-d'); ?>">
-                </div>
-            </div>
-              <div class="row mt-3">
-                <div class="col-12 text-end">
-                    <button type="button" class="btn btn-primary" id="btn_guardar_patologia" onclick="crearOrdenPatologica()">Guardar</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
       <!--<div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
@@ -2435,8 +2087,6 @@
 </div>
 </div>
 </div>
-
-
 
 <!-- archivos  -->
 <div class="modal fade" id="archivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="archivosLabel" aria-hidden="true">
