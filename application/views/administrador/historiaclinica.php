@@ -72,13 +72,12 @@
                       <?php
                       $genero = isset($pacientes->sexo) ? strtolower($pacientes->sexo) : '';
                       $imagen = (strpos($genero, 'femenino') !== false || $genero === 'f')
-                        ? 'avatar-mujer.jpg'
-                        : 'team-41.jpg';
+                        ? 'avatar-mujer.jpg': 'team-41.jpg';
                       ?>
                         <img
-                            class="avatar avatar-xl avatar-circle"
-                            src="<?php echo base_url('public/img/theme/' . $imagen); ?>"
-                            alt="Foto de perfil de <?php echo htmlspecialchars($pacientes->nombre . ' ' . $pacientes->apellido); ?>"
+                          class="avatar avatar-xl avatar-circle rounded-circle"
+                          src="<?php echo base_url('public/img/theme/' . $imagen); ?>"
+                          alt="Foto de perfil de <?php echo htmlspecialchars($pacientes->nombre . ' ' . $pacientes->apellido); ?>"
                         >
                     </div>
                     <div class="flex-grow-1 ms-4">
