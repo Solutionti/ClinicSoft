@@ -749,14 +749,14 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="d-grid gap-2">
-                            <button
+                            <!-- <button
                               class="btn btn-danger rounded-pill"
                               data-bs-toggle="modal"
                               data-bs-target="#procesosclinicos"
                               [disabled]="historiaTipoForm.invalid"
                             >
                              <i class="fas fa-database"></i> Procesos Clinicos
-                            </button>
+                            </button> -->
                           </div>
                           <div class="d-grid gap-2">
                             <button
@@ -1245,6 +1245,43 @@
           <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
             <div class="container-fluid">
               <div class="row">
+             <div class="col-md-2">
+              <label>ID</label>
+              <input
+                type="number"
+                class="form-control"
+                readonly
+              >
+             </div>
+             <div class="col-md-3">
+              <label>Codigo</label>
+              <input
+                type="number"
+                class="form-control"
+                readonly
+              >
+             </div>
+             <div class="col-md-5">
+              <label>Nombre procedimiento</label>
+              <input
+                type="number"
+                class="form-control"
+                readonly
+              >
+             </div>
+             <div class="col-md-2">
+              <label>Tipo</label>
+              <select
+                class="form-control"
+              >
+                <option value="">Seleccione el tipo</option>
+                <option value="">Principal</option>
+                <option value="">Relacionado</option>
+                <option value="">Complicacion</option>
+              </select>
+             </div>
+            </div>
+              <div class="row mt-3">
                 <div class="col-md-6">
                   <div class="table-responsive">
                     <table class="table align-items-center table-borderless" id="table-diagnosticos2">
@@ -1253,6 +1290,7 @@
                           <th scope="col" class="sort text-sm text-white text-black">ID</th>
                           <th scope="col" class="sort text-sm text-white text-black" data-sort="name">Codigo</th>
                           <th scope="col" class="sort text-sm text-white text-black" data-sort="budget">Nombre diagnostico</th>
+                          <th scope="col" class="sort text-sm text-white text-black" data-sort="budget">Tipo</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1261,6 +1299,7 @@
                           <td class="budget"><?php echo $diagnosticos->id; ?></td>
                           <td class="budget"><?php echo $diagnosticos->clave; ?></td>
                           <td class="budget"><?php echo $diagnosticos->descripcion; ?></td>
+                          <td class="budget"></td>
                         </tr>
                       <?php } ?>
                       </tbody>

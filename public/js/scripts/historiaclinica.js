@@ -692,7 +692,6 @@ $(document).ready(function (){
       data: { documento: documento  },
       success: function (data) {
         data = JSON.parse(data);
-        console.log(data);
         document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' Cm</span>';
         document.getElementById('cardiaca').innerHTML = '<span class="small">' + data.frecuencia_cardiaca + ' lpm</span>';
         document.getElementById('peso').innerHTML = '<span class="small">' + data.peso + ' Kg</span>';
@@ -701,6 +700,19 @@ $(document).ready(function (){
         document.getElementById('temperatura').innerHTML = '<span class="small">' + data.temperatura + ' °C</span>';
         document.getElementById('saturacion').innerHTML = '<span class="small">' + data.saturacion + ' %</span>';
         document.getElementById('arterial').innerHTML = '<span class="small">' + data.presion_arterial + ' mmHg</span>';
+
+        // Signos vitales en la modal
+        $("#temperatura_historia").text(data.temperatura + ' °C');
+        $("#peso_historia").text(data.peso + ' Kg');
+        $("#estatura_historia").text(data.talla + ' Cm');
+        $("#pa_historia").text(data.presion_arterial + ' mmHg');
+        $("#fc_historia").text(data.frecuencia_cardiaca + ' lpm');
+
+        // Datos del paciente para la modal de Historia Clínica
+        $("#documento_historia").val(data.documento);
+        $("#nombre_historia").val(data.apellido + ' ' + data.paciente);
+        $("#edad_historia").val(data.edad);
+        $("#sexo_historia").val(data.sexo);
         
         // Calcular porcentaje de grasa (fórmula de Deurenberg)
         if(data.edad && data.sexo) {
@@ -715,18 +727,6 @@ $(document).ready(function (){
         
         $("#documento_historia").val(data.documento);
         $("#consecutivo_historia").val(data.codigo_triaje);
-        
-        // Datos del paciente para la modal de Historia Clínica
-        $("#nombre_historia").val(data.apellido + ' ' + data.paciente);
-        $("#edad_historia").val(data.edad);
-        $("#sexo_historia").val(data.sexo);
-        
-        // Signos vitales en la modal
-        $("#temperatura_historia").text(data.temperatura + ' °C');
-        $("#peso_historia").text(data.peso + ' Kg');
-        $("#estatura_historia").text(data.talla + ' Cm');
-        $("#pa_historia").text(data.presion_arterial + ' mmHg');
-        $("#fc_historia").text(data.frecuencia_cardiaca + ' lpm');
 
         // DATOS PARA LA CITAS
         $("#medico").val(data.codigo_doctor);
