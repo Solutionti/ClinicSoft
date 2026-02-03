@@ -12,6 +12,7 @@
     <link href="<?php echo base_url(); ?>public/fontawesome/css/brands.css" rel="stylesheet">
   	<link href="<?php echo base_url(); ?>public/fontawesome/css/solid.css" rel="stylesheet">
   <style>
+    
     .color-rosa {
       background-color: #CF1B77 !important;
     }
@@ -24,6 +25,7 @@
     .rosa-text {
       color: #CF1B77 !important;
     }
+    
   </style>
 </head>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  * -->
