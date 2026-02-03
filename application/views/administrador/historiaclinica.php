@@ -121,24 +121,27 @@
                 <div class="row gx-0">
                     <div class="col-5 ps-1">
                         <ul class="list-inline mb-0">
+                          <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>Temp</li>
+                          <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>P. Arterial</li>
+                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Card</li>
+                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Resp</li>
+                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>Saturacion</li>
                           <li class="align-middle me-2"><i class="fas fa-ruler-vertical me-1 text-danger"></i>Estatura</li>
                           <li class="align-middle me-2"><i class="fas fa-weight me-1 text-dark"></i>Peso</li>
                           <li class="align-middle me-2"><i class="fas fa-child me-1 text-warning"></i>Masa</li>
-                          <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>Temp</li>
-                          <li class="align-middle me-2"><i class="fas fa-diagnoses me-1 text-dark"></i>F. Resp</li>
-                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Card</li>
-                          <li class="align-middle"><i class="fas fa-child me-1 text-danger"></i>% Grasa</li>
                         </ul>
                     </div>
                     <div class="col-7 ps-0">
                         <ul class="list-inline mb-0">
+                            <li class="align-middle" id="temperatura"></li>
+                            <li class="align-middle" id="arterial"></li>
+                            <li class="align-middle" id="cardiaca"> </li>
+                            <li class="align-middle" id="respiratoria"></li>
+                            <li class="align-middle" id="saturacion"> </li>
                             <li class="align-middle" id="estatura"></li>
                             <li class="align-middle" id="peso"> </li>
                             <li class="align-middle" id="imc"> </li>
-                            <li class="align-middle" id="temperatura"></li>
-                            <li class="align-middle" id="respiratoria"></li>
-                            <li class="align-middle" id="cardiaca"> </li>
-                            <li class="align-middle" id="grasa"></li>
+                            <!-- <li class="align-middle" id="grasa"></li> -->
                           </ul>
                     </div>
                 </div>

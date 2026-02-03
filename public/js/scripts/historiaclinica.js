@@ -699,6 +699,8 @@ $(document).ready(function (){
         document.getElementById('imc').innerHTML = '<span class="small">' + data.imc + ' IMC</span>';
         document.getElementById('respiratoria').innerHTML = '<span class="small">' + data.frecuencia_respiratoria + ' r/m</span>';
         document.getElementById('temperatura').innerHTML = '<span class="small">' + data.temperatura + ' °C</span>';
+        document.getElementById('saturacion').innerHTML = '<span class="small">' + data.saturacion + ' %</span>';
+        document.getElementById('arterial').innerHTML = '<span class="small">' + data.presion_arterial + ' mmHg</span>';
         
         // Calcular porcentaje de grasa (fórmula de Deurenberg)
         if(data.edad && data.sexo) {
