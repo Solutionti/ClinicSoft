@@ -850,7 +850,37 @@ function crearMedicamento() {
       $("#via_aplicacion_medicamento").val(''),
       $("#frecuencia_medicamento").val(''),
       $("#duracion_medicamento").val('');
-    //  setTimeout(reloadPage, 3000);
+      
+      let medicamentos = [];
+
+      medicamentos.push({
+        triaje: triaje,
+        paciente: paciente,
+        medicamento: medicamento,
+        cantidad: cantidad,
+        dosis: dosis,
+        via_aplicacion: via_aplicacion,
+        frecuencia: frecuencia,
+        duracion: duracion
+      });
+
+      medicamentos.forEach(function(med) {
+        document.getElementById('listarecetamedica').innerHTML += `
+          <tr>
+            <td class="text-xs">
+              <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento(this)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            <td class="text-xs text-uppercase">${med.medicamento}</td>
+            <td class="text-xs text-uppercase">${med.cantidad}</td>
+            <td class="text-xs text-uppercase">${med.dosis}</td>
+            <td class="text-xs text-uppercase">${med.via_aplicacion}</td>
+            <td class="text-xs text-uppercase">${med.frecuencia}</td>
+            <td class="text-xs text-uppercase">${med.duracion}</td>
+          </tr>
+        `;
+      });
    },
    error: function() {
      $("body").overhang({
@@ -859,6 +889,10 @@ function crearMedicamento() {
      }); 
    }
  });
+}
+
+function eliminarMedicamento(button) {
+//   alert("eliminar medicamento");
 }
 
 function crearCita() {

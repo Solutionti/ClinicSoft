@@ -123,7 +123,7 @@
                           <th>Duración</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="listarecetamedica">
                         <!-- Los medicamentos se cargan dinámicamente -->
                       </tbody>
                     </table>
