@@ -821,7 +821,7 @@
                         <div class="sidebar-card-body">
                             <div class="stats-mini">
                                 <div class="stat-mini-item">
-                                    <span class="number">127</span>
+                                    <span class="number">30</span>
                                     <span class="label">Días Activo</span>
                                 </div>
                                 <div class="stat-mini-item">
