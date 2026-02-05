@@ -1162,7 +1162,7 @@
                            <div class="col-md-8">
                               <div class="form-group input-group-sm">
                                  <label>Medico</label>
-                                 <select class="form-control" id="medico" required disabled>
+                                 <select class="form-control" id="medico" >
                                     <option value="">Seleccione un doctor</option>
                                     <?php foreach ($doctor->result() as $doctores) { ?>
                                     <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre . ' (' . $doctores->perfil . ' )'; ?></option>
@@ -1174,7 +1174,7 @@
                               <div class="form-group input-group-sm">
                                  <label>Fecha</label>
                                  <div class="input-group">
-                                    <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;" required class="form-control" id="fecha" min="<?php echo date('Y-m-d'); ?>">
+                                    <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;"  class="form-control" id="fecha" min="<?php echo date('Y-m-d'); ?>">
                                     <!-- <div class="input-group-append">
                                       <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
                                     </div> -->
@@ -1198,7 +1198,7 @@
                               <div class="form-group input-group-sm">
                                  <label>DNI Paciente</label>
                                  <div class="input-group">
-                                    <input readonly type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" required>
+                                    <input  type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" >
                                     <div class="input-group-append">
                                        <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
                                     </div>
@@ -1208,7 +1208,7 @@
                            <div class="col-md-6">
                               <div class="form-group input-group-sm">
                                  <label>Apellidos y Nombres  Paciente</label>
-                                 <input type="text" class="form-control" id="nombre" required readonly>
+                                 <input type="text" class="form-control" id="nombre"  >
                               </div>
                            </div>
                            <div class="col-md-3">
@@ -1220,7 +1220,7 @@
                            <div class="col-md-6">
                               <div class="form-group input-group-sm">
                                  <label>Estado Cita</label>
-                                 <select class="form-control" id="estado" required disabled>
+                                 <select class="form-control" id="estado"  >
                                     <option value="Pendiente">Pendiente</option>
                                     <option value="Confirmado">Confirmado</option>
                                     <option value="Tratado">Tratado</option>

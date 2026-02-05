@@ -80,6 +80,18 @@
                               </div>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                           <div class="col-md-6">
+                             <label>Interconsulta </label>
+                              <input type="text" class="form-control" id="interconsulta"> 
+                           </div>
+                           <div class="col-md-6">
+                             <label>Destino del paciente </label>
+                             <select class="form-control" id="destino">
+                               <option value="">Ingrese el destino del paciente</option>
+                             </select>
+                           </div>
+                        </div>
                         <div class="row">
                           <div class="col-md-12">
                             <button 
