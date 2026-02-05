@@ -43,8 +43,6 @@
                         <tr>
                            <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
                            <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
-                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Precio</th> -->
-                           <!-- <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 ps-2">Estado</th> -->
                         </tr>
                      </thead>
                      <tbody>
@@ -52,21 +50,17 @@
                         <tr>
                            <td class="text-xs"><?php echo $laboratorios->codigo; ?></td>
                            <td class="text-xs"><?php echo $laboratorios->nombre; ?></td>
-                           <!-- <td class="text-xs"/td> -->
-                           <!-- <td class="text-xs">ACTIVO</td> -->
                         </tr>
                         <?php } ?>
                      </tbody>
                    </table>
                 </div>
                 <div class="col-md-6">
-                  <!--  -->
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
                     <thead>
                       <tr class="bg-default text-white">
                         <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
                         <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">Analisis</th>
-                        
                       </tr>
                     </thead>
                     <tbody>
@@ -238,7 +232,41 @@
                       <div id="tomografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
                         <div class="accordion-body">
                           <!-- TOMOGRAFIA -->
-                           ACA VA EL CONTENIDO DE TOMOGRAFIA
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                     <thead  class="bg-default text-white">
+                        <tr>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">TOMOGRAFIA</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
+                        <tr>
+                           <td class="text-xs">1</td>
+                           <td class="text-xs">prueba</td>
+                        </tr>
+                        <?php //} ?>
+                     </tbody>
+                   </table>
+                              </div>
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                    <thead>
+                      <tr class="bg-default text-white">
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">TOMOGRAFIA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                              </div>
+                            </div>
+                            <!--  -->
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -252,7 +280,39 @@
                       <div id="resonancia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
                         <div class="accordion-body">
                           <!-- RESONANCIA -->
-                           ACA VA EL CONTENIDO DE RESONANCIA
+                           <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                     <thead  class="bg-default text-white">
+                        <tr>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">RESONANCIA</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
+                        <tr>
+                           <td class="text-xs">1</td>
+                           <td class="text-xs">prueba</td>
+                        </tr>
+                        <?php //} ?>
+                     </tbody>
+                   </table>
+                              </div>
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                    <thead>
+                      <tr class="bg-default text-white">
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">RESONANCIA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                              </div>
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -266,7 +326,39 @@
                       <div id="ecografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
                         <div class="accordion-body">
                           <!-- ECOGRAFIA -->
-                           ACA VA EL CONTENIDO DE ECOGRAFIA
+                           <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                     <thead  class="bg-default text-white">
+                        <tr>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
+                        <tr>
+                           <td class="text-xs">1</td>
+                           <td class="text-xs">prueba</td>
+                        </tr>
+                        <?php //} ?>
+                     </tbody>
+                   </table>
+                              </div>
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                    <thead>
+                      <tr class="bg-default text-white">
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                              </div>
+                            </div>
                         </div>
                       </div>
                     </div>
