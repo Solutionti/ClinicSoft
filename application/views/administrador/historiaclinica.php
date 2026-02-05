@@ -89,23 +89,22 @@
                             </li>
                             <li style="position: relative; z-index: 30;">
                               <div class="dropdown d-inline-block">
-                                <button class="btn btn-info btn-xs mt-3" type="button" id="dropdownNuevaConsulta" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                <button class="btn btn-primary btn-xs mt-3" type="button" id="dropdownNuevaConsulta" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
                                   Nueva Consulta <i class="fas fa-chevron-down ms-1"></i>
                                 </button>
                                 <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownNuevaConsulta" style="z-index: 1000;">
                                   <style>.dropdown-menu::before, .dropdown-menu::after { display: none !important; content: none !important; }</style>
                                   <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('1')">Consulta General</a></li>
-                                  <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('2')">Consulta de Ginecología</a></li>
+                                  <li><a class="dropdown-item" href="#" onclick="abrirHistoriaClinica('2')">Consulta Ginecología</a></li>
                                 </ul>
                               </div>
-                              <a
+                              <!-- <a
                                 class="btn btn-danger btn-xs mt-3"
                                 data-bs-toggle="modal"
                                 data-bs-target="#descargamodalhc"
-                                
                               >
                                 Ver HC
-                              </a>
+                              </a> -->
                             </li>
                           </ul>
                         </div>
@@ -209,7 +208,7 @@
               </div>
             </div>
              </div>
-             <div class="col-md-6">
+             <div class="col-md-5">
                <div class="card card-dashed h-200">
                  <div class="card-header bg-default"><h6 class="text-white text-uppercase">seguimiento de Procesos clinicos anteriores y actual</h6></div> 
                    <div class="card-body">
@@ -741,7 +740,7 @@
   <!-- End Accordion -->
                    </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4">
                 <div class="card card-dashed h-900">
                     <div class="card-header bg-default"><h6 class="text-white text-uppercase">consulta</h6></div>
                     <div class="card-body">
@@ -758,17 +757,50 @@
                             </button> -->
                           </div>
                           <div class="d-grid gap-2">
-                            <button
+                            <!-- <button
                               class="btn btn-primary rounded-pill"
                               data-bs-toggle="modal"
                               data-bs-target="#citasmedicas"
                               >
                             <i class="fas fa-calendar-alt"></i> Agendar Cita
-                            </button>
+                            </button> -->
                           </div>
                         </div>
                       </div>
                       <div class="row">
+                        <small class="text-bold mb-2">LINEA DE TIEMPO
+                          <span class="icon icon-soft-primary">
+                            <i class="fas fa-file-alt text-danger mx-1 "></i>
+                          </span>
+                        </small>
+                        <ul class="list-unstyled">
+                          <?php foreach ($historia->result() as $historias): ?>
+                            <?php //print_r($historias); ?>
+                            <?php if($historias->tipo_consulta == 1) { ?>
+                            <li class="">
+                              <i class="fas fa-calendar-alt text-primary"></i>
+                              <span class="text-primary">
+                                <?php
+                                  $fecha = $historias->fecha;
+                                  $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+                                  $partes = explode('-', $fecha);
+                                  echo $partes[0] . ' ' . $meses[(int)$partes[1]] . ' ' . $partes[2];
+                                ?>
+                              </span> 
+                              - General (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)">ver PDF</a>]
+                            </li>
+                            <?php } else { ?>
+                            <li class="">
+                              <i class="fas fa-calendar-alt text-danger"></i>
+                               <span class="text-danger">27 Enero 2026</span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">ver PDF</a>]
+                            </li>
+                            <?php } ?>
+                          <?php endforeach; ?>
+                        </ul>
+                      </div>
+                      <div class="row mt-3">
                         <small class="text-bold mb-2">CONSULTAS AGENDADAS
                           <span class="icon icon-soft-primary">
                             <i class="fas fa-plus text-danger mx-1 "></i>
@@ -789,9 +821,7 @@
                                   <?php echo substr($poscita->fecha, 0, 10); ?>   <?php echo $poscita->hora; ?>
                                 </small>
                               </div>
-
                             <?php } ?>
-
                       </div>
                       <div class="row mt-4">
                         <small class="text-bold mb-2">CONSULTAS INICIADAS</small>
@@ -815,8 +845,6 @@
                             </small>
                           </div>
                         <?php } ?>
-
-
                         <!--  -->
                         <?php if (!$ginecoiniciada) { ?>
                           <P>Paciente no presenta atencion en <a class="text-danger">Consulta Ginecologica</a></P>
@@ -923,23 +951,23 @@
                 <div class="row text-center">
                   <div class="col">
                     <small class="text-muted">Temperatura</small>
-                    <p class="mb-0 fw-bold text-danger" id="temperatura_historia">--</p>
+                    <p class="mb-0 fw-bold text-dark" id="temperatura_historia">--</p>
                   </div>
                   <div class="col">
                     <small class="text-muted">Peso</small>
-                    <p class="mb-0 fw-bold text-primary" id="peso_historia">--</p>
+                    <p class="mb-0 fw-bold text-dark" id="peso_historia">--</p>
                   </div>
                   <div class="col">
                     <small class="text-muted">Estatura</small>
-                    <p class="mb-0 fw-bold text-success" id="estatura_historia">--</p>
+                    <p class="mb-0 fw-bold text-dark" id="estatura_historia">--</p>
                   </div>
                   <div class="col">
                     <small class="text-muted">P. Arterial</small>
-                    <p class="mb-0 fw-bold text-warning" id="pa_historia">--</p>
+                    <p class="mb-0 fw-bold text-dark" id="pa_historia">--</p>
                   </div>
                   <div class="col">
                     <small class="text-muted">F. Cardiaca</small>
-                    <p class="mb-0 fw-bold text-info" id="fc_historia">--</p>
+                    <p class="mb-0 fw-bold text-dark" id="fc_historia">--</p>
                   </div>
                 </div>
               </div>
@@ -1000,7 +1028,7 @@
           <!-- TAB CIERRE -->
           <div class="tab-pane fade" id="nav-cierre" role="tabpanel" aria-labelledby="nav-cierre-tab" tabindex="0">
             <div class="container-fluid">
-             <!-- cierre de atencion -->
+             <?php require("historiaclinica/cierreatencion.php"); ?>
             </div>
           </div>
         </div>
@@ -1236,7 +1264,6 @@
               </thead>
               <tbody>
               <?php foreach ($historia->result() as $historias) { ?>
-                
                <tr>
                  <?php if ($historias->tipo_consulta == 1) { ?>
                  <td>

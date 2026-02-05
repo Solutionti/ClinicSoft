@@ -2066,4 +2066,11 @@ class Historiaclinica extends Admin_Controller
 		$this->Historias_model->borrarArchivoPdf($codigo);
 		unlink($link);
 	}
+
+	public function eliminarMedicamento() {
+		$documento = $this->input->post('paciente');
+		$triaje = $this->input->post('triaje');
+		$codigo = $this->input->post('medicamento');
+		$this->Historias_model->eliminarMedicamento($codigo, $triaje, $documento);
+	}
 }

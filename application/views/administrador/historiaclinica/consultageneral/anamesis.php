@@ -118,10 +118,12 @@
                   <textarea
                     class="form-control form-control-sm"
                     id="anamnesis_sintomas"
-                  ></textarea>
+                  >
+                  </textarea>
                 </div>
               </div>
             </div>
+            <br>
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
             <div class="container-fluid">

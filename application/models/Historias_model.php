@@ -819,6 +819,13 @@ class Historias_model extends CI_model
     $this->db->where('codigo_documento_pacientes', $codigo);
     $this->db->delete('documentos_pacientes');
   }
+
+  public function eliminarMedicamento($codigo, $triaje, $documento){
+    $this->db->where('medicamento', $codigo);
+    $this->db->where('triaje', $triaje);
+    $this->db->where('paciente', $documento);
+    $this->db->delete('medicamentos'); 
+  }
 }
 
 ?>

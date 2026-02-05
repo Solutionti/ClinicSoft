@@ -17,7 +17,7 @@
               >
              </div>
              <div class="col-md-5">
-              <label>Nombre procedimiento</label>
+              <label>Nombre Diagnostico</label>
               <input
                 type="number"
                 class="form-control"
@@ -30,9 +30,9 @@
                 class="form-control"
               >
                 <option value="">Seleccione el tipo</option>
-                <option value="">Principal</option>
-                <option value="">Relacionado</option>
-                <option value="">Complicacion</option>
+                <option value="D">Definitivo</option>
+                <option value="P">Presentivo</option>
+                <option value="R">Repetitivo</option>
               </select>
              </div>
             </div>

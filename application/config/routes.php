@@ -115,6 +115,7 @@ $route["administracion/pdfginecologia/(:num)/(:any)"] = "administrador/historiac
 $route["administracion/pdfgeneral/(:num)"] = "administrador/historiaclinica/generarpdfmedicinageneral";
 $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTriajeid";
 $route["administracion/eliminararchivo"] = "administrador/historiaclinica/borrarArchivoPdf";
+$route["administracion/eliminarmedicamento"] = "administrador/historiaclinica/eliminarMedicamento";
 
 
 

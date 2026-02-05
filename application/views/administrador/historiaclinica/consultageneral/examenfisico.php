@@ -19,7 +19,8 @@
                   <textarea
                     class="form-control form-control-sm"
                     id="examen_mamas"
-                  ></textarea>
+                  >
+                  </textarea>
                 </div>
               </div>
               <div class="row mt-3">

@@ -691,6 +691,7 @@ $(document).ready(function (){
       method: "POST",
       data: { documento: documento  },
       success: function (data) {
+        console.log(data);
         data = JSON.parse(data);
         document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' Cm</span>';
         document.getElementById('cardiaca').innerHTML = '<span class="small">' + data.frecuencia_cardiaca + ' lpm</span>';
@@ -713,7 +714,14 @@ $(document).ready(function (){
         $("#nombre_historia").val(data.apellido + ' ' + data.paciente);
         $("#edad_historia").val(data.edad);
         $("#sexo_historia").val(data.sexo);
-        
+        $("#consecutivo_historia").val(data.codigo_triaje);
+
+        // DATOS PARA LA CITAS
+        $("#medico").val(data.codigo_doctor);
+        $("#dni").val(data.documento);
+        $("#nombre").val(data.apellido + ' ' + data.paciente);
+        $("#telefono").val(data.telefono);
+
         // Calcular porcentaje de grasa (fórmula de Deurenberg)
         if(data.edad && data.sexo) {
             const edad = parseInt(data.edad);
@@ -724,15 +732,8 @@ $(document).ready(function (){
             const porcentajeGrasa = ((1.20 * parseFloat(data.imc)) + (0.23 * edad) - (10.8 * factorGenero) - 5.4).toFixed(1);
             document.getElementById('grasa').innerHTML = '<span class="small">' + porcentajeGrasa + ' %</span>';
         }
-        
-        $("#documento_historia").val(data.documento);
-        $("#consecutivo_historia").val(data.codigo_triaje);
 
-        // DATOS PARA LA CITAS
-        $("#medico").val(data.codigo_doctor);
-        $("#dni").val(data.documento);
-        $("#nombre").val(data.apellido + ' ' + data.paciente);
-        $("#telefono").val(data.telefono);
+        
       }
    });
 })
@@ -815,7 +816,7 @@ function crearAlergias() {
 
 function crearMedicamento() {
     var url = baseurl + "administracion/crearmedicamento",
-    triaje = $("#consecutivo_historia").val();
+    triaje = $("#consecutivo_historia").val(),
     doctor = $("#documento_historia").val(),
     paciente = $("#documento_historia").val(),
     medicamento = $("#medicamento_medicamento").val(),
@@ -868,7 +869,7 @@ function crearMedicamento() {
         document.getElementById('listarecetamedica').innerHTML += `
           <tr>
             <td class="text-xs">
-              <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento(this)">
+              <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('${med.medicamento}')">
                 <i class="fa fa-trash"></i>
               </button>
             </td>
@@ -891,8 +892,43 @@ function crearMedicamento() {
  });
 }
 
-function eliminarMedicamento(button) {
-//   alert("eliminar medicamento");
+function eliminarMedicamento(medicamentos) {
+ var paciente = $("#documento_historia").val(),
+     triaje = $("#consecutivo_historia").val(),
+     url = baseurl + "administracion/eliminarmedicamento";
+
+     $("body").overhang({
+       type: "confirm",
+       primary: "#40D47E",
+       accent: "#27AE60",
+       yesColor: "#3498DB",
+       message: "Desea eliminar el medicamento del paciente ?",
+       overlay: true,
+       callback: function (value) {
+         if(value == false){
+                        
+         }
+         else {
+           $.ajax({
+            url: url,
+            method: "POST",
+            data: { 
+              medicamento: medicamentos,
+              paciente: paciente,
+              triaje: triaje
+            },
+            success: function() {
+              $("body").overhang({
+                type: "success",
+                message: "El medicamento se ha eliminado correctamente"
+              });
+
+              
+            }
+          });             
+         } 
+       }
+     });
 }
 
 function crearCita() {
@@ -927,7 +963,7 @@ function crearCita() {
 				type: "success",
 				message: "Listo",
 			});
-			setTimeout(reloadPage, 3000);
+			// setTimeout(reloadPage, 3000);
 		},
 		error: function () {
 
