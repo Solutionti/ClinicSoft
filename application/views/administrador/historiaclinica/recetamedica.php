@@ -2,7 +2,7 @@
                 <div class="col-md-12">
                 <div class="row ">
                   <div class="col-md-7">
-                    <label>Medicamento</label>
+                    <label>Medicamento *</label>
                     <div class="input-group">
                       <a href="" class="input-group-text" data-bs-toggle="modal" data-bs-target="#modalmedicamentos" style="padding: 0.375rem 0.75rem;">
                         <i class="fas fa-eye"></i>
@@ -11,11 +11,11 @@
                     </div>
                   </div>
                   <div class="col-md-2">
-                    <label>Cantidad</label>
+                    <label>Cantidad *</label>
                     <input type="number" class="form-control" id="cantidad_medicamento">
                   </div>
                   <div class="col-md-3">
-                    <label>Dosis</label>
+                    <label>Dosis *</label>
                     <select class="form-control text-uppercase" id="dosis_medicamento">
                       <option value="">Seleccione la dosis</option>
                       <option value="Noespecificada">No especificada</option>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="row mt-3">
                   <div class="col-md-4">
-                    <label>Vía de aplicación</label>
+                    <label>Vía de aplicación *</label>
                     <select class="form-control text-uppercase" id="via_aplicacion_medicamento">
                       <option value="">Seleccione la vía de aplicación</option>
                       <option value="Via_oral">Vía oral</option>
@@ -63,7 +63,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label>Frecuencia</label>
+                    <label>Frecuencia *</label>
                     <select class="form-control text-uppercase" id="frecuencia_medicamento">
                       <option value="">Seleccione la frecuencia</option>
                       <option value="No_especifica">No especifica</option>
@@ -89,7 +89,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label>Duración</label>
+                    <label>Duración *</label>
                     <select class="form-control text-uppercase" id="duracion_medicamento">
                       <option value="">Seleccione la duración</option>
                       <option value="cinco_dias">05 días</option>

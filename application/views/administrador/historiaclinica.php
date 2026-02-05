@@ -794,7 +794,16 @@
                             <?php } else { ?>
                             <li class="">
                               <i class="fas fa-calendar-alt text-danger"></i>
-                               <span class="text-danger">27 Enero 2026</span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">ver PDF</a>]
+                               <span class="text-danger">
+                                <?php
+                                  $fecha = $historias->fecha;
+                                  $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+                                  $partes = explode('-', $fecha);
+                                  echo $partes[0] . ' ' . $meses[(int)$partes[1]] . ' ' . $partes[2];
+                                ?>
+                               </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">ver PDF</a>]
                             </li>
                             <?php } ?>
                           <?php endforeach; ?>
@@ -1331,6 +1340,7 @@
                   <th></th>
                   <th>Codigo</th>
                   <th>Medicamento</th>
+                  <th>Stock</th>
                   <th>Estado</th>
                 </tr>
               </thead>
@@ -1349,6 +1359,7 @@
                   </td>
                   <td><?php echo utf8_decode($farmacia->codigo_producto); ?></td>
                   <td><?php echo utf8_decode($farmacia->nombre_producto); ?></td>
+                  <td><?php echo utf8_decode($farmacia->b1); ?></td>
                   <td>Disponible</td>
                 </tr>
                 <?php } ?>
