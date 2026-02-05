@@ -816,8 +816,7 @@
                           </span>
                         </small>
                           <?php if (!$poscita) { ?>
-                            <P>Aun no hay citas agendadas utiliza la <a class="text-danger" data-bs-toggle="modal"
-                            data-bs-target="#citasmedicas">agenda</a>  para calendarizarla</P>
+                            <P>Aun no hay citas agendadas,<a class="text-danger"> no olvides agendarla en la historia clinica </a> cierre de atencion.</P>
                             <?php } else { ?>
                               <div
                                 class="alert alert-danger text-white"
@@ -1141,109 +1140,6 @@
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
-<!-- CITAS MEDICAS -->
-<div class="modal fade" id="citasmedicas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="citasmedicasLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header bg-default">
-        <h1 class="modal-title fs-5 text-white" id="citasmedicasLabel">AGENDAMIENTO DE CITAS </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <div class="messageError"></div>
-                  <div class="row">
-                     <div class="col-md-1" style="opacity: 0;">
-                     </div>
-                     <div class="col-md-10">
-                        <div class="row">
-                           <div class="col-md-8">
-                              <div class="form-group input-group-sm">
-                                 <label>Medico</label>
-                                 <select class="form-control" id="medico" >
-                                    <option value="">Seleccione un doctor</option>
-                                    <?php foreach ($doctor->result() as $doctores) { ?>
-                                    <option value="<?php echo $doctores->codigo_doctor; ?>"><?php echo $doctores->nombre . ' (' . $doctores->perfil . ' )'; ?></option>
-                                    <?php } ?>
-                                 </select>
-                              </div>
-                           </div>
-                           <div class="col-md-4" >
-                              <div class="form-group input-group-sm">
-                                 <label>Fecha</label>
-                                 <div class="input-group">
-                                    <input type="date" style="height: 32px;padding: 0px;padding-right: 10px;"  class="form-control" id="fecha" min="<?php echo date('Y-m-d'); ?>">
-                                    <!-- <div class="input-group-append">
-                                      <button type="button" style="padding: 5px 15px;" class="btn btn-primary" id="lupa_Horario"><i class="fa fa-search"></i></button>
-                                    </div> -->
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="" id="Cont_Horas" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                           </div>
-                           <div class="col-md-1" style="opacity: 0;">
-                              <select class="form-control" id="hora" required style="height: 32px;padding: 0px;">
-                                 <option value="">Seleccionar</option>
-                              </select>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-md-3">
-                              <div class="form-group input-group-sm">
-                                 <label>DNI Paciente</label>
-                                 <div class="input-group">
-                                    <input  type="text" class="form-control" id="dni" style="height: 32px;padding: 0px;" minlength="7" maxlength="11" >
-                                    <div class="input-group-append">
-                                       <button type="button" style="padding: 5px;" class="btn btn-primary" id="lupa_DNI"><i class="fa fa-search"></i></button>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="form-group input-group-sm">
-                                 <label>Apellidos y Nombres  Paciente</label>
-                                 <input type="text" class="form-control" id="nombre"  >
-                              </div>
-                           </div>
-                           <div class="col-md-3">
-                              <div class="form-group input-group-sm">
-                                 <label>Celular</label>
-                                 <input type="text" class="form-control" id="telefono">
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="form-group input-group-sm">
-                                 <label>Estado Cita</label>
-                                 <select class="form-control" id="estado"  >
-                                    <option value="Pendiente">Pendiente</option>
-                                    <option value="Confirmado">Confirmado</option>
-                                    <option value="Tratado">Tratado</option>
-                                    <option value="Cancelado">Cancelado</option>
-                                 </select>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                              <div class="form-group input-group-sm">
-                                 <label>observaciones</label>
-                                 <input type="text" class="form-control" id="observaciones" value="cita pendiente para confirmacion de hora ">
-                              </div>
-                              </div>
-                              </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cerrar</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="crearCita()">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 </div>
 </div>
 </div>
