@@ -1033,6 +1033,8 @@
           <div class="tab-pane fade" id="nav-auxiliares" role="tabpanel" aria-labelledby="nav-auxiliares-tab" tabindex="0">
             <?php require("historiaclinica/examenesauxiliares.php"); ?>
           </div>
+          </div>
+          </div>
           <!-- TAB CIERRE -->
           <div class="tab-pane fade" id="nav-cierre" role="tabpanel" aria-labelledby="nav-cierre-tab" tabindex="0">
             <div class="container-fluid">

@@ -6,7 +6,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLabAux" aria-expanded="false" aria-controls="collapseLabAux">
-                          <i class="fas fa-flask me-2"></i> ORDEN DE LABORATORIO
+                          <i class="fas fa-flask me-2"></i> ORDEN DE LABORATORIOS
                         </button>
                       </h2>
                       <div id="collapseLabAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -83,7 +83,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapsePatAux" aria-expanded="false" aria-controls="collapsePatAux">
-                          <i class="fas fa-microscope me-2"></i> ORDEN DE PATOLOGÍA
+                          <i class="fas fa-microscope me-2"></i> ORDEN DE PATOLOGÍAS
                         </button>
                       </h2>
                       <div id="collapsePatAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -226,7 +226,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#tomografia" aria-expanded="false" aria-controls="tomografia">
-                          <i class="fas fa-pager me-2"></i> TOMOGRAFIA
+                          <i class="fas fa-pager me-2"></i> TOMOGRAFIAS
                         </button>
                       </h2>
                       <div id="tomografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -274,7 +274,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#resonancia" aria-expanded="false" aria-controls="resonancia">
-                          <i class="fas fa-radiation me-2"></i> RESONANCIA
+                          <i class="fas fa-radiation me-2"></i> RESONANCIAS
                         </button>
                       </h2>
                       <div id="resonancia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -320,7 +320,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#ecografia" aria-expanded="false" aria-controls="ecografia">
-                          <i class="fas fa-x-ray me-2"></i> ECOGRAFIA
+                          <i class="fas fa-x-ray me-2"></i> ECOGRAFIAS
                         </button>
                       </h2>
                       <div id="ecografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
