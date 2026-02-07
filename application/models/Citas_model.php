@@ -7,31 +7,28 @@ class Citas_model extends CI_model {
 
 
     public function crearCita($data) {
-
+        $this->db->where("documento", $data["dni"]);
+        $this->db->where("triage", $data["triage"]);
+        $this->db->delete("citas");
+        if($data["triage"] != "") {
+           $triage = $data["triage"];
+        }
+        else {
+          $triage = 0;
+        }
         $datos = [
-
-            "documento" => $data["dni"],
-
-            "nombre" => $data["nombre"],
-
-            "telefono" => $data["telefono"],
-
-            "doctor" => $data["medico"],
-
-            "fecha" => $data["fecha"],
-
-            "fechafin" => $data["fecha"],
-
-            "hora" => $data["hora"],
-
-            "comentarios" => $data["observaciones"],
-
-            "estado" => $data["estado"],
-
-            "usuario" => $this->session->userdata("nombre")
-
+          "documento" => $data["dni"],
+          "triage" => $triage,
+          "nombre" => $data["nombre"],
+          "telefono" => $data["telefono"],
+          "doctor" => $data["medico"],
+          "fecha" => $data["fecha"],
+          "fechafin" => $data["fecha"],
+          "hora" => $data["hora"],
+          "comentarios" => $data["observaciones"],
+          "estado" => $data["estado"],
+          "usuario" => $this->session->userdata("nombre")
         ];
-
         $this->db->insert("citas", $datos);
 
     }

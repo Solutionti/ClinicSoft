@@ -665,6 +665,7 @@ $("#saveBtn").on("click", function (){
                 type: "success",
                 message: "Historia se ha registrado correctamente"
             });
+            $('#saveBtn').removeClass('visible');
         },
         error: function () {
             $("body").overhang({
@@ -966,10 +967,10 @@ function crearCita() {
       fecha = $("#fecha_cita").val(),
       hora = "00:00",
       estado = $("#estado_cita").val(),
+      triage = $("#consecutivo_historia").val(),
       observaciones = $("#observaciones_cita").val();
 
       $.ajax({
-
 		url: url1,
 		method: "POST",
 		data: {
@@ -981,6 +982,7 @@ function crearCita() {
 		  hora: hora,
 		  estado: estado,
 		  observaciones: observaciones,
+          triage: triage
 		},
 
 		success: function () {

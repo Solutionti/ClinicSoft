@@ -110,6 +110,7 @@ class Citas extends Admin_Controller {
 		$fecha = $this->input->post("fecha");
 		$hora = $this->input->post("hora");
 		$estado = $this->input->post("estado");
+		$triage = $this->input->post("triage");
 		$observaciones = $this->input->post("observaciones");
 
 		$datos = [
@@ -120,7 +121,8 @@ class Citas extends Admin_Controller {
 			"fecha" => $fecha,
 			"hora" => $hora,
 			"estado" => $estado,
-			"observaciones" => $observaciones
+			"observaciones" => $observaciones,
+			"triage" => $triage
 		];
 		$this->Citas_model->crearCita($datos);
 	}
