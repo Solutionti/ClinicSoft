@@ -919,8 +919,8 @@ function eliminarMedicamento(medicamentos) {
 
      $("body").overhang({
        type: "confirm",
-       primary: "#40D47E",
-       accent: "#27AE60",
+       primary: "#5e72e4",
+       accent: "#ffffff",
        yesColor: "#3498DB",
        message: "Desea eliminar el medicamento del paciente ?",
        overlay: true,
@@ -1144,8 +1144,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function borrarDocumento(codigo,tipoarchivo,archivo) {
 $("body").overhang({
   type: "confirm",
-  primary: "#40D47E",
-  accent: "#27AE60",
+  primary: "#5e72e4",
+  accent: "#ffffff",
   yesColor: "#3498DB",
   message: "Desea eliminar el archivo por completo?",
   overlay: true,
@@ -1172,6 +1172,42 @@ $("body").overhang({
     } else {
     }
   }
-});
+ });
 }
+
+function abrirHistoriaClinica(tipo) {
+          $("body").overhang({
+            type: "confirm",
+            primary: "#5e72e4",
+            accent: "#ffffff",
+            yesColor: "#3498DB",
+            message: "Esta seguro de crear un consecutivo para la historia clinica?",
+            overlay: true,
+            yesMessage: "Si",
+            noMessage: "No",
+            callback: function (value) {
+            if(value == false){
+                        
+            }
+            else {
+            document.getElementById('tphistoria').value = tipo;
+            $('#tphistoria').trigger('change');
+            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            modal.show();
+
+            if(tipo == 1) {
+             $("#nav-antecedentesgine").removeClass("show active");
+             $("#nav-home").addClass("show active");
+
+            }
+            else if(tipo == 2) {
+              $("#nav-home").removeClass("show active");
+             $("#nav-antecedentesgine").addClass("show active");
+            
+            }
+              return false;
+             };                
+            }
+          });
+        }
 

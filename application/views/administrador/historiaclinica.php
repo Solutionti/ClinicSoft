@@ -9,9 +9,49 @@
       <link rel="stylesheet" href="<?php echo base_url('public/css/custom.css'); ?>">
       <!-- Script de reconocimiento de voz -->
       <script src="<?php echo base_url(); ?>public/js/scripts/speechRecognition.js"></script>
+      
    </head>
    <body class="g-sidenav-show bg-gray-100">
-    
+    <!-- Botón Guardar Flotante -->
+   <style>
+        /* ===== BOTÓN GUARDAR FLOTANTE ===== */
+        .save-floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #5e72e4, #9fa6d3);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(45, 206, 137, 0.4);
+            transition: all 0.3s ease;
+            z-index: 5000000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+        }
+
+        .save-floating-btn.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .save-floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(45, 206, 137, 0.5);
+        }
+        .save-floating-btn.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+      </style>
+
    <div class="min-height-300 bg-default position-absolute w-100"></div>
    <?php $pacientes = $paciente->result()[0]; ?>
 <main class="main-content position-relative border-radius-lg">
@@ -199,7 +239,8 @@
                       </ul>
                       <button
                         class="btn btn-primary btn-xs"
-                        data-bs-toggle="modal" data-bs-target="#archivos"
+                        data-bs-toggle="modal"
+                        data-bs-target="#archivos"
                         
                       >
                         Subir archivo
@@ -832,6 +873,7 @@
                               </div>
                             <?php } ?>
                       </div>
+                       
                       <div class="row mt-4">
                         <small class="text-bold mb-2">CONSULTAS INICIADAS</small>
                          
@@ -1043,11 +1085,11 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
+      <!-- <div class="modal-footer"> -->
+        <!-- <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  id="btn-general" hidden>Guardar</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  id="btn-gineco" hidden>Guardar</button>
-      </div>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  id="btn-gineco" hidden>Guardar</button> -->
+      <!-- </div> -->
     </div>
   </div>
 </div>
@@ -1102,6 +1144,8 @@
       </div>-->
     </div>
   </div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1271,9 +1315,11 @@
         <button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="CancelarMedicamento()">Cancelar</button>
       </div>
     </div>
-  </div>
+  </div>                  
 </div>
-
+<button class="save-floating-btn" id="saveBtn">
+     <i class="fas fa-save"></i> Guardar Cambios
+ </button>
       <?php require_once ('componentes/scripts.php'); ?>
       <script src="<?php echo base_url(); ?>public/js/scripts/historiaclinica.js?v=1.0.3"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
@@ -1282,34 +1328,15 @@
       <script src="<?php echo base_url(); ?>public/js/scripts/ecografia.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/tomografia.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/resonancia.js"></script>
-      
       <script>
         $(document).ready(function() {
-          // Hacer la función global para que esté disponible en onclick
-          window.abrirHistoriaClinica = function(tipo) {
-            // Preseleccionar el tipo de historia clínica
-            document.getElementById('tphistoria').value = tipo;
-            // Disparar el evento change para activar la lógica de mostrar/ocultar tabs
-            $('#tphistoria').trigger('change');
-            // Abrir el modal
-            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            modal.show();
+          $('.form-field').on('input', function() {
+            $('#saveBtn').addClass('visible');
+          });
 
-            if(tipo == 1) {
-             $("#nav-antecedentesgine").removeClass("show active");
-             $("#nav-home").addClass("show active");
-
-            }
-            else if(tipo == 2) {
-              $("#nav-home").removeClass("show active");
-             $("#nav-antecedentesgine").addClass("show active");
-            
-            }
-            // Prevenir que el enlace se comporte como un enlace normal
-            return false;
-          };
         });
       </script>
+      
    </body>
 </html>
 
