@@ -47,10 +47,10 @@ class Historias_model extends CI_model
 
   // PARA MEDICINA GENERAL EL TIPO DE CONSULTA ES 1
   // PARA GINECOLOGIA  EL TIPO DE CONSULTA ES 2
-  public function crearHistorialPacientesGinecologicas($data, $id, $tipo)
+  public function crearHistorialPacientesGinecologicas($data)
   {
     $datos = [
-      'tipo_consulta' => $tipo,
+      'tipo_consulta' => $data['tipo'],
       'paciente' => $data['paciente'],
       'doctor' => $data['doctor'],
       'codigo_historia' => $data['paciente'],
@@ -61,8 +61,25 @@ class Historias_model extends CI_model
       'usuario' => $this->session->userdata('nombre')
     ];
     $this->db->insert('historial_pacientes', $datos);
-    $id = $this->db->insert_id();
-    return $id;
+
+    if($data['tipo'] == 1) {
+     $data = [
+      "codigo_triage" => $data['triaje'],
+      "codigo_paciente" => $data['paciente'],
+      "usuario" => $this->session->userdata('nombre'),
+     ];
+     $this->db->insert('h_consultas', $data);
+    }
+    else if($data['tipo'] == 2) {
+      $data = [
+        "codigo_triage" => $data['triaje'],
+        "codigo_historia" => $data['paciente'],
+        "usuario" => $this->session->userdata('nombre'),
+        "estado" => 'Activo'
+      ];
+      $this->db->insert('h_ginecologias', $data);
+    }
+    
   }
 
   public function crearHconsultasGinecologicas($data)
@@ -115,6 +132,7 @@ class Historias_model extends CI_model
   {
     $datos = [
       'codigo_triage' => $data['triaje'],
+      'codigo_paciente' => $data['paciente'],
       'anamnesis' => $data['anamnesis'],
       'empresa' => $data['empresa'],
       'compania' => $data['compania'],
@@ -148,10 +166,11 @@ class Historias_model extends CI_model
       'firma_medico' => $data['firma'],
       'usuario' => $this->session->userdata('nombre')
     ];
-    $this->db->insert('h_consultas', $datos);
-    $id = $this->db->insert_id();
-
-    return $id;
+    
+    $this->db->where('codigo_triage', $data['triaje']);
+    $this->db->where('codigo_paciente', $data['paciente']);
+    $this->db->update('h_consultas', $datos);
+    
   }
 
   public function crearRecetaMedica($data)

@@ -567,7 +567,7 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
     table_lab_mini4.draw(false);
 });
 
-$("#btn-general").on("click", function (){
+$("#saveBtn").on("click", function (){
     var url2 = baseurl + "administracion/crearhistoriageneral",
     dni = $("#documento_historia").val(),
     doctorid = $("#doctorid1").val(),
@@ -598,7 +598,6 @@ $("#btn-general").on("click", function (){
     apetito = $("#fisico_apetito").val(),
     sed = $("#fisico_sed").val(),
     orina = $("#fisico_orina").val(),
-    
     ap_genito = $("#ap_genito2").val(),
     // 
     examendx = $("#plan_examen").val(),
@@ -608,10 +607,10 @@ $("#btn-general").on("click", function (){
     referencia = $("#plan_referencia").val(),
     firma = $("#plan_firma").val();
 
-    let diagnosticosgeneral = [];
-    for (let i = 0; i < elementos_general.length; i++) {
-        diagnosticosgeneral [i] = elementos_general[i][0];
-    }
+    // let diagnosticosgeneral = [];
+    // for (let i = 0; i < elementos_general.length; i++) {
+    //     diagnosticosgeneral [i] = elementos_general[i][0];
+    // }
 
     $.ajax({
         url: url2,
@@ -645,7 +644,7 @@ $("#btn-general").on("click", function (){
             apetito: apetito,
             sed: sed,
             orina: orina,
-            diagnosticosgeneral: diagnosticosgeneral,
+            // diagnosticosgeneral: diagnosticosgeneral,
             examendx: examendx,
             procedimientos: procedimientos,
             interconsultas: interconsultas,
@@ -654,11 +653,18 @@ $("#btn-general").on("click", function (){
             firma: firma
         },
         success: function () {
+            //Diagnosticos
+            //examenes auxiliares
+            //procedimientos
+            //cierre de atencion
+            if(fecha_cita = $("#fecha_cita").val() != "") {
+              crearCita();
+            }
+
             $("body").overhang({
                 type: "success",
                 message: "Historia se ha registrado correctamente"
             });
-            setTimeout(reloadPage, 3000);
         },
         error: function () {
             $("body").overhang({
@@ -729,10 +735,10 @@ $(document).ready(function (){
         $("#consecutivo_historia").val(data.codigo_triaje);
 
         // DATOS PARA LA CITAS
-        $("#medico").val(data.codigo_doctor);
-        $("#dni").val(data.documento);
-        $("#nombre").val(data.apellido + ' ' + data.paciente);
-        $("#telefono").val(data.telefono);
+        $("#medico_cita").val(data.codigo_doctor);
+        $("#dni_cita").val(data.documento);
+        $("#nombre_cita").val(data.apellido + ' ' + data.paciente);
+        $("#telefono_cita").val(data.telefono);
 
         // Calcular porcentaje de grasa (fórmula de Deurenberg)
         if(data.edad && data.sexo) {
@@ -953,14 +959,14 @@ function eliminarMedicamento(medicamentos) {
 
 function crearCita() {
   var url1 = baseurl + "administracion/crearcita",
-      dni = $("#dni").val(),
-      nombre = $("#nombre").val(),
-      telefono = $("#telefono").val(),
-      medico = $("#medico").val(),
-      fecha = $("#fecha").val(),
+      dni = $("#dni_cita").val(),
+      nombre = $("#nombre_cita").val(),
+      telefono = $("#telefono_cita").val(),
+      medico = $("#medico_cita").val(),
+      fecha = $("#fecha_cita").val(),
       hora = "00:00",
-      estado = $("#estado").val(),
-      observaciones = $("#observaciones").val();
+      estado = $("#estado_cita").val(),
+      observaciones = $("#observaciones_cita").val();
 
       $.ajax({
 
@@ -978,15 +984,8 @@ function crearCita() {
 		},
 
 		success: function () {
-
-			$("body").overhang({
-				type: "success",
-				message: "Listo",
-			});
-			// setTimeout(reloadPage, 3000);
 		},
 		error: function () {
-
 			$("body").overhang({
 				type: "warning",
 				message: "No se realizo la operacion.",
@@ -1198,12 +1197,37 @@ function abrirHistoriaClinica(tipo) {
             if(tipo == 1) {
              $("#nav-antecedentesgine").removeClass("show active");
              $("#nav-home").addClass("show active");
-
+             
+             $.ajax({
+               url: baseurl + "administracion/consecutivohistoria",
+                method: "POST",
+                data: {
+                  triaje: $("#consecutivo_historia").val(),
+                  paciente: $("#documento_historia").val(), 
+                  tipo: tipo 
+                },
+                success: function(response) {
+                  
+                }
+              });
             }
             else if(tipo == 2) {
               $("#nav-home").removeClass("show active");
              $("#nav-antecedentesgine").addClass("show active");
-            
+             
+             $.ajax({
+               url: baseurl + "administracion/consecutivohistoria",
+                method: "POST",
+                data: {
+                  triaje: $("#consecutivo_historia").val(),
+                  paciente: $("#documento_historia").val(), 
+                  tipo: tipo 
+                },
+                success: function(response) {
+                  
+                }
+              });
+
             }
               return false;
              };                

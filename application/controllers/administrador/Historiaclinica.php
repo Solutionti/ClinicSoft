@@ -170,6 +170,105 @@ class Historiaclinica extends Admin_Controller
 		$this->load->view('administrador/historiaclinica', $data);
 	}
 
+	public function crearConsecutivoHC() {
+		$data1 = [
+		  'paciente' => $this->input->post('paciente'),
+	      'doctor' => $this->session->userdata('codigo'),
+		  'triaje' => $this->input->post('triaje'),
+		  'tipo' => $this->input->post('tipo'),
+		];
+	  $this->Historias_model->crearHistorialPacientesGinecologicas($data1);
+	}
+
+	public function crearHistorialPacientesGeneral()
+	{
+		$paciente = $this->input->post('dni');
+		$doctor = $this->input->post('doctorid');
+		$triaje = $this->input->post('triaje');
+		$anamnesis = $this->input->post('anamnesis');
+		$empresa = $this->input->post('empresa');
+		$compania = $this->input->post('compania');
+		$iafa = $this->input->post('iafa');
+		$acompanante = $this->input->post('acompanante');
+		$documento = $this->input->post('dni3');
+		$celular = $this->input->post('celular');
+		$motivo_consulta = $this->input->post('motivo_consulta');
+		$tratamiento_anterior = $this->input->post('tratamiento_anterior');
+		$enfermedad_actual = $this->input->post('enfermedad_actual');
+		$tp_enfermedad = $this->input->post('tp_enfermedad');
+		$inicio = $this->input->post('inicio');
+		$curso = $this->input->post('curso');
+		$sintomas = $this->input->post('sintomas');
+		$cabeza = $this->input->post('cabeza');
+		$cuello = $this->input->post('cuello');
+		$ap_respiratorio = $this->input->post('ap_respiratorio');
+		$ap_cardio = $this->input->post('ap_cardio');
+		$ap_genito = $this->input->post('ap_genito');
+		$abdomen = $this->input->post('abdomen');
+		$locomotor = $this->input->post('locomotor');
+		$sistema_nervioso = $this->input->post('sistema_nervioso');
+		$apetito = $this->input->post('apetito');
+		$sed = $this->input->post('sed');
+		$orina = $this->input->post('orina');
+		$diagnosticosgeneral = $this->input->post('diagnosticosgeneral');
+		$examendx = $this->input->post('examendx');
+		$procedimientos = $this->input->post('procedimientos');
+		$interconsultas = $this->input->post('interconsultas');
+		$tratamiento = $this->input->post('tratamiento');
+		$referencia = $this->input->post('referencia');
+		$cita = $this->input->post('cita');
+		$firma = $this->input->post('firma');
+
+		$data2 = [
+			'paciente' => $paciente,
+			'triaje' => $triaje,
+			'anamnesis' => $anamnesis,
+			'empresa' => $empresa,
+			'compania' => $compania,
+			'iafa' => $iafa,
+			'acompanante' => $acompanante,
+			'documento' => $documento,
+			'celular' => $celular,
+			'motivo_consulta' => $motivo_consulta,
+			'tratamiento_anterior' => $tratamiento_anterior,
+			'enfermedad_actual' => $enfermedad_actual,
+			'tp_enfermedad' => $tp_enfermedad,
+			'inicio' => $inicio,
+			'curso' => $curso,
+			'sintomas' => $sintomas,
+			'cabeza' => $cabeza,
+			'cuello' => $cuello,
+			'ap_respiratorio' => $ap_respiratorio,
+			'ap_cardio' => $ap_cardio,
+			'ap_genito' => $ap_genito,
+			'abdomen' => $abdomen,
+			'locomotor' => $locomotor,
+			'sistema_nervioso' => $sistema_nervioso,
+			'apetito' => $apetito,
+			'sed' => $sed,
+			'orina' => $orina,
+			'examendx' => $examendx,
+			'procedimientos' => $procedimientos,
+			'tratamiento' => $tratamiento,
+			'referencia' => $referencia,
+			'interconsultas' => $interconsultas,
+			'cita' => $cita,
+			'firma' => $firma,
+		];
+
+		$id = $this->Historias_model->crearHconsultasGeneral($data2);
+		
+		// for ($i = 0; $i < sizeof($diagnosticosgeneral); $i++) {
+		// 	$data3 = [
+		// 		'paciente' => $paciente,
+		// 		'diagnosticos' => $diagnosticosgeneral[$i],
+		// 		'historia' => $historia,
+		// 		'triaje' => $triaje
+		// 	];
+		// 	$this->Historias_model->crearDiagnosticosGeneral($data3);
+		// }
+	}
+
 	public function crearHistorialPacientesGinecologicas()
 	{
 		$paciente = $this->input->post('dni');
@@ -210,12 +309,6 @@ class Historiaclinica extends Admin_Controller
 		$proxima_cita = $this->input->post('proxima_cita');
 		$firma_medico = $this->input->post('firma_medico');
 		$tratamiento = $this->input->post('tratamientos_gine');
-
-		$data1 = [
-			'paciente' => $paciente,
-			'doctor' => $this->session->userdata('codigo'),
-			'triaje' => $triaje
-		];
 
 		$data2 = [
 			'triaje' => $triaje,
@@ -266,101 +359,6 @@ class Historiaclinica extends Admin_Controller
 				'triaje' => $triaje
 			];
 			$this->Historias_model->crearDiagnosticos($data3);
-		}
-	}
-
-	public function crearHistorialPacientesGeneral()
-	{
-		$paciente = $this->input->post('dni');
-		$doctor = $this->input->post('doctorid');
-		$triaje = $this->input->post('triaje');
-
-		$anamnesis = $this->input->post('anamnesis');
-		$empresa = $this->input->post('empresa');
-		$compania = $this->input->post('compania');
-		$iafa = $this->input->post('iafa');
-		$acompanante = $this->input->post('acompanante');
-		$documento = $this->input->post('dni3');
-		$celular = $this->input->post('celular');
-		$motivo_consulta = $this->input->post('motivo_consulta');
-		$tratamiento_anterior = $this->input->post('tratamiento_anterior');
-		$enfermedad_actual = $this->input->post('enfermedad_actual');
-		$tp_enfermedad = $this->input->post('tp_enfermedad');
-		$inicio = $this->input->post('inicio');
-		$curso = $this->input->post('curso');
-		$sintomas = $this->input->post('sintomas');
-		$cabeza = $this->input->post('cabeza');
-		$cuello = $this->input->post('cuello');
-		$ap_respiratorio = $this->input->post('ap_respiratorio');
-		$ap_cardio = $this->input->post('ap_cardio');
-		$ap_genito = $this->input->post('ap_genito');
-		$abdomen = $this->input->post('abdomen');
-		$locomotor = $this->input->post('locomotor');
-		$sistema_nervioso = $this->input->post('sistema_nervioso');
-		$apetito = $this->input->post('apetito');
-		$sed = $this->input->post('sed');
-		$orina = $this->input->post('orina');
-		$diagnosticosgeneral = $this->input->post('diagnosticosgeneral');
-		$examendx = $this->input->post('examendx');
-		$procedimientos = $this->input->post('procedimientos');
-		$interconsultas = $this->input->post('interconsultas');
-		$tratamiento = $this->input->post('tratamiento');
-		$referencia = $this->input->post('referencia');
-		$cita = $this->input->post('cita');
-		$firma = $this->input->post('firma');
-
-		$data1 = [
-			'paciente' => $paciente,
-			'doctor' => $this->session->userdata('codigo'),
-			'triaje' => $triaje
-		];
-
-		$data2 = [
-			'triaje' => $triaje,
-			'anamnesis' => $anamnesis,
-			'empresa' => $empresa,
-			'compania' => $compania,
-			'iafa' => $iafa,
-			'acompanante' => $acompanante,
-			'documento' => $documento,
-			'celular' => $celular,
-			'motivo_consulta' => $motivo_consulta,
-			'tratamiento_anterior' => $tratamiento_anterior,
-			'enfermedad_actual' => $enfermedad_actual,
-			'tp_enfermedad' => $tp_enfermedad,
-			'inicio' => $inicio,
-			'curso' => $curso,
-			'sintomas' => $sintomas,
-			'cabeza' => $cabeza,
-			'cuello' => $cuello,
-			'ap_respiratorio' => $ap_respiratorio,
-			'ap_cardio' => $ap_cardio,
-			'ap_genito' => $ap_genito,
-			'abdomen' => $abdomen,
-			'locomotor' => $locomotor,
-			'sistema_nervioso' => $sistema_nervioso,
-			'apetito' => $apetito,
-			'sed' => $sed,
-			'orina' => $orina,
-			'examendx' => $examendx,
-			'procedimientos' => $procedimientos,
-			'tratamiento' => $tratamiento,
-			'referencia' => $referencia,
-			'interconsultas' => $interconsultas,
-			'cita' => $cita,
-			'firma' => $firma,
-		];
-
-		$id = $this->Historias_model->crearHconsultasGeneral($data2);
-		$historia = $this->Historias_model->crearHistorialPacientesGinecologicas($data1, $id, 1);
-		for ($i = 0; $i < sizeof($diagnosticosgeneral); $i++) {
-			$data3 = [
-				'paciente' => $paciente,
-				'diagnosticos' => $diagnosticosgeneral[$i],
-				'historia' => $historia,
-				'triaje' => $triaje
-			];
-			$this->Historias_model->crearDiagnosticosGeneral($data3);
 		}
 	}
 

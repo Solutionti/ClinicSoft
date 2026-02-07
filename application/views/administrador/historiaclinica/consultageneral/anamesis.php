@@ -7,6 +7,7 @@
                       class="form-select form-select-sm form-control form-control-sm"
                       id="anamnesis_directa"
                     >
+                      <option value="">Seleccione una opcion</option>
                       <option value="D">DIRECTA</option>
                       <option value="I">INDIRECTA</option>
                       <option value="M">MIXTA</option>

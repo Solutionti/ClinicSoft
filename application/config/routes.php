@@ -106,6 +106,8 @@ $route["administracion/actualizarprecios"] = "administrador/precios/actualizarpr
 /***********************************************************
 ************ HISTORIAS PACIENTES ***************************
 ************************************************************/
+
+$route["administracion/consecutivohistoria"] = "administrador/historiaclinica/crearConsecutivoHC";
 $route["administracion/crearhistoriaginecologia"] = "administrador/historiaclinica/crearhistorialpacientesginecologicas";
 $route["administracion/crearhistoriageneral"] = "administrador/historiaclinica/crearhistorialpacientesgeneral";
 $route["administracion/crearreceta"] = "administrador/historiaclinica/crearrecetamedica";
