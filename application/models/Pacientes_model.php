@@ -4,7 +4,7 @@ class Pacientes_model extends CI_model
 {
     public function getPacientes()
     {
-        $this->db->select('*');
+        $this->db->select('*, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad');
         $this->db->from('pacientes');
         $this->db->where('estado', 'Activo');
         $result = $this->db->get();
@@ -14,7 +14,7 @@ class Pacientes_model extends CI_model
 
     public function getPacienteTabla($documento, $apellido)
     {
-        $this->db->select('*');
+        $this->db->select('*, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad');
         $this->db->from('pacientes');
         $this->db->or_where('documento', $documento);
         $this->db->or_like('apellido', $apellido);
@@ -30,7 +30,7 @@ class Pacientes_model extends CI_model
 
     public function getPacienteId($documento)
     {
-        $this->db->select('*');
+        $this->db->select('*, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad');
         $this->db->from('pacientes');
         $this->db->where('documento', $documento);
         $result = $this->db->get();

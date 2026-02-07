@@ -693,9 +693,9 @@ $(document).ready(function (){
       success: function (data) {
         console.log(data);
         data = JSON.parse(data);
-        document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' Cm</span>';
+        document.getElementById('estatura').innerHTML = '<span class="small">' + data.talla + ' cm</span>';
         document.getElementById('cardiaca').innerHTML = '<span class="small">' + data.frecuencia_cardiaca + ' lpm</span>';
-        document.getElementById('peso').innerHTML = '<span class="small">' + data.peso + ' Kg</span>';
+        document.getElementById('peso').innerHTML = '<span class="small">' + data.peso + ' kg</span>';
         document.getElementById('imc').innerHTML = '<span class="small">' + data.imc + ' IMC</span>';
         document.getElementById('respiratoria').innerHTML = '<span class="small">' + data.frecuencia_respiratoria + ' r/m</span>';
         document.getElementById('temperatura').innerHTML = '<span class="small">' + data.temperatura + ' °C</span>';
@@ -704,8 +704,8 @@ $(document).ready(function (){
 
         // Signos vitales en la modal
         $("#temperatura_historia").text(data.temperatura + ' °C');
-        $("#peso_historia").text(data.peso + ' Kg');
-        $("#estatura_historia").text(data.talla + ' Cm');
+        $("#peso_historia").text(data.peso + ' kg');
+        $("#estatura_historia").text(data.talla + ' cm');
         $("#pa_historia").text(data.presion_arterial + ' mmHg');
         $("#fc_historia").text(data.frecuencia_cardiaca + ' lpm');
 

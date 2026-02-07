@@ -6,7 +6,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLabAux" aria-expanded="false" aria-controls="collapseLabAux">
-                          <i class="fas fa-flask me-2"></i> ORDEN DE LABORATORIOS
+                          <i class="fas fa-flask me-2"></i> ORDEN DE LABORATORIO
                         </button>
                       </h2>
                       <div id="collapseLabAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -83,7 +83,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapsePatAux" aria-expanded="false" aria-controls="collapsePatAux">
-                          <i class="fas fa-microscope me-2"></i> ORDEN DE PATOLOGÍAS
+                          <i class="fas fa-microscope me-2"></i> ORDEN DE PATOLOGÍA
                         </button>
                       </h2>
                       <div id="collapsePatAux" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -222,11 +222,65 @@
                         </div>
                       </div>
                     </div>
+                    <!-- ECOGRAFIA -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#ecografia" aria-expanded="false" aria-controls="ecografia">
+                          <i class="fas fa-x-ray me-2"></i> ORDEN DE ECOGRAFIA
+                        </button>
+                      </h2>
+                      <div id="ecografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
+                        <div class="accordion-body">
+                          <!-- ECOGRAFIA -->
+                           <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-ecografia">
+                     <thead  class="bg-default text-white">
+                        <tr>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <?php foreach ($eco->result() as $tb_eco) { ?>
+                        <tr>
+                           <td class="text-xs"><?php echo $tb_eco->codigo; ?></td>
+                           <td class="text-xs"><?php echo $tb_eco->nombre; ?></td>
+                        </tr>
+                        <?php } ?>
+                     </tbody>
+                   </table>
+                              </div>
+                              <div class="col-md-6">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-ecografia-items">
+                    <thead>
+                      <tr class="bg-default text-white">
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
+                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="crearOrdenEcografiaHistoria()">
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="limpiarSeleccionEcografia()">
+                      <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                  </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
                     <!--  -->
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#tomografia" aria-expanded="false" aria-controls="tomografia">
-                          <i class="fas fa-pager me-2"></i> TOMOGRAFIAS
+                          <i class="fas fa-pager me-2"></i> ORDEN DE TOMOGRAFIA
                         </button>
                       </h2>
                       <div id="tomografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -235,7 +289,7 @@
                           <div class="container-fluid">
                             <div class="row">
                               <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-tomografia">
                      <thead  class="bg-default text-white">
                         <tr>
                            <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -243,17 +297,17 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
+                        <?php foreach ($tomografias->result() as $tb_tomo) { ?>
                         <tr>
-                           <td class="text-xs">1</td>
-                           <td class="text-xs">prueba</td>
+                           <td class="text-xs"><?php echo $tb_tomo->codigo; ?></td>
+                           <td class="text-xs"><?php echo $tb_tomo->nombre; ?></td>
                         </tr>
-                        <?php //} ?>
+                        <?php } ?>
                      </tbody>
                    </table>
                               </div>
                               <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-tomografia-items">
                     <thead>
                       <tr class="bg-default text-white">
                         <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -263,6 +317,14 @@
                     <tbody>
                     </tbody>
                   </table>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="crearOrdenTomografiaHistoria()">
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="limpiarSeleccionTomografia()">
+                      <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                  </div>
                               </div>
                             </div>
                             <!--  -->
@@ -274,7 +336,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#resonancia" aria-expanded="false" aria-controls="resonancia">
-                          <i class="fas fa-radiation me-2"></i> RESONANCIAS
+                          <i class="fas fa-radiation me-2"></i> ORDEN DE RESONANCIA
                         </button>
                       </h2>
                       <div id="resonancia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
@@ -283,7 +345,7 @@
                            <div class="container-fluid">
                             <div class="row">
                               <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-resonancia">
                      <thead  class="bg-default text-white">
                         <tr>
                            <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -291,17 +353,17 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
+                        <?php foreach ($resonancias->result() as $tb_reso) { ?>
                         <tr>
-                           <td class="text-xs">1</td>
-                           <td class="text-xs">prueba</td>
+                           <td class="text-xs"><?php echo $tb_reso->codigo; ?></td>
+                           <td class="text-xs"><?php echo $tb_reso->nombre; ?></td>
                         </tr>
-                        <?php //} ?>
+                        <?php } ?>
                      </tbody>
                    </table>
                               </div>
                               <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
+                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-resonancia-items">
                     <thead>
                       <tr class="bg-default text-white">
                         <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
@@ -311,52 +373,14 @@
                     <tbody>
                     </tbody>
                   </table>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!--  -->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#ecografia" aria-expanded="false" aria-controls="ecografia">
-                          <i class="fas fa-x-ray me-2"></i> ECOGRAFIAS
-                        </button>
-                      </h2>
-                      <div id="ecografia" class="accordion-collapse collapse" data-bs-parent="#accordionExamenesAux">
-                        <div class="accordion-body">
-                          <!-- ECOGRAFIA -->
-                           <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio">
-                     <thead  class="bg-default text-white">
-                        <tr>
-                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
-                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <?php // foreach ($laboratorio->result() as $laboratorios) { ?>
-                        <tr>
-                           <td class="text-xs">1</td>
-                           <td class="text-xs">prueba</td>
-                        </tr>
-                        <?php //} ?>
-                     </tbody>
-                   </table>
-                              </div>
-                              <div class="col-md-6">
-                                <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-laboratorio-items">
-                    <thead>
-                      <tr class="bg-default text-white">
-                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">#</th>
-                        <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12">ECOGRAFIA</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" onclick="crearOrdenResonanciaHistoria()">
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="limpiarSeleccionResonancia()">
+                      <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                  </div>
                               </div>
                             </div>
                         </div>

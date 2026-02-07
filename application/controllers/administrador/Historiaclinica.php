@@ -103,6 +103,9 @@ class Historiaclinica extends Admin_Controller
 		$ordenPatologicas = $this->Historias_model->getOrdenesPatologicas($documento);
 		$ordenLaboratorios = $this->Historias_model->getOrdeneslaboratorio($documento);
 		$documentosPacientes = $this->Historias_model->getDocumentosPacientes($documento);
+		$eco = $this->Historias_model->getEcografias($documento);
+		$tomografias = $this->Historias_model->getTomografias($documento);
+		$resonancias = $this->Historias_model->getResonancias($documento);
 
 		// listar las ecografias en el frontend
 		$ecoAbdominal = $this->Historias_model->getEcografiaAbdominal($documento);
@@ -145,6 +148,9 @@ class Historiaclinica extends Admin_Controller
 			'ordenLaboratorio' => $ordenLaboratorios,
 			'documentosPacientes' => $documentosPacientes,
 			'recetas' => $recetas,
+			'eco' => $eco,
+			'tomografias' => $tomografias,
+			'resonancias' => $resonancias,
 			//
 			'ecoAbdominales' => $ecoAbdominal,
 			'ecoMamas' => $ecoMama,
@@ -2067,7 +2073,8 @@ class Historiaclinica extends Admin_Controller
 		unlink($link);
 	}
 
-	public function eliminarMedicamento() {
+	public function eliminarMedicamento()
+	{
 		$documento = $this->input->post('paciente');
 		$triaje = $this->input->post('triaje');
 		$codigo = $this->input->post('medicamento');

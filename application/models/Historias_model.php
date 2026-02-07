@@ -643,6 +643,34 @@ class Historias_model extends CI_model
     return $result;
   }
 
+  public function getEcografias($paciente)
+  {
+    $this->db->select('*');
+    $this->db->from('tb_eco');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getTomografias($paciente)
+  {
+    $this->db->select('*');
+    $this->db->from('tomografias');
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getResonancias($paciente)
+  {
+    $this->db->select('*');
+    $this->db->from('resonancias');
+    // La tabla solo tiene codigo y nombre, no hay campo de documento
+    $result = $this->db->get();
+
+    return $result;
+  }
+
   // controladores para listar las ecografias
 
   public function getEcografiaAbdominal($paciente)
@@ -820,11 +848,12 @@ class Historias_model extends CI_model
     $this->db->delete('documentos_pacientes');
   }
 
-  public function eliminarMedicamento($codigo, $triaje, $documento){
+  public function eliminarMedicamento($codigo, $triaje, $documento)
+  {
     $this->db->where('medicamento', $codigo);
     $this->db->where('triaje', $triaje);
     $this->db->where('paciente', $documento);
-    $this->db->delete('medicamentos'); 
+    $this->db->delete('medicamentos');
   }
 }
 

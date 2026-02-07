@@ -65,14 +65,15 @@
         <div class="container-fluid mt-3">
           <div class="row">
             <div class="col-md-3">
-               <h4 class="page-header-title h6"> <?php echo $pacientes->nombre . ' ' . $pacientes->apellido; ?></h4>
+               <h4 class="page-header-title h6"> <?php echo $pacientes->apellido . ' ' . $pacientes->nombre; ?></h4>
                 <div class="page-header" style="position: relative; z-index: 20; overflow: visible;">
                   <div class="d-flex align-items-lg-center">
                     <div class="flex-shrink-0">
                       <?php
                       $genero = isset($pacientes->sexo) ? strtolower($pacientes->sexo) : '';
                       $imagen = (strpos($genero, 'femenino') !== false || $genero === 'f')
-                        ? 'avatar-mujer.jpg': 'team-41.jpg';
+                        ? 'avatar-mujer.jpg'
+                        : 'team-41.jpg';
                       ?>
                         <img
                           class="avatar avatar-xl avatar-circle rounded-circle"
@@ -85,7 +86,7 @@
                         <div class="col-lg mb-3 mb-lg-0">
                           <ul class="list-inline list-separator">
                             <li class="list-inline-item">
-                              <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo $pacientes->fecha_nacimiento; ?> - <?php echo $pacientes->edad; ?> años
+                              <i class="bi-geo-alt-fill text-primary me-1"></i> <?php echo date("d/m/Y", strtotime($pacientes->fecha_nacimiento)); ?> - <?php echo $pacientes->edad; ?> años
                             </li>
                             <li style="position: relative; z-index: 30;">
                               <div class="dropdown d-inline-block">
@@ -120,10 +121,10 @@
                     <div class="col-5 ps-1">
                         <ul class="list-inline mb-0">
                           <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>Temp</li>
-                          <li class="align-middle me-2"><i class="fas fa-thermometer me-1 text-success"></i>P. Arterial</li>
-                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Card</li>
+                          <li class="align-middle me-2"><i class="fas fa-stethoscope me-1 text-success"></i>P. Arterial</li>
+                          <li class="align-middle me-2"><i class="fas fa-heart me-1 text-danger"></i>F. Card</li>
                           <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Resp</li>
-                          <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>Saturacion</li>
+                          <li class="align-middle me-2"><i class="fas fa-tint me-1 text-danger"></i>Saturacion</li>
                           <li class="align-middle me-2"><i class="fas fa-ruler-vertical me-1 text-danger"></i>Estatura</li>
                           <li class="align-middle me-2"><i class="fas fa-weight me-1 text-dark"></i>Peso</li>
                           <li class="align-middle me-2"><i class="fas fa-child me-1 text-warning"></i>Masa</li>
@@ -775,18 +776,18 @@
                         </small>
                         <ul class="list-unstyled">
                           <?php foreach ($historia->result() as $historias): ?>
-                            <?php //print_r($historias); ?>
-                            <?php if($historias->tipo_consulta == 1) { ?>
+                            <?php // print_r($historias); ?>
+                            <?php if ($historias->tipo_consulta == 1) { ?>
                             <li class="">
                               <i class="fas fa-calendar-alt text-primary"></i>
                               <span class="text-primary">
                                 <?php
-                                  $fecha = $historias->fecha;
-                                  $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                                $fecha = $historias->fecha;
+                                $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                                  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-                                  $partes = explode('-', $fecha);
-                                  echo $partes[0] . ' ' . $meses[(int)$partes[1]] . ' ' . $partes[2];
+                                $partes = explode('-', $fecha);
+                                echo $partes[0] . ' ' . $meses[(int) $partes[1]] . ' ' . $partes[2];
                                 ?>
                               </span> 
                               - General (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)">ver PDF</a>]
@@ -796,12 +797,12 @@
                               <i class="fas fa-calendar-alt text-danger"></i>
                                <span class="text-danger">
                                 <?php
-                                  $fecha = $historias->fecha;
-                                  $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                                $fecha = $historias->fecha;
+                                $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                                  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-                                  $partes = explode('-', $fecha);
-                                  echo $partes[0] . ' ' . $meses[(int)$partes[1]] . ' ' . $partes[2];
+                                $partes = explode('-', $fecha);
+                                echo $partes[0] . ' ' . $meses[(int) $partes[1]] . ' ' . $partes[2];
                                 ?>
                                </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">ver PDF</a>]
                             </li>
@@ -1004,40 +1005,40 @@
         <br>
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-              <?php require("historiaclinica/consultageneral/anamesis.php"); ?>
+              <?php require ('historiaclinica/consultageneral/anamesis.php'); ?>
             </div>
           </div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-              <?php require("historiaclinica/consultageneral/plantrabajo.php"); ?>
+              <?php require ('historiaclinica/consultageneral/plantrabajo.php'); ?>
           </div>
           <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
-            <?php require("historiaclinica/diagnosticos.php"); ?>
+            <?php require ('historiaclinica/diagnosticos.php'); ?>
           </div>
           <div class="tab-pane fade " id="nav-antecedentesgine" role="tabpanel" aria-labelledby="nav-antecedentesgine-tab" tabindex="0">
-            <?php require("historiaclinica/ginecologia/antecedentes.php"); ?>
+            <?php require ('historiaclinica/ginecologia/antecedentes.php'); ?>
           </div>
           <div class="tab-pane fade " id="nav-fisicogine" role="tabpanel" aria-labelledby="nav-fisicogine-tab" tabindex="0">
-            <?php require("historiaclinica/consultageneral/examenfisico.php"); ?>
+            <?php require ('historiaclinica/consultageneral/examenfisico.php'); ?>
           </div>
           <div class="tab-pane fade " id="nav-consultagine" role="tabpanel" aria-labelledby="nav-consultagine-tab" tabindex="0">
-            <?php require("historiaclinica/ginecologia/consulta.php"); ?>
+            <?php require ('historiaclinica/ginecologia/consulta.php'); ?>
           </div>
           <div class="tab-pane fade" id="nav-procedimientos" role="tabpanel" aria-labelledby="nav-procedimientos-tab" tabindex="0">
-            <?php require("historiaclinica/procedimientos.php") ?>
+            <?php require ('historiaclinica/procedimientos.php') ?>
           </div>
           <!-- TAB RECETA MÉDICA -->
           <div class="tab-pane fade" id="nav-receta" role="tabpanel" aria-labelledby="nav-receta-tab" tabindex="0">
-            <?php require("historiaclinica/recetamedica.php"); ?>
+            <?php require ('historiaclinica/recetamedica.php'); ?>
           </div>
           <!-- TAB EXÁMENES AUXILIARES -->
           <div class="tab-pane fade" id="nav-auxiliares" role="tabpanel" aria-labelledby="nav-auxiliares-tab" tabindex="0">
-            <?php require("historiaclinica/examenesauxiliares.php"); ?>
+            <?php require ('historiaclinica/examenesauxiliares.php'); ?>
           </div>
           
           <!-- TAB CIERRE -->
           <div class="tab-pane fade" id="nav-cierre" role="tabpanel" aria-labelledby="nav-cierre-tab" tabindex="0">
             <div class="container-fluid">
-             <?php require("historiaclinica/cierreatencion.php"); ?>
+             <?php require ('historiaclinica/cierreatencion.php'); ?>
             </div>
           </div>
         </div>
@@ -1278,6 +1279,9 @@
       <script src="<?php echo base_url(); ?>public/js/scripts/laboratorio.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/seleccionarPerfil.js"></script>
       <script src="<?php echo base_url(); ?>public/js/scripts/get_Items.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/ecografia.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/tomografia.js"></script>
+      <script src="<?php echo base_url(); ?>public/js/scripts/resonancia.js"></script>
       
       <script>
         $(document).ready(function() {
