@@ -452,6 +452,13 @@ var elementos_general = new Array();
 $('#table-diagnosticos2').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();
     elem_lab = table_general.row(this).data();
+    $("#diagnostico_id").val(elem_lab[0]);
+    $("#diagnostico_codigo").val(elem_lab[1]);
+    $("#diagnostico_nombre").val(elem_lab[2]); 
+});
+
+$("#agregar_diagnostico").on("click", function() {
+    elem_lab = [$("#diagnostico_id").val(), $("#diagnostico_codigo").val(), $("#diagnostico_nombre").val(), $("#diagnostico_tipo").val()];  
     elementos_general.push(elem_lab);
     table_general.row(this).remove()
     table_lab_mini2.row.add(elem_lab).draw(false);
@@ -462,6 +469,11 @@ $('#table-diagnosticos2').on('dblclick', 'tr', function(e) {
     }
     $("#total").val((total_).toFixed(2));
     table_general.draw(false);
+    
+    $("#diagnostico_id").val("");
+    $("#diagnostico_codigo").val("");
+    $("#diagnostico_nombre").val("");
+    $("#diagnostico_tipo").val("");
 });
 
 $('#items-general-table').on('dblclick', 'tr', function(e) {
@@ -828,7 +840,7 @@ function crearMedicamento() {
 
     if(medicamento == "" || cantidad == "" || dosis == "" || via_aplicacion == "" || frecuencia == "" || duracion == "") {
         $("body").overhang({
-           type: "warn",
+           type: "error",
            message: "Debe completar todos los campos con * para registrar el medicamento"
         });
     }

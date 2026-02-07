@@ -33,6 +33,14 @@
                       <tbody>
                       </tbody>
                     </table>
+                    <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-primary" >
+                      <i class="fas fa-save me-1"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-warning">
+                      <i class="fas fa-broom me-1"></i> Limpiar
+                    </button>
+                  </div>
                   </div>
                 </div>
               </div>
