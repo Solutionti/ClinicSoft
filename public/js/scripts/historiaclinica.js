@@ -1188,14 +1188,8 @@ function abrirHistoriaClinica(tipo) {
             noMessage: "No",
             callback: function (value) {
             if(value == false){
-              if(tipo == 1) {
-               $("#nav-antecedentesgine").removeClass("show active");
-               $("#nav-home").addClass("show active");
-            }
-            else if(tipo == 2) {
-              $("#nav-home").removeClass("show active");
-              $("#nav-antecedentesgine").addClass("show active");
-             }         
+              alert("hola");
+                       
             }
             else {
             document.getElementById('tphistoria').value = tipo;
