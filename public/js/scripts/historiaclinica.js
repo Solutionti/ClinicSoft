@@ -1187,9 +1187,26 @@ function abrirHistoriaClinica(tipo) {
             yesMessage: "Si",
             noMessage: "No",
             callback: function (value) {
-            if(value == false){
-              alert("hola");
-                       
+            if(value === false){
+              if(tipo == 1) {
+                document.getElementById('tphistoria').value = tipo;
+            $('#tphistoria').trigger('change');
+            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            modal.show();
+               $("#nav-antecedentesgine").removeClass("show active");
+               $("#nav-home").addClass("show active");
+                // $("#staticBackdrop").modal("show");
+               
+            }
+            else if(tipo == 2) {
+                document.getElementById('tphistoria').value = tipo;
+            $('#tphistoria').trigger('change');
+            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            modal.show();
+              $("#nav-home").removeClass("show active");
+              $("#nav-antecedentesgine").addClass("show active");
+            //   $("#staticBackdrop").modal("show");
+             }         
             }
             else {
             document.getElementById('tphistoria').value = tipo;
