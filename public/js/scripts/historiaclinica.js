@@ -1182,7 +1182,7 @@ function abrirHistoriaClinica(tipo) {
             primary: "#5e72e4",
             accent: "#ffffff",
             yesColor: "#3498DB",
-            message: "Esta seguro de crear una nueva historia clinica?",
+            message: "Esta seguro de crear un consecutivo para la historia clinica?",
             overlay: true,
             yesMessage: "Si",
             noMessage: "No",
@@ -1190,22 +1190,20 @@ function abrirHistoriaClinica(tipo) {
             if(value === false){
               if(tipo == 1) {
                 document.getElementById('tphistoria').value = tipo;
-            $('#tphistoria').trigger('change');
-            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            modal.show();
-               $("#nav-antecedentesgine").removeClass("show active");
-               $("#nav-home").addClass("show active");
-                // $("#staticBackdrop").modal("show");
+                $('#tphistoria').trigger('change');
+                var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                modal.show();
+                  $("#nav-antecedentesgine").removeClass("show active");
+                  $("#nav-home").addClass("show active");
                
             }
             else if(tipo == 2) {
-                document.getElementById('tphistoria').value = tipo;
-            $('#tphistoria').trigger('change');
-            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            modal.show();
-              $("#nav-home").removeClass("show active");
-              $("#nav-antecedentesgine").addClass("show active");
-            //   $("#staticBackdrop").modal("show");
+              document.getElementById('tphistoria').value = tipo;
+              $('#tphistoria').trigger('change');
+              var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+              modal.show();
+                $("#nav-home").removeClass("show active");
+                $("#nav-antecedentesgine").addClass("show active");
              }         
             }
             else {
