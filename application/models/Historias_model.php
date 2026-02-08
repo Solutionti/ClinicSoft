@@ -595,6 +595,19 @@ class Historias_model extends CI_model
     $this->db->insert('ordenes_laboratorio_detalle', $orden_laboratorio);
   }
 
+  public function crearProcedimientosHistoria($data)
+  {
+    $datos = [
+      'codigo_historia' => $data['triaje'],
+      'paciente' => $data['paciente'],
+      'codigo_procedimiento' => $data['codigo'],
+      'texto_plantilla' => $data['plantilla'],
+      'fecha' => date('Y-m-d'),
+      'usuario' => $this->session->userdata('nombre')
+    ];
+    $this->db->insert('procedimiento_historias', $datos);
+  }
+
   public function getOrdenesPatologicas($documento)
   {
     $this->db->select('*');

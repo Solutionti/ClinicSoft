@@ -218,6 +218,7 @@ class Historiaclinica extends Admin_Controller
 		$referencia = $this->input->post('referencia');
 		$cita = $this->input->post('cita');
 		$firma = $this->input->post('firma');
+		$procedimientos_seleccionados = $this->input->post('procedimientos_seleccionados');
 
 		$data2 = [
 			'paciente' => $paciente,
@@ -257,7 +258,28 @@ class Historiaclinica extends Admin_Controller
 		];
 
 		$id = $this->Historias_model->crearHconsultasGeneral($data2);
-	
+		
+		if (!empty($procedimientos_seleccionados)) {
+			foreach ($procedimientos_seleccionados as $proc) {
+				$dataProc = [
+					'triaje' => $triaje,
+					'paciente' => $paciente,
+					'codigo' => $proc[0],
+					'plantilla' => $proc[2]
+				];
+				$this->Historias_model->crearProcedimientosHistoria($dataProc);
+			}
+		}
+		
+		// for ($i = 0; $i < sizeof($diagnosticosgeneral); $i++) {
+		// 	$data3 = [
+		// 		'paciente' => $paciente,
+		// 		'diagnosticos' => $diagnosticosgeneral[$i],
+		// 		'historia' => $historia,
+		// 		'triaje' => $triaje
+		// 	];
+		// 	$this->Historias_model->crearDiagnosticosGeneral($data3);
+		// }
 	}
 
 	public function crearHistorialPacientesGinecologicas()

@@ -1,5 +1,39 @@
 <div class="container-fluid">
               <div class="row">
+             <div class="col-md-2">
+              <label>Codigo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="procedimiento_codigo"
+                readonly
+              >
+             </div>
+             <div class="col-md-4">
+              <label>Nombre Procedimiento</label>
+              <input
+                type="text"
+                class="form-control"
+                id="procedimiento_nombre"
+                readonly
+              >
+             </div>
+             <div class="col-md-5">
+              <label>Texto Plantilla</label>
+              <input
+                type="text"
+                class="form-control"
+                id="procedimiento_plantilla"
+              >
+             </div>
+             <div class="col-md-1">
+              <label>&nbsp;</label>
+              <button class="btn btn-success w-100" id="agregar_procedimiento">
+                <i class="fas fa-plus me-1"></i>
+              </button>
+             </div>
+            </div>
+              <div class="row mt-3">
                 <div class="col-md-6">
                   <div class="table-responsive">
                     <table class="table align-items-center table-borderless" id="table-procedimientos2">
@@ -7,6 +41,7 @@
                         <tr>
                           <th scope="col" class="sort  text-white text-sm" data-sort="name">Codigo</th>
                           <th scope="col" class="sort  text-white text-sm" data-sort="budget">Nombre procedimiento</th>
+                          <th scope="col" class="sort  text-white text-sm" data-sort="budget">Texto plantilla</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -14,6 +49,7 @@
                         <tr>
                           <td> <?php echo $procedimientos->codigo_cpt; ?> </td>
                           <td> <?php echo $procedimientos->nombre; ?> </td>
+                          <td><?php echo $procedimientos->texto_plantilla; ?></td>
                         </tr>
                      <?php } ?>
                      </tbody>
@@ -28,6 +64,7 @@
                         <tr>
                           <th scope="col" class="sort text-white text-sm" data-sort="name">Codigo</th>
                           <th scope="col" class="sort text-white text-sm" data-sort="budget">Nombre procedimiento</th>
+                          <th scope="col" class="sort text-white text-sm" data-sort="budget">Texto plantilla</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -36,8 +73,13 @@
                     <div class="d-flex gap-2 mt-3">
                     <!-- <button class="btn btn-primary" >
                       <i class="fas fa-save me-1"></i> Guardar
+<<<<<<< HEAD
                     </button> -->
                     <button type="button" class="btn btn-warning">
+=======
+                    </button>
+                    <button type="button" class="btn btn-warning" id="btn-limpiar-procedimientos">
+>>>>>>> 6071aac6625b3a02634a57e45f1dd0be0e479762
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
                   </div>
