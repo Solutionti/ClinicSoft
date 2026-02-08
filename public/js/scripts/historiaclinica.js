@@ -538,39 +538,58 @@ $('#items-procedimientos-table').on('dblclick', 'tr', function(e) {
     table_lab_mini3.draw(false);
 });
 var elementos_procedimientos2 = new Array();
+var selected_procedimiento_row = null;
+
 $('#table-procedimientos2').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();
     elem_lab = table_procedi2.row(this).data();
-    elementos_procedimientos2.push(elem_lab);
-    table_procedi2.row(this).remove()
-    table_lab_mini4.row.add(elem_lab).draw(false);
+    $("#procedimiento_codigo").val(elem_lab[0]);
+    $("#procedimiento_nombre").val(elem_lab[1]);
+    $("#procedimiento_plantilla").val(elem_lab[2]);
+    selected_procedimiento_row = table_procedi2.row(this);
+});
 
-    total_ = 0;
-    for (let i = 0; i < elementos_procedimientos2.length; i++) {
-        total_ += elementos_procedimientos2[i][2] * 1;
+$("#agregar_procedimiento").on("click", function() {
+    var codigo = $("#procedimiento_codigo").val();
+    var nombre = $("#procedimiento_nombre").val();
+    var plantilla = $("#procedimiento_plantilla").val();
+
+    if(codigo == "") {
+         return; 
     }
-    $("#total").val((total_).toFixed(2));
-    table_procedi2.draw(false);
+
+    var elem_lab = [codigo, nombre, plantilla];
+    elementos_procedimientos2.push(elem_lab);
+    
+    table_lab_mini4.row.add(elem_lab).draw(false);
+    
+    if(selected_procedimiento_row) {
+        selected_procedimiento_row.remove().draw(false);
+        selected_procedimiento_row = null;
+    }
+    
+    $("#procedimiento_codigo").val("");
+    $("#procedimiento_nombre").val("");
+    $("#procedimiento_plantilla").val("");
 });
 
 $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();
     elem_lab = table_lab_mini4.row(this).data();
-    table_lab_mini4.row(this).remove()
+    table_lab_mini4.row(this).remove().draw(false);
     table_procedi2.row.add(elem_lab).draw(false);
 
     for (let i = 0; i < elementos_procedimientos2.length; i++) {
         if (elementos_procedimientos2[i][0] == elem_lab[0]) {
             elementos_procedimientos2.splice(i, 1);
-            i = elementos_procedimientos2.length;
+            break;
         }
     }
-    total_ = 0;
-    for (let i = 0; i < elementos_procedimientos2.length; i++) {
-        total_ += elementos_procedimientos2[i][2] * 1;
-    }
-    $("#total").val((total_).toFixed(2));
-    table_lab_mini4.draw(false);
+});
+
+$("#btn-limpiar-procedimientos").on("click", function() {
+    elementos_procedimientos2 = [];
+    table_lab_mini4.clear().draw();
 });
 
 $("#saveBtn").on("click", function (){
@@ -618,6 +637,11 @@ $("#saveBtn").on("click", function (){
     //     diagnosticosgeneral [i] = elementos_general[i][0];
     // }
 
+    let procedimientos_seleccionados = [];
+    for (let i = 0; i < elementos_procedimientos2.length; i++) {
+        procedimientos_seleccionados.push(elementos_procedimientos2[i]);
+    }
+
     $.ajax({
         url: url2,
         method: "POST",
@@ -653,6 +677,7 @@ $("#saveBtn").on("click", function (){
             // diagnosticosgeneral: diagnosticosgeneral,
             examendx: examendx,
             procedimientos: procedimientos,
+            procedimientos_seleccionados: procedimientos_seleccionados,
             interconsultas: interconsultas,
             tratamiento: tratamiento,
             referencia: referencia,

@@ -7,6 +7,7 @@ class Colposcopia extends Admin_Controller {
         parent::__construct();
         $this->load->model("Colposcopia_model");
         $this->load->library('upload'); // Cargar librería de subida
+        $this->load->library('image_lib'); // Cargar librería de imágenes
     }
 
     public function index() {
@@ -18,7 +19,7 @@ class Colposcopia extends Admin_Controller {
     public function crearColposcopia() {
         // 1. CONFIGURACIÓN DE SUBIDA DE IMÁGENES (Más seguro que move_uploaded_file)
         $config['upload_path']   = './public/colposcopia/'; // Asegúrate que esta carpeta exista
-        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['max_size']      = 5120; // 5MB
         $config['encrypt_name']  = TRUE; // Encripta el nombre (ej: 837483.jpg)
 
@@ -34,6 +35,19 @@ class Colposcopia extends Admin_Controller {
             if ($this->upload->do_upload('imagen1')) {
                 $uploadData = $this->upload->data();
                 $imagen1 = $uploadData['file_name'];
+
+                // --- OPTIMIZACIÓN ---
+                $config_manip = array(
+                    'image_library'  => 'gd2',
+                    'source_image'   => $uploadData['full_path'],
+                    'maintain_ratio' => TRUE,
+                    'width'          => 1200,
+                    'height'         => 1200,
+                    'quality'        => '85%'
+                );
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
             }
         }
 
@@ -44,6 +58,19 @@ class Colposcopia extends Admin_Controller {
             if ($this->upload->do_upload('imagen2')) {
                 $uploadData = $this->upload->data();
                 $imagen2 = $uploadData['file_name'];
+
+                // --- OPTIMIZACIÓN ---
+                $config_manip = array(
+                    'image_library'  => 'gd2',
+                    'source_image'   => $uploadData['full_path'],
+                    'maintain_ratio' => TRUE,
+                    'width'          => 1200,
+                    'height'         => 1200,
+                    'quality'        => '85%'
+                );
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
             }
         }
 
@@ -54,6 +81,19 @@ class Colposcopia extends Admin_Controller {
             if ($this->upload->do_upload('imagen3')) {
                 $uploadData = $this->upload->data();
                 $imagen3 = $uploadData['file_name'];
+
+                // --- OPTIMIZACIÓN ---
+                $config_manip = array(
+                    'image_library'  => 'gd2',
+                    'source_image'   => $uploadData['full_path'],
+                    'maintain_ratio' => TRUE,
+                    'width'          => 1200,
+                    'height'         => 1200,
+                    'quality'        => '85%'
+                );
+                $this->image_lib->initialize($config_manip);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
             }
         }
 

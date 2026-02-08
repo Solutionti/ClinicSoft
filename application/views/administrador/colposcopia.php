@@ -98,7 +98,7 @@
                 <img src="<?php echo base_url(); ?>public/img/theme/team-41.jpg" class="avatar avatar-sm me-3">
               </div>
               <div class="d-flex flex-column justify-content-center">
-                <h6 class="mb-0 text-xs"><?php echo $colposcopias->apellido." ".$colposcopias->paciente; ?></h6>
+                <h6 class="mb-0 text-xs"><?php echo $colposcopias->apellido." ".$colposcopias->nombre; ?></h6>
                 <p class="text-xs text-secondary mb-0"><?php echo $colposcopias->documento; ?></p>
               </div>
             </div>
@@ -114,6 +114,9 @@
                          </a>
                          <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Toma 2">
                              <img  src="<?php echo base_url() ?>public/colposcopia/<?php echo $colposcopias->imagen2; ?>">
+                         </a>
+                         <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Toma 3">
+                             <img  src="<?php echo base_url() ?>public/colposcopia/<?php echo $colposcopias->imagen3; ?>">
                          </a>
                       </div>
                     </td>
@@ -149,7 +152,7 @@
             <input
                type="text"
                class="form-control form-control-sm"
-               value="<?php echo $this->session->userdata('apellido'). ' ' . $this->session->userdata('nombre'); ?>"
+               value="<?php echo $this->session->userdata('nombre'). ' ' . $this->session->userdata('nombre'); ?>"
                readonly
                id="codigo_doctor"
                name="medico"
@@ -365,7 +368,7 @@
     <!-- Imagen 1 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen1" id="inputImg1" accept="image/*">
+            <input type="file" class="custom-file-input" name="imagen1" id="inputImg1" accept=".jpg, .jpeg">
             <label class="custom-file-label">Sin Filtro (Basal)</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
@@ -377,7 +380,7 @@
     <!-- Imagen 2 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen2" id="inputImg2" accept="image/*">
+            <input type="file" class="custom-file-input" name="imagen2" id="inputImg2" accept=".jpg, .jpeg">
             <label class="custom-file-label">Con Ácido Acético</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
@@ -389,7 +392,7 @@
     <!-- Imagen 3 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen3" id="inputImg3" accept="image/*">
+            <input type="file" class="custom-file-input" name="imagen3" id="inputImg3" accept=".jpg, .jpeg">
             <label class="custom-file-label">Test de Schiller (Lugol)</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">

@@ -352,6 +352,7 @@
                         <tr class="bg-dark text-white">
                           <th class="text-uppercase text-xs">codigo</th>
                           <th class="text-uppercase text-xs">Nombre procedimiento</th>
+                          <th class="text-uppercase text-xs">Texto plantilla</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -359,6 +360,7 @@
                       <tr class="text-capitalize">
                         <td><?php echo $procedimientoss->codigo_cpt; ?>  </td>
                         <td><?php echo $procedimientoss->nombre; ?>  </td>
+                        <td><?php echo $procedimientoss->texto_plantilla; ?>  </td>
                       </tr>
                       <?php } ?>
                     </tbody>
