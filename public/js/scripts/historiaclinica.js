@@ -1182,7 +1182,7 @@ function abrirHistoriaClinica(tipo) {
             primary: "#5e72e4",
             accent: "#ffffff",
             yesColor: "#3498DB",
-            message: "Esta seguro de crear un consecutivo para la historia clinica?",
+            message: "Esta seguro de crear una nueva historia clinica?",
             overlay: true,
             yesMessage: "Si",
             noMessage: "No",
