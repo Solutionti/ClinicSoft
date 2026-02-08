@@ -118,6 +118,8 @@ $route["administracion/pdfgeneral/(:num)"] = "administrador/historiaclinica/gene
 $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTriajeid";
 $route["administracion/eliminararchivo"] = "administrador/historiaclinica/borrarArchivoPdf";
 $route["administracion/eliminarmedicamento"] = "administrador/historiaclinica/eliminarMedicamento";
+$route["administracion/creardiagnosticos"] = "administrador/historiaclinica/crearDiagnosticos";
+
 
 
 

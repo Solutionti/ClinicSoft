@@ -452,15 +452,25 @@ var elementos_general = new Array();
 $('#table-diagnosticos2').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();
     elem_lab = table_general.row(this).data();
+    table_general.row(this).remove();
+    // table_lab_mini2.row.add(elem_lab).draw(false);
+    
     $("#diagnostico_id").val(elem_lab[0]);
     $("#diagnostico_codigo").val(elem_lab[1]);
-    $("#diagnostico_nombre").val(elem_lab[2]); 
+    $("#diagnostico_nombre").val(elem_lab[2]);
+    
+    total_ = 0;
+    for (let i = 0; i < elementos_general.length; i++) {
+        total_ += elementos_general[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_general.draw(false);
 });
 
 $("#agregar_diagnostico").on("click", function() {
     elem_lab = [$("#diagnostico_id").val(), $("#diagnostico_codigo").val(), $("#diagnostico_nombre").val(), $("#diagnostico_tipo").val()];  
     elementos_general.push(elem_lab);
-    table_general.row(this).remove()
+    table_general.row(this).remove();
     table_lab_mini2.row.add(elem_lab).draw(false);
 
     total_ = 0;
@@ -613,10 +623,7 @@ $("#saveBtn").on("click", function (){
     referencia = $("#plan_referencia").val(),
     firma = $("#plan_firma").val();
 
-    // let diagnosticosgeneral = [];
-    // for (let i = 0; i < elementos_general.length; i++) {
-    //     diagnosticosgeneral [i] = elementos_general[i][0];
-    // }
+    
 
     $.ajax({
         url: url2,
@@ -660,6 +667,7 @@ $("#saveBtn").on("click", function (){
         },
         success: function () {
             //Diagnosticos
+            crearDiagnosticos('1');
             //examenes auxiliares
             //procedimientos
             //cierre de atencion
@@ -837,6 +845,39 @@ function crearAlergias() {
        }); 
      }
    });
+}
+
+function crearDiagnosticos(tipo) {
+  var url = baseurl + "administracion/creardiagnosticos";
+  let triage = $("#consecutivo_historia").val(),
+      paciente = $("#documento_historia").val();
+
+  let diagnosticos = [];
+  for (let i = 0; i < elementos_general.length; i++) {
+    diagnosticos[i] = elementos_general[i][1] + '-' + elementos_general[i][3];
+  }
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+          triage: triage,
+          paciente: paciente,
+          diagnosticos: diagnosticos,
+          tipo: tipo,
+        },
+        success: function() {
+        
+        }
+    });
+}
+
+function crearProcedimientos() {
+
+}
+
+function crearExamenesAuxiliares() {
+
 }
 
 function crearMedicamento() {
