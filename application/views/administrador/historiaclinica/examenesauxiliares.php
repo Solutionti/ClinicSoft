@@ -67,9 +67,6 @@
                     </tbody>
                   </table>
                   <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-primary" onclick="crearOrdenLaboratorioHistoria()">
-                      <i class="fas fa-save me-1"></i> Guardar
-                    </button>
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccion()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
@@ -264,9 +261,6 @@
                     </tbody>
                   </table>
                   <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-primary" onclick="crearOrdenEcografiaHistoria()">
-                      <i class="fas fa-save me-1"></i> Guardar
-                    </button>
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionEcografia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
@@ -318,9 +312,6 @@
                     </tbody>
                   </table>
                   <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-primary" onclick="crearOrdenTomografiaHistoria()">
-                      <i class="fas fa-save me-1"></i> Guardar
-                    </button>
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionTomografia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
@@ -374,9 +365,6 @@
                     </tbody>
                   </table>
                   <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-primary" onclick="crearOrdenResonanciaHistoria()">
-                      <i class="fas fa-save me-1"></i> Guardar
-                    </button>
                     <button type="button" class="btn btn-warning" onclick="limpiarSeleccionResonancia()">
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>

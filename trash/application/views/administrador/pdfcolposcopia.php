@@ -9,13 +9,13 @@ $pdf->Image('public/colposcopia/'.$colposcopias->imagen2 , 120 ,115, 60 , 40,'JP
 $pdf->SetFont('Times','',13);
 $pdf->Ln(1);
 $pdf->Cell(65,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'CLINICA ENFOQUE SALUD', '', 0,'L', false );
+$pdf->Cell(60,6,'CLINICA MI SALUD', '', 0,'L', false );
 $pdf->Ln(5);
 $pdf->Cell(72,6,'', '', 0,'L', false );
 $pdf->Cell(1,6,'Maternidad y Especialidades', '', 0,'L', false );
 $pdf->Ln(5);
 $pdf->Cell(60,6,'', '', 0,'L', false );
-$pdf->Cell(7,6,'Calle Alfonso Ugarte #673', '', 0,'L', false );
+$pdf->Cell(7,6,'Av. Salaverry #1402', '', 0,'L', false );
 $pdf->Ln(2);
 $pdf->Cell(42,5,'', '', 0,'L', false );
 $pdf->Cell(60,5,'_____________________________________________', '', 0,'L', false );

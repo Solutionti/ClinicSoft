@@ -205,7 +205,7 @@
 
   <div class="modal fade" id="AgregarPaciente" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-fullscreen" role="document">
-    <div class="modal-content">
+    <form class="modal-content" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>administracion/crearcolposcopia">
       <div class="modal-header bg-default">
         <h5 class="modal-title text-uppercase text-white" id="exampleModalLabel">Crear colposcopia</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -214,7 +214,6 @@
    
       </div>
       <div class="modal-body">
-        <form enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>administracion/crearcolposcopia">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group input-group-sm">
@@ -247,127 +246,127 @@
             </div>
          </div>
 
-         <div class="row">
-        <div class="col-md-4">
-                <div class="form-group input-group-sm">
-                 <label>U. escamo columnar</label>
-                 <select  name="escamo_columnar" class="form-control">
-                   <option value="">Seleccione una opción</option>
-                   <option value="Sin lesiones">Sin lesiones</option>
-                   <option value="Epitelio blanco">Epitelio Blanco</option>
-                   <option value="Mosaico">Mosaico</option>
-                   <option value="Puntillado">Puntillado</option>
-                   <option value="Leucoplasia">Leucoplasia</option>
-                   <option value="Vasos atipicos">Vasos Atipicos</option>
-                   <option value="Shiler positivo">Shiler Positivo</option>
-                   <option value="Shiler Negativo">Shiler Negativo</option>
-                 </select>
-                </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group input-group-sm">
-                 <label>Endo cervix</label>
-                 <select name="endocervix" class="form-control">
-                   <option value="">Seleccione una opción</option>
-                   <option value="Sin lesiones">Sin Lesiones</option>
-                   <option value="Ectopia">Ectopia</option>
-                   <option value="Mosaico">Mosaico</option>
-                   <option value="Puntillado">Puntillado</option>
-                   <option value="Epitelio blanco">Epitelio Blanco</option>
-                   <option value="Vasos atipicos">Vasos Atipicos</option>
-                 </select>
-                 
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group input-group-sm">
-                 <label>Vagina</label>
-                 <select  name="vagina" class="form-control">
-                   <option value="">Seleccione una opción</option>
-                   <option value="Sin lesiones">Sin Lesiones</option>
-                   <option value="Condilomas">Condilomas</option>
-                   <option value="Flujo">Flujo</option>
-                   <option value="Puntiada">Puntiada</option>
-                   <option value="Atrofia">Atrofia</option>
-                   <option value="Herpes">Herpes</option>
-                   <option value="Ulcera">Ulcera</option>
-                 </select>
-              </div>
-            </div>
-         </div>
-         <div class="row">
-        <div class="col-md-4">
-                <div class="form-group input-group-sm">
-                    <label>Vulva</label>
-                    <select name="vulva" class="form-control">
-                      <option value="">Seleccione una opción</option>
-                      <option value="Sin lesiones">Sin lesiones</option>
-                      <option value="Condilomas">Condilomas</option>
-                      <option value="Herpes">Herpes</option>
-                      <option value="Nevus">Nevus</option>
-                      <option value="Ulcera">Ulcera</option>
-                      <option value="Lesion roja">Lesion Roja</option>
-                      <option value="Lesion blanca">Lesion Blanca</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group input-group-sm">
-                 <label>Perineo</label>
-                 <select  name="perineo" class="form-control">
-                   <option value="">Seleccione una opción</option>
-                   <option value="Sin lesiones">Sin lesiones</option>
-                   <option value="Condiloma">Condiloma</option>
-                 </select>
-                 
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group input-group-sm">
-                 <label>Region Parianal</label>
-                 <select  name="region_parianal" class="form-control">
-                 <option value="">Seleccione una opción</option>
-                   <option value="Sin lesiones">Sin lesiones</option>
-                   <option value="Condiloma">Condiloma</option>
-                 </select>
+        <div class="row">
+    <div class="col-md-4">
+        <div class="form-group input-group-sm">
+            <label>U. Escamo Columnar (Visibilidad)</label> <select name="escamo_columnar" class="form-control">
+                <option value="">Seleccione visibilidad</option>
+                <option value="Visible (Tipo 1)">Completamente Visible (Tipo 1)</option>
+                <option value="Parcialmente Visible (Tipo 2)">Parcialmente Visible (Tipo 2)</option>
+                <option value="No Visible (Tipo 3)">No Visible (Tipo 3)</option>
+                <option value="No aplicable">No aplicable (Histerectomía)</option>
+            </select>
+        </div>
+    </div>
 
-              </div>
-            </div>
-         </div>
-         <div class="row">
-        <div class="col-md-6">
-                <div class="form-group input-group-sm">
-                    <label>Biopsia</label>
-                    <select  name="biopsia" class="form-control">
-                      <option value="">Seleccione una opción</option>
-                      <option value="No">No</option>
-                      <option value="Vulva">Vulva</option>
-                      <option value="Vagina">Vagina</option>
-                      <option value="Cervix">Cervix</option>
-                    </select>
+    <div class="col-md-4">
+        <div class="form-group input-group-sm">
+            <label>Hallazgos / Lesiones en Cérvix</label>
+            <select name="hallazgos_cervix" class="form-control">
+                <option value="">Sin hallazgos patológicos</option>
+                <optgroup label="Hallazgos Normales">
+                    <option value="Ectropión/Ectopia">Ectropión / Ectopia</option>
+                    <option value="Metaplasia Escamosa">Metaplasia Escamosa</option>
+                    <option value="Quistes de Naboth">Quistes de Naboth</option>
+                </optgroup>
+                <optgroup label="Grado 1 (Menor)">
+                    <option value="Epitelio Blanco Delgado">Epitelio Blanco Delgado</option>
+                    <option value="Mosaico Fino">Mosaico Fino</option>
+                    <option value="Puntillado Fino">Puntillado Fino</option>
+                </optgroup>
+                <optgroup label="Grado 2 (Mayor)">
+                    <option value="Epitelio Blanco Denso">Epitelio Blanco Denso</option>
+                    <option value="Mosaico Grueso">Mosaico Grueso</option>
+                    <option value="Puntillado Grueso">Puntillado Grueso</option>
+                    <option value="Vasos Atípicos">Vasos Atípicos</option>
+                </optgroup>
+                 <optgroup label="Test de Schiller">
+                    <option value="Schiller Positivo (Yodo Negativo)">Schiller Positivo (Zona Clara)</option>
+                    <option value="Schiller Negativo (Yodo Positivo)">Schiller Negativo (Zona Oscura)</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
 
-                </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group input-group-sm">
-                 <label>Papanicolaou</label>
-                 <select  name="papanicolaou" class="form-control">
-                 <option value="">Seleccione una opción</option>
-                 <option value="Si">Si</option>
-                 <option value="No">No</option>
-                 </select>
+    <div class="col-md-4">
+        <div class="form-group input-group-sm">
+            <label>Vagina</label>
+            <select name="vagina" class="form-control">
+                <option value="Sin lesiones">Mucosa Normal / Sin Lesiones</option>
+                <option value="Leucorrea/Flujo">Leucorrea / Flujo Inespecífico</option>
+                <option value="Condilomas">Condilomas / Verrugas</option>
+                <option value="Atrofia">Atrofia (Hipoestrogenismo)</option>
+                <option value="Úlcera">Úlcera</option>
+                <option value="VAIN">Sospecha de VAIN</option>
+            </select>
+        </div>
+    </div>
+</div>
 
-              </div>
-            </div>
-         </div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group input-group-sm">
+            <label>Vulva</label>
+            <select name="vulva" class="form-control">
+                <option value="Sin lesiones">Sin lesiones</option>
+                <option value="Condilomas">Condilomas Acuminados</option>
+                <option value="Herpes">Vesículas Herpéticas</option>
+                <option value="Nevus">Nevus (Lunar)</option>
+                <option value="Distrofia">Distrofia / Liquen</option>
+                <option value="Ulcera">Úlcera</option>
+                <option value="VIN">Sospecha de VIN</option>
+            </select>
+        </div>
+    </div>
 
-         <div class="row">
-            <div class="col-md-6">
-              <div class="form-group input-group-sm">
-                <label>Conclusiones</label>
-                <textarea  name="conclusiones"  rows="7" class="form-control"></textarea>
-              </div>
-           </div>
+    <div class="col-md-3">
+        <div class="form-group input-group-sm">
+            <label>Perineo y Región Perianal</label>
+            <select name="perineo_anal" class="form-control">
+                <option value="Sin lesiones">Sin lesiones</option>
+                <option value="Condilomas">Condilomas / Verrugas</option>
+                <option value="Plicomas">Plicomas</option>
+                <option value="Fisura">Fisura Anal</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group input-group-sm">
+             <label>Toma de Biopsia</label>
+             <select name="biopsia" class="form-control">
+                  <option value="No">No se realiza</option>
+                  <option value="Cervix H12">Cérvix - Radio 12</option>
+                  <option value="Cervix H6">Cérvix - Radio 6</option>
+                  <option value="Cervix H3">Cérvix - Radio 3</option>
+                  <option value="Cervix H9">Cérvix - Radio 9</option>
+                  <option value="Varios Radios">Múltiples Radios</option>
+                  <option value="Endocervical">Legrado Endocervical (LEC)</option>
+                  <option value="Vagina">Vagina / Vulva</option>
+             </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group input-group-sm">
+            <label>Papanicolaou (PAP)</label>
+            <select name="papanicolaou" class="form-control">
+                <option value="No">No se realiza</option>
+                <option value="Si - Convencional">Si - Convencional</option>
+                <option value="Si - Base Liquida">Si - Base Líquida</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="form-group input-group-sm">
+            <label>Conclusiones / Plan de Tratamiento</label>
+            <textarea name="conclusiones" rows="4" class="form-control" placeholder="Describa el diagnóstico colposcópico y el plan a seguir..."></textarea>
+        </div>
+    </div>
+</div>
            <div class="col-md-6 mt-3">
              <label for="">Seleccione las imagenes</label>
              <div class="custom-file">
@@ -382,13 +381,11 @@
                <label class="custom-file-label">Seleccionar Archivo</label>
              </div>
            </div>
-         </div>
         </div>
       <div class="modal-footer">
         <input type="submit"  class="btn btn-primary" value="Guardar">
       </div>
-      <form>
-    </div>
+    </form>
   </div>
 </div>
 

@@ -4,18 +4,22 @@ $colposcopias = $colposcopia->result()[0];
 $pdf=new FPDF();
 $pdf->addpage();
 $pdf->Image('public/img/theme/logo.png' , 10 ,9, 25 , 20,'png');
-$pdf->Image('public/colposcopia/'.$colposcopias->imagen1 , 35 ,115, 60 , 40,'JPG');
-$pdf->Image('public/colposcopia/'.$colposcopias->imagen2 , 120 ,115, 60 , 40,'JPG');
+
+if (!empty($colposcopias->imagen1) && file_exists('public/colposcopia/'.$colposcopias->imagen1)) {
+    $pdf->Image('public/colposcopia/'.$colposcopias->imagen1 , 35 ,115, 60 , 40,'JPG');
+}
+
+if (!empty($colposcopias->imagen2) && file_exists('public/colposcopia/'.$colposcopias->imagen2)) {
+    $pdf->Image('public/colposcopia/'.$colposcopias->imagen2 , 120 ,115, 60 , 40,'JPG');
+}
+
 $pdf->SetFont('Times','',13);
 $pdf->Ln(1);
 $pdf->Cell(63,6,'', '', 0,'L', false );
-$pdf->Cell(60,6,'"CLINICA ENFOQUE SALUD"', '', 0,'L', false );
-$pdf->Ln(5);
-$pdf->Cell(67,6,'', '', 0,'L', false );
-$pdf->Cell(1,6,'Maternidad y Especialidades', '', 0,'L', false );
+$pdf->Cell(60,6,'"CLINICA MI SALUD"', '', 0,'L', false );
 $pdf->Ln(5);
 $pdf->Cell(68,6,'', '', 0,'L', false );
-$pdf->Cell(7,6,'Calle Alfonso Ugarte #673', '', 0,'L', false );
+$pdf->Cell(7,6,'Av. Salaverry #1402', '', 0,'L', false );
 $pdf->Ln(2);
 $pdf->Cell(42,5,'', '', 0,'L', false );
 $pdf->Cell(60,5,'_____________________________________________', '', 0,'L', false );
@@ -53,7 +57,7 @@ $pdf->SetFont('Times','B',9);
 
 $pdf->Ln(11);
 $pdf->Cell(50,6,'Perineo', 1, 0,'C', false );
-$pdf->Cell(50,6,'Region parianal', 1, 0,'C', false );
+$pdf->Cell(50,6,'Region perianal', 1, 0,'C', false );
 $pdf->Cell(45,6,'Biopsia', 1, 0,'C', false );
 $pdf->Cell(45,6,'Papanicolaou', 1, 0,'C', false );
 $pdf->SetFont('Times','',9);
