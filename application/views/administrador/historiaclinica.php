@@ -164,7 +164,7 @@
                           <li class="align-middle me-2"><i class="fas fa-stethoscope me-1 text-success"></i>P. Arterial</li>
                           <li class="align-middle me-2"><i class="fas fa-heart me-1 text-danger"></i>F. Card</li>
                           <li class="align-middle me-2"><i class="fas fa-heartbeat me-1 text-danger"></i>F. Resp</li>
-                          <li class="align-middle me-2"><i class="fas fa-tint me-1 text-danger"></i>Saturacion</li>
+                          <li class="align-middle me-2"><i class="fas fa-tint me-1 text-danger"></i>Saturación</li>
                           <li class="align-middle me-2"><i class="fas fa-ruler-vertical me-1 text-danger"></i>Estatura</li>
                           <li class="align-middle me-2"><i class="fas fa-weight me-1 text-dark"></i>Peso</li>
                           <li class="align-middle me-2"><i class="fas fa-child me-1 text-warning"></i>Masa</li>
@@ -487,7 +487,7 @@
       <div class="accordion-item">
         <div class="accordion-header" id="btn-icon-start-headingThree">
           <a class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#ecografias" aria-expanded="false" aria-controls="ecografias">
-              <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> ECOGRAFIAS</span>
+              <span class="ps-1 text-dark text-bold"><i class="fas fa-x-ray"></i> ECOGRAFÍAS</span>
           </a>
         </div>
         <div id="ecografias" class="accordion-collapse collapse" aria-labelledby="btn-icon-start-headingThree" data-bs-parent="#accordionBtnIconStartExample">
@@ -898,14 +898,14 @@
                         <?php } ?>
                         <!--  -->
                         <?php if (!$ginecoiniciada) { ?>
-                          <P>Paciente no presenta atencion en <a class="text-danger">Consulta Ginecologica</a></P>
+                          <P>Paciente no presenta atencion en <a class="text-danger">Consulta Ginecológica</a></P>
                           <?php } else { ?>
                             <div
                               class="alert alert-warning text-white"
                               role="alert"
                             >
                               <h6 class="alert-heading">
-                                Consulta<small> Ginecologica</small>
+                                Consulta<small> Ginecológica</small>
                               </h6>
                               <hr>
                               <ul class="list-inline">

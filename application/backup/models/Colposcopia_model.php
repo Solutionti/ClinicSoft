@@ -73,7 +73,3 @@ class Colposcopia_model extends CI_model {
 
 }
 
-//https://acordes.lacuerda.net/ska-p/el_vals_del_obrero.shtml
-//https://acordes.lacuerda.net/mana/oye_mi_amor-3.shtml
-//https://acordes.lacuerda.net/mana/me_vale.shtml
-//https://www.cifraclub.com.br/los-prisioneros/el-baile-de-los-que-sobran/

@@ -496,6 +496,12 @@ $('#items-general-table').on('dblclick', 'tr', function(e) {
     table_lab_mini2.draw(false);
 });
 
+$("#btn-limpiar-diagnosticos").on("click", function() {
+    elementos_general = [];
+    table_lab_mini2.clear().draw();
+    $("#total").val("0.00");
+});
+
 var elementos_procedimientos = new Array();
 $('#table-procedimientos').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();

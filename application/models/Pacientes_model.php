@@ -30,9 +30,12 @@ class Pacientes_model extends CI_model
 
     public function getPacienteId($documento)
     {
-        $this->db->select('*, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad');
+        $this->db->select('pacientes.*, TIMESTAMPDIFF(YEAR, pacientes.fecha_nacimiento, CURDATE()) as edad, departamentos.name as departamento_nombre, provincia.name as provincia_nombre, distritos.name as distrito_nombre');
         $this->db->from('pacientes');
-        $this->db->where('documento', $documento);
+        $this->db->join('departamentos', 'pacientes.departamento = departamentos.id', 'left');
+        $this->db->join('provincia', 'pacientes.provincia = provincia.id', 'left');
+        $this->db->join('distritos', 'pacientes.distrito = distritos.id', 'left');
+        $this->db->where('pacientes.documento', $documento);
         $result = $this->db->get();
 
         return $result;

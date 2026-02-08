@@ -606,7 +606,7 @@ class Historiaclinica extends Admin_Controller
 		// $pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
 		$pdf->Ln(5);
 		$pdf->cell(128, 5, '', 0);
-		$pdf->cell(40, 5, 'HISTORIA CLINICA DEL PACIENTE', 0);
+		$pdf->cell(40, 5, 'HISTORIA DE MEDICINA GENERAL', 0);
 
 		$pdf->Ln(10);
 		$pdf->SetFont('Courier', 'B', 8);
@@ -621,7 +621,7 @@ class Historiaclinica extends Admin_Controller
 		$pdf->cell(40, 5, 'APELLIDOS Y NOMBRES', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(100, 5, $datospaciente->nombre . ' ' . $datospaciente->apellido, 1);
+		$pdf->cell(100, 5, $datospaciente->apellido . ' ' . $datospaciente->nombre, 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(10, 5, 'HC', 1);
@@ -659,25 +659,25 @@ class Historiaclinica extends Admin_Controller
 		$pdf->cell(40, 5, 'DIRECCION', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(45, 5, $datospaciente->direccion, 1);
+		$pdf->cell(45, 5, substr($datospaciente->direccion, 0, 35), 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->departamento, 1);
+		$pdf->cell(20, 5, mb_strtoupper($datospaciente->departamento_nombre, 'UTF-8'), 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15, 5, 'PROVINCIA', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->provincia, 1);
+		$pdf->cell(20, 5, mb_strtoupper($datospaciente->provincia_nombre, 'UTF-8'), 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
 		$pdf->cell(15, 5, 'DISTRITO', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(21, 5, $datospaciente->distrito, 1);
+		$pdf->cell(21, 5, mb_strtoupper(substr($datospaciente->distrito_nombre, 0, 15), 'UTF-8'), 1);
 
 		$pdf->Ln(5);
 
@@ -691,7 +691,7 @@ class Historiaclinica extends Admin_Controller
 		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(36, 5, $datospaciente->estado_civil, 1);
+		$pdf->cell(36, 5, mb_strtoupper($datospaciente->estado_civil, 'UTF-8'), 1);
 		$pdf->Ln(9);
 
 		// DATOS DEL TRIAGE
@@ -705,47 +705,54 @@ class Historiaclinica extends Admin_Controller
 		$pdf->Ln(6);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ESTATURA', 1);
+		$pdf->cell(27, 5, 'PRESIÓN ARTERIAL', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->talla . ' CM', 1);
+		$pdf->cell(20, 5, $datostriage->presion_arterial . ' mmHg', 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'PESO', 1);
+		$pdf->cell(30, 5, 'FRECUENCIA CARDÍACA', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->peso . ' KG', 1);
+		$pdf->cell(10, 5, $datostriage->frecuencia_cardiaca . ' lpm', 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'IMC', 1);
+		$pdf->cell(35, 5, 'FRECUENCIA RESPIRATORIA', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->imc . ' IMC', 1);
+		$pdf->cell(14, 5, $datostriage->frecuencia_respiratoria . ' r/m', 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'TEMPERATURA', 1);
+		$pdf->cell(20, 5, 'SATURACIÓN', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->temperatura . ' C°', 1);
+		$pdf->cell(10, 5, $datostriage->saturacion . ' %', 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, '% GRASA', 1);
+		$pdf->cell(22, 5, 'TEMPERATURA', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(16, 5, '0%', 1);
+		$pdf->cell(8, 5, $datostriage->temperatura . ' °C', 1);
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'FRECUENCIA RESPIRATORIA', 1);
+		$pdf->cell(27, 5, 'PESO', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->frecuencia_respiratoria . ' R/M', 1);
+		$pdf->cell(20, 5, $datostriage->peso . ' kg', 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'FRECUENCIA CARDIACA', 1);
+		$pdf->cell(30, 5, 'TALLA', 1);
 
 		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->frecuencia_cardiaca . ' MMHG', 1);
+		$pdf->cell(10, 5, $datostriage->talla . ' cm', 1);
+
+		$pdf->SetFont('Arial', 'B', 6);
+		$pdf->cell(35, 5, 'IMC', 1);
+
+		$pdf->SetFont('Arial', '', 6);
+		$pdf->cell(14, 5, $datostriage->imc . ' kg/m2', 1);
+
 
 		// DATOS DE LA CONSULTA GENERAL
 		$pdf->ln(9);
@@ -769,7 +776,7 @@ class Historiaclinica extends Admin_Controller
 		$pdf->cell(40, 5, $datosgeneral->empresa, 1);
 
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('COMPAÑIA'), 1);
+		$pdf->cell(20, 5, 'COMPAÑIA', 1);
 		$pdf->SetFont('Arial', '', 6);
 		$pdf->cell(40, 5, $datosgeneral->compania, 1);
 
@@ -780,7 +787,7 @@ class Historiaclinica extends Admin_Controller
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('NOMBRE ACOMPAÑANTE'), 1);
+		$pdf->cell(30, 5, 'NOMBRE ACOMPAÑANTE', 1);
 		$pdf->SetFont('Arial', '', 6);
 		$pdf->cell(70, 5, $datosgeneral->nombre_acompanante, 1);
 
