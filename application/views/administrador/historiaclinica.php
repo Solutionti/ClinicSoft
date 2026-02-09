@@ -1062,8 +1062,9 @@
             <?php require ('historiaclinica/ginecologia/antecedentes.php'); ?>
           </div>
           <div class="tab-pane fade " id="nav-fisicogine" role="tabpanel" aria-labelledby="nav-fisicogine-tab" tabindex="0">
-            <?php require ('historiaclinica/consultageneral/examenfisico.php'); ?>
+            <?php require ('historiaclinica/ginecologia/examenfisico.php'); ?>
           </div>
+          
           <div class="tab-pane fade " id="nav-consultagine" role="tabpanel" aria-labelledby="nav-consultagine-tab" tabindex="0">
             <?php require ('historiaclinica/ginecologia/consulta.php'); ?>
           </div>

@@ -19,12 +19,14 @@
               >
              </div>
              <div class="col-md-5">
+              <div class="form-field">
               <label>Texto Plantilla</label>
               <input
                 type="text"
                 class="form-control"
                 id="procedimiento_plantilla"
               >
+              </div>
              </div>
              <div class="col-md-1">
               <label>&nbsp;</label>
@@ -73,13 +75,9 @@
                     <div class="d-flex gap-2 mt-3">
                     <!-- <button class="btn btn-primary" >
                       <i class="fas fa-save me-1"></i> Guardar
-<<<<<<< HEAD
-                    </button> -->
-                    <button type="button" class="btn btn-warning">
-=======
                     </button>
+                    -->
                     <button type="button" class="btn btn-warning" id="btn-limpiar-procedimientos">
->>>>>>> 6071aac6625b3a02634a57e45f1dd0be0e479762
                       <i class="fas fa-broom me-1"></i> Limpiar
                     </button>
                   </div>

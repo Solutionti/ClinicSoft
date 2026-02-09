@@ -123,9 +123,10 @@ class Historias_model extends CI_model
       'usuario' => $this->session->userdata('nombre'),
       'tratamiento' => $data['tratamiento']
     ];
-    $this->db->insert('h_ginecologias', $datos);
-    $id = $this->db->insert_id();
-    return $id;
+    $this->db->where('codigo_triage', $data['triaje']);
+    $this->db->where('codigo_historia', $data['paciente']);
+    $this->db->update('h_ginecologias', $datos);
+    
   }
 
   public function crearHconsultasGeneral($data)
@@ -268,8 +269,11 @@ class Historias_model extends CI_model
     $this->db->insert('diagnosticos', $datos);
   }
 
-  public function crearDiagnosticosGeneral($data)
-  {
+  public function crearDiagnosticosGeneral($data){
+    $this->db->where("codigo_historia", $data['triaje']);
+    $this->db->where("paciente", $data['paciente']);
+    $this->db->delete("diagnosticos");
+
     $datos = [
       'codigo_historia' => $data['triaje'],
       'paciente' => $data['paciente'],
@@ -600,8 +604,10 @@ class Historias_model extends CI_model
     $datos = [
       'codigo_historia' => $data['triaje'],
       'paciente' => $data['paciente'],
-      'codigo_procedimiento' => $data['codigo'],
-      'texto_plantilla' => $data['plantilla'],
+      'codigo_procedimiento' => explode('-', $data['procedimientos'])[0],
+      'tipo_especialidad' => $data['tipo'],
+      'texto_plantilla' => explode('-', $data['procedimientos'])[1],
+      'historia' => $data['paciente'],
       'fecha' => date('Y-m-d'),
       'usuario' => $this->session->userdata('nombre')
     ];
@@ -883,6 +889,50 @@ class Historias_model extends CI_model
     $this->db->where('triaje', $triaje);
     $this->db->where('paciente', $documento);
     $this->db->delete('medicamentos');
+  }
+
+  public function crearEncabezadoExamenesAuxiliares($data) {
+    $datos = [
+      "documento" => $data['paciente'],
+      "tipo" => $data['tipo'],
+      "triage" => $data['triaje'],
+      "fecha" => date('Y-m-d'),
+    ];
+    $this->db->insert('examenes_auxiliares', $datos);
+  }
+
+  public function crearExamenAuxiliaresEcografia($data) {
+    $datos = [
+      "codigoauxiliar" => $data['ecografia'],
+      "examen" => $data['examen'],
+      "fecha" => date('Y-m-d'),
+      "triage" => $data['triaje'],
+      "paciente" => $data['paciente'],
+    ];
+    $this->db->insert('detalle_examen_auxiliares', $datos);
+  }
+
+  public function crearExamenAuxiliaresTomografia($data) {
+    $datos = [
+      "codigoauxiliar" => $data['tomografia'],
+      "examen" => $data['examen'],
+      "fecha" => date('Y-m-d'),
+      "triage" => $data['triaje'],
+      "paciente" => $data['paciente'],
+    ];
+    $this->db->insert('detalle_examen_auxiliares', $datos);
+  }
+
+  public function crearExamenAuxiliaresResonancia($data) {
+    
+    $datos = [
+      "codigoauxiliar" => $data['resonancia'],
+      "examen" => $data['examen'],
+      "fecha" => date('Y-m-d'),
+      "triage" => $data['triaje'],
+      "paciente" => $data['paciente'],
+    ];
+    $this->db->insert('detalle_examen_auxiliares', $datos);
   }
 }
 

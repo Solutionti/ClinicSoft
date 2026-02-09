@@ -108,6 +108,7 @@
                     >
                 </div>
                 <div class="col-4">
+                  <div class="form-field">
                     <label class="form-label">Sexo:</label>
                     <div class="d-flex align-items-center">
                         <div class="form-check me-2">
@@ -120,9 +121,11 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="row mb-2">
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Médico Solicitante:</label>
                     <input
                         type="text"
@@ -131,8 +134,10 @@
                         value="<?php echo $this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido') ?>"
                         readonly
                     >
+                    </div>
                 </div>
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Muestra:</label>
                     <div class="d-flex align-items-center">
                         <div class="form-check me-2">
@@ -148,23 +153,31 @@
                             <label class="form-check-label" for="histo">Histopatológico</label>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="col-2">
+                  <div class="form-field">
                     <label class="form-label">Paridad:</label>
                     <input type="text" class="form-control form-control-sm" id="paridad_paciente">
+                    </div>
                 </div>
                 <div class="col-2">
+                   <div class="form-field">
                     <label class="form-label">F.U.R:</label>
                     <input type="text" class="form-control form-control-sm" id="fur_paciente">
+                    </div>
                 </div>
                 <div class="col-2">
+                  <div class="form-field">
                     <label class="form-label">F.U.P:</label>
                     <input type="text" class="form-control form-control-sm" id="fup_paciente">
+                    </div>
                 </div>
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">LACT:</label>
                     <div class="d-flex align-items-center">
                         <div class="form-check me-2">
@@ -176,45 +189,53 @@
                             <label class="form-check-label" for="lactNo">No</label>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Otros Antecedentes:</label>
                     <input type="text" class="form-control form-control-sm" id="antecedentes_paciente">
+                    </div>
                 </div>
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Resultados de informes anteriores:</label>
                     <input type="text" class="form-control form-control-sm" id="resultados_anteriores">
+                  </div>
                 </div>
             </div>
             <h6 class="mt-3">HALLAZGOS</h6>
             <div class="row mb-2">
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Otros:</label>
                     <input type="text" class="form-control form-control-sm" id="otros_hallazgos">
+                  </div>
                 </div>
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Datos clínicos o tejidos a examinar:</label>
                     <input type="text" class="form-control form-control-sm" id="datos_clinicos">
+                  </div>
                 </div>
             </div>
               <div class="row mb-2">
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Diagnóstico:</label>
                     <textarea class="form-control form-control-sm" rows="1" id="diagnostico_patologia"></textarea>
+                  </div>
                 </div>
                 <div class="col-6">
+                  <div class="form-field">
                     <label class="form-label">Fecha:</label>
                     <input type="date" class="form-control form-control-sm" id="fechaActual" value="<?php echo date('Y-m-d'); ?>">
+                  </div>  
                 </div>
-            </div>
-              <div class="row mt-3">
-                <div class="col-12 text-end">
-                    <button type="button" class="btn btn-primary" id="btn_guardar_patologia" onclick="crearOrdenPatologica()">Guardar</button>
-                </div>
-            </div>
+            </div>  
         </form>
                         </div>
                       </div>
