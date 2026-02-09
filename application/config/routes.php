@@ -119,9 +119,10 @@ $route["administracion/triajehistorias"] = "administrador/historiaclinica/getTri
 $route["administracion/eliminararchivo"] = "administrador/historiaclinica/borrarArchivoPdf";
 $route["administracion/eliminarmedicamento"] = "administrador/historiaclinica/eliminarMedicamento";
 $route["administracion/creardiagnosticos"] = "administrador/historiaclinica/crearDiagnosticos";
-
-
-
+$route["administracion/crearprocedimientos"] = "administrador/historiaclinica/crearProcedimientos";
+$route["administracion/ordenecografia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresEcografias";
+$route["administracion/ordentomografia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresTomografias";
+$route["administracion/ordenresonancia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresResonancia";
 
 /***********************************************************
 ****************** COLPOSCOPIA *****************************

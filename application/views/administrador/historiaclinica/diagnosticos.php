@@ -28,6 +28,7 @@
               >
              </div>
              <div class="col-md-2">
+              <div class="form-field">
               <label>Tipo</label>
               <select
                 class="form-control"
@@ -38,6 +39,7 @@
                 <option value="P">Presentivo</option>
                 <option value="R">Repetitivo</option>
               </select>
+              </div>
              </div>
              <div class="col-md-1">
               <label>&nbsp;</label>

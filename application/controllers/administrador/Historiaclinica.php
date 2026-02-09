@@ -258,28 +258,6 @@ class Historiaclinica extends Admin_Controller
 		];
 
 		$id = $this->Historias_model->crearHconsultasGeneral($data2);
-		
-		if (!empty($procedimientos_seleccionados)) {
-			foreach ($procedimientos_seleccionados as $proc) {
-				$dataProc = [
-					'triaje' => $triaje,
-					'paciente' => $paciente,
-					'codigo' => $proc[0],
-					'plantilla' => $proc[2]
-				];
-				$this->Historias_model->crearProcedimientosHistoria($dataProc);
-			}
-		}
-		
-		// for ($i = 0; $i < sizeof($diagnosticosgeneral); $i++) {
-		// 	$data3 = [
-		// 		'paciente' => $paciente,
-		// 		'diagnosticos' => $diagnosticosgeneral[$i],
-		// 		'historia' => $historia,
-		// 		'triaje' => $triaje
-		// 	];
-		// 	$this->Historias_model->crearDiagnosticosGeneral($data3);
-		// }
 	}
 
 	public function crearHistorialPacientesGinecologicas()
@@ -317,13 +295,14 @@ class Historiaclinica extends Admin_Controller
 		$locomotor = $this->input->post('locomotor');
 		$sistema_nervioso = $this->input->post('sistema_nervioso');
 		$exa_auxiliares = $this->input->post('exa_auxiliares');
-		$diagnosticosginecologia = $this->input->post('diagnosticosginecologia');
 		$plan_trabajo = $this->input->post('plan_trabajo');
 		$proxima_cita = $this->input->post('proxima_cita');
 		$firma_medico = $this->input->post('firma_medico');
 		$tratamiento = $this->input->post('tratamientos_gine');
 
 		$data2 = [
+			'paciente' => $paciente,
+			'doctor' => $doctor,
 			'triaje' => $triaje,
 			'familiares' => $familiares,
 			'patologicos' => $patologicos,
@@ -360,19 +339,8 @@ class Historiaclinica extends Admin_Controller
 			'firma_medico' => $firma_medico,
 			'tratamiento' => $tratamiento
 		];
-
-		$id = $this->Historias_model->crearHconsultasGinecologicas($data2);
-		$historia = $this->Historias_model->crearHistorialPacientesGinecologicas($data1, $id, 2);
-
-		for ($i = 0; $i < sizeof($diagnosticosginecologia); $i++) {
-			$data3 = [
-				'paciente' => $paciente,
-				'diagnosticos' => $diagnosticosginecologia[$i],
-				'historia' => $historia,
-				'triaje' => $triaje
-			];
-			$this->Historias_model->crearDiagnosticos($data3);
-		}
+		
+		$historia = $this->Historias_model->crearHconsultasGinecologicas($data2);
 	}
 
 	public function crearRecetaMedica()
@@ -1645,7 +1613,7 @@ class Historiaclinica extends Admin_Controller
 		foreach ($medicamentos->result() as $medicamento) {
 			$pdf->SetFont('Arial', '', 8);
 			$pdf->cell(10, 5, $medicamento->cantidad, 1);
-			$pdf->cell(55, 5, strtoupper($medicamento->medicamento), 1);
+			$pdf->cell(55, 5, strtoupper(explode('-', $medicamento->medicamento)[1]), 1);
 			$pdf->cell(30, 5, strtoupper($medicamento->dosis), 1);
 			$pdf->cell(40, 5, strtoupper($medicamento->via_aplicacion), 1);
 			$pdf->cell(30, 5, $medicamento->frecuencia, 1);
@@ -2115,6 +2083,100 @@ class Historiaclinica extends Admin_Controller
 		];
 		
 	   $this->Historias_model->crearDiagnosticosGeneral($data3);
+	  }
+	}
+
+	public function crearProcedimientos() {
+	  $paciente = $this->input->post('paciente');
+	  $triage = $this->input->post('triage');
+      $procedimientos = $this->input->post('procedimientos');
+	  $tipo = $this->input->post('tipo');
+
+	  for ($i = 0; $i < sizeof($procedimientos); $i++) {
+		$data4 = [
+		  'paciente' => $paciente,
+		  'procedimientos' => $procedimientos[$i],
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];			
+		$this->Historias_model->crearProcedimientosHistoria($data4);
+	  }
+    }
+	
+	public function crearEncabezadoExamenesAuxiliares() {
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triage');
+		$examen = $this->input->post('examen');
+		$tipo = $this->input->post('tipo');
+
+		$data6 = [
+		  'paciente' => $paciente,
+	      'examen' => $examen,
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];			
+		$this->Historias_model->crearEncabezadoExamenesAuxiliares($data6);
+	}
+
+	public function DetalleExamenAuxiliaresEcografias() {
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triage');
+		$ecografia = $this->input->post('ecografia');
+		$examen = $this->input->post('examen');
+		$tipo = $this->input->post('tipo');
+
+	  for ($i = 0; $i < sizeof($ecografia); $i++) {
+		$data5 = [
+		  'paciente' => $paciente,
+		  'ecografia' => $ecografia[$i],
+		  'examen' => $examen,
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];			
+		$this->Historias_model->crearExamenAuxiliaresEcografia($data5);
+	  }
+	}
+   
+	public function DetalleExamenAuxiliaresTomografias() {
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triage');
+		$tomografia = $this->input->post('tomografia');
+		$examen = $this->input->post('examen');
+		$tipo = $this->input->post('tipo');
+
+	  for ($i = 0; $i < sizeof($tomografia); $i++) {
+		$data5 = [
+		  'paciente' => $paciente,
+		  'tomografia' => $tomografia[$i],
+		  'examen' => $examen,
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];			
+		$this->Historias_model->crearExamenAuxiliaresTomografia($data5);
+	  }
+	}
+
+	public function DetalleExamenAuxiliaresResonancia() {
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triage');
+		$resonancia = $this->input->post('resonancia');
+		$examen = $this->input->post('examen');
+		$tipo = $this->input->post('tipo');
+
+	  for ($i = 0; $i < sizeof($resonancia); $i++) {
+		$data5 = [
+		  'paciente' => $paciente,
+		  'resonancia' => $resonancia[$i],
+		  'examen' => $examen,
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];			
+		$this->Historias_model->crearExamenAuxiliaresResonancia($data5);
 	  }
 	}
 }

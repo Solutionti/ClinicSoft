@@ -163,7 +163,6 @@ var filasOcultas = {}; // Almacenar referencias a filas ocultas
 $('#table-laboratorio').on('dblclick', 'tr:visible', function() {
     var row = $(this);
     var data = [];
-    
     // Obtener los datos de la fila
     row.find('td').each(function(i) {
         data[i] = $(this).text().trim();
@@ -192,6 +191,7 @@ $('#table-laboratorio').on('dblclick', 'tr:visible', function() {
         row.hide();
         filasOcultas[data[0]] = row;
     }
+    $('#saveBtn').addClass('visible');
 });
 
 // Función para eliminar un análisis seleccionado
@@ -215,6 +215,10 @@ function eliminarAnalisis(elemento) {
         
         // Eliminar de la tabla de seleccionados
         table.row(row).remove().draw(false);
+
+        if(elementos_laboratorio.length === 0 ) {
+          $('#saveBtn').removeClass('visible');
+        }
     }
 }
 
@@ -260,11 +264,11 @@ function crearOrdenLaboratorioHistoria() {
           ordenlab: ordenlab
         },
         success: function(response) {
-            $("body").overhang({
-                type: "success",
-                message: "Orden de laboratorio guardada correctamente"
-            });
-            setTimeout(reloadPage, 3000);
+            // $("body").overhang({
+            //     type: "success",
+            //     message: "Orden de laboratorio guardada correctamente"
+            // });
+            // setTimeout(reloadPage, 3000);
         },
         error: function() {
             $("body").overhang({
@@ -337,116 +341,6 @@ $('#items-ginecologia-table').on('dblclick', 'tr', function(e) {
     $("#total").val((total_).toFixed(2));
     table_lab_mini.draw(false);
 });
-
-$("#btn-gineco").on("click", function(){
-    
-    var url1 = baseurl + "administracion/crearhistoriaginecologia",
-        dni = $("#documento_historia").val(),
-        doctorid = $("#doctorid1").val(),
-        triaje = $("#consecutivo_historia").val(),
-        // 
-        familiares = $("#antecedentes_familiares").val(),
-        patologicos = $("#antecedentes_patologicos").val(),
-        gine_obste = $("#antecedentes_gineco").val(),
-        fum = $("#antecedentes_fum").val(),
-        rm = $("#antecedentes_rm").val(),
-        flujo_genital = $("#antecedentes_flujo").val(),
-        parejas = $("#antecedentes_parejas").val(),
-        gestas = $("#antecedentes_gestas").val(),
-        partos = $("#antecedentes_partos").val(),
-        abortos = $("#antecedentes_abortos").val(),
-        anticonceptivos = $("#antecedentes_anticonceptivos").val(),
-        tipo = $("#antecedentes_tipos").val(),
-        tiempo = $("#antecedentes_tiempo").val(),
-        cirugia_ginecologica = $("#antecedentes_cirugia").val(),
-        otros = $("#antecedentes_otros").val(),
-        pap = $("#antecedentes_fecha").val(),
-        hijos = $("#antecedentes_hijos").val(),
-        // 
-        motivo_consulta = $("#consulta_motivo").val(),
-        signos_sintomas = $("#consulta_sintomas").val(),
-        // 
-        piel_tscs = $("#examen_piel").val(),
-        tiroides = $("#examen_tiroides").val(),
-        mamas = $("#examen_mamas").val(),
-        a_respiratorio = $("#examen_respiratorio").val(),
-        a_cardiovascular = $("#examen_cardiovascular").val(),
-        abdomen = $("#examen_abdomen").val(),
-        genito = $("#examen_genito").val(),
-        tacto = $("#examen_tacto").val(),
-        locomotor = $("#examen_locomotor").val(),
-        sistema_nervioso = $("#examen_sistema").val(),
-        // 
-        exa_auxiliares = $("#exa_auxiliares1").val(),
-        tratamientos_gine = $("#tratamientos_gine").val(),
-        plan_trabajo = $("#plan_trabajo1").val(),
-        proxima_cita = $("#proxima_cita1").val(),
-        firma_medico = $("#firma_medico1").val();
-
-        let diagnosticosginecologia = [];
-
-        for (let i = 0; i < elementos_general.length; i++) {
-            diagnosticosginecologia [i] = elementos_general[i][0];
-        }
-        
-        $.ajax({
-            url : url1,
-            method: "POST",
-            data: {
-                dni: dni,
-                doctorid: doctorid,
-                triaje: triaje,
-                familiares: familiares,
-                patologicos: patologicos,
-                gine_obste: gine_obste,
-                fum: fum,
-                rm: rm,
-                flujo_genital: flujo_genital,
-                parejas: parejas,
-                gestas: gestas,
-                partos: partos,
-                abortos: abortos,
-                anticonceptivos: anticonceptivos,
-                tipo: tipo,
-                tiempo: tiempo,
-                cirugia_ginecologica: cirugia_ginecologica,
-                otros: otros,
-                pap: pap,
-                hijos: hijos,
-                motivo_consulta: motivo_consulta,
-                signos_sintomas: signos_sintomas,
-                piel_tscs: piel_tscs,
-                tiroides: tiroides,
-                mamas: mamas,
-                a_respiratorio: a_respiratorio,
-                a_cardiovascular: a_cardiovascular,
-                abdomen: abdomen,
-                genito: genito,
-                tacto: tacto,
-                locomotor: locomotor,
-                sistema_nervioso: sistema_nervioso,
-                exa_auxiliares: exa_auxiliares,
-                diagnosticosginecologia: diagnosticosginecologia,
-                plan_trabajo: plan_trabajo,
-                proxima_cita: proxima_cita,
-                firma_medico: firma_medico,
-                tratamientos_gine: tratamientos_gine
-             },
-             success: function () {
-                $("body").overhang({
-                    type: "success",
-                    message: "Historia se ha registrado correctamente"
-                });
-                setTimeout(reloadPage, 3000);
-             },
-             error: function () {
-                $("body").overhang({
-                  type: "error",
-                  message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
-                }); 
-              }
-        });
-})
 
 var elementos_general = new Array();
 $('#table-diagnosticos2').on('dblclick', 'tr', function(e) {
@@ -581,6 +475,8 @@ $("#agregar_procedimiento").on("click", function() {
     $("#procedimiento_codigo").val("");
     $("#procedimiento_nombre").val("");
     $("#procedimiento_plantilla").val("");
+
+    $('#saveBtn').addClass('visible');
 });
 
 $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
@@ -595,6 +491,9 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
             break;
         }
     }
+    if(elementos_procedimientos2.length === 0) {
+        $('#saveBtn').removeClass('visible');
+    }
 });
 
 $("#btn-limpiar-procedimientos").on("click", function() {
@@ -603,103 +502,122 @@ $("#btn-limpiar-procedimientos").on("click", function() {
 });
 
 $("#saveBtn").on("click", function (){
-    var url2 = baseurl + "administracion/crearhistoriageneral",
-    dni = $("#documento_historia").val(),
-    doctorid = $("#doctorid1").val(),
-    triaje = $("#consecutivo_historia").val(),
-    // 
-    anamnesis = $("#anamnesis_directa").val(),
-    empresa = $("#anamnesis_empresa").val(),
-    compania = $("#anamnesis_compañia").val(),
-    iafa = $("#anamnesis_iafa").val(),
-    acompanante = $("#anamnesis_acompanante").val(),
-    dni3 = $("#anamnesis_dni").val(),
-    celular = $("#anamnesis_celular").val(),
-    motivo_consulta = $("#anamnesis_consulta").val(),
-    tratamiento_anterior = $("#anamnesis_tratamiento").val(),
-    enfermedad_actual = $("#anamnesis_enfermedad").val(),
-    tp_enfermedad = $("#anamnesis_tiempo").val(),
-    inicio = $("#anamnesis_inicio").val(),
-    curso = $("#anamnesis_curso").val(),
-    sintomas = $("#anamnesis_sintomas").val(),
-    // 
-    cuello = $("#fisico_cuello").val(),
-    abdomen = $("#fisico_abdomen").val(),
-    ap_respiratorio = $("#fisico_respiratorio").val(),
-    ap_cardio = $("#fisico_cardio").val(),
-    sistema_nervioso = $("#fisico_sistema").val(),
-    cabeza = $("#fisico_cabeza").val(),
-    locomotor = $("#fisico_locomotor").val(),
-    apetito = $("#fisico_apetito").val(),
-    sed = $("#fisico_sed").val(),
-    orina = $("#fisico_orina").val(),
-    ap_genito = $("#ap_genito2").val(),
-    // 
-    examendx = $("#plan_examen").val(),
-    procedimientos = $("#plan_procedimiento").val(),
-    interconsultas = $("#plan_interconsulta").val(),
-    tratamiento = $("#plan_tratamiento").val(),
-    referencia = $("#plan_referencia").val(),
-    firma = $("#plan_firma").val();
+    var tipo_historia = $("#tphistoria").val();
 
-    
+    if(tipo_historia == 1) {
+      var url2 = baseurl + "administracion/crearhistoriageneral",
+      dni = $("#documento_historia").val(),
+      doctorid = $("#doctorid1").val(),
+      triaje = $("#consecutivo_historia").val(),
+      // 
+      anamnesis = $("#anamnesis_directa").val(),
+      empresa = $("#anamnesis_empresa").val(),
+      compania = $("#anamnesis_compania").val(),
+      iafa = $("#anamnesis_iafa").val(),
+      acompanante = $("#anamnesis_acompanante").val(),
+      dni3 = $("#anamnesis_dni").val(),
+      celular = $("#anamnesis_celular").val(),
+      motivo_consulta = $("#anamnesis_consulta").val(),
+      tratamiento_anterior = $("#anamnesis_tratamiento").val(),
+      enfermedad_actual = $("#anamnesis_enfermedad").val(),
+      tp_enfermedad = $("#anamnesis_tiempo").val(),
+      inicio = $("#anamnesis_inicio").val(),
+      curso = $("#anamnesis_curso").val(),
+      sintomas = $("#anamnesis_sintomas").val(),
+      // 
+      cuello = $("#fisico_cuello").val(),
+      abdomen = $("#fisico_abdomen").val(),
+      ap_respiratorio = $("#fisico_respiratorio").val(),
+      ap_cardio = $("#fisico_cardio").val(),
+      sistema_nervioso = $("#fisico_sistema").val(),
+      cabeza = $("#fisico_cabeza").val(),
+      locomotor = $("#fisico_locomotor").val(),
+      apetito = $("#fisico_apetito").val(),
+      sed = $("#fisico_sed").val(),
+      orina = $("#fisico_orina").val(),
+      ap_genito = $("#ap_genito2").val(),
+      // 
+      examendx = $("#plan_examen").val(),
+      procedimientos = $("#plan_procedimiento").val(),
+      interconsultas = $("#plan_interconsulta").val(),
+      tratamiento = $("#plan_tratamiento").val(),
+      referencia = $("#plan_referencia").val(),
+      firma = $("#plan_firma").val();
 
-    let procedimientos_seleccionados = [];
-    for (let i = 0; i < elementos_procedimientos2.length; i++) {
-        procedimientos_seleccionados.push(elementos_procedimientos2[i]);
-    }
-
-    $.ajax({
+      $.ajax({
         url: url2,
         method: "POST",
         data: {
-            dni: dni,
-            doctorid: doctorid,
-            triaje: triaje,
-            anamnesis: anamnesis,
-            empresa: empresa,
-            compania: compania,
-            iafa: iafa,
-            acompanante: acompanante,
-            dni3: dni3,
-            celular: celular,
-            motivo_consulta: motivo_consulta,
-            tratamiento_anterior: tratamiento_anterior,
-            enfermedad_actual: enfermedad_actual,
-            tp_enfermedad: tp_enfermedad,
-            inicio: inicio,
-            curso: curso,
-            sintomas: sintomas,
-            cabeza: cabeza,
-            cuello: cuello,
-            ap_respiratorio: ap_respiratorio,
-            ap_cardio: ap_cardio,
-            abdomen: abdomen,
-            ap_genito: ap_genito,
-            locomotor: locomotor,
-            sistema_nervioso: sistema_nervioso,
-            apetito: apetito,
-            sed: sed,
-            orina: orina,
-            // diagnosticosgeneral: diagnosticosgeneral,
-            examendx: examendx,
-            procedimientos: procedimientos,
-            procedimientos_seleccionados: procedimientos_seleccionados,
-            interconsultas: interconsultas,
-            tratamiento: tratamiento,
-            referencia: referencia,
-            firma: firma
+          dni: dni,
+          doctorid: doctorid,
+          triaje: triaje,
+          anamnesis: anamnesis,
+          empresa: empresa,
+          compania: compania,
+          iafa: iafa,
+          acompanante: acompanante,
+          dni3: dni3,
+          celular: celular,
+          motivo_consulta: motivo_consulta,
+          tratamiento_anterior: tratamiento_anterior,
+          enfermedad_actual: enfermedad_actual,
+          tp_enfermedad: tp_enfermedad,
+          inicio: inicio,
+          curso: curso,
+          sintomas: sintomas,
+          cabeza: cabeza,
+          cuello: cuello,
+          ap_respiratorio: ap_respiratorio,
+          ap_cardio: ap_cardio,
+          abdomen: abdomen,
+          ap_genito: ap_genito,
+          locomotor: locomotor,
+          sistema_nervioso: sistema_nervioso,
+          apetito: apetito,
+          sed: sed,
+          orina: orina,
+          // diagnosticosgeneral: diagnosticosgeneral,
+          examendx: examendx,
+          interconsultas: interconsultas,
+          tratamiento: tratamiento,
+          referencia: referencia,
+          firma: firma
         },
         success: function () {
             //Diagnosticos
-            crearDiagnosticos('1');
+            if(elementos_general.length > 0) {
+              crearDiagnosticos('1');
+            }
             //examenes auxiliares
+              //LABORATORIO
+              if (elementos_laboratorio.length > 0) {
+                crearOrdenLaboratorioHistoria();
+              }
+              //ordenpatologica
+              if($('input[name="muestra"]:checked').length > 0) {
+                crearOrdenPatologica();
+              }
+              //orden ecografia
+              if(elementos_eco.length > 0) {
+                crearOrdenEcografiaHistoria('1');
+              }
+              //orden de tomografia
+              if(elementos_tomo.length > 0) {
+                crearOrdenTomografia('1');
+              }
+              //orden de resonancia
+              if(elementos_reso.length > 0) {
+                crearOrdenResonancia('1');
+              }
+
             //procedimientos
+            if(elementos_procedimientos2.length > 0) {
+              crearProcedimientos('1');
+            }
             //cierre de atencion
             if(fecha_cita = $("#fecha_cita").val() != "") {
               crearCita();
             }
-
             $("body").overhang({
                 type: "success",
                 message: "Historia se ha registrado correctamente"
@@ -712,7 +630,144 @@ $("#saveBtn").on("click", function (){
               message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
             }); 
           }
-    })
+    });
+    }
+    else if(tipo_historia == 2) {
+      var url1 = baseurl + "administracion/crearhistoriaginecologia",
+        dni = $("#documento_historia").val(),
+        doctorid = $("#doctorid1").val(),
+        triaje = $("#consecutivo_historia").val(),
+        // 
+        familiares = $("#antecedentes_familiares").val(),
+        patologicos = $("#antecedentes_patologicos").val(),
+        gine_obste = $("#antecedentes_gineco").val(),
+        fum = $("#antecedentes_fum").val(),
+        rm = $("#antecedentes_rm").val(),
+        flujo_genital = $("#antecedentes_flujo").val(),
+        parejas = $("#antecedentes_parejas").val(),
+        gestas = $("#antecedentes_gestas").val(),
+        partos = $("#antecedentes_partos").val(),
+        abortos = $("#antecedentes_abortos").val(),
+        anticonceptivos = $("#antecedentes_anticonceptivos").val(),
+        tipo = $("#antecedentes_tipos").val(),
+        tiempo = $("#antecedentes_tiempo").val(),
+        cirugia_ginecologica = $("#antecedentes_cirugia").val(),
+        otros = $("#antecedentes_otros").val(),
+        pap = $("#antecedentes_fecha").val(),
+        hijos = $("#antecedentes_hijos").val(),
+        // 
+        motivo_consulta = $("#consulta_motivo").val(),
+        signos_sintomas = $("#consulta_sintomas").val(),
+        // 
+        piel_tscs = $("#examen_piel").val(),
+        tiroides = $("#examen_tiroides").val(),
+        mamas = $("#examen_mamas").val(),
+        a_respiratorio = $("#examen_respiratorio").val(),
+        a_cardiovascular = $("#examen_cardiovascular").val(),
+        abdomen = $("#examen_abdomen").val(),
+        genito = $("#examen_genito").val(),
+        tacto = $("#examen_tacto").val(),
+        locomotor = $("#examen_locomotor").val(),
+        sistema_nervioso = $("#examen_sistema").val(),
+        // 
+        exa_auxiliares = $("#exa_auxiliares1").val(),
+        tratamientos_gine = $("#tratamientos_gine").val(),
+        plan_trabajo = $("#plan_trabajo1").val(),
+        proxima_cita = $("#proxima_cita1").val(),
+        firma_medico = $("#firma_medico1").val();
+        
+        $.ajax({
+            url : url1,
+            method: "POST",
+            data: {
+                dni: dni,
+                doctorid: doctorid,
+                triaje: triaje,
+                familiares: familiares,
+                patologicos: patologicos,
+                gine_obste: gine_obste,
+                fum: fum,
+                rm: rm,
+                flujo_genital: flujo_genital,
+                parejas: parejas,
+                gestas: gestas,
+                partos: partos,
+                abortos: abortos,
+                anticonceptivos: anticonceptivos,
+                tipo: tipo,
+                tiempo: tiempo,
+                cirugia_ginecologica: cirugia_ginecologica,
+                otros: otros,
+                pap: pap,
+                hijos: hijos,
+                motivo_consulta: motivo_consulta,
+                signos_sintomas: signos_sintomas,
+                piel_tscs: piel_tscs,
+                tiroides: tiroides,
+                mamas: mamas,
+                a_respiratorio: a_respiratorio,
+                a_cardiovascular: a_cardiovascular,
+                abdomen: abdomen,
+                genito: genito,
+                tacto: tacto,
+                locomotor: locomotor,
+                sistema_nervioso: sistema_nervioso,
+                exa_auxiliares: exa_auxiliares,
+                plan_trabajo: plan_trabajo,
+                proxima_cita: proxima_cita,
+                firma_medico: firma_medico,
+                tratamientos_gine: tratamientos_gine
+             },
+             success: function () {
+                //Diagnosticos
+            if(elementos_general.length > 0) {
+              crearDiagnosticos('1');
+            }
+            //examenes auxiliares
+              //LABORATORIO
+              if (elementos_laboratorio.length > 0) {
+                crearOrdenLaboratorioHistoria();
+              }
+              //ordenpatologica
+              if($('input[name="muestra"]:checked').length > 0) {
+                crearOrdenPatologica();
+              }
+              //orden ecografia
+              if(elementos_eco.length > 0) {
+                crearOrdenEcografiaHistoria('2');
+              }
+              //orden de tomografia
+              if(elementos_tomo.length > 0) {
+                crearOrdenTomografia('2');
+              }
+              //orden de resonancia
+              if(elementos_reso.length > 0) {
+                crearOrdenResonancia('2');
+              }
+
+            //procedimientos
+            if(elementos_procedimientos2.length > 0) {
+              crearProcedimientos('2');
+            }
+            //cierre de atencion
+            if(fecha_cita = $("#fecha_cita").val() != "") {
+              crearCita();
+            }
+            $("body").overhang({
+                type: "success",
+                message: "Historia se ha registrado correctamente"
+            });
+            $('#saveBtn').removeClass('visible');
+             },
+             error: function () {
+                $("body").overhang({
+                  type: "error",
+                  message: "Alerta ! Tenemos un problema al conectar con la base de datos verifica tu red.",
+                }); 
+              }
+        });
+    }
+    
 });
 
 $("#ecografias").on("change", function() {
@@ -897,7 +952,27 @@ function crearDiagnosticos(tipo) {
     });
 }
 
-function crearProcedimientos() {
+function crearProcedimientos(tipo) {
+
+  let procedimientos = [];
+
+  for (let i = 0; i < elementos_procedimientos2.length; i++) {
+    procedimientos[i] = elementos_procedimientos2[i][0] + '-' + elementos_procedimientos2[i][2];
+  }
+
+  $.ajax({
+    url: baseurl + "administracion/crearprocedimientos",
+    method: "POST",
+    data: {
+      triage: $("#consecutivo_historia").val(),
+      paciente: $("#documento_historia").val(),
+      procedimientos: procedimientos,
+      tipo: tipo
+    },
+    success: function() {
+
+    }
+  });
 
 }
 
@@ -1323,4 +1398,702 @@ function abrirHistoriaClinica(tipo) {
             }
           });
         }
+
+
+//ecografias ordenes
+// Variables globales para ecografía
+var elementos_eco = [];
+var table_eco;
+var table_eco_mini;
+// Initialize DataTables when document is ready
+$(document).ready(function() {
+    // Función para inicializar DataTables de ecografía
+    function initializeEcografiaDataTables() {
+        try {
+            // Destruir DataTables existentes si ya fueron inicializados
+            if ($.fn.DataTable.isDataTable('#table-ecografia')) {
+                $('#table-ecografia').DataTable().destroy();
+            }
+            if ($.fn.DataTable.isDataTable('#table-ecografia-items')) {
+                $('#table-ecografia-items').DataTable().destroy();
+            }
+            
+            // Verificar que las tablas existan
+            if ($('#table-ecografia').length === 0) {
+                console.error("No se encontró la tabla #table-ecografia");
+                return;
+            }
+            if ($('#table-ecografia-items').length === 0) {
+                console.error("No se encontró la tabla #table-ecografia-items");
+                return;
+            }
+            // Inicializar DataTable para la tabla principal de ecografías
+            table_eco = $('#table-ecografia').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ ecografías",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+            // Inicializar DataTable para la tabla de ecografías seleccionadas
+            table_eco_mini = $('#table-ecografia-items').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ ecografías",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay ecografías seleccionadas",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+        } catch (error) {
+            console.error("Error al inicializar DataTables de ecografía:", error);
+        }
+    }
+    
+    // Esperar a que el DOM esté completamente cargado
+    if (document.readyState === 'complete') {
+        initializeEcografiaDataTables();
+    } else {
+        $(window).on('load', function() {
+            setTimeout(initializeEcografiaDataTables, 1000);
+        });
+    }
+});
+
+// Evento doble clic para agregar ecografía a la tabla de selección
+$('#table-ecografia').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_eco.row(this).data();
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    // Agregar a la matriz de elementos
+    elementos_eco.push(rowData);
+    // Remover la fila de la tabla original
+    table_eco.row(this).remove();
+    // Agregar a la tabla de destino
+    var newRow = table_eco_mini.row.add(rowData).draw(false).node();
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    table_eco.draw(false);
+    $('#saveBtn').addClass('visible');
+});
+
+// Evento doble clic para remover ecografía de la tabla de selección
+$('#table-ecografia-items').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_eco_mini.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Remover la fila de la tabla de ítems
+    table_eco_mini.row(this).remove().draw(false);
+    
+    // Agregar a la tabla original
+    var newRow = table_eco.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    // Eliminar de la matriz de elementos
+    for (let i = 0; i < elementos_eco.length; i++) {
+        if (elementos_eco[i][0] == rowData[0]) {
+            elementos_eco.splice(i, 1);
+            break;
+        }
+    }
+    
+    table_eco_mini.draw(false);
+    if(elementos_eco.length === 0) {
+      $('#saveBtn').removeClass('visible');
+    }
+});
+
+// Función para crear orden de ecografía
+function crearOrdenEcografiaHistoria(tipo) {
+    var url = baseurl + "administracion/ordenecografia";
+    
+    let paciente = $("#documento_historia").val(),
+        triage = $("#consecutivo_historia").val();
+    
+    let ordeneco = [];
+    for (let i = 0; i < elementos_eco.length; i++) {
+        ordeneco[i] = elementos_eco[i][0];
+    }
+    
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: {
+                paciente: paciente,
+                triage: triage,
+                ecografia: ordeneco,
+                examen: 'Ecografias',
+                tipo: tipo
+            },
+            success: function(data) {
+                
+            },
+            error: function() {
+            }
+        });
+    
+}
+
+// Función para limpiar selección de ecografías
+function limpiarSeleccionEcografia() {
+    // Mover todos los elementos de vuelta a la tabla original
+    var datosActuales = table_eco_mini.data().toArray();
+    
+    for (let i = 0; i < datosActuales.length; i++) {
+        table_eco.row.add(datosActuales[i]).draw(false);
+    }
+    
+    // Limpiar tabla de selección
+    table_eco_mini.clear().draw();
+    
+    // Limpiar array de elementos
+    elementos_eco = [];
+    
+    table_eco.draw(false);
+}
+
+
+// tomografias
+
+// Variables globales para tomografía
+var elementos_tomo = [];
+var table_tomo;
+var table_tomo_mini;
+
+// Initialize DataTables when document is ready
+$(document).ready(function() {
+    
+    // Función para inicializar DataTables de tomografía
+    function initializeTomografiaDataTables() {
+        try {
+            // Destruir DataTables existentes si ya fueron inicializados
+            if ($.fn.DataTable.isDataTable('#table-tomografia')) {
+                $('#table-tomografia').DataTable().destroy();
+            }
+            if ($.fn.DataTable.isDataTable('#table-tomografia-items')) {
+                $('#table-tomografia-items').DataTable().destroy();
+            }
+            
+            // Verificar que las tablas existan
+            if ($('#table-tomografia').length === 0) {
+                console.error("No se encontró la tabla #table-tomografia");
+                return;
+            }
+            if ($('#table-tomografia-items').length === 0) {
+                console.error("No se encontró la tabla #table-tomografia-items");
+                return;
+            }
+            
+            // Inicializar DataTable para la tabla principal de tomografías
+            table_tomo = $('#table-tomografia').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ tomografías",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+            // Inicializar DataTable para la tabla de tomografías seleccionadas
+            table_tomo_mini = $('#table-tomografia-items').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ tomografías",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay tomografías seleccionadas",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+        } catch (error) {
+            console.error("Error al inicializar DataTables de tomografía:", error);
+        }
+    }
+    
+    // Esperar a que el DOM esté completamente cargado
+    if (document.readyState === 'complete') {
+        initializeTomografiaDataTables();
+    } else {
+        $(window).on('load', function() {
+            setTimeout(initializeTomografiaDataTables, 1000);
+        });
+    }
+});
+
+// Evento doble clic para agregar tomografía a la tabla de selección
+$('#table-tomografia').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_tomo.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Agregar a la matriz de elementos
+    elementos_tomo.push(rowData);
+    
+    // Remover la fila de la tabla original
+    table_tomo.row(this).remove();
+    
+    // Agregar a la tabla de destino
+    var newRow = table_tomo_mini.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    table_tomo.draw(false);
+    $('#saveBtn').addClass('visible');
+});
+
+// Evento doble clic para remover tomografía de la tabla de selección
+$('#table-tomografia-items').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_tomo_mini.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Remover la fila de la tabla de ítems
+    table_tomo_mini.row(this).remove().draw(false);
+    
+    // Agregar a la tabla original
+    var newRow = table_tomo.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    // Eliminar de la matriz de elementos
+    for (let i = 0; i < elementos_tomo.length; i++) {
+        if (elementos_tomo[i][0] == rowData[0]) {
+            elementos_tomo.splice(i, 1);
+            break;
+        }
+    }
+    
+    table_tomo_mini.draw(false);
+    if(elementos_tomo.length === 0) {
+        $('#saveBtn').removeClass('visible');
+    }
+});
+
+// Función para crear orden de tomografía
+function crearOrdenTomografia(tipo) {
+    var url = baseurl + "administracion/ordentomografia";
+    let documento = $("#documento_historia").val(),
+        triage = $("#consecutivo_historia").val();
+    
+    let ordentomo = [];
+    for (let x = 0; x < elementos_tomo.length; x++) {
+        ordentomo[x] = elementos_tomo[x][0];
+    }
+    
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: {
+                paciente: documento,
+                tomografia: ordentomo,
+                triage: triage,
+                examen: 'Tomografias',
+                tipo: tipo
+            },
+            success: function(data) {
+                
+            },
+            error: function() {
+            }
+        });  
+}
+
+// Función para limpiar selección de tomografías
+function limpiarSeleccionTomografia() {
+    // Mover todos los elementos de vuelta a la tabla original
+    var datosActuales = table_tomo_mini.data().toArray();
+    
+    for (let i = 0; i < datosActuales.length; i++) {
+        table_tomo.row.add(datosActuales[i]).draw(false);
+    }
+    
+    // Limpiar tabla de selección
+    table_tomo_mini.clear().draw();
+    
+    // Limpiar array de elementos
+    elementos_tomo = [];
+    
+    table_tomo.draw(false);
+}
+
+//resonancia
+
+// Variables globales para resonancia
+var elementos_reso = [];
+var table_reso;
+var table_reso_mini;
+
+// Initialize DataTables when document is ready
+$(document).ready(function() {
+    
+    // Función para inicializar DataTables de resonancia
+    function initializeResonanciaDataTables() {
+        try {
+            // Destruir DataTables existentes si ya fueron inicializados
+            if ($.fn.DataTable.isDataTable('#table-resonancia')) {
+                $('#table-resonancia').DataTable().destroy();
+            }
+            if ($.fn.DataTable.isDataTable('#table-resonancia-items')) {
+                $('#table-resonancia-items').DataTable().destroy();
+            }
+            
+            // Verificar que las tablas existan
+            if ($('#table-resonancia').length === 0) {
+                console.error("No se encontró la tabla #table-resonancia");
+                return;
+            }
+            if ($('#table-resonancia-items').length === 0) {
+                console.error("No se encontró la tabla #table-resonancia-items");
+                return;
+            }
+            
+            // Inicializar DataTable para la tabla principal de resonancias
+            table_reso = $('#table-resonancia').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ resonancias",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay datos disponibles en la tabla",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+            // Inicializar DataTable para la tabla de resonancias seleccionadas
+            table_reso_mini = $('#table-resonancia-items').DataTable({
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 5,
+                "language": {
+                    "processing": "Procesando",
+                    "search": "Buscar:",
+                    "lengthMenu": "Ver _MENU_ registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ resonancias",
+                    "zeroRecords": "No se encontraron resultados",
+                    "emptyTable": "No hay resonancias seleccionadas",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                "responsive": true,
+                "ordering": true,
+                "searching": true,
+                "initComplete": function() {
+                }
+            });
+            
+        } catch (error) {
+            console.error("Error al inicializar DataTables de resonancia:", error);
+        }
+    }
+    
+    // Esperar a que el DOM esté completamente cargado
+    if (document.readyState === 'complete') {
+        initializeResonanciaDataTables();
+    } else {
+        $(window).on('load', function() {
+            setTimeout(initializeResonanciaDataTables, 1000);
+        });
+    }
+});
+
+// Evento doble clic para agregar resonancia a la tabla de selección
+$('#table-resonancia').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_reso.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Agregar a la matriz de elementos
+    elementos_reso.push(rowData);
+    
+    // Remover la fila de la tabla original
+    table_reso.row(this).remove();
+    
+    // Agregar a la tabla de destino
+    var newRow = table_reso_mini.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    table_reso.draw(false);
+    $('#saveBtn').addClass('visible');
+});
+
+// Evento doble clic para remover resonancia de la tabla de selección
+$('#table-resonancia-items').on('dblclick', 'tr', function(e) {
+    var $row = $(this);
+    var rowData = table_reso_mini.row(this).data();
+    
+    // Guardar las clases de la fila original
+    var rowClasses = $row.attr('class') || '';
+    
+    // Guardar las celdas con sus clases
+    var cellsWithClasses = [];
+    $row.find('td').each(function() {
+        cellsWithClasses.push({
+            data: $(this).text().trim(),
+            className: $(this).attr('class') || ''
+        });
+    });
+    
+    // Remover la fila de la tabla de ítems
+    table_reso_mini.row(this).remove().draw(false);
+    
+    // Agregar a la tabla original
+    var newRow = table_reso.row.add(rowData).draw(false).node();
+    
+    // Aplicar las clases a la nueva fila
+    if (rowClasses) {
+        $(newRow).attr('class', rowClasses);
+    }
+    
+    // Aplicar clases a las celdas
+    $(newRow).find('td').each(function(index) {
+        if (cellsWithClasses[index]) {
+            $(this).attr('class', cellsWithClasses[index].className);
+        }
+    });
+    
+    // Eliminar de la matriz de elementos
+    for (let i = 0; i < elementos_reso.length; i++) {
+        if (elementos_reso[i][0] == rowData[0]) {
+            elementos_reso.splice(i, 1);
+            break;
+        }
+    }
+    
+    table_reso_mini.draw(false);
+    if(elementos_reso.length === 0) {
+        $('#saveBtn').removeClass('visible');
+    }
+});
+
+// Función para crear orden de resonancia
+function crearOrdenResonancia(tipo) {
+    var url = baseurl + "administracion/ordenresonancia";
+    
+    let documento = $("#documento_historia").val(),
+       
+        triage = $("#consecutivo_historia").val();
+    
+    let ordenreso = [];
+    for (let z = 0; z < elementos_reso.length; z++) {
+        ordenreso[z] = elementos_reso[z][0];
+    }
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: {
+                paciente: documento,
+                triage: triage,
+                resonancia: ordenreso,
+                examen: 'Resonancias',
+                tipo: tipo
+            },
+            success: function(data) {
+                
+            },
+            error: function() {
+                
+            }
+        });
+    
+}
+
+// Función para limpiar selección de resonancias
+function limpiarSeleccionResonancia() {
+    // Mover todos los elementos de vuelta a la tabla original
+    var datosActuales = table_reso_mini.data().toArray();
+    
+    for (let i = 0; i < datosActuales.length; i++) {
+        table_reso.row.add(datosActuales[i]).draw(false);
+    }
+    
+    // Limpiar tabla de selección
+    table_reso_mini.clear().draw();
+    
+    // Limpiar array de elementos
+    elementos_reso = [];
+    
+    table_reso.draw(false);
+}
 
