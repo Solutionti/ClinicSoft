@@ -156,144 +156,138 @@
         >
     </div>
       </div>
-        <div class="row">
-                 <div class="col-md-3">
-                    <label>Feto / Embriòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="Unico">
-                     <label class="form-check-label" for="inlineRadio1">Unico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="Multiple">
-                     <label class="form-check-label" for="inlineRadio2">Multiple</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row mt-2">
-               <div class="col-md-3">
-        <label>Situación</label>
+       <div class="modal-body">
+    
+    <h6 class="text-primary font-weight-bold text-uppercase border-bottom pb-2">1. Vitalidad y Biometría</h6>
+    
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small font-weight-bold">Feto / Embrión</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="Unico" checked>
+                    <label class="form-check-label small" for="unico">Único</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="Multiple">
+                    <label class="form-check-label small" for="multiple">Múltiple</label>
+                </div>
+            </div>
         </div>
-    <div class="col-md-3">
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="Cefálico">
-        <label class="form-check-label" for="cefalico">Cefálico</label>
+
+        <div class="col-md-3">
+            <label class="small font-weight-bold text-danger">LCC (Céfalo-Caudal)</label>
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control font-weight-bold" id="lcc" placeholder="45-84">
+                <span class="input-group-text">mm</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label class="small font-weight-bold">LCF (Latidos)</label>
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control" id="lcf" placeholder="120-160">
+                <span class="input-group-text">lpm</span>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <label class="small font-weight-bold">Situación</label>
+            <select class="form-control form-control-sm" id="situacion">
+                <option value="Indiferente">Indiferente (Variable)</option>
+                <option value="Cefálico">Cefálico</option>
+                <option value="Podálico">Podálico</option>
+                <option value="Transverso">Transverso</option>
+            </select>
+        </div>
     </div>
-</div>
-<div class="col-md-3">
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="situacion" id="podalico" value="Podálico">
-        <label class="form-check-label" for="podalico">Podálico</label>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="small">Líquido Amniótico</label>
+            <input type="text" class="form-control form-control-sm" id="liquidoAmniotico" value="Volumen normal para edad gestacional">
+        </div>
+        <div class="col-md-6">
+            <label class="small">Placenta (Ubicación/Grado)</label>
+            <input type="text" class="form-control form-control-sm" id="placenta" placeholder="Ej. Anterior alta / Grado 0">
+        </div>
     </div>
-</div>
-<div class="col-md-3">
-    <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="Indiferente">
-        <label class="form-check-label" for="indiferente">Indiferente</label>
+
+    <h6 class="text-danger font-weight-bold text-uppercase border-bottom pb-2 mt-4">2. Marcadores Genéticos (11-13.6 sem)</h6>
+    
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small font-weight-bold text-danger">Translucencia Nucal</label> 
+            <div class="input-group input-group-sm">
+                <input id="translucenciaNucal" type="number" step="0.1" class="form-control font-weight-bold">
+                <span class="input-group-text">mm</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label class="small font-weight-bold">Hueso Nasal</label>
+            <select id="huesoNasal" class="form-control form-control-sm">
+                <option value="Presente">Presente (Normal)</option>
+                <option value="Ausente">Ausente (Riesgo)</option>
+                <option value="Hipoplasico">Hipoplásico</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="small font-weight-bold">Ductus Venoso</label>
+            <select id="ductudVenosa" class="form-control form-control-sm">
+                <option value="IP Normal / Onda A Positiva">IP Normal / Onda A (+)</option>
+                <option value="Onda A Reversa">Onda A Reversa (Patológico)</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="small font-weight-bold">Flujo Tricuspídeo</label>
+            <select id="flujoTricuspideo" class="form-control form-control-sm">
+                <option value="Normal">Normal</option>
+                <option value="Regurgitacion">Regurgitación</option>
+            </select>
+        </div>
     </div>
+
+    <h6 class="text-info font-weight-bold text-uppercase border-bottom pb-2 mt-4">3. Riesgo Preeclampsia (Doppler)</h6>
+    
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label class="small">Art. Uterina Derecha (IP)</label> 
+            <input id="art-Uteder" type="number" step="0.01" class="form-control form-control-sm" onchange="calcularIPPromedio()">
+        </div>
+        <div class="col-md-4">
+            <label class="small">Art. Uterina Izquierda (IP)</label> 
+            <input id="art-Uteizq" type="number" step="0.01" class="form-control form-control-sm" onchange="calcularIPPromedio()">
+        </div>
+        <div class="col-md-4">
+            <label class="small font-weight-bold text-info">IP Promedio</label> 
+            <input id="ippromedio" type="text" class="form-control form-control-sm bg-light font-weight-bold" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold small">Conclusión</label>
+                <textarea id="conclusion" rows="3" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold small">Sugerencia</label>
+                <textarea id="sugerencia" rows="3" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="form-group">
-                        <label>Liquido amniotico</label>
-                        <textarea id="liquidoAmniotico" class="form-control" rows="1">volumen normal para la edad gestacional</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Placenta</label>
-                        <input id="placenta" type="text" class="form-control form-control-sm" placeholder="Grados"> 
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LCR</label> 
-                     <input id="lcr" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LCF</label> 
-                     <input id="lcf" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4 text-center">
-                    <label class="mt-3">X</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>. </label> 
-                     <input id="." type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>Art Uterina Derecha</label> 
-                     <input id="art-Uteder" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>Art Uterina Izquierda</label> 
-                     <input id="art-Uteizq" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-2">
-                     <label>IP Promedio</label> 
-                     <input id="ippromedio" type="text" class="form-control form-control-sm">
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="huesoNasal" class="form-control" rows="1">Hueso nasal presente</textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-2">
-                     <label>Translucencia nucal</label> 
-                     <input id="translucenciaNucal" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-5">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="ductudVenosa" class="form-control" rows="1">Ductus venosa onda trifasica normal.</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Conclusion</label>
-                        <textarea id="conclusion" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Sugerencia</label>
-                        <textarea id="sugerencia" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-               </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="createEcografiaGenetica()">Guardar</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      </div>
-      </div>
-       </div>
-     </div>
-     <br>  
-   </div>
-   </div>
-    </div>
-  </main>
-         
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" onclick="createEcografiaGenetica()">Guardar Ecografía</button>
+</div>
                
 
   <?php require_once("componentes/scripts.php"); ?>
