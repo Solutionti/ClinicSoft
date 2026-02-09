@@ -3,10 +3,10 @@ function createEcografiaGenetica() {
     var documento_paciente = $("#dni").val(); 
     var codigo_doctor = $("#codigo_doctor").val();
     var fetoembrion = $("input[name='fetoembrion']:checked").val(); 
-    var situacion = $("input[name='situacion']:checked").val(); 
+    var situacion = $("#situacion").val(); 
     var liquidoAmniotico = $("#liquidoAmniotico").val();
     var placenta = $("#placenta").val();
-    var lcr = $("#lcr").val();
+    var lcc = $("#lcc").val();
     var lcf = $("#lcf").val();
     var artUteder = $("#art-Uteder").val();
     var artUteizq = $("#art-Uteizq").val();
@@ -14,6 +14,7 @@ function createEcografiaGenetica() {
     var huesoNasal = $("#huesoNasal").val();
     var translucenciaNucal = $("#translucenciaNucal").val();
     var ductudVenosa = $("#ductudVenosa").val();
+    var flujoTricuspideo = $("#flujoTricuspideo").val();
     var conclusion_mama = $("#conclusion").val(); 
     var sugerencias_mama = $("#sugerencia").val(); 
 
@@ -27,7 +28,7 @@ function createEcografiaGenetica() {
             situacion: situacion,
             liquidoAmniotico: liquidoAmniotico,
             placenta: placenta,
-            lcr: lcr,
+            lcc: lcc,
             lcf: lcf,
             artUteder: artUteder,
             artUteizq: artUteizq,
@@ -35,6 +36,7 @@ function createEcografiaGenetica() {
             huesoNasal: huesoNasal,
             translucenciaNucal: translucenciaNucal,
             ductudVenosa: ductudVenosa,
+            flujoTricuspideo: flujoTricuspideo,
             conclusion_mama: conclusion_mama,
             sugerencias_mama: sugerencias_mama
         },
@@ -47,17 +49,18 @@ function createEcografiaGenetica() {
             $("#dni").val(''); 
             $("#codigo_doctor").val('');
             $("input[name='fetoembrion']").prop('checked', false); 
-            $("input[name='situacion']").prop('checked', false); 
+            $("#situacion").val(''); 
             $("#liquidoAmniotico").val('volumen normal para la edad gestacional');
             $("#huesoNasal").val('Hueso nasal presente');
             $("#ductudVenosa").val('Ductus venosa onda trifasica normal.');
             $("#placenta").val('');
-            $("#lcr").val('');
+            $("#lcc").val('');
             $("#lcf").val('');
             $("#art-Uteder").val('');
             $("#art-Uteizq").val('');
             $("#ippromedio").val('');
             $("#translucenciaNucal").val('');
+            $("#flujoTricuspideo").val('');
             $("#conclusion").val(''); 
             $("#sugerencia").val('');
 
@@ -81,3 +84,13 @@ function createEcografiaGenetica() {
         let url = baseurl + "administracion/pdfecografiagenetica/" + dni;
         window.open(url, "_blank", " width=950, height=1000");
       }    
+
+      function calcularIPPromedio() {
+    let der = parseFloat(document.getElementById('art-Uteder').value) || 0;
+    let izq = parseFloat(document.getElementById('art-Uteizq').value) || 0;
+    
+    if(der > 0 && izq > 0) {
+        let promedio = (der + izq) / 2;
+        document.getElementById('ippromedio').value = promedio.toFixed(2);
+    }
+}

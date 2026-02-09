@@ -150,238 +150,177 @@
          >
         </div>
         </div>
-        <div class="row">
-                 <div class="col-md-3">
-                    <label>Sexo</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino">
-                     <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="femenino" value="Femenino">
-                     <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="sexo" id="novisible" value="No vsible">
-                     <label class="form-check-label" for="inlineRadio2">No visible</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row mt-2">
-               <div class="col-md-3">
-                    <label>Situaciòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="cefa" value="cefalico">
-                     <label class="form-check-label" for="inlineRadio1">Cefalico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="poda" value="podalico">
-                     <label class="form-check-label" for="inlineRadio2">Podalico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="indi" value="indiferente">
-                     <label class="form-check-label" for="inlineRadio2">Indiferente</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-4">
-                     <h6 class="text-danger">CABEZA</h6>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Forma</label>
-                              <textarea id="formacabeza" class="form-control">encefalo, ventriculos, linea media, talamos y cisuras normales, cavum del septum pellucidum y cuerpo calloso visible
-                              </textarea>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Cerebelo (mm)</label>
-                              <input type="number" id="cerebelo" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Cisterna Magna (mm)</label>
-                              <input type="number" id="cisternaMagna" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Atrio Ventricular (mm)</label>
-                              <input type="number" id="atrioVentricular" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <h6 class="text-primary">CARA</h6>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Perfil</label>
-                              <textarea id="perfilCara" class="form-control">nariz y fosas nasales, labio superior, orbitas y cristalinos normales</textarea>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                           <h6 class="text-info">CUELLO</h6>
-                              <textarea id="cuello" class="form-control">no masas</textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <h6 class="text-warning">TORAX</h6>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Se observa</label>
-                              <textarea id="perfiltorax" class="form-control">pulmones y corazon de tamaños adecuados, no masas</textarea>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                           <h6 class="text-secondary">CORAZON</h6>
-                              <textarea id="corazon" class="form-control">situs solitus, tamaño, frecuencia cardiaca, 4 camaras y eje cardiaco normales, salida de aorta y arteria pulmonar normales y cruzamiento adecuados (“vasos bien relacionados”)</textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                  <div class="col-md-4">
-                     <h6 class="text-warning">COLUMNA VERTEBRAL</h6>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Se observa</label>
-                              <textarea id="columnaVertebral" class="form-control">de aspecto normal en los planos sagital coronal y tranversal.</textarea>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                           <h6 class="text-secondary">ABDOMEN</h6>
-                              <textarea id="abdomen" class="form-control">pared normal, estomago presente, riñones normales, vejiga con 2 vasos (arterias umbilicales). intestinos de  ecogenicidad normal, insercion de cordon normal. </textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <h6 class="text-success">BIOMETRIA FETAL</h6>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>DBP (mm)</label>
-                              <input type="number" id="dbp" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>CC (mm)</label>
-                              <input type="number" id="cc" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>CA (mm)</label>
-                              <input type="number" id="ca" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>LF (mm)
-                              </label>
-                              <input type="number" id="lf" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Comentario</label>
-                              <textarea id="comentario" class="form-control">PLACENTA CORPORAL POSTERIOR GRADO  “0”                  LA: ADECUADO PARA EDAD GESTACIONAL</textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-4">
-                     <h6 class="text-primary">DOPPLER ARTERIAS UTERINAS (IP)</h6>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Derecha</label>
-                              <input type="text" id="ip-der" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Izquierda</label>
-                              <input type="text" id="ip-izq" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>Ponderado Fetal (gr)</label>
-                              <input type="number" id="ponderadoFetal" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div class="form-group">
-                              <label>LCF (x min)</label>
-                              <input type="number" id="lcf" class="form-control form-control-sm">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="form-group">
-                              <label>Conclusiones</label>
-                              <textarea id="conclusiones" class="form-control"></textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" onclick="createEcografiaMorfologica()">Guardar</button>
-               </div>
+        <div class="modal-body">
+         <h6 class="text-secondary font-weight-bold border-bottom pb-2">Datos Generales</h6>
+    <div class="row mb-3">
+        <div class="col-md-6 border-right">
+            <label class="small font-weight-bold d-block">Sexo Fetal:</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="sexo_m" value="Masculino">
+                <label class="form-check-label small" for="sexo_m">Masculino</label>
             </div>
-         </div>
-      </div>
-      </div>
-      </div>
-       </div>
-     </div>
-     <br>  
-   </div>
-   </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="sexo_f" value="Femenino">
+                <label class="form-check-label small" for="sexo_f">Femenino</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" id="sexo_no" value="No Visible">
+                <label class="form-check-label small" for="sexo_no">No Visible</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label class="small font-weight-bold d-block">Situación:</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="situacion" id="sit_cef" value="Cefálico" checked>
+                <label class="form-check-label small" for="sit_cef">Cefálico</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="situacion" id="sit_pod" value="Podálico">
+                <label class="form-check-label small" for="sit_pod">Podálico</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="situacion" id="sit_tra" value="Transverso">
+                <label class="form-check-label small" for="sit_tra">Transverso</label>
+            </div>
+            <button type="button" class="btn btn-success btn-sm ml-2" onclick="cargarMorfologicaNormal()">
+                <i class="fas fa-magic"></i> Cargar Todo Normal
+            </button>
+        </div>
     </div>
-  </main>
+    
+
+
+    <h6 class="text-primary font-weight-bold border-bottom pb-2">1. Neurosonografía (Cabeza)</h6>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label class="small font-weight-bold">Estructuras Intracraneales</label>
+            <textarea id="formacabeza" class="form-control form-control-sm" rows="2">Encéfalo, ventrículos, línea media, tálamos y cisuras normales. Cavum del septum pellucidum y cuerpo calloso visibles.</textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small text-danger">Cerebelo (mm)</label>
+            <input type="number" id="cerebelo" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small text-danger">Cist. Magna (mm)</label>
+            <input type="number" id="cisternaMagna" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small text-danger">Atrio Vent. (mm)</label>
+            <input type="number" id="atrioVentricular" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small text-danger font-weight-bold">Pliegue Nucal</label> <input type="number" id="pliegueNucal" class="form-control form-control-sm" placeholder="< 6mm">
+        </div>
+    </div>
+
+    <h6 class="text-info font-weight-bold border-bottom pb-2 mt-2">2. Cara y Cuello</h6>
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <label class="small">Perfil Facial</label>
+            <textarea id="perfilCara" class="form-control form-control-sm" rows="1">Nariz, fosas nasales, labio superior íntegro, órbitas y cristalinos normales.</textarea>
+        </div>
+        <div class="col-md-4">
+            <label class="small">Cuello</label>
+            <textarea id="cuello" class="form-control form-control-sm" rows="1">Sin masas ni circulares.</textarea>
+        </div>
+    </div>
+
+    <h6 class="text-warning font-weight-bold border-bottom pb-2 mt-2">3. Tórax y Corazón</h6>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="small">Pulmones / Tórax</label>
+            <textarea id="perfiltorax" class="form-control form-control-sm" rows="2">Pulmones de ecogenicidad homogénea, diafragma íntegro, no masas.</textarea>
+        </div>
+        <div class="col-md-6">
+            <label class="small">Corazón (4 Cámaras)</label>
+            <textarea id="corazon" class="form-control form-control-sm" rows="2">Situs solitus, 4 cámaras simétricas, salida de grandes vasos normal. Ritmo regular.</textarea>
+        </div>
+    </div>
+
+    <h6 class="text-success font-weight-bold border-bottom pb-2 mt-2">4. Abdomen y Columna</h6>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="small">Abdomen / Gastro / Renal</label>
+            <textarea id="abdomen" class="form-control form-control-sm" rows="3">Pared íntegra, estómago presente, riñones normales, vejiga visible con 2 arterias umbilicales.</textarea>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-2">
+                <label class="small">Columna Vertebral</label>
+                <textarea id="columnaVertebral" class="form-control form-control-sm" rows="1">Íntegra en todos sus segmentos.</textarea>
+            </div>
+            <div class="mb-2">
+                <label class="small text-danger font-weight-bold">Extremidades</label>
+                <textarea id="extremidades" class="form-control form-control-sm" rows="1">4 extremidades presentes y móviles. Manos y pies visibles.</textarea>
+            </div>
+        </div>
+    </div>
+
+    <h6 class="text-secondary font-weight-bold border-bottom pb-2 mt-2">5. Biometría Fetal</h6>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small">DBP (mm)</label>
+            <input type="number" id="dbp" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small">CC (mm)</label>
+            <input type="number" id="cc" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small">CA (mm)</label>
+            <input type="number" id="ca" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small">LF (mm)</label>
+            <input type="number" id="lf" class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small">Peso (g)</label>
+            <input type="number" id="ponderadoFetal" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-3">
+            <label class="small">LCF (lpm)</label>
+            <input type="number" id="lcf" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-6">
+            <label class="small">Placenta / Líquido</label>
+            <input type="text" id="placenta_liquido" class="form-control form-control-sm" value="Placenta Corporal Post. Grado I / ILA Normal">
+        </div>
+    </div>
+
+    <h6 class="text-danger font-weight-bold border-bottom pb-2 mt-2">6. Doppler y Materno</h6>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small">IP Uterina Der.</label>
+            <input type="number" step="0.01" id="ip-der" class="form-control form-control-sm" onchange="calcPromedioMorfo()">
+        </div>
+        <div class="col-md-3">
+            <label class="small">IP Uterina Izq.</label>
+            <input type="number" step="0.01" id="ip-izq" class="form-control form-control-sm" onchange="calcPromedioMorfo()">
+        </div>
+        <div class="col-md-3">
+            <label class="small font-weight-bold">IP Promedio</label> <input type="number" id="ip_promedio" class="form-control form-control-sm bg-light" readonly>
+        </div>
+        <div class="col-md-3">
+            <label class="small font-weight-bold text-danger">Cervicometría</label> <input type="number" id="cervicometria" class="form-control form-control-sm" placeholder="> 25mm">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="small font-weight-bold">Conclusión</label>
+            <textarea id="conclusiones" class="form-control" rows="2"></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+     <button type="button" class="btn btn-primary" onclick="createEcografiaMorfologica()">Guardar Ecografía</button>
+</div>
 
   <?php require_once("componentes/scripts.php"); ?>
   <script src="<?php echo base_url(); ?>public/js/scripts/ecografias/global.js"></script>
