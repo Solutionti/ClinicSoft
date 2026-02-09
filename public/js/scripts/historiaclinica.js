@@ -452,15 +452,25 @@ var elementos_general = new Array();
 $('#table-diagnosticos2').on('dblclick', 'tr', function(e) {
     elem_lab = new Array();
     elem_lab = table_general.row(this).data();
+    table_general.row(this).remove();
+    // table_lab_mini2.row.add(elem_lab).draw(false);
+    
     $("#diagnostico_id").val(elem_lab[0]);
     $("#diagnostico_codigo").val(elem_lab[1]);
-    $("#diagnostico_nombre").val(elem_lab[2]); 
+    $("#diagnostico_nombre").val(elem_lab[2]);
+    
+    total_ = 0;
+    for (let i = 0; i < elementos_general.length; i++) {
+        total_ += elementos_general[i][2] * 1;
+    }
+    $("#total").val((total_).toFixed(2));
+    table_general.draw(false);
 });
 
 $("#agregar_diagnostico").on("click", function() {
     elem_lab = [$("#diagnostico_id").val(), $("#diagnostico_codigo").val(), $("#diagnostico_nombre").val(), $("#diagnostico_tipo").val()];  
     elementos_general.push(elem_lab);
-    table_general.row(this).remove()
+    table_general.row(this).remove();
     table_lab_mini2.row.add(elem_lab).draw(false);
 
     total_ = 0;
@@ -632,10 +642,7 @@ $("#saveBtn").on("click", function (){
     referencia = $("#plan_referencia").val(),
     firma = $("#plan_firma").val();
 
-    // let diagnosticosgeneral = [];
-    // for (let i = 0; i < elementos_general.length; i++) {
-    //     diagnosticosgeneral [i] = elementos_general[i][0];
-    // }
+    
 
     let procedimientos_seleccionados = [];
     for (let i = 0; i < elementos_procedimientos2.length; i++) {
@@ -685,6 +692,7 @@ $("#saveBtn").on("click", function (){
         },
         success: function () {
             //Diagnosticos
+            crearDiagnosticos('1');
             //examenes auxiliares
             //procedimientos
             //cierre de atencion
@@ -862,6 +870,39 @@ function crearAlergias() {
        }); 
      }
    });
+}
+
+function crearDiagnosticos(tipo) {
+  var url = baseurl + "administracion/creardiagnosticos";
+  let triage = $("#consecutivo_historia").val(),
+      paciente = $("#documento_historia").val();
+
+  let diagnosticos = [];
+  for (let i = 0; i < elementos_general.length; i++) {
+    diagnosticos[i] = elementos_general[i][1] + '-' + elementos_general[i][3];
+  }
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+          triage: triage,
+          paciente: paciente,
+          diagnosticos: diagnosticos,
+          tipo: tipo,
+        },
+        success: function() {
+        
+        }
+    });
+}
+
+function crearProcedimientos() {
+
+}
+
+function crearExamenesAuxiliares() {
+
 }
 
 function crearMedicamento() {
@@ -1213,13 +1254,29 @@ function abrirHistoriaClinica(tipo) {
             primary: "#5e72e4",
             accent: "#ffffff",
             yesColor: "#3498DB",
-            message: "Esta seguro de crear una nueva historia clinica?",
+            message: "Esta seguro de crear un consecutivo para la historia clinica?",
             overlay: true,
             yesMessage: "Si",
             noMessage: "No",
             callback: function (value) {
-            if(value == false){
-                        
+            if(value === false){
+              if(tipo == 1) {
+                document.getElementById('tphistoria').value = tipo;
+                $('#tphistoria').trigger('change');
+                var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                modal.show();
+                  $("#nav-antecedentesgine").removeClass("show active");
+                  $("#nav-home").addClass("show active");
+               
+            }
+            else if(tipo == 2) {
+              document.getElementById('tphistoria').value = tipo;
+              $('#tphistoria').trigger('change');
+              var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+              modal.show();
+                $("#nav-home").removeClass("show active");
+                $("#nav-antecedentesgine").addClass("show active");
+             }         
             }
             else {
             document.getElementById('tphistoria').value = tipo;
@@ -1260,7 +1317,6 @@ function abrirHistoriaClinica(tipo) {
                   
                 }
               });
-
             }
               return false;
              };                

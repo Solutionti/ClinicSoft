@@ -2098,4 +2098,23 @@ class Historiaclinica extends Admin_Controller
 		$codigo = $this->input->post('medicamento');
 		$this->Historias_model->eliminarMedicamento($codigo, $triaje, $documento);
 	}
+
+	public function crearDiagnosticos() {
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triage');
+		$diagnosticos = $this->input->post('diagnosticos');
+		$tipo = $this->input->post('tipo');
+
+	  for ($i = 0; $i < sizeof($diagnosticos); $i++) {
+	    $data3 = [
+		  'paciente' => $paciente,
+		  'diagnosticos' => $diagnosticos[$i],
+		  'historia' => $paciente,
+		  'tipo' => $tipo,
+		  'triaje' => $triage
+		];
+		
+	   $this->Historias_model->crearDiagnosticosGeneral($data3);
+	  }
+	}
 }

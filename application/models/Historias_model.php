@@ -273,18 +273,15 @@ class Historias_model extends CI_model
     $datos = [
       'codigo_historia' => $data['triaje'],
       'paciente' => $data['paciente'],
-      'codigo_diagnosti' => $data['diagnosticos'],
-      'tipo_especialidad' => 1,
+      'codigo_diagnosti' => explode('-', $data['diagnosticos'])[0],
+      'tipo' => explode('-', $data['diagnosticos'])[1],
+      'tipo_especialidad' => $data['tipo'],
       'historia' => $data['paciente'],
       'fecha' => date('Y-m-d'),
       'usuario' => $this->session->userdata('nombre')
     ];
     $this->db->insert('diagnosticos', $datos);
   }
-
-  // SET collation_connection = 'utf8mb4_general_ci';
-  // ALTER DATABASE your_bd CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-  // ALTER TABLE your_table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
   public function getDiagnosticosGinecologia($historia, $fecha)
   {
