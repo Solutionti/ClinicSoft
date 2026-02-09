@@ -721,7 +721,7 @@ $("#saveBtn").on("click", function (){
              success: function () {
                 //Diagnosticos
             if(elementos_general.length > 0) {
-              crearDiagnosticos('1');
+              crearDiagnosticos('2');
             }
             //examenes auxiliares
               //LABORATORIO
