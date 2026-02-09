@@ -901,6 +901,14 @@ class Historias_model extends CI_model
     $this->db->insert('examenes_auxiliares', $datos);
   }
 
+  public function eliminarexamenesAuxiliares($examen, $triage, $paciente) {
+    $this->db->where('examen', $examen);
+    $this->db->where('triage', $triage);
+    $this->db->where('paciente', $paciente);
+    $this->db->delete('detalle_examen_auxiliares');
+
+  }
+
   public function crearExamenAuxiliaresEcografia($data) {
     $datos = [
       "codigoauxiliar" => $data['ecografia'],
