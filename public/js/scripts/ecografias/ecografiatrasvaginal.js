@@ -1,26 +1,31 @@
 function createEcografiaTrasvaginal() {
     var url = baseurl + "administracion/ecografiatrasvaginal";
-    var documento_paciente = $("#dni").val(),
-        codigo_doctor = $("#codigo_doctor").val();
-         uteroTipo = $("#utero-tipo").val();
+    var documento_paciente = $("#dni").val();
+    var codigo_doctor = $("#codigo_doctor").val();
+    var uteroTipo = $("#utero-tipo").val();
     var superficie = $("#superficie").val();
     var miometrio = $("#miometrio").val();
-        endometrio = $("#endometrio_grosor").val();
-    var   ut_l = $("#ut_l").val();
+    var endometrio_grosor = $("#endometrio_grosor").val();
+    var ut_l = $("#ut_l").val();
     var ut_ap = $("#ut_ap").val();
     var ut_t = $("#ut_t").val();
     var ut_vol = $("#ut_vol").val();
-         comentarioUtero = $("#comentarioUtero").val();
+    var comentarioUtero = $("#comentarioUtero").val();
     var od_l = $("#od_l").val();
-         ovarioDer1 = $("#ovario-der1").val();
-         ovarioDer2 = $("#ovario-der2").val();
-         comentarioOvarioDer = $("#comentarioOvario-der").val();
-         ovarioIz1 = $("#ovario-iz1").val();
-         ovarioIz2 = $("#ovario-iz2").val();
-         comentarioOvarioIzq = $("#comentarioOvario-izq").val();
-         fondosaco = $("#fondosaco").val();
-         conclusion = $("#conclusion").val();
-         sugerencias = $("#sugerencias").val();
+    var od_ap = $("#od_ap").val();
+    var od_t = $("#od_t").val();
+    var od_vol = $("#od_vol").val();
+    var comentarioOvarioDer = $("#comentarioOvario-der").val();
+    var oi_l = $("#oi_l").val();
+    var oi_ap = $("#oi_ap").val();
+    var oi_t = $("#oi_t").val();
+    var oi_vol = $("#oi_vol").val();
+    var comentarioOvarioIzq = $("#comentarioOvario-izq").val();
+    var fondosaco = $("#fondosaco").val();
+    var tiene_tumor = $("#tiene_tumor").is(':checked') ? 'Si' : 'No';
+    var tumorAnexialCom = $("#tumorAnexial-com").val();
+    var conclusion = $("#conclusion").val();
+    var sugerencias = $("#sugerencias").val();
   
     $.ajax({
       url: url,
@@ -31,20 +36,25 @@ function createEcografiaTrasvaginal() {
         uteroTipo: uteroTipo,
         superficie: superficie,
         miometrio: miometrio,
-        endometrio: endometrio_grosor,
+        endometrio_grosor: endometrio_grosor,
         ut_l: ut_l,
         ut_ap: ut_ap,
         ut_t: ut_t,
         ut_vol: ut_vol,
         comentarioUtero: comentarioUtero,
         od_l: od_l,
-        ovarioDer1: ovarioDer1,
-        ovarioDer2: ovarioDer2,
+        od_ap: od_ap,
+        od_t: od_t,
+        od_vol: od_vol,
         comentarioOvarioDer: comentarioOvarioDer,
-        ovarioIz1: ovarioIz1,
-        ovarioIz2: ovarioIz2,
+        oi_l: oi_l,
+        oi_ap: oi_ap,
+        oi_t: oi_t,
+        oi_vol: oi_vol,
         comentarioOvarioIzq: comentarioOvarioIzq,
         fondosaco: fondosaco,
+        tiene_tumor: tiene_tumor,
+        tumorAnexialCom: tumorAnexialCom,
         conclusion: conclusion,
         sugerencias: sugerencias
       },
@@ -59,21 +69,26 @@ function createEcografiaTrasvaginal() {
         $("#codigo_doctor").val('');
         $("#utero-tipo").val('Anteverso'); // Valor por defecto
         $("#superficie").val('Regular');
-        $("#miometrio").val('Homogenio');
-        $("#endometrio_grosor").val('Grosor mm libre');
+        $("#miometrio").val('Homogéneo');
+        $("#endometrio_grosor").val('');
         $("#ut_l").val('');
         $("#ut_ap").val('');
         $("#ut_t").val('');
         $("#ut_vol").val('');
         $("#comentarioUtero").val('DE BORDES REGULARES Y PARENQUIMA HOMOGENEO');
         $("#od_l").val('');
-        $("#ovario-der1").val('');
-        $("#ovario-der2").val('');
+        $("#od_ap").val('');
+        $("#od_t").val('');
+        $("#od_vol").val('');
         $("#comentarioOvario-der").val('DE ASPECTO NORMAL.');
-        $("#ovario-iz1").val('');
-        $("#ovario-iz2").val('');
+        $("#oi_l").val('');
+        $("#oi_ap").val('');
+        $("#oi_t").val('');
+        $("#oi_vol").val('');
         $("#comentarioOvario-izq").val('DE ASPECTO NORMAL.');
         $("#fondosaco").val('Libre');
+        $("#tiene_tumor").prop('checked', false);
+        $("#tumorAnexial-com").val('');
         $("#conclusion").val('');
         $("#sugerencias").val('');
         generarpdfTrasvaginal()
@@ -94,6 +109,7 @@ function createEcografiaTrasvaginal() {
     let url = baseurl + "administracion/pdfecografiatrasvaginal/" + dni;
     window.open(url, "_blank", " width=950, height=1000");
   }    
+
 function cargarTransvaginalNormal() {
     document.getElementById('utero-tipo').value = "Anteverso";
     document.getElementById('superficie').value = "Regular";
