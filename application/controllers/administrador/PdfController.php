@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PdfController extends CI_Controller {
 
     private function fixText($texto) {
-        return utf8_decode($texto);
+        return ($texto);
     }
 
     

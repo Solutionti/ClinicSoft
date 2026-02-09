@@ -388,6 +388,8 @@ class Ecografias extends Admin_Controller {
     public function createEcografiaPelvica() {
       $documento_paciente = $this->input->post("documento_paciente");
       $codigo_doctor = $this->input->post("codigo_doctor");
+      $replecion = $this->input->post("replecion");
+      $vejiga_desc = $this->input->post("vejiga_desc");
       $uteroTipo = $this->input->post("uteroTipo");
       $superficie = $this->input->post("superficie");
       $endometrio = $this->input->post("endometrio");
@@ -411,6 +413,8 @@ class Ecografias extends Admin_Controller {
       $datos = [
           "documento_paciente" => $documento_paciente,
           "codigo_doctor" => $codigo_doctor,
+          "replecion" => $replecion,
+          "vejiga_desc" => $vejiga_desc,
           "utero_tipo" => $uteroTipo,
           "superficie" => $superficie,
           "endometrio" => $endometrio,

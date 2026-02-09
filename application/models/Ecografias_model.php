@@ -169,6 +169,8 @@ public function createEcografiaPelvica($data) {
   $datos = [
       "documento_paciente" => $data["documento_paciente"],
       "codigo_doctor" => $data["codigo_doctor"],
+      "replecion" => $data["replecion"],
+      "vejiga_desc" => $data["vejiga_desc"],
       "utero_tipo" => $data["utero_tipo"],
       "superficie" => $data["superficie"],
       "endometrio" => $data["endometrio"],
