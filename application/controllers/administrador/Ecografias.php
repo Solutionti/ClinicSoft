@@ -598,86 +598,112 @@ public function createEcografiaProstatica() {
 // ECOGRAFIA RENAL
 
 public function createEcografiaRenal() {
-  $documento_paciente = $this->input->post("documento_paciente");
-  $codigo_doctor = $this->input->post("codigo_doctor");
-  $motivo = $this->input->post("motivo");
+    // Recibir datos uno por uno
+    $documento_paciente = $this->input->post("documento_paciente");
+    $codigo_doctor = $this->input->post("codigo_doctor");
+    $motivo = $this->input->post("motivo");
 
-  // Riñón derecho
-  $morfologia_movilidad_derecho = $this->input->post("morfologia_movilidad_derecho");
-  $ecogenicidad_derecho = $this->input->post("ecogenicidad_derecho");
-  $medidas_longitud_derecho = $this->input->post("medidas_longitud_derecho");
-  $medidas_parenquima_derecho = $this->input->post("medidas_parenquima_derecho");
-  $imagenes_expansivas_solidas_derecho = $this->input->post("imagenes_expansivas_solidas_derecho");
-  $imagenes_expansivas_quisticas_derecho = $this->input->post("imagenes_expansivas_quisticas_derecho");
-  $hidronefrosis_derecho = $this->input->post("hidronefrosis_derecho");
-  $medidas_hidronefrosis_derecho = $this->input->post("medidas_hidronefrosis_derecho");
+    // RD
+    $rd_morfologia = $this->input->post("rd_morfologia");
+    $rd_ecogenicidad = $this->input->post("rd_ecogenicidad");
+    $rd_longitud = $this->input->post("rd_longitud");
+    $rd_parenquima = $this->input->post("rd_parenquima");
+    $rd_solidas = $this->input->post("rd_solidas");
+    $rd_quisticas = $this->input->post("rd_quisticas");
+    $rd_hidronefrosis = $this->input->post("rd_hidronefrosis");
+    $rd_hidro_medida = $this->input->post("rd_hidro_medida");
+    $rd_microlitiasis = $this->input->post("rd_microlitiasis");
+    $rd_micro_medida = $this->input->post("rd_micro_medida");
+    $rd_calculos = $this->input->post("rd_calculos");
+    $rd_calculos_medida = $this->input->post("rd_calculos_medida");
 
-  // Riñón izquierdo
-  $morfologia_movilidad_izquierdo = $this->input->post("morfologia_movilidad_izquierdo");
-  $ecogenicidad_izquierdo = $this->input->post("ecogenicidad_izquierdo");
-  $medidas_longitud_izquierdo = $this->input->post("medidas_longitud_izquierdo");
-  $medidas_parenquima_izquierdo = $this->input->post("medidas_parenquima_izquierdo");
-  $imagenes_expansivas_solidas_izquierdo = $this->input->post("imagenes_expansivas_solidas_izquierdo");
-  $imagenes_expansivas_quisticas_izquierdo = $this->input->post("imagenes_expansivas_quisticas_izquierdo");
-  $hidronefrosis_izquierdo = $this->input->post("hidronefrosis_izquierdo");
-  $medidas_hidronefrosis_izquierdo = $this->input->post("medidas_hidronefrosis_izquierdo");
+    // RI
+    $ri_morfologia = $this->input->post("ri_morfologia");
+    $ri_ecogenicidad = $this->input->post("ri_ecogenicidad");
+    $ri_longitud = $this->input->post("ri_longitud");
+    $ri_parenquima = $this->input->post("ri_parenquima");
+    $ri_solidas = $this->input->post("ri_solidas");
+    $ri_quisticas = $this->input->post("ri_quisticas");
+    $ri_hidronefrosis = $this->input->post("ri_hidronefrosis");
+    $ri_hidro_medida = $this->input->post("ri_hidro_medida");
+    $ri_microlitiasis = $this->input->post("ri_microlitiasis");
+    $ri_micro_medida = $this->input->post("ri_micro_medida");
+    $ri_calculos = $this->input->post("ri_calculos");
+    $ri_calculos_medida = $this->input->post("ri_calculos_medida");
 
-  // Vejiga
-  $repelcion_vejiga = $this->input->post("repelcion_vejiga");
-  $paredes_vejiga = $this->input->post("paredes_vejiga");
-  $contenido_aneocoico = $this->input->post("contenido_aneocoico");
-  $imagenes_expansivas_vejiga = $this->input->post("imagenes_expansivas_vejiga");
-  $calculos_vejiga = $this->input->post("calculos_vejiga");
-  $vol_pre_miccional = $this->input->post("vol_pre_miccional");
-  $vol_post_miccional = $this->input->post("vol_post_miccional");
-  $retencion = $this->input->post("retencion");
+    // Vejiga
+    $vejiga_replecion = $this->input->post("vejiga_replecion");
+    $vejiga_paredes = $this->input->post("vejiga_paredes");
+    $vejiga_contenido = $this->input->post("vejiga_contenido");
+    $vejiga_imagenes = $this->input->post("vejiga_imagenes");
+    $vejiga_calculos = $this->input->post("vejiga_calculos");
+    $descripcion_vejiga = $this->input->post("descripcion_vejiga");
 
-  // Observaciones
-  $observacion_textarea = $this->input->post("observacion_textarea");
-  $conclusiones = $this->input->post("conclusiones");
+    // Volúmenes
+    $vol_pre = $this->input->post("vol_pre");
+    $vol_post = $this->input->post("vol_post");
+    $retencion = $this->input->post("retencion");
 
-  $datos = [
-      "documento_paciente" => $documento_paciente,
-      "codigo_doctor" => $codigo_doctor,
-      "motivo" => $motivo,
-      // Riñón derecho
-      "morfologia_movilidad_derecho" => $morfologia_movilidad_derecho,
-      "ecogenicidad_derecho" => $ecogenicidad_derecho,
-      "medidas_longitud_derecho" => $medidas_longitud_derecho,
-      "medidas_parenquima_derecho" => $medidas_parenquima_derecho,
-      "imagenes_expansivas_solidas_derecho" => $imagenes_expansivas_solidas_derecho,
-      "imagenes_expansivas_quisticas_derecho" => $imagenes_expansivas_quisticas_derecho,
-      "hidronefrosis_derecho" => $hidronefrosis_derecho,
-      "medidas_hidronefrosis_derecho" => $medidas_hidronefrosis_derecho,
-      // Riñón izquierdo
-      "morfologia_movilidad_izquierdo" => $morfologia_movilidad_izquierdo,
-      "ecogenicidad_izquierdo" => $ecogenicidad_izquierdo,
-      "medidas_longitud_izquierdo" => $medidas_longitud_izquierdo,
-      "medidas_parenquima_izquierdo" => $medidas_parenquima_izquierdo,
-      "imagenes_expansivas_solidas_izquierdo" => $imagenes_expansivas_solidas_izquierdo,
-      "imagenes_expansivas_quisticas_izquierdo" => $imagenes_expansivas_quisticas_izquierdo,
-      "hidronefrosis_izquierdo" => $hidronefrosis_izquierdo,
-      "medidas_hidronefrosis_izquierdo" => $medidas_hidronefrosis_izquierdo,
-      // Vejiga
-      "repelcion_vejiga" => $repelcion_vejiga,
-      "paredes_vejiga" => $paredes_vejiga,
-      "contenido_aneocoico" => $contenido_aneocoico,
-      "imagenes_expansivas_vejiga" => $imagenes_expansivas_vejiga,
-      "calculos_vejiga" => $calculos_vejiga,
-      "vol_pre_miccional" => $vol_pre_miccional,
-      "vol_post_miccional" => $vol_post_miccional,
-      "retencion" => $retencion,
-      // Observaciones
-      "observacion_textarea" => $observacion_textarea,
-      "conclusiones" => $conclusiones,
-      "fecha" => date("Y-m-d"),
-      "hora" => date("H:i:s"),
-      "usuario" => $this->session->userdata("nombre"),
-  ];
+    // Final
+    $observaciones = $this->input->post("observaciones");
+    $conclusiones = $this->input->post("conclusiones");
 
-  $this->Ecografias_model->createEcografiaRenal($datos);
+    $datos = [
+        "documento_paciente" => $documento_paciente,
+        "codigo_doctor" => $codigo_doctor,
+        "motivo" => $motivo,
+        
+        // RD
+        "rd_morfologia" => $rd_morfologia,
+        "rd_ecogenicidad" => $rd_ecogenicidad,
+        "rd_longitud" => $rd_longitud,
+        "rd_parenquima" => $rd_parenquima,
+        "rd_solidas" => $rd_solidas,
+        "rd_quisticas" => $rd_quisticas,
+        "rd_hidronefrosis" => $rd_hidronefrosis,
+        "rd_hidro_medida" => $rd_hidro_medida,
+        "rd_microlitiasis" => $rd_microlitiasis,
+        "rd_micro_medida" => $rd_micro_medida,
+        "rd_calculos" => $rd_calculos,
+        "rd_calculos_medida" => $rd_calculos_medida,
 
-  echo json_encode(["status" => "success", "message" => "Ecografía Renal registrada correctamente"]);
+        // RI
+        "ri_morfologia" => $ri_morfologia,
+        "ri_ecogenicidad" => $ri_ecogenicidad,
+        "ri_longitud" => $ri_longitud,
+        "ri_parenquima" => $ri_parenquima,
+        "ri_solidas" => $ri_solidas,
+        "ri_quisticas" => $ri_quisticas,
+        "ri_hidronefrosis" => $ri_hidronefrosis,
+        "ri_hidro_medida" => $ri_hidro_medida,
+        "ri_microlitiasis" => $ri_microlitiasis,
+        "ri_micro_medida" => $ri_micro_medida,
+        "ri_calculos" => $ri_calculos,
+        "ri_calculos_medida" => $ri_calculos_medida,
+
+        // Vejiga
+        "vejiga_replecion" => $vejiga_replecion,
+        "vejiga_paredes" => $vejiga_paredes,
+        "vejiga_contenido" => $vejiga_contenido,
+        "vejiga_imagenes" => $vejiga_imagenes,
+        "vejiga_calculos" => $vejiga_calculos,
+        "descripcion_vejiga" => $descripcion_vejiga,
+
+        // Vol
+        "vol_pre" => $vol_pre,
+        "vol_post" => $vol_post,
+        "retencion" => $retencion,
+
+        // Final
+        "observaciones" => $observaciones,
+        "conclusiones" => $conclusiones
+    ];
+
+    if($this->Ecografias_model->createEcografiaRenal($datos)) {
+        echo json_encode(["status" => "success", "message" => "Registrado correctamente"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error al guardar"]);
+    }
 }
 
 

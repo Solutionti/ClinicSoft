@@ -150,273 +150,262 @@
         >
         </div>
         </div>
-        <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
-                </div>
-            
-            <h5 class="mt-4">Hallazgos:</h5>
-            <h6 class="mt-3">Riñon derecho:</h6>
+        <div class="modal-body">
+    <form id="formRenal">
         
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <label for="morfologia_movilidad_derecho" class="form-label">Morfologia y movilidad:</label>
-                    <select class="form-select form-select-sm" id="morfologia_movilidad_derecho" formControlName="morfologia_movilidad_derecho">
-                        <option>Normal</option>
-                        <option>Anormal</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="ecogenicidad_derecho" class="form-label">Ecogenicidad:</label>
-                    <select class="form-select form-select-sm" id="ecogenicidad_derecho" formControlName="ecogenicidad_derecho">
-                        <option>Normal</option>
-                        <option>Aumentada</option>
-                        <option>Disminuida</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="medidas_longitud_derecho" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medidas</label>
-                    <input type="text" class="form-control form-control-sm" id="medidas_longitud_derecho" formControlName="medidas_longitud_derecho" value="     mm de longitud">
-                    </div>
-                <div class="col-md-3">
-                    <label for="medidas_parenquima_derecho" class="form-label">:</label>
-                    <input type="text" class="form-control form-control-sm" id="medidas_parenquima_derecho" formControlName="medidas_longitud_derecho" value="     mm de parénquima">
-                    </div>
-                </div>
-                
-                <div class="row mb-3">
-                <!-- Imágenes expansivas -->
-                <div class="col-md-3">
-                    <label for="imagenes_expansivas_solidas_derecho" class="form-label">Imágenes expansivas: Sólidas</label>
-                    <select class="form-select form-select-sm" id="imagenes_expansivas_solidas_derecho" formControlName="imagenes_expansivas_solidas_derecho" >
-                        <option value="No">No</option>
-                        <option value="Sí">Sí</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="imagenes_expansivas_quisticas_derecho" class="form-label">Quísticas</label>
-                    <select class="form-select form-select-sm" id="imagenes_expansivas_quisticas_derecho" formControlName="imagenes_expansivas_quisticas_derecho" >
-                        <option value="No">No</option>
-                        <option value="Sí">Sí</option>
-                    </select>
-                      </div>
-                      <div class="col-md-3">
-                        <label for="hidronefrosis_derecho" class="form-label">Hidronefrosis:</label>
-                        <select class="form-select form-select-sm" id="hidronefrosis_derecho" formControlName="hidronefrosis_derecho" (change)="onhidronefrosisChange($event)">
-                          <option value="No">No</option>
-                          <option value="Sí">Sí</option>
-                      </select>
-                    </div>
-                    <div class="col-md-3" *ngIf="ishidronefrosisSi">
-                      <label for="medidas_hidronefrosis" class="form-label">Medidas:</label>
-                      <input type="text" class="form-control form-control-sm" id="medidas_hidronefrosis" formControlName="medidas_hidronefrosis" value="     mm">
-                  </div>
-                </div>
-               
-                
-              <div class="row mb-3">
-                <div class="col-md-3">
-                  <label for="micro_litiasis_derecho" class="form-label">Micro litiasis:</label>
-                  <select class="form-select form-select-sm" id="micro_litiasis_derecho" formControlName="micro_litiasis_derecho" (change)="onmicro_litiasiChange($event)">
-                    <option value="No">No</option>
-                    <option value="Sí">Sí</option>
-                </select>
-              </div>
-              <div class="col-md-3" *ngIf="ismicro_litiasiSi">
-                <label for="medidas_hidronefrosis" class="form-label">Medidas:</label>
-                <input type="text" class="form-control form-control-sm" id="medidas_hidronefrosis" formControlName="medidas_hidronefrosis" value="     mm">
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <label class="small font-weight-bold">Motivo del Examen</label>
+                <input type="text" class="form-control form-control-sm" id="motivo" placeholder="Dolor lumbar, infección urinaria...">
             </div>
-                
-                <div class="col-md-3">
-                  <label for="calculos_derecho" class="form-label">Calculos:</label>
-                  <select class="form-select form-select-sm" id="calculos_derecho" formControlName="calculos_derecho" (change)="oncalculosChange($event)">
-                    <option value="No">No</option>
-                    <option value="Sí">Sí</option>
-                </select>
-                </div>
-                <div class="col-md-3" *ngIf="iscalculosSi">
-                  <label for="medidas_calculos_derecho" class="form-label">Medidas:</label>
-                  <input type="text" class="form-control form-control-sm" id="medidas_calculos_derecho" formControlName="medidas_calculos_derecho" value="     mm"> 
-              </div>
-          </div>
-            <div class="mb-3">
-                <label for="descripcion_otros_derecho" class="form-label">Descripción/Otros:</label>
-                <textarea class="form-control form-control-sm" id="descripcion_otros_derecho" formControlName="descripcion_otros_derecho" rows="3"></textarea>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarRenalNormal()">
+                    <i class="fas fa-magic"></i> Cargar Normal
+                </button>
             </div>
-            <!-- RIÑON IZQ -->
-            <h6 class="mt-4">Riñón Izquierdo:</h6>
-            <div class="row mb-3">
-              <div class="col-md-3">
-                  <label for="morfologia_movilidad_izquierdo" class="form-label">Morfologia y movilidad:</label>
-                  <select class="form-select form-select-sm" id="morfologia_movilidad_izquierdo" formControlName="morfologia_movilidad_izquierdo">
-                      <option>Normal</option>
-                      <option>Anormal</option>
-                  </select>
-              </div>
-              <div class="col-md-3">
-                  <label for="ecogenicidad_izquierdo" class="form-label">Ecogenicidad:</label>
-                  <select class="form-select form-select-sm" id="ecogenicidad_izquierdo" formControlName="ecogenicidad_izquierdo">
-                      <option>Normal</option>
-                      <option>Aumentada</option>
-                      <option>Disminuida</option>
-                  </select>
-              </div>
-              <div class="col-md-3">
-                  <label for="medidas_longitud_izquierdo" class="form-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medidas</label>
-                  <input type="text" class="form-control form-control-sm" id="medidas_longitud_izquierdo" formControlName="medidas_longitud_izquierdo" value="     mm de longitud">
-                  </div>
-              <div class="col-md-3">
-                  <label for="medidas_parenquima_izquierdo" class="form-label">:</label>
-                  <input type="text" class="form-control form-control-sm" id="medidas_parenquima_izquierdo" formControlName="medidas_longitud_izquierdo" value="     mm de parénquima">
-                  </div>
-              </div>
-              
-              <div class="row mb-3">
-              
-              <div class="col-md-3">
-                  <label for="imagenes_expansivas_solidas_izquierdo" class="form-label">Imágenes expansivas: Sólidas</label>
-                  <select class="form-select form-select-sm" id="imagenes_expansivas_solidas_izquierdo" formControlName="imagenes_expansivas_solidas_izquierdo" >
-                      <option value="No">No</option>
-                      <option value="Sí">Sí</option>
-                  </select>
-              </div>
-              <div class="col-md-3">
-                  <label for="imagenes_expansivas_quisticas_izquierdo" class="form-label">Quísticas</label>
-                  <select class="form-select form-select-sm" id="imagenes_expansivas_quisticas_izquierdo" formControlName="imagenes_expansivas_quisticas_izquierdo" >
-                      <option value="No">No</option>
-                      <option value="Sí">Sí</option>
-                  </select>
+        </div>
+
+        <div class="card mb-3 border-primary">
+            <div class="card-header bg-light text-primary font-weight-bold py-1 text-center">
+                1. EVALUACIÓN RENAL COMPARATIVA
+            </div>
+            <div class="card-body py-2 px-1">
+                <div class="row mx-0 border-bottom pb-2 mb-2">
+                    <div class="col-md-2 text-center"></div>
+                    <div class="col-md-5 text-center font-weight-bold text-primary">RIÑÓN DERECHO</div>
+                    <div class="col-md-5 text-center font-weight-bold text-primary">RIÑÓN IZQUIERDO</div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Morfología</label></div>
+                    <div class="col-md-5">
+                        <select id="rd_morfologia" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Anormal">Anormal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <select id="ri_morfologia" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Anormal">Anormal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Ecogenicidad</label></div>
+                    <div class="col-md-5">
+                        <select id="rd_ecogenicidad" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Aumentada">Aumentada</option>
+                            <option value="Disminuida">Disminuida</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <select id="ri_ecogenicidad" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Aumentada">Aumentada</option>
+                            <option value="Disminuida">Disminuida</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Longitud (mm)</label></div>
+                    <div class="col-md-5"><input type="number" id="rd_longitud" class="form-control form-control-sm text-center" placeholder="RD"></div>
+                    <div class="col-md-5"><input type="number" id="ri_longitud" class="form-control form-control-sm text-center" placeholder="RI"></div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Parénquima (mm)</label></div>
+                    <div class="col-md-5"><input type="number" id="rd_parenquima" class="form-control form-control-sm text-center" placeholder="RD"></div>
+                    <div class="col-md-5"><input type="number" id="ri_parenquima" class="form-control form-control-sm text-center" placeholder="RI"></div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center bg-light py-1">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Img. Sólidas</label></div>
+                    <div class="col-md-5">
+                        <select id="rd_solidas" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <select id="ri_solidas" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center bg-light py-1">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Img. Quísticas</label></div>
+                    <div class="col-md-5">
+                        <select id="rd_quisticas" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <select id="ri_quisticas" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0 text-danger">Hidronefrosis</label></div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="rd_hidronefrosis" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="rd_hidro_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="ri_hidronefrosis" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="ri_hidro_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Microlitiasis</label></div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="rd_microlitiasis" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="rd_micro_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="ri_microlitiasis" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="ri_micro_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-0 mb-2 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0 text-danger">Cálculos</label></div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="rd_calculos" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="rd_calculos_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-sm">
+                            <select id="ri_calculos" class="form-control form-control-sm" style="max-width: 70px;">
+                                <option value="No">No</option>
+                                <option value="Sí">Sí</option>
+                            </select>
+                            <input type="text" id="ri_calculos_medida" class="form-control" placeholder="Medida (mm)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 border-info">
+            <div class="card-header bg-light text-info font-weight-bold py-1">
+                2. VEJIGA Y VOLÚMENES
+            </div>
+            <div class="card-body py-2">
+                <div class="row mb-2">
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Repleción</label>
+                        <select id="vejiga_replecion" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Mínima">Mínima</option>
+                            <option value="Excesiva">Excesiva</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
-                      <label for="hidronefrosis_izquierdo" class="form-label">Hidronefrosis:</label>
-                      <select class="form-select form-select-sm" id="hidronefrosis_izquierdo" formControlName="hidronefrosis_izquierdo" (change)="onhidronefrosisChange($event)">
-                        <option value="No">No</option>
-                        <option value="Sí">Sí</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3" *ngIf="ishidronefrosisSi">
-                    <label for="medidas_hidronefrosis" class="form-label">Medidas:</label>
-                    <input type="text" class="form-control form-control-sm" id="medidas_hidronefrosis" formControlName="medidas_hidronefrosis" value="     mm">
+                        <label class="small font-weight-bold">Paredes</label>
+                        <select id="vejiga_paredes" class="form-control form-control-sm">
+                            <option value="Normal">Normal</option>
+                            <option value="Delgadas">Delgadas</option>
+                            <option value="Engrosadas">Engrosadas</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Contenido Anecoico</label>
+                        <select id="vejiga_contenido" class="form-control form-control-sm">
+                            <option value="Sí">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Img. Expansivas</label>
+                        <select id="vejiga_imagenes" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="micro_litiasis_izquierdo" class="form-label">Micro litiasis:</label>
-                <select class="form-select form-select-sm" id="micro_litiasis_izquierdo" formControlName="micro_litiasis_izquierdo" (change)="onmicro_litiasiChange($event)">
-                  <option value="No">No</option>
-                  <option value="Sí">Sí</option>
-              </select>
-            </div>
-            <div class="col-md-3" *ngIf="ismicro_litiasiSi">
-              <label for="medidas_hidronefrosis" class="form-label">Medidas:</label>
-              <input type="text" class="form-control form-control-sm" id="medidas_hidronefrosis" formControlName="medidas_hidronefrosis" value="     mm">
-          </div>
-              
-              <div class="col-md-3">
-                <label for="calculos_izquierdo" class="form-label">Calculos:</label>
-                <select class="form-select form-select-sm" id="calculos_izquierdo" formControlName="calculos_izquierdo" (change)="oncalculosChange($event)">
-                  <option value="No">No</option>
-                  <option value="Sí">Sí</option>
-              </select>
-              </div>
-              <div class="col-md-3" *ngIf="iscalculosSi">
-                <label for="medidas_calculos_izquierdo" class="form-label">Medidas:</label>
-                <input type="text" class="form-control form-control-sm" id="medidas_calculos_izquierdo" formControlName="medidas_calculos_izquierdo" value="     mm"> 
-            </div>
-        </div>
-        <div class="mb-3">
-          <label for="descripcion_otros_izquierdo" class="form-label">Descripción/Otros:</label>
-          <textarea class="form-control form-control-sm" id="descripcion_otros_izquierdo" formControlName="descripcion_otros_izquierdo" rows="3"></textarea>
-      </div>
 
-      <h6 class="mt-4">Vejiga:</h6>
-      <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="repelcion_vejiga" class="form-label">Repelcion:</label>
-            <select class="form-select form-select-sm" id="repelcion_vejiga" formControlName="repelcion_vejiga">
-              <option>Normal</option>
-              <option>Minimo</option>
-              <option>Excesiva</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="paredes_vejiga" class="form-label">Paredes:</label>
-            <select class="form-select form-select-sm" id="paredes_vejiga" formControlName="paredes_vejiga">
-                <option>Normal</option>
-                <option>Delgado</option>
-                <option>Engrosaso</option>
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="contenido_aneocoico" class="form-label">Contenido aneocoico</label>
-            <select class="form-select form-select-sm" id="contenido_aneocoico" formControlName="contenido_aneocoico">
-              <option>Si</option>
-              <option>No</option>
-          </select>
-            </div>
-        <div class="col-md-3">
-            <label for="imagenes_expansivas_vejiga" class="form-label">Imagenes expansivas</label>
-            <select class="form-select form-select-sm" id="imagenes_expansivas_vejiga" formControlName="imagenes_expansivas_vejiga">
-              <option>Si</option>
-              <option>No</option>
-            </select>
-        </div>
-      </div>
+                <div class="row mb-2">
+                     <div class="col-md-3">
+                        <label class="small font-weight-bold">Cálculos</label>
+                        <select id="vejiga_calculos" class="form-control form-control-sm">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </div>
+                    <div class="col-md-9">
+                        <label class="small font-weight-bold">Descripción Vejiga</label>
+                        <input type="text" id="descripcion_vejiga" class="form-control form-control-sm" placeholder="Detalles...">
+                    </div>
+                </div>
 
-        <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="calculos_vejiga" class="form-label">Calculos en su interior</label>
-            <select class="form-select form-select-sm" id="calculos_vejiga" formControlName="calculos_vejiga" >
-                <option value="No">No</option>
-                <option value="Sí">Sí</option>
-            </select>
-        </div>
-          <div class="col-md-3">
-              <label for="vol_pre_miccional" class="form-label">Vol.pre-miccional (cc):</label>
-              <input type="text" class="form-control form-control-sm" id="vol_pre_miccional" formControlName="vol_pre_miccional">
-          </div>
-      
-          <div class="col-md-3">
-              <label for="vol_post_miccional" class="form-label">Vol.post-miccional (cc):</label>
-              <input type="text" class="form-control form-control-sm" id="vol_post_miccional" formControlName="vol_post_miccional">
-          </div>
-      
-          <div class="col-md-3">
-              <label for="retencion" class="form-label">% de retención:</label>
-              <input type="text" class="form-control form-control-sm" id="retencion" formControlName="retencion">
-          </div>
-      </div>
-
-      <div class="mb-3">
-      <label for="descripcion_otros_izquierdo" class="form-label">Descripción/Otros:</label>
-      <textarea class="form-control form-control-sm" id="descripcion_otros_izquierdo" formControlName="descripcion_otros_izquierdo" rows="3"></textarea>
-      </div>
-      
-            <div class="d-flex align-items-center mt-4">
-                <h6 class="mb-0">Observaciones:</h6>
-                <div class="ms-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="otra" id="otra" formControlName="observacion" (change)="onObservacionChange($event)">
-                        <label class="form-check-label" for="otra">Agregar</label>
+                <div class="row bg-light p-2 rounded mx-0 border">
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold text-primary">Vol. Pre-miccional (cc)</label>
+                        <input type="number" id="vol_pre" class="form-control form-control-sm" placeholder="0">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold text-primary">Vol. Post-miccional (cc)</label>
+                        <input type="number" id="vol_post" class="form-control form-control-sm" placeholder="0">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold text-danger">% Retención</label>
+                        <input type="text" id="retencion" class="form-control form-control-sm font-weight-bold text-danger" readonly placeholder="Calculado">
                     </div>
                 </div>
             </div>
-            <div class="mt-3" *ngIf="isObservacionOtra">
-                <textarea class="form-control form-control-sm" id="observacion_textarea" formControlName="observacion_textarea" rows="3" placeholder="Escriba su observación"></textarea>
-            </div>
-            
-            <h6 class="mt-4">Conclusiones:</h6>
-            <div class="mb-3">
-                <textarea class="form-control form-control-sm" id="conclusiones" formControlName="conclusiones" rows="3" placeholder="Escriba sus conclusiones"></textarea>
-            </div>
-            
-              <!--  -->
-            </form>
-            <div class="row mt-1">
-              <div class="col-md-3">
-              <button type="button" class="btn btn-primary" onclick="createEcografiaRenal()">Guardar</button>
-              </div>
+        </div>
+
+        <h6 class="font-weight-bold mt-2">Observaciones Adicionales</h6>
+        <div class="mb-2">
+             <textarea id="observaciones" class="form-control form-control-sm" rows="2"></textarea>
+        </div>
+
+        <h6 class="font-weight-bold text-primary">Conclusiones</h6>
+        <div class="mb-3">
+            <textarea id="conclusiones" class="form-control form-control-sm" rows="3"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaRenal()">Guardar Ecografía</button>
+</div>
             </div>
               <br>
             </div>
