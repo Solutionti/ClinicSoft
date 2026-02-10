@@ -333,43 +333,29 @@ public function createEcografiaRenal($datos) {
 
 // ECOGRAFIA TIROIDES
 public function createEcografiaTiroides($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "descripcionTiroides" => $data["descripcionTiroides"],
-      "lobuloDerecho" => $data["lobuloDerecho"],
-      "lobuloIzquierdo" => $data["lobuloIzquierdo"],
-      "istmo" => $data["istmo"],
-      "estructurasVasculares" => $data["estructurasVasculares"],
-      "glandulasSubmaxilares" => $data["glandulasSubmaxilares"],
-      "adenopatiaCervicales" => $data["adenopatiaCervicales"],
-      "piel" => $data["piel"],
-      "tcsc" => $data["tcsc"],
-      "conclusiones" => $data["conclusiones"],
-      "sugerencias" => $data["sugerencias"],
-      "fecha" => date("Y-m-d"), // Fecha actual
-      "hora" => date("H:i:s"), // Hora actual
-      "usuario" => $this->session->userdata("nombre") // Usuario de la sesión
-  ];
-  $this->db->insert("ecografia_tiroides", $datos); // Ajusta el nombre de la tabla
+    // Agregar Auditoría Automática
+    $data["fecha"]   = date("Y-m-d");
+    $data["hora"]    = date("H:i:s");
+    $data["usuario"] = $this->session->userdata("nombre"); // Asegúrate que 'nombre' es tu variable de sesión
+
+    // Insertar en la tabla
+    return $this->db->insert("ecografia_tiroides", $data);
 }
 
 
 // ECOGRAFIA HISTEROSONOGRAFIA
 public function createEcografiaHisterosonografia($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "descripcionProcedimiento" => $data["descripcionProcedimiento"],
-      "conclusiones" => $data["conclusiones"],
-      "sugerencias" => $data["sugerencias"],
-      "fecha" => date("Y-m-d"), // Fecha actual
-      "hora" => date("H:i:s"), // Hora actual
-      "usuario" => $this->session->userdata("nombre") // Usuario de la sesión
-  ];
-  $this->db->insert("ecografia_histerosonografia", $datos); // Ajusta el nombre de la tabla
+    // Agregamos datos de auditoría automática
+    $data["fecha"]   = date("Y-m-d");
+    $data["hora"]    = date("H:i:s");
+    $data["usuario"] = $this->session->userdata("nombre"); // Usuario logueado
+    
+    // Insertamos en la tabla que creamos (ecografia_histerosonografia)
+    if ($this->db->insert("ecografia_histerosonografia", $data)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // ECOGRAFIA ARTERIAL
@@ -565,7 +551,7 @@ public function createEcografiaVenosa($data) {
     $this->db->select("*");
     $this->db->from("ecografia_tiroides");
     $this->db->where("documento_paciente", $documento);
-    $this->db->order_by('id', 'DESC');
+    $this->db->order_by('codigo_ecografia', 'DESC');
     $result = $this->db->get();
 
     return  $result;
@@ -575,7 +561,7 @@ public function createEcografiaVenosa($data) {
     $this->db->select("*");
     $this->db->from("ecografia_histerosonografia");
     $this->db->where("documento_paciente", $documento);
-    $this->db->order_by('id', 'DESC');
+    $this->db->order_by('codigo_ecografia', 'DESC');
     $result = $this->db->get();
 
     return  $result;

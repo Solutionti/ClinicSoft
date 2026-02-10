@@ -158,32 +158,48 @@
         >
         </div>
         </div>
+        <div class="modal-body">
+    <form id="formHistero">
+        
         <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
+            <div class="col-md-8">
+                <label class="small font-weight-bold">Motivo del Examen</label>
+                <input type="text" class="form-control form-control-sm" id="motivo" placeholder="Sangrado uterino anormal, infertilidad...">
+            </div>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarHisteroNormal()">
+                    <i class="fas fa-magic"></i> Cargar Texto Base
+                </button>
+            </div>
+        </div>
+
+        <div class="card mb-3 border-primary">
+            <div class="card-header bg-light text-primary font-weight-bold py-1">
+                DESCRIPCIÓN DEL PROCEDIMIENTO Y HALLAZGOS
+            </div>
+            <div class="card-body py-2">
+                <div class="form-group mb-0">
+                    <textarea class="form-control" id="descripcion_procedimiento" rows="8" placeholder="Describa el procedimiento, catéter usado, líquido instilado y hallazgos en cavidad..."></textarea>
+                    <small class="text-muted">Incluya: Sonda utilizada, cantidad de NaCl, descripción de la cavidad y tolerancia de la paciente.</small>
                 </div>
-               
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="descripcionProcedimiento">Descripción del procedimiento:</label>
-                    <textarea class="form-control" id="descripcionProcedimiento" rows="3">Previa colocación de sondas foley N° 8 se instila 15 cc de NaCl 0.9%, se observa imágenes en cavidad endometrial una de 6 x 4 mm en pared psoterior a 17 mm del fondo de cavidad endometrial (tipo 0 ) y otro de 4 x 5 mm en cara anterior a 8 mm del fondo de la cavidad endometrial. LA PACIENTE TOLERA EL PROCEDIMIENTO.</textarea>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="conclusiones">Conclusiones:</label>
-                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="sugerencias">Sugerencias:</label>
-                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
-            </div>
-              <div class="row mt-1">
-                <div class="col-md-3">
-                <button type="button" class="btn btn-primary" onclick="createEcografiaHisterosonografia()">Guardar</button>
-                </div>
+        </div>
+
+        <h6 class="font-weight-bold text-primary">Conclusiones</h6>
+        <div class="mb-3">
+            <textarea class="form-control" id="conclusiones" rows="2"></textarea>
+        </div>
+
+        <h6 class="font-weight-bold">Sugerencias</h6>
+        <div class="mb-3">
+            <textarea class="form-control" id="sugerencias" rows="1"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaHisterosonografia()">Guardar Histerosonografía</button>
+</div>
               </div>
             </form>
               <br>

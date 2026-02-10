@@ -709,79 +709,113 @@ public function createEcografiaRenal() {
 
 // ECOGRAFIA DE TIROIDES
 public function createEcografiaTiroides() {
-  // Recuperar los datos enviados por AJAX
-  $documento_paciente = $this->input->post("documento_paciente");
-  $codigo_doctor = $this->input->post("codigo_doctor");
-  $motivo = $this->input->post("motivo");
-  $descripcionTiroides = $this->input->post("descripcionTiroides");
-  $lobuloDerecho = $this->input->post("lobuloDerecho");
-  $lobuloIzquierdo = $this->input->post("lobuloIzquierdo");
-  $istmo = $this->input->post("istmo");
-  $estructurasVasculares = $this->input->post("estructurasVasculares");
-  $glandulasSubmaxilares = $this->input->post("glandulasSubmaxilares");
-  $adenopatiaCervicales = $this->input->post("adenopatiaCervicales");
-  $piel = $this->input->post("piel");
-  $tcsc = $this->input->post("tcsc");
-  $conclusiones = $this->input->post("conclusiones");
-  $sugerencias = $this->input->post("sugerencias");
+    // --- 1. Recibir Datos Generales ---
+    $documento_paciente = $this->input->post("documento_paciente");
+    $codigo_doctor      = $this->input->post("codigo_doctor");
+    $motivo             = $this->input->post("motivo");
+    $descripcion_tiroides = $this->input->post("descripcion_tiroides");
 
-  // Organizar los datos en un array
-  $datos = [
-      "documento_paciente" => $documento_paciente,
-      "codigo_doctor" => $codigo_doctor,
-      "motivo" => $motivo,
-      "descripcionTiroides" => $descripcionTiroides,
-      "lobuloDerecho" => $lobuloDerecho,
-      "lobuloIzquierdo" => $lobuloIzquierdo,
-      "istmo" => $istmo,
-      "estructurasVasculares" => $estructurasVasculares,
-      "glandulasSubmaxilares" => $glandulasSubmaxilares,
-      "adenopatiaCervicales" => $adenopatiaCervicales,
-      "piel" => $piel,
-      "tcsc" => $tcsc,
-      "conclusiones" => $conclusiones,
-      "sugerencias" => $sugerencias,
-      "fecha" => date("Y-m-d"), // Fecha actual
-      "hora" => date("H:i:s"), // Hora actual
-      "usuario" => $this->session->userdata("nombre") // Usuario de la sesión
-  ];
+    // --- 2. Lóbulo Derecho ---
+    $ld_long    = $this->input->post("ld_long");
+    $ld_ap      = $this->input->post("ld_ap");
+    $ld_trans   = $this->input->post("ld_trans");
+    $ld_volumen = $this->input->post("ld_volumen");
 
-  // Llamar al modelo para guardar los datos
-  $this->Ecografias_model->createEcografiaTiroides($datos);
+    // --- 3. Lóbulo Izquierdo ---
+    $li_long    = $this->input->post("li_long");
+    $li_ap      = $this->input->post("li_ap");
+    $li_trans   = $this->input->post("li_trans");
+    $li_volumen = $this->input->post("li_volumen");
 
-  // Devolver una respuesta JSON
-  echo json_encode(["status" => "success", "message" => "Ecografía de Tiroides registrada correctamente"]);
+    // --- 4. Volumen Total ---
+    $volumen_total = $this->input->post("volumen_total");
+
+    // --- 5. Estructuras y Hallazgos ---
+    $istmo                  = $this->input->post("istmo");
+    $estructuras_vasculares = $this->input->post("estructuras_vasculares");
+    $glandulas_submaxilares = $this->input->post("glandulas_submaxilares");
+    $adenopatia_cervicales  = $this->input->post("adenopatia_cervicales");
+    $piel                   = $this->input->post("piel");
+    $tcsc                   = $this->input->post("tcsc");
+
+    // --- 6. Cierre ---
+    $conclusiones = $this->input->post("conclusiones");
+    $sugerencias  = $this->input->post("sugerencias");
+
+    // Empaquetar datos para el Modelo
+    $data = array(
+        "documento_paciente" => $documento_paciente,
+        "codigo_doctor"      => $codigo_doctor,
+        "motivo"             => $motivo,
+        "descripcion_tiroides" => $descripcion_tiroides,
+
+        // Derecho
+        "ld_long"    => $ld_long,
+        "ld_ap"      => $ld_ap,
+        "ld_trans"   => $ld_trans,
+        "ld_volumen" => $ld_volumen,
+
+        // Izquierdo
+        "li_long"    => $li_long,
+        "li_ap"      => $li_ap,
+        "li_trans"   => $li_trans,
+        "li_volumen" => $li_volumen,
+
+        // Total
+        "volumen_total" => $volumen_total,
+
+        // Estructuras
+        "istmo"                  => $istmo,
+        "estructuras_vasculares" => $estructuras_vasculares,
+        "glandulas_submaxilares" => $glandulas_submaxilares,
+        "adenopatia_cervicales"  => $adenopatia_cervicales,
+        "piel"                   => $piel,
+        "tcsc"                   => $tcsc,
+
+        // Final
+        "conclusiones" => $conclusiones,
+        "sugerencias"  => $sugerencias
+    );
+
+    // Enviar al Modelo
+    if($this->Ecografias_model->createEcografiaTiroides($data)) {
+        echo json_encode(["status" => "success", "message" => "Registrado correctamente"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error al guardar en BD"]);
+    }
 }
 
 // ECOGRAFIA HISTEROSONOGRAFIA
 
 public function createEcografiaHisterosonografia() {
-  // Recuperar los datos enviados por AJAX
-  $documento_paciente = $this->input->post("documento_paciente");
-  $codigo_doctor = $this->input->post("codigo_doctor");
-  $motivo = $this->input->post("motivo");
-  $descripcionProcedimiento = $this->input->post("descripcionProcedimiento");
-  $conclusiones = $this->input->post("conclusiones");
-  $sugerencias = $this->input->post("sugerencias");
+    // 1. Recibir los datos del formulario (vía AJAX)
+    // El nombre dentro de input->post("...") debe coincidir con el data: {} del AJAX
+    $data = array(
+        "documento_paciente"        => $this->input->post("documento_paciente"),
+        "codigo_doctor"             => $this->input->post("codigo_doctor"),
+        "motivo"                    => $this->input->post("motivo"),
+        
+        // Este es el campo clave de este reporte (Texto largo)
+        "descripcion_procedimiento" => $this->input->post("descripcion_procedimiento"),
+        
+        "conclusiones"              => $this->input->post("conclusiones"),
+        "sugerencias"               => $this->input->post("sugerencias")
+    );
 
-  // Organizar los datos en un array
-  $datos = [
-      "documento_paciente" => $documento_paciente,
-      "codigo_doctor" => $codigo_doctor,
-      "motivo" => $motivo,
-      "descripcionProcedimiento" => $descripcionProcedimiento,
-      "conclusiones" => $conclusiones,
-      "sugerencias" => $sugerencias,
-      "fecha" => date("Y-m-d"), // Fecha actual
-      "hora" => date("H:i:s"), // Hora actual
-      "usuario" => $this->session->userdata("nombre") // Usuario de la sesión
-  ];
-
-  // Llamar al modelo para guardar los datos
-  $this->Ecografias_model->createEcografiaHisterosonografia($datos);
-
-  // Devolver una respuesta JSON
-  echo json_encode(["status" => "success", "message" => "Ecografia Histerosonografía registrada correctamente"]);
+    // 2. Enviar al Modelo para insertar en la BD
+    if($this->Ecografias_model->createEcografiaHisterosonografia($data)) {
+        // Respuesta Éxitosa para el AJAX
+        echo json_encode([
+            "status" => "success", 
+            "message" => "Histerosonografía registrada correctamente"
+        ]);
+    } else {
+        // Respuesta de Error
+        echo json_encode([
+            "status" => "error", 
+            "message" => "Error al guardar en la base de datos"
+        ]);
+    }
 }
 
 
