@@ -217,7 +217,7 @@ function eliminarAnalisis(elemento) {
         table.row(row).remove().draw(false);
 
         if(elementos_laboratorio.length === 0 ) {
-          $('#saveBtn').removeClass('visible');
+          $('#saveBtn').addClass('visible');
         }
     }
 }
@@ -492,7 +492,7 @@ $('#items-procedimientos2-table').on('dblclick', 'tr', function(e) {
         }
     }
     if(elementos_procedimientos2.length === 0) {
-        $('#saveBtn').removeClass('visible');
+        $('#saveBtn').addClass('visible');
     }
 });
 
@@ -1572,7 +1572,7 @@ $('#table-ecografia-items').on('dblclick', 'tr', function(e) {
     
     table_eco_mini.draw(false);
     if(elementos_eco.length === 0) {
-      $('#saveBtn').removeClass('visible');
+      $('#saveBtn').addClass('visible');
     }
 });
 
@@ -1809,7 +1809,7 @@ $('#table-tomografia-items').on('dblclick', 'tr', function(e) {
     
     table_tomo_mini.draw(false);
     if(elementos_tomo.length === 0) {
-        $('#saveBtn').removeClass('visible');
+        $('#saveBtn').addClass('visible');
     }
 });
 
@@ -2043,7 +2043,7 @@ $('#table-resonancia-items').on('dblclick', 'tr', function(e) {
     
     table_reso_mini.draw(false);
     if(elementos_reso.length === 0) {
-        $('#saveBtn').removeClass('visible');
+        $('#saveBtn').addClass('visible');
     }
 });
 

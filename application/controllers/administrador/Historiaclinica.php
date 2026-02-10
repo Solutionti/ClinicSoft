@@ -2126,7 +2126,8 @@ class Historiaclinica extends Admin_Controller
 		$ecografia = $this->input->post('ecografia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
-
+		
+      $this->Historias_model->eliminarexamenesAuxiliares('Ecografias', $triage, $paciente);
 	  for ($i = 0; $i < sizeof($ecografia); $i++) {
 		$data5 = [
 		  'paciente' => $paciente,
@@ -2146,7 +2147,7 @@ class Historiaclinica extends Admin_Controller
 		$tomografia = $this->input->post('tomografia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
-
+	  $this->Historias_model->eliminarexamenesAuxiliares('Tomografias', $triage, $paciente);
 	  for ($i = 0; $i < sizeof($tomografia); $i++) {
 		$data5 = [
 		  'paciente' => $paciente,
@@ -2166,6 +2167,8 @@ class Historiaclinica extends Admin_Controller
 		$resonancia = $this->input->post('resonancia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
+	  
+	  $this->Historias_model->eliminarexamenesAuxiliares('Resonancias', $triage, $paciente);
 
 	  for ($i = 0; $i < sizeof($resonancia); $i++) {
 		$data5 = [
