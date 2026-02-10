@@ -62,33 +62,58 @@ class Ecografias_model extends CI_model {
 
     
     // ECOGRAFIA OBSTETRICA
-
     public function createEcografiaObstetrica($data) {
-      $datos = [
-          "documento_paciente" => $data["documento_paciente"],
-          "codigo_doctor" => $data["codigo_doctor"],
-          "fetoembrion" => $data["fetoembrion"],
-          "situacion" => $data["situacion"],
-          "estadoFeto" => $data["estadoFeto"],
-          "placenta" => $data["placenta"],
-          "dpb" => $data["dpb"],
-          "lcf" => $data["lcf"],
-          "min" => $data["min"],
-          "cc" => $data["cc"],
-          "ca" => $data["ca"],
-          "lf" => $data["lf"],
-          "ila" => $data["ila"],
-          "percentil" => $data["percentil"],
-          "tipoParto" => $data["tipoParto"],
-          "conclusion" => $data["conclusion"],
-          "sugerencia" => $data["sugerencia"],
-          "fecha" => date("Y-m-d"),
-          "hora" => date("h:i A"),
-          "usuario" => $this->session->userdata("nombre"),
-      ];
-      
-      $this->db->insert("ecografia_obstetrica", $datos);
-  }
+    // Mapeamos los datos recibidos del Controlador a las columnas de la BD
+    $datos = [
+        // --- 1. Identificación ---
+        "documento_paciente" => $data["documento_paciente"],
+        "codigo_doctor"      => $data["codigo_doctor"],
+
+        // --- 2. Datos Precoz (< 13 Sem) ---
+        "saco_gestacional"   => $data["saco_gestacional"],
+        "saco_vitelino"      => $data["saco_vitelino"],
+        "lcc"                => $data["lcc"],
+        "embrion_visualizado"=> $data["embrion_visualizado"],
+
+        // --- 3. Vitalidad y Estática ---
+        "fetoembrion"        => $data["fetoembrion"], // Único/Múltiple
+        "situacion"          => $data["situacion"],
+        "presentacion"       => $data["presentacion"], // Cefálico/Podálico
+        "dorso"              => $data["dorso"],        // Derecho/Izquierdo
+        "lcf"                => $data["lcf"],
+        "estadoFeto"         => $data["estadoFeto"],   // Movimientos
+        "sexo"               => $data["sexo"],
+        "fpp_eco"            => $data["fpp_eco"],
+
+        // --- 4. Biometría y Peso ---
+        "dpb"                => $data["dpb"],
+        "cc"                 => $data["cc"],
+        "ca"                 => $data["ca"],
+        "lf"                 => $data["lf"],
+        "ponderado"          => $data["ponderado"],      // Peso en gramos
+        "edad_gestacional"   => $data["edad_gestacional"],
+        "percentil"          => $data["percentil"],
+
+        // --- 5. Placenta ---
+        "placenta"           => $data["placenta"],       // Ubicación
+        "placenta_grado"     => $data["placenta_grado"], // Grado 0-III
+        "ila"                => $data["ila"],
+
+        // --- 6. Conclusiones ---
+        "conclusion"         => $data["conclusion"],
+        "sugerencia"         => $data["sugerencia"],
+
+        // --- 7. Auditoría (Automático) ---
+        "fecha"              => date("Y-m-d"),
+        "hora"               => date("h:i A"),
+        "usuario"            => $this->session->userdata("nombre"),
+    ];
+    
+    // Insertamos en la tabla
+    // Asegúrate de que tu tabla 'ecografia_obstetrica' tenga todas estas columnas nuevas
+    return $this->db->insert("ecografia_obstetrica", $datos);
+}
+    
   
   // ECOGRAFIA MORFOLOGICA
   public function createEcografiaMorfologica($data) {
@@ -176,18 +201,23 @@ public function createEcografiaPelvica($data) {
       "endometrio" => $data["endometrio"],
       "tumoraxial" => $data["tumoraxial"],
       "tumor_anexial_com" => $data["tumor_anexial_com"],
+      "miometrio" => $data["miometrio"],
       "utero_medidas" => $data["utero_medidas"],
       "medida_utero1" => $data["medida_utero1"],
       "medida_utero2" => $data["medida_utero2"],
+      "ut_vol" => $data["ut_vol"],
       "comentario_utero" => $data["comentario_utero"],
       "ovario_der1" => $data["ovario_der1"],
       "ovario_der2" => $data["ovario_der2"],
+      "ov_der_t" => $data["ov_der_t"],          
+      "od_vol" => $data["od_vol"],
       "comentario_ovario_der" => $data["comentario_ovario_der"],
       "ovario_iz1" => $data["ovario_iz1"],
       "ovario_iz2" => $data["ovario_iz2"],
+      "ov_izq_t" => $data["ov_izq_t"],          
+      "oi_vol" => $data["oi_vol"],
       "comentario_ovario_izq" => $data["comentario_ovario_izq"],
       "fondosaco" => $data["fondosaco"],
-      "miometrio" => $data["miometrio"],
       "conclusion" => $data["conclusion"],
       "sugerencias" => $data["sugerencias"],
       "fecha" => date("Y-m-d"),
@@ -199,61 +229,91 @@ public function createEcografiaPelvica($data) {
 
 //ECOGRAFIA ABDOMINAL
 public function createEcografiaAbdominal($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "estomago" => $data["estomago"],
-      "higado" => $data["higado"],
-      "coledoco_diametro" => $data["coledoco_diametro"],
-      "vesicula_volumen" => $data["vesicula_volumen"],
-      "vesicula_paredes" => $data["vesicula_paredes"],
-      "bazo" => $data["bazo"],
-      "rinon_derecho" => $data["rinon_derecho"],
-      "rinon_izquierdo" => $data["rinon_izquierdo"],
-      "otros_hallazgos" => $data["otros_hallazgos"],
-      "conclusiones" => $data["conclusiones"],
-      "sugerencias" => $data["sugerencias"],
-      "fecha" => date("Y-m-d"),
-      "hora" => date("H:i:s"),
-      "usuario" => $this->session->userdata("nombre"),
-  ];
-  $this->db->insert("ecografia_abdominal", $datos);
+    $datos = [
+        "documento_paciente" => $data["documento_paciente"],
+        "codigo_doctor" => $data["codigo_doctor"],
+        "motivo" => $data["motivo"],
+        
+        // Hígado y Vías
+        "higado_tamano" => $data["higado_tamano"],
+        "higado_eco" => $data["higado_eco"],
+        "coledoco_diametro" => $data["coledoco_diametro"],
+        "vesicula_paredes" => $data["vesicula_paredes"],
+        "vesicula_detalles" => $data["vesicula_detalles"],
+        
+        // Órganos Medios
+        "pancreas" => $data["pancreas"],
+        "bazo_tamano" => $data["bazo_tamano"],
+        "bazo_aspecto" => $data["bazo_aspecto"],
+        
+        // Riñones
+        "rd_long" => $data["rd_long"],
+        "rd_par" => $data["rd_par"],
+        "rinon_derecho" => $data["rinon_derecho"],
+        
+        "ri_long" => $data["ri_long"],
+        "ri_par" => $data["ri_par"],
+        "rinon_izquierdo" => $data["rinon_izquierdo"],
+        
+        // Finales
+        "estomago" => $data["estomago"],
+        "otros_hallazgos" => $data["otros_hallazgos"],
+        "conclusiones" => $data["conclusiones"], // En BD suele ser 'conclusion' singular, verifica tu columna
+        "sugerencias" => $data["sugerencias"],
+        
+        // Auditoría
+        "fecha" => date("Y-m-d"),
+        "hora" => date("h:i A"),
+        "usuario" => $this->session->userdata("nombre"),
+    ];
+    
+    return $this->db->insert("ecografia_abdominal", $datos);
 }
 
 // ECOGRAFIA PROSTATICA
-
 public function createEcografiaProstatica($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "replicacion" => $data["replicacion"],
-      "paredes" => $data["paredes"],
-      "contenido" => $data["contenido"],
-      "detalle_contenido" => $data["detalle_contenido"],
-      "imagenes_expansivas" => $data["imagenes_expansivas"],
-      "detalle_imagenes" => $data["detalle_imagenes"],
-      "calculos" => $data["calculos"],
-      "detalle_calculos" => $data["detalle_calculos"],
-      "vol_pre" => $data["vol_pre"],
-      "vol_post" => $data["vol_post"],
-      "retencion" => $data["retencion"],
-      "descripcion" => $data["descripcion"],
-      "bordes" => $data["bordes"],
-      "transverso" => $data["transverso"],
-      "antero_posterior" => $data["antero_posterior"],
-      "longitudinal" => $data["longitudinal"],
-      "volumen" => $data["volumen"],
-      "otra" => $data["otra"],
-      "observacion_textarea" => $data["observacion_textarea"],
-      "conclusiones" => $data["conclusiones"],
-      "fecha" => date("Y-m-d"),
-      "hora" => date("H:i:s"),
-      "usuario" => $this->session->userdata("nombre"),
-  ];
-  $this->db->insert("ecografia_prostatica", $datos);
+    // Organizar los datos para insertar en la BD
+    $datos = [
+        // --- 1. Datos Generales ---
+        "documento_paciente" => $data["documento_paciente"],
+        "codigo_doctor"      => $data["codigo_doctor"],
+        "motivo"             => $data["motivo"],
+        
+        // --- 2. Vejiga ---
+        "paredes"            => $data["paredes"],
+        "contenido"          => $data["contenido"],
+        "imagenes_expansivas"=> $data["imagenes_expansivas"],
+        "calculos"           => $data["calculos"],
+        "descripcion_vejiga" => $data["descripcion_vejiga"],
+        
+        // --- 3. Volúmenes y Residuo ---
+        "vol_pre"            => $data["vol_pre"],
+        "vol_post"           => $data["vol_post"],
+        "retencion"          => $data["retencion"], // % calculado
+        
+        // --- 4. Próstata (Medidas y Peso) ---
+        "transverso"         => $data["transverso"],
+        "antero_posterior"   => $data["antero_posterior"],
+        "longitudinal"       => $data["longitudinal"],
+        "volumen"            => $data["volumen"], // Peso + Grado
+        
+        // --- 5. Características Próstata ---
+        "bordes"             => $data["bordes"],
+        "observacion"        => $data["observacion"], // Ecoestructura
+        
+        // --- 6. Conclusiones ---
+        "conclusiones"       => $data["conclusiones"],
+        
+        // --- 7. Auditoría Automática ---
+        "fecha"              => date("Y-m-d"),
+        "hora"               => date("h:i A"),
+        "usuario"            => $this->session->userdata("nombre"), // Ajusta si tu sesión usa otro nombre
+    ];
+
+    // Insertar en la tabla
+    return $this->db->insert("ecografia_prostatica", $datos);
 }
+
 
 // ECOGRAFIA RENAL
 public function createEcografiaRenal($data) {

@@ -9,18 +9,23 @@ function createEcografiaPelvica() {
         endometrio = $("#endometrio").val();
         tumoraxial = $("input[name='tumoraxial']:checked").val(); // ID corregido
         tumor_anexial_com = $("#tumor_anexial_com").val();
+        miometrio = $("#miometrio").val();
         uteroMedidas = $("#utero-medidas").val();
         medidaUtero1 = $("#medidaUtero1").val();
         medidaUtero2 = $("#medidaUtero2").val();
+        ut_vol = $("#ut_vol").val();
         comentarioUtero = $("#comentarioUtero").val();
         ovarioDer1 = $("#ovario-der1").val();
         ovarioDer2 = $("#ovario-der2").val();
+        ov_der_t = $("#ov_der_t").val(),          
+        od_vol = $("#od_vol").val(),
         comentarioOvarioDer = $("#comentarioOvario-der").val();
         ovarioIz1 = $("#ovario-iz1").val();
         ovarioIz2 = $("#ovario-iz2").val();
+        ov_izq_t = $("#ov_izq_t").val(),          // FALTABA (Transverso)
+        oi_vol = $("#oi_vol").val(),
         comentarioOvarioIzq = $("#comentarioOvario-izq").val();
         fondosaco = $("#fondosaco").val();
-        miometrio = $("#miometrio").val();
         conclusion = $("#conclusion").val();
         sugerencias = $("#sugerencias").val();  
 
@@ -37,18 +42,23 @@ function createEcografiaPelvica() {
         endometrio: endometrio,
         tumoraxial: tumoraxial, // ID corregido
         tumor_anexial_com: tumor_anexial_com,
+        miometrio: miometrio,
         uteroMedidas: uteroMedidas,
         medidaUtero1: medidaUtero1,
         medidaUtero2: medidaUtero2,
+        ut_vol: ut_vol,
         comentarioUtero: comentarioUtero,
         ovarioDer1: ovarioDer1,
         ovarioDer2: ovarioDer2,
+        ov_der_t: ov_der_t,          
+        od_vol: od_vol,
         comentarioOvarioDer: comentarioOvarioDer,
         ovarioIz1: ovarioIz1,
         ovarioIz2: ovarioIz2,
+        ov_izq_t: ov_izq_t,          
+        oi_vol: oi_vol,
         comentarioOvarioIzq: comentarioOvarioIzq,
         fondosaco: fondosaco,
-        miometrio: miometrio,
         conclusion: conclusion,
         sugerencias: sugerencias  
       },
@@ -70,18 +80,23 @@ function createEcografiaPelvica() {
         $("#endometrio").val('Grosor mm libre');
         $("input[name='tumoraxial']").prop('checked', false); // ID corregido
         $("#tumor_anexial_com").val('No hay masas solidas ni quisticas');
+        $("#miometrio").val('Homogenio');
         $("#utero-medidas").val('');
         $("#medidaUtero1").val('');
         $("#medidaUtero2").val('');
+        $("#ut_vol").val('');
         $("#comentarioUtero").val('DE BORDES REGULARES Y PARENQUIMA HOMOGENEO');
         $("#ovario-der1").val('');
         $("#ovario-der2").val('');
+        $("#ov_der_t").val('');          
+        $("#od_vol").val('');
         $("#comentarioOvario-der").val('DE ASPECTO NORMAL.');
         $("#ovario-iz1").val('');
         $("#ovario-iz2").val('');
+        $("#ov_izq_t").val('');          
+        $("#oi_vol").val('');
         $("#comentarioOvario-izq").val('DE ASPECTO NORMAL.');
         $("#fondosaco").val('Libre');
-        $("#miometrio").val('Homogenio');
         $("#conclusion").val('');
         $("#sugerencias").val('');
       

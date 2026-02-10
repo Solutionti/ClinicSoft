@@ -156,157 +156,123 @@
         </div>
         </div>
      <!-- contenido nuevo  -->
-     <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
-                </div>
-            
-    </div>
-            
-            <h5 class="mt-4">Hallazgos</h5>
-            <h6 class="mt-3">Vejiga</h6>
-            <!-- Vejiga, Paredes, Contenido anecoico e Imágenes expansivas  -->
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <label for="replicacion" class="form-label">Replicación</label>
-                    <select class="form-select form-select-sm" id="replicacion" formControlName="replicacion">
-                    <option value="normal">Normal</option>
-                    <option value="minimo">Mínimo</option>
-                    <option value="excesivo">Excesivo</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="paredes" class="form-label">Paredes</label>
-                    <select class="form-select form-select-sm" id="paredes" formControlName="paredes">
-                    <option value="normal">Normal</option>
-                    <option value="delgada">Delgada</option>
-                    <option value="engrosada">Engrosada</option>
-                    </select>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="contenido" class="form-label">Contenido anecoico</label>
-                      <select class="form-select form-select-sm" id="contenido">
-                      <option value="">Seleccione</option>
-                            <option value="Sí">Sí</option>
-                            <option value="No">No</option>
-                      </select>
-                    </div>
-
-                    
-    <div class="col-md-3" id="detalle_contenedor" style="display: none;">
-        <label for="detalle_contenido" class="form-label">Detalle Contenido</label>
-        <input type="text" class="form-control form-control-sm" id="detalle_contenido">
-    </div>
-    <div class="row mb-3">
-    <!-- Imágenes expansivas -->
-    <div class="col-md-3">
-        <label for="imagenes_expansivas" class="form-label">Imágenes expansivas</label>
-        <select class="form-select form-select-sm" id="imagenes_expansivas">
-            <option value="No">No</option>
-            <option value="Sí">Sí</option>
-        </select>
-    </div>
-    <div class="col-md-3" id="detalle_imagenes_contenedor" style="display: none;">
-        <label for="detalle_imagenes" class="form-label">Detalle Imágenes</label>
-        <input type="text" class="form-control form-control-sm" id="detalle_imagenes">
-    </div>
-
-    <!-- Cálculos en su interior -->
-    <div class="col-md-3">
-        <label for="calculos" class="form-label">Cálculos en su interior</label>
-        <select class="form-select form-select-sm" id="calculos">
-            <option value="No">No</option>
-            <option value="Sí">Sí</option>
-        </select>
-    </div>
-    <div class="col-md-3" id="detalle_calculos_contenedor" style="display: none;">
-        <label for="detalle_calculos" class="form-label">Detalle Cálculos</label>
-        <input type="text" class="form-control form-control-sm" id="detalle_calculos">
-    </div>
-</div>
-
-            
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="vol_pre" class="form-label">Vol.pre-miccional (cc)</label>
-                    <input type="text" class="form-control form-control-sm" id="vol_pre" formControlName="vol_pre">
-                </div>
-            
-                <div class="col-md-4">
-                    <label for="vol_post" class="form-label">Vol.post-miccional (cc)</label>
-                    <input type="text" class="form-control form-control-sm" id="vol_post" formControlName="vol_post">
-                </div>
-            
-                <div class="col-md-4">
-                    <label for="retencion" class="form-label">% de retención</label>
-                    <input type="text" class="form-control form-control-sm" id="retencion" formControlName="retencion">
-                </div>
+     <div class="modal-body">
+    <form id="formProstata">
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <label for="motivo" class="form-label font-weight-bold">Motivo del Examen</label>
+                <input type="text" class="form-control form-control-sm" id="motivo" placeholder="Ej: Dificultad para orinar, chequeo...">
             </div>
-            
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción/Otros</label>
-                <textarea class="form-control form-control-sm" id="descripcion" formControlName="descripcion" rows="3"></textarea>
-            </div>
-            
-            <h6 class="mt-4">Próstata</h6>
-            <div class="row mb-3">
-                <!-- Bordes -->
-                <div class="col-md-4">
-                    <label for="bordes" class="form-label">Bordes</label>
-                    <select class="form-select form-select-sm" id="bordes" formControlName="bordes">
-                        <option value="regulares">Regulares</option>
-                        <option value="irregulares">Irregulares</option>
-                    </select>
-                </div>
-            
-                <!-- Dimensiones (Transverso, Antero posterior, Longitudinal) -->
-                <div class="col-md-2">
-                    <label for="transverso" class="form-label">Transverso (mm)</label>
-                    <input type="text" class="form-control form-control-sm" id="transverso" formControlName="transverso">
-                </div>
-                <div class="col-md-2">
-                    <label for="antero_posterior" class="form-label">Antero posterior (mm)</label>
-                    <input type="text" class="form-control form-control-sm" id="antero_posterior" formControlName="antero_posterior">
-                </div>
-                <div class="col-md-2">
-                    <label for="longitudinal" class="form-label">Longitudinal (mm)</label>
-                    <input type="text" class="form-control form-control-sm" id="longitudinal" formControlName="longitudinal">
-                </div>
-            
-                <!-- Volumen (cc) -->
-                <div class="col-md-2">
-                    <label for="volumen" class="form-label">Volumen (cc)</label>
-                    <input type="text" class="form-control form-control-sm" id="volumen" formControlName="volumen">
-                    <small class="form-text text-muted">V.N 15cc</small>
-                </div>
-            </div>
-            
-            <div class="d-flex align-items-center mt-4">
-        <h6 class="mb-0">Observaciones</h6>
-        <div class="ms-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="otra" id="otra">
-                <label class="form-check-label" for="otra">Agregar</label>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarProstataNormal()">
+                    <i class="fas fa-magic"></i> Cargar Normal
+                </button>
             </div>
         </div>
-    </div>
 
-    <div class="mt-3" id="observacion_container">
-        <textarea class="form-control form-control-sm" id="observacion_textarea" rows="3" placeholder="Escriba su observación"></textarea>
-    </div>
-            
-            <h6 class="mt-4">Conclusiones</h6>
-            <div class="mb-3">
-                <textarea class="form-control form-control-sm" id="conclusiones" formControlName="conclusiones" rows="3" placeholder="Escriba sus conclusiones"></textarea>
+        <h5 class="mt-4 text-primary border-bottom pb-2">1. VEJIGA Y RESIDUO</h5>
+        
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Paredes</label>
+                <select class="form-control form-control-sm" id="paredes">
+                    <option value="Delgadas">Delgadas (Normal)</option>
+                    <option value="Engrosadas">Engrosadas (>3mm)</option>
+                    <option value="Trabeculadas">Trabeculadas (Lucha)</option>
+                </select>
             </div>
-            
-              <!--  -->
-            </form>
-            <div class="row mt-1">
-              <div class="col-md-3">
-              <button type="button" class="btn btn-primary" onclick="createEcografiaProstatica()">Guardar</button>
-              </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Contenido</label>
+                <select class="form-control form-control-sm" id="contenido">
+                    <option value="Anecoico">Anecoico (Limpio)</option>
+                    <option value="Sedimento">Con Sedimento</option>
+                    <option value="Litiasis">Litiasis (Cálculos)</option>
+                </select>
+            </div>
+             <div class="col-md-3">
+                <label class="small font-weight-bold">Imágenes Expansivas</label>
+                <select class="form-control form-control-sm" id="imagenes_expansivas">
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                 <label class="small font-weight-bold">Cálculos</label>
+                <select class="form-control form-control-sm" id="calculos">
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+             <div class="col-md-12">
+                <label class="small font-weight-bold">Descripción Adicional Vejiga</label>
+                <input type="text" class="form-control form-control-sm" id="descripcion_vejiga" placeholder="Detalles adicionales...">
+            </div>
+        </div>
+
+        <div class="row mb-3 p-2 bg-light rounded mx-0 border">
+            <div class="col-md-4">
+                <label class="small font-weight-bold text-primary">Vol. Pre-miccional (cc)</label>
+                <input type="number" class="form-control form-control-sm" id="vol_pre" placeholder="0">
+            </div>
+            <div class="col-md-4">
+                <label class="small font-weight-bold text-primary">Vol. Post-miccional (cc)</label>
+                <input type="number" class="form-control form-control-sm" id="vol_post" placeholder="0">
+            </div>
+            <div class="col-md-4">
+                <label class="small font-weight-bold text-danger">% Retención (Residuo)</label>
+                <input type="text" class="form-control form-control-sm font-weight-bold text-danger" id="retencion" readonly placeholder="Calculando...">
+            </div>
+        </div>
+
+        <h5 class="mt-4 text-primary border-bottom pb-2">2. PRÓSTATA</h5>
+        
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Transverso (mm)</label>
+                <input type="number" class="form-control form-control-sm" id="transverso" placeholder="mm">
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Antero-Posterior (mm)</label>
+                <input type="number" class="form-control form-control-sm" id="antero_posterior" placeholder="mm">
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Longitudinal (mm)</label>
+                <input type="number" class="form-control form-control-sm" id="longitudinal" placeholder="mm">
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold text-success">Volumen/Peso (cc)</label>
+                <input type="text" class="form-control form-control-sm font-weight-bold text-success" id="volumen" readonly placeholder="Calculado">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+             <div class="col-md-4">
+                <label class="small font-weight-bold">Bordes</label>
+                <select class="form-control form-control-sm" id="bordes">
+                    <option value="Regulares">Regulares</option>
+                    <option value="Irregulares">Irregulares</option>
+                    <option value="Lobulados">Lobulados</option>
+                </select>
+            </div>
+             <div class="col-md-8">
+                <label class="small font-weight-bold">Observaciones / Ecoestructura</label>
+                <textarea class="form-control form-control-sm" id="observacion_textarea" rows="1" placeholder="Homogénea, Heterogénea..."></textarea>
+            </div>
+        </div>
+
+        <h5 class="mt-4 text-primary border-bottom pb-2">CONCLUSIONES</h5>
+        <div class="mb-3">
+            <textarea class="form-control" id="conclusiones" rows="3"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaProstatica()">Guardar Ecografía</button>
+</div>
             </div>
               <br>
             </div>

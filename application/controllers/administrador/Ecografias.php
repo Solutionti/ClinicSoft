@@ -145,53 +145,95 @@ class Ecografias extends Admin_Controller {
     // ECOGRAFIA OBSTETRICA
 
     public function createEcografiaObstetrica() {
-      // Recibir datos del formulario enviado por AJAX
-      $documento_paciente = $this->input->post("documento_paciente");
-      $codigo_doctor = $this->input->post("codigo_doctor");
-      $fetoembrion = $this->input->post("fetoembrion");
-      $situacion = $this->input->post("situacion");
-      $estadoFeto = $this->input->post("estadoFeto");
-      $placenta = $this->input->post("placenta");
-      $dpb = $this->input->post("dpb");
-      $lcf = $this->input->post("lcf");
-      $min = $this->input->post("min");
-      $cc = $this->input->post("cc");
-      $ca = $this->input->post("ca");
-      $lf = $this->input->post("lf");
-      $ila = $this->input->post("ila");
-      $percentil = $this->input->post("percentil");
-      $tipoParto = $this->input->post("tipoParto");
-      $conclusion = $this->input->post("conclusion");
-      $sugerencia = $this->input->post("sugerencia");
-  
-      // Agrupar los datos en un array
-      $datos = [
-          "documento_paciente" => $documento_paciente,
-          "codigo_doctor" => $codigo_doctor,
-          "fetoembrion" => $fetoembrion,
-          "situacion" => $situacion,
-          "estadoFeto" => $estadoFeto,
-          "placenta" => $placenta,
-          "dpb" => $dpb,
-          "lcf" => $lcf,
-          "min" => $min,
-          "cc" => $cc,
-          "ca" => $ca,
-          "lf" => $lf,
-          "ila" => $ila,
-          "percentil" => $percentil,
-          "tipoParto" => $tipoParto,
-          "conclusion" => $conclusion,
-          "sugerencia" => $sugerencia,
-      ];
-  
-      // Insertar en la base de datos utilizando el modelo
-      $this->Ecografias_model->createEcografiaObstetrica($datos);
-  
-      // Enviar respuesta JSON para que el frontend sepa que todo salió bien
-      echo json_encode(["status" => "success", "message" => "Ecografía Obstétrica registrada correctamente"]);
-  }
-  
+    // 1. Recibir datos del formulario (AJAX)
+    
+    // --- Datos Generales ---
+    $documento_paciente = $this->input->post("documento_paciente");
+    $codigo_doctor      = $this->input->post("codigo_doctor");
+    
+    // --- Datos Precoz (< 13 sem) ---
+    $saco_gestacional   = $this->input->post("saco_gestacional");
+    $saco_vitelino      = $this->input->post("saco_vitelino"); // Columna Nueva
+    $lcc                = $this->input->post("lcc");             // Columna Nueva
+    $embrion_visualizado = $this->input->post("embrion_visualizado"); // Columna Nueva
+
+    // --- Vitalidad y Estática ---
+    $situacion      = $this->input->post("situacion");
+    $presentacion   = $this->input->post("presentacion"); // Columna Nueva
+    $dorso          = $this->input->post("dorso");        // Columna Nueva
+    $lcf            = $this->input->post("lcf");
+    // Mapeamos 'movimientos' a tu antigua columna 'estadoFeto' para reciclarla
+    $estadoFeto     = $this->input->post("movimientos"); 
+    $sexo           = $this->input->post("sexo");         // Columna Nueva
+    $fpp_eco        = $this->input->post("fpp_eco");      // Columna Nueva
+
+    // --- Biometría ---
+    $dpb              = $this->input->post("dpb");
+    $cc               = $this->input->post("cc");
+    $ca               = $this->input->post("ca");
+    $lf               = $this->input->post("lf");
+    $ponderado        = $this->input->post("ponderado");        // Columna Nueva (Peso)
+    $edad_gestacional = $this->input->post("edad_gestacional"); // Columna Nueva
+    $percentil        = $this->input->post("percentil");
+
+    // --- Placenta ---
+    // Mapeamos 'placenta_ub' a tu antigua columna 'placenta'
+    $placenta         = $this->input->post("placenta_ub"); 
+    $placenta_grado   = $this->input->post("placenta_grado");   // Columna Nueva
+    $ila              = $this->input->post("ila");
+
+    // --- Final ---
+    $conclusion = $this->input->post("conclusion");
+    $sugerencia = $this->input->post("sugerencia");
+    // 'tipoParto' ya no se usa (se incluye en sugerencia), puedes dejarlo vacío o borrar la columna
+
+    // 2. Agrupar en Array
+    $datos = [
+        "documento_paciente" => $documento_paciente,
+        "codigo_doctor"      => $codigo_doctor,
+        "fecha"              => date("Y-m-d"), // Agregamos la fecha actual automáticamente
+        
+        // Campos nuevos
+        "saco_gestacional"   => $saco_gestacional,
+        "saco_vitelino"      => $saco_vitelino,
+        "lcc"                => $lcc,
+        "embrion_visualizado"=> $embrion_visualizado,
+        
+        // Campos estándar
+        "situacion"          => $situacion,
+        "presentacion"       => $presentacion,
+        "dorso"              => $dorso,
+        "lcf"                => $lcf,
+        "estadoFeto"         => $estadoFeto, // Guarda lo que venga de 'movimientos'
+        "sexo"               => $sexo,
+        "fpp_eco"            => $fpp_eco,
+
+        "dpb"                => $dpb,
+        "cc"                 => $cc,
+        "ca"                 => $ca,
+        "lf"                 => $lf,
+        "ponderado"          => $ponderado,
+        "edad_gestacional"   => $edad_gestacional,
+        "percentil"          => $percentil,
+
+        "placenta"           => $placenta, // Guarda la Ubicación
+        "placenta_grado"     => $placenta_grado,
+        "ila"                => $ila,
+
+        "conclusion"         => $conclusion,
+        "sugerencia"         => $sugerencia
+    ];
+
+    // 3. Insertar en BD
+    $insert = $this->Ecografias_model->createEcografiaObstetrica($datos);
+
+    // 4. Respuesta
+    if($insert) {
+        echo json_encode(["status" => "success", "message" => "Ecografía Obstétrica registrada correctamente"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error al guardar en base de datos"]);
+    }
+}
 
   // ECOGRAFIA GENETICA
   public function createEcografiaGenetica() {
@@ -395,18 +437,23 @@ class Ecografias extends Admin_Controller {
       $endometrio = $this->input->post("endometrio");
       $tumoraxial = $this->input->post("tumoraxial");
       $tumor_anexial_com = $this->input->post("tumor_anexial_com");
+      $miometrio = $this->input->post("miometrio");
       $uteroMedidas = $this->input->post("uteroMedidas");
       $medidaUtero1 = $this->input->post("medidaUtero1");
       $medidaUtero2 = $this->input->post("medidaUtero2");
+      $ut_vol = $this->input->post("ut_vol");
       $comentarioUtero = $this->input->post("comentarioUtero");
       $ovarioDer1 = $this->input->post("ovarioDer1");
       $ovarioDer2 = $this->input->post("ovarioDer2");
+      $ov_der_t = $this->input->post("ov_der_t");          
+      $od_vol = $this->input->post("od_vol");
       $comentarioOvarioDer = $this->input->post("comentarioOvarioDer");
       $ovarioIz1 = $this->input->post("ovarioIz1");
       $ovarioIz2 = $this->input->post("ovarioIz2");
+      $ov_izq_t = $this->input->post("ov_izq_t");          
+      $oi_vol = $this->input->post("oi_vol");
       $comentarioOvarioIzq = $this->input->post("comentarioOvarioIzq");
       $fondosaco = $this->input->post("fondosaco");
-      $miometrio = $this->input->post("miometrio");
       $conclusion = $this->input->post("conclusion");
       $sugerencias = $this->input->post("sugerencias");
   
@@ -420,18 +467,23 @@ class Ecografias extends Admin_Controller {
           "endometrio" => $endometrio,
           "tumoraxial" => $tumoraxial,
           "tumor_anexial_com" => $tumor_anexial_com,
+          "miometrio" => $miometrio,
           "utero_medidas" => $uteroMedidas,
           "medida_utero1" => $medidaUtero1,
           "medida_utero2" => $medidaUtero2,
+          "ut_vol" => $ut_vol,
           "comentario_utero" => $comentarioUtero,
           "ovario_der1" => $ovarioDer1,
           "ovario_der2" => $ovarioDer2,
+          "ov_der_t" => $ov_der_t,          
+          "od_vol" => $od_vol,
           "comentario_ovario_der" => $comentarioOvarioDer,
           "ovario_iz1" => $ovarioIz1,
           "ovario_iz2" => $ovarioIz2,
+          "ov_izq_t" => $ov_izq_t,          
+          "oi_vol" => $oi_vol,
           "comentario_ovario_izq" => $comentarioOvarioIzq,
           "fondosaco" => $fondosaco,
-          "miometrio" => $miometrio,
           "conclusion" => $conclusion,
           "sugerencias" => $sugerencias,
           "fecha" => date("Y-m-d"),
@@ -447,105 +499,100 @@ class Ecografias extends Admin_Controller {
   
 // ECOGRAFIA ABDOMINAL
 public function createEcografiaAbdominal() {
-  $documento_paciente = $this->input->post("documento_paciente");
-  $codigo_doctor = $this->input->post("codigo_doctor");
-  $motivo = $this->input->post("motivo");
-  $estomago = $this->input->post("estomago");
-  $higado = $this->input->post("higado");
-  $coledoco_diametro = $this->input->post("coledoco_diametro");
-  $vesicula_volumen = $this->input->post("vesicula_volumen");
-  $vesicula_paredes = $this->input->post("vesicula_paredes");
-  $bazo = $this->input->post("bazo");
-  $rinon_derecho = $this->input->post("rinon_derecho");
-  $rinon_izquierdo = $this->input->post("rinon_izquierdo");
-  $otros_hallazgos = $this->input->post("otros_hallazgos");
-  $conclusiones = $this->input->post("conclusiones");
-  $sugerencias = $this->input->post("sugerencias");
+    // Recibir datos
+    $documento_paciente = $this->input->post("documento_paciente");
+    $codigo_doctor = $this->input->post("codigo_doctor");
+    $motivo = $this->input->post("motivo");
 
-  $datos = [
-      "documento_paciente" => $documento_paciente,
-      "codigo_doctor" => $codigo_doctor,
-      "motivo" => $motivo,
-      "estomago" => $estomago,
-      "higado" => $higado,
-      "coledoco_diametro" => $coledoco_diametro,
-      "vesicula_volumen" => $vesicula_volumen,
-      "vesicula_paredes" => $vesicula_paredes,
-      "bazo" => $bazo,
-      "rinon_derecho" => $rinon_derecho,
-      "rinon_izquierdo" => $rinon_izquierdo,
-      "otros_hallazgos" => $otros_hallazgos,
-      "conclusiones" => $conclusiones,
-      "sugerencias" => $sugerencias,
-      "fecha" => date("Y-m-d"),
-      "hora" => date("H:i:s"),
-      "usuario" => $this->session->userdata("nombre"),
-  ];
+    // Hígado
+    $higado_tamano = $this->input->post("higado_tamano");
+    $higado_eco = $this->input->post("higado_eco");
+    $coledoco_diametro = $this->input->post("coledoco_diametro");
+    $vesicula_paredes = $this->input->post("vesicula_paredes");
+    $vesicula_detalles = $this->input->post("vesicula_detalles");
 
-  $this->Ecografias_model->createEcografiaAbdominal($datos);
+    // Páncreas/Bazo
+    $pancreas = $this->input->post("pancreas");
+    $bazo_tamano = $this->input->post("bazo_tamano");
+    $bazo_aspecto = $this->input->post("bazo_aspecto");
 
-  echo json_encode(["status" => "success", "message" => "Ecografía Abdominal registrada correctamente"]);
+    // Riñones
+    $rd_long = $this->input->post("rd_long");
+    $rd_par = $this->input->post("rd_par");
+    $rinon_derecho = $this->input->post("rinon_derecho"); // Aspecto
+    
+    $ri_long = $this->input->post("ri_long");
+    $ri_par = $this->input->post("ri_par");
+    $rinon_izquierdo = $this->input->post("rinon_izquierdo"); // Aspecto
+
+    // Otros
+    $estomago = $this->input->post("estomago");
+    $otros_hallazgos = $this->input->post("otros_hallazgos");
+    $conclusiones = $this->input->post("conclusiones");
+    $sugerencias = $this->input->post("sugerencias");
+
+    $datos = [
+        "documento_paciente" => $documento_paciente,
+        "codigo_doctor" => $codigo_doctor,
+        "motivo" => $motivo,
+        
+        "higado_tamano" => $higado_tamano,
+        "higado_eco" => $higado_eco,
+        "coledoco_diametro" => $coledoco_diametro,
+        "vesicula_paredes" => $vesicula_paredes,
+        "vesicula_detalles" => $vesicula_detalles,
+        
+        "pancreas" => $pancreas,
+        "bazo_tamano" => $bazo_tamano,
+        "bazo_aspecto" => $bazo_aspecto,
+        
+        "rd_long" => $rd_long,
+        "rd_par" => $rd_par,
+        "rinon_derecho" => $rinon_derecho,
+        
+        "ri_long" => $ri_long,
+        "ri_par" => $ri_par,
+        "rinon_izquierdo" => $rinon_izquierdo,
+        
+        "estomago" => $estomago,
+        "otros_hallazgos" => $otros_hallazgos,
+        "conclusiones" => $conclusiones,
+        "sugerencias" => $sugerencias
+    ];
+
+    $this->Ecografias_model->createEcografiaAbdominal($datos);
+    echo json_encode(["status" => "success", "message" => "Registrado correctamente"]);
 }
 
 // ECOGRAFIA PROSTATICA
-
 public function createEcografiaProstatica() {
-  $documento_paciente = $this->input->post("documento_paciente");
-  $codigo_doctor = $this->input->post("codigo_doctor");
-  $motivo = $this->input->post("motivo");
-  $replicacion = $this->input->post("replicacion");
-  $paredes = $this->input->post("paredes");
-  $contenido = $this->input->post("contenido");
-  $detalle_contenido = $this->input->post("detalle_contenido");
-  $imagenes_expansivas = $this->input->post("imagenes_expansivas");
-  $detalle_imagenes = $this->input->post("detalle_imagenes");
-  $calculos = $this->input->post("calculos");
-  $detalle_calculos = $this->input->post("detalle_calculos");
-  $vol_pre = $this->input->post("vol_pre");
-  $vol_post = $this->input->post("vol_post");
-  $retencion = $this->input->post("retencion");
-  $descripcion = $this->input->post("descripcion");
-  $bordes = $this->input->post("bordes");
-  $transverso = $this->input->post("transverso");
-  $antero_posterior = $this->input->post("antero_posterior");
-  $longitudinal = $this->input->post("longitudinal");
-  $volumen = $this->input->post("volumen");
-  $otra = $this->input->post("otra");
-  $observacion_textarea = $this->input->post("observacion_textarea");
-  $conclusiones = $this->input->post("conclusiones");
-
-  $datos = [
-      "documento_paciente" => $documento_paciente,
-      "codigo_doctor" => $codigo_doctor,
-      "motivo" => $motivo,
-      "replicacion" => $replicacion,
-      "paredes" => $paredes,
-      "contenido" => $contenido,
-      "detalle_contenido" => $detalle_contenido,
-      "imagenes_expansivas" => $imagenes_expansivas,
-      "detalle_imagenes" => $detalle_imagenes,
-      "calculos" => $calculos,
-      "detalle_calculos" => $detalle_calculos,
-      "vol_pre" => $vol_pre,
-      "vol_post" => $vol_post,
-      "retencion" => $retencion,
-      "descripcion" => $descripcion,
-      "bordes" => $bordes,
-      "transverso" => $transverso,
-      "antero_posterior" => $antero_posterior,
-      "longitudinal" => $longitudinal,
-      "volumen" => $volumen,
-      "otra" => $otra,
-      "observacion_textarea" => $observacion_textarea,
-      "conclusiones" => $conclusiones,
-      "fecha" => date("Y-m-d"),
-      "hora" => date("H:i:s"),
-      "usuario" => $this->session->userdata("nombre"),
-  ];
-
-  $this->Ecografias_model->createEcografiaProstatica($datos);
-
-  echo json_encode(["status" => "success", "message" => "Ecografía Prostática registrada correctamente"]);
+    // 1. Recibir datos POST
+    $data = array(
+        "documento_paciente" => $this->input->post("documento_paciente"),
+        "codigo_doctor"      => $this->input->post("codigo_doctor"),
+        "motivo"             => $this->input->post("motivo"),
+        "paredes"            => $this->input->post("paredes"),
+        "contenido"          => $this->input->post("contenido"),
+        "imagenes_expansivas"=> $this->input->post("imagenes_expansivas"),
+        "calculos"           => $this->input->post("calculos"),
+        "descripcion_vejiga" => $this->input->post("descripcion_vejiga"),
+        "vol_pre"            => $this->input->post("vol_pre"),
+        "vol_post"           => $this->input->post("vol_post"),
+        "retencion"          => $this->input->post("retencion"),
+        "transverso"         => $this->input->post("transverso"),
+        "antero_posterior"   => $this->input->post("antero_posterior"),
+        "longitudinal"       => $this->input->post("longitudinal"),
+        "volumen"            => $this->input->post("volumen"),
+        "bordes"             => $this->input->post("bordes"),
+        "observacion"        => $this->input->post("observacion"),
+        "conclusiones"       => $this->input->post("conclusiones")
+    );
+  
+    if($this->Ecografias_model->createEcografiaProstatica($data)) {
+        echo json_encode(["status" => "success", "message" => "Registrado"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error BD"]);
+    }
 }
 
 // ECOGRAFIA RENAL
