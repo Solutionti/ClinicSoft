@@ -116,6 +116,9 @@
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaVenosaview">
                      <span class="sidenav-normal"> Ecografia Venosa</span>
                      </a>
+                     <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaObstetricadopplerview">
+                     <span class="sidenav-normal"> Ecografia Obstetrica Doppler</span>
+                     </a>
                   </li>
                </ul>
             </div>

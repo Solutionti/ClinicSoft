@@ -1,6 +1,12 @@
 function createEcografiaTiroides() {
     var url = baseurl + "administracion/ecografiatiroides";
 
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
+
     // --- 1. DATOS GENERALES ---
     var documento_paciente = $("#dni").val();
     var codigo_doctor = $("#codigo_doctor").val();

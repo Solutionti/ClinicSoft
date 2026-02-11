@@ -150,125 +150,96 @@
         >
         </div>
         </div>
+       <div class="modal-body">
+    <form id="formVenosa">
         <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
-                </div>
+            <div class="col-md-8">
+                <label class="form-label">Motivo del Examen:</label>
+                <input type="text" class="form-control form-control-sm" id="motivo">
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <h6>MIEMBRO INFERIOR <span style="color: green;">DERECHO</span>:</h6>
-                    <textarea class="form-control form-control-sm" id="descripcionProcedimiento" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
-                </div>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarVenosaNormal()">
+                    <i class="fas fa-magic"></i> Cargar Normal
+                </button>
             </div>
+        </div>
 
-                <form>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Vena</th>
-                                <th>MEDIDA MM</th>
-                                <th>REFLUJO</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>F. Común</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="8MM"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_fc" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Safena mayor muslo</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_fs" value="60"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_fs" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Safena mayor pierna</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_poplitea" value="45"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_poplitea" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Poplitea</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_tp" value="40"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_tp" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Safena menor</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_ta" value="40-42"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_ta" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Perforantes</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_media" value="38"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_media" value="Bifásica"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <h6>MIEMBRO INFERIOR <span style="color: rgb(128, 15, 0);">IZQUIERDA</span>:</h6>
-                        <textarea class="form-control form-control-sm" id="descripcionProcedimientoIzquierdo" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
-                    </div>
-                </div>
-    
-                    <form>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Vena</th>
-                                    <th>MEDIDA MM</th>
-                                    <th>RELUJO</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>F. Común</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="60"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_fc" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Safena mayor muslo</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_fs" value="50"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_fs" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Safena mayor pierna</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_poplitea" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_poplitea" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Poplitea</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_tp" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_tp" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Safena menor</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_ta" value="38"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_ta" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Perforantes</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_media" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_media" value="Bifásica"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-            
-            <div class="form-group">
-                <label for="conclusiones">Conclusiones:</label>
-                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="sugerencias">Sugerencias:</label>
-                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
-            </div>
-              <div class="row mt-1">
-                <div class="col-md-3">
-                <button type="button" class="btn btn-primary" onclick="createEcografiaVenosa()">Guardar</button>
-                </div>
+        <div class="form-group">
+            <h6 style="color: green; font-weight: bold;">MIEMBRO INFERIOR DERECHO:</h6>
+            <textarea class="form-control form-control-sm" id="mid_descripcion" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
+        </div>
+
+        <table class="table table-sm table-bordered">
+            <thead class="bg-light">
+                <tr><th>Vena</th> <th>MEDIDA MM</th> <th>REFLUJO</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>F. Común</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_fc_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_fc_ref"></td></tr>
+                <tr><td>Safena mayor muslo</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_smm_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_smm_ref"></td></tr>
+                <tr><td>Safena mayor pierna</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_smp_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_smp_ref"></td></tr>
+                <tr><td>Poplítea</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_pop_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_pop_ref"></td></tr>
+                <tr><td>Safena menor</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_sm_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_sm_ref"></td></tr>
+                <tr><td>Perforantes</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_perf_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mid_perf_ref"></td></tr>
+            </tbody>
+        </table>
+
+        <div class="form-group mt-4">
+            <h6 style="color: rgb(128, 15, 0); font-weight: bold;">MIEMBRO INFERIOR IZQUIERDO:</h6>
+            <textarea class="form-control form-control-sm" id="mii_descripcion" rows="3">PAREDES LISAS, FLUJO FASICO CON LA RESPIRACIÓN, REFLUJOS SEGÚN DESCRIPCIÓN.</textarea>
+        </div>
+
+        <table class="table table-sm table-bordered">
+            <thead class="bg-light">
+                <tr><th>Vena</th> <th>MEDIDA MM</th> <th>REFLUJO</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>F. Común</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_fc_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_fc_ref"></td></tr>
+                <tr><td>Safena mayor muslo</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_smm_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_smm_ref"></td></tr>
+                <tr><td>Safena mayor pierna</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_smp_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_smp_ref"></td></tr>
+                <tr><td>Poplítea</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_pop_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_pop_ref"></td></tr>
+                <tr><td>Safena menor</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_sm_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_sm_ref"></td></tr>
+                <tr><td>Perforantes</td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_perf_med"></td> 
+                    <td><input type="text" class="form-control form-control-sm" id="mii_perf_ref"></td></tr>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <label>Conclusiones:</label>
+            <textarea class="form-control form-control-sm" id="conclusiones" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Sugerencias:</label>
+            <textarea class="form-control form-control-sm" id="sugerencias" rows="2"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaVenosa()">Guardar</button>
+</div>
               </div>
             </form>
               <br>

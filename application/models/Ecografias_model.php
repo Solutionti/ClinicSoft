@@ -359,91 +359,41 @@ public function createEcografiaHisterosonografia($data) {
 }
 
 // ECOGRAFIA ARTERIAL
+// 1. GUARDAR (INSERT)
 public function createEcografiaArterial($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "descripcionProcedimientoDerecho" => $data["descripcionProcedimientoDerecho"],
-      "descripcionProcedimientoIzquierdo" => $data["descripcionProcedimientoIzquierdo"],
-      // Miembro inferior derecho
-      "vps_fc_derecho" => $data["vps_fc_derecho"],
-      "onda_fc_derecho" => $data["onda_fc_derecho"],
-      "vps_fs_derecho" => $data["vps_fs_derecho"],
-      "onda_fs_derecho" => $data["onda_fs_derecho"],
-      "vps_poplitea_derecho" => $data["vps_poplitea_derecho"],
-      "onda_poplitea_derecho" => $data["onda_poplitea_derecho"],
-      "vps_tp_derecho" => $data["vps_tp_derecho"],
-      "onda_tp_derecho" => $data["onda_tp_derecho"],
-      "vps_ta_derecho" => $data["vps_ta_derecho"],
-      "onda_ta_derecho" => $data["onda_ta_derecho"],
-      "vps_media_derecho" => $data["vps_media_derecho"],
-      "onda_media_derecho" => $data["onda_media_derecho"],
-      // Miembro inferior izquierdo
-      "vps_fc_izquierdo" => $data["vps_fc_izquierdo"],
-      "onda_fc_izquierdo" => $data["onda_fc_izquierdo"],
-      "vps_fs_izquierdo" => $data["vps_fs_izquierdo"],
-      "onda_fs_izquierdo" => $data["onda_fs_izquierdo"],
-      "vps_poplitea_izquierdo" => $data["vps_poplitea_izquierdo"],
-      "onda_poplitea_izquierdo" => $data["onda_poplitea_izquierdo"],
-      "vps_tp_izquierdo" => $data["vps_tp_izquierdo"],
-      "onda_tp_izquierdo" => $data["onda_tp_izquierdo"],
-      "vps_ta_izquierdo" => $data["vps_ta_izquierdo"],
-      "onda_ta_izquierdo" => $data["onda_ta_izquierdo"],
-      "vps_media_izquierdo" => $data["vps_media_izquierdo"],
-      "onda_media_izquierdo" => $data["onda_media_izquierdo"],
-      // Conclusiones y sugerencias
-      "conclusiones" => $data["conclusiones"],
-      "sugerencias" => $data["sugerencias"],
-      "fecha" => $data["fecha"],
-      "hora" => $data["hora"],
-      "usuario" => $data["usuario"]
-  ];
-  $this->db->insert("ecografia_arterial", $datos); // Ajusta el nombre de la tabla
+    // Agregamos datos de auditoría automática
+    $data["fecha"]   = date("Y-m-d");
+    $data["hora"]    = date("H:i:s");
+    $data["usuario"] = $this->session->userdata("nombre"); // Usuario que registra
+    
+    // Insertamos en la tabla
+    if ($this->db->insert("ecografia_arterial", $data)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // ECOGRAFIA VENOSA
 public function createEcografiaVenosa($data) {
-  $datos = [
-      "documento_paciente" => $data["documento_paciente"],
-      "codigo_doctor" => $data["codigo_doctor"],
-      "motivo" => $data["motivo"],
-      "descripcionProcedimientoDerecho" => $data["descripcionProcedimientoDerecho"],
-      "descripcionProcedimientoIzquierdo" => $data["descripcionProcedimientoIzquierdo"],
-      // Miembro inferior derecho
-      "medida_fc_derecho" => $data["medida_fc_derecho"],
-      "reflujo_fc_derecho" => $data["reflujo_fc_derecho"],
-      "medida_fs_derecho" => $data["medida_fs_derecho"],
-      "reflujo_fs_derecho" => $data["reflujo_fs_derecho"],
-      "medida_poplitea_derecho" => $data["medida_poplitea_derecho"],
-      "reflujo_poplitea_derecho" => $data["reflujo_poplitea_derecho"],
-      "medida_tp_derecho" => $data["medida_tp_derecho"],
-      "reflujo_tp_derecho" => $data["reflujo_tp_derecho"],
-      "medida_ta_derecho" => $data["medida_ta_derecho"],
-      "reflujo_ta_derecho" => $data["reflujo_ta_derecho"],
-      "medida_media_derecho" => $data["medida_media_derecho"],
-      "reflujo_media_derecho" => $data["reflujo_media_derecho"],
-      // Miembro inferior izquierdo
-      "medida_fc_izquierdo" => $data["medida_fc_izquierdo"],
-      "reflujo_fc_izquierdo" => $data["reflujo_fc_izquierdo"],
-      "medida_fs_izquierdo" => $data["medida_fs_izquierdo"],
-      "reflujo_fs_izquierdo" => $data["reflujo_fs_izquierdo"],
-      "medida_poplitea_izquierdo" => $data["medida_poplitea_izquierdo"],
-      "reflujo_poplitea_izquierdo" => $data["reflujo_poplitea_izquierdo"],
-      "medida_tp_izquierdo" => $data["medida_tp_izquierdo"],
-      "reflujo_tp_izquierdo" => $data["reflujo_tp_izquierdo"],
-      "medida_ta_izquierdo" => $data["medida_ta_izquierdo"],
-      "reflujo_ta_izquierdo" => $data["reflujo_ta_izquierdo"],
-      "medida_media_izquierdo" => $data["medida_media_izquierdo"],
-      "reflujo_media_izquierdo" => $data["reflujo_media_izquierdo"],
-      // Conclusiones y sugerencias
-      "conclusiones" => $data["conclusiones"],
-      "sugerencias" => $data["sugerencias"],
-      "fecha" => $data["fecha"],
-      "hora" => $data["hora"],
-      "usuario" => $data["usuario"]
-  ];
-  $this->db->insert("ecografia_venosa", $datos); // Ajusta el nombre de la tabla
+    $data["fecha"] = date("Y-m-d");
+    $data["hora"] = date("H:i:s");
+    $data["usuario"] = $this->session->userdata("nombre");
+    return $this->db->insert("ecografia_venosa", $data);
+}
+
+public function createEcografiaObstetricaDoppler($data) {
+    // Agregamos datos de auditoría automática
+    $data["fecha"]   = date("Y-m-d");
+    $data["hora"]    = date("H:i:s");
+    $data["usuario"] = $this->session->userdata("nombre"); // Usuario logueado
+    
+    // Insertamos en la tabla
+    if ($this->db->insert("ecografia_obstetrica_doppler", $data)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // CONSULTAS PARA TRAER LA INFO DEL PACIENTE Y LA ECOGRAFIA
@@ -571,7 +521,7 @@ public function createEcografiaVenosa($data) {
     $this->db->select("*");
     $this->db->from("ecografia_arterial");
     $this->db->where("documento_paciente", $documento);
-    $this->db->order_by('id', 'DESC');
+    $this->db->order_by('codigo_ecografia', 'DESC');
     $result = $this->db->get();
 
     return  $result;
@@ -581,10 +531,23 @@ public function createEcografiaVenosa($data) {
     $this->db->select("*");
     $this->db->from("ecografia_venosa");
     $this->db->where("documento_paciente", $documento);
-    $this->db->order_by('id', 'DESC');
+    $this->db->order_by('codigo_ecografia', 'DESC');
     $result = $this->db->get();
 
     return  $result;
   }
+
+  // 2. LEER DATOS PARA EL PDF (SELECT)
+  public function getEcografiaDopplerPdf($dni) {
+    $this->db->select("*");
+    $this->db->from("ecografia_obstetrica_doppler");
+    $this->db->where("documento_paciente", $dni);
+    
+    // IMPORTANTE: Ordenamos por 'codigo_ecografia' descendente para obtener la última
+    $this->db->order_by("codigo_ecografia", "DESC");
+    $this->db->limit(1);
+    
+    return $this->db->get();
+}
     
 }

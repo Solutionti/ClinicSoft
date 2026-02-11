@@ -150,125 +150,98 @@
         >
         </div>
         </div>
+       <div class="modal-body">
+    <form id="formArterial">
+        
         <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
-                </div>
+            <div class="col-md-8">
+                <label class="small font-weight-bold">Motivo del Examen</label>
+                <input type="text" class="form-control form-control-sm" id="motivo">
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <h6>MIEMBRO INFERIOR <span style="color: green;">DERECHO</span>:</h6>
-                    <textarea class="form-control" id="descripcionProcedimiento" rows="3">PLACAS ATEROMATOSAS EN TIBIAL ANTERIOR DISTAL Y PEDIA.</textarea>
-                </div>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarArterialNormal()">
+                    <i class="fas fa-magic"></i> Cargar Normal
+                </button>
             </div>
+        </div>
 
-                <form>
-                    <table class="table">
-                        <thead>
+        <div class="card mb-3 border-primary">
+            <div class="card-header bg-light text-primary font-weight-bold py-1">
+                MIEMBRO INFERIOR DERECHO
+            </div>
+            <div class="card-body py-2">
+                <div class="form-group mb-2">
+                    <textarea class="form-control form-control-sm" id="mid_descripcion" rows="2" placeholder="Descripción de placas o hallazgos..."></textarea>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 small">
+                        <thead class="bg-light text-center">
                             <tr>
-                                <th>Arteria</th>
-                                <th>VPS</th>
-                                <th>ONDA</th>
+                                <th style="width: 40%;">Arteria</th>
+                                <th style="width: 30%;">VPS (cm/s)</th>
+                                <th style="width: 30%;">Onda</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>F. Común</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="65"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_fc" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>F. Superficial</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_fs" value="60"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_fs" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Poplitea</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_poplitea" value="45"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_poplitea" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Tibial Posterior</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_tp" value="40"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_tp" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Tibial Anterior</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_ta" value="40-42"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_ta" value="Bifásica"></td>
-                            </tr>
-                            <tr>
-                                <td>Media</td>
-                                <td><input type="text" class="form-control form-control-sm" name="vps_media" value="38"></td>
-                                <td><input type="text" class="form-control form-control-sm" name="onda_media" value="Bifásica"></td>
-                            </tr>
+                            <tr><td>F. Común</td> <td><input type="text" id="mid_fc_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_fc_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>F. Superficial</td> <td><input type="text" id="mid_fs_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_fs_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Poplítea</td> <td><input type="text" id="mid_pop_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_pop_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Tibial Posterior</td> <td><input type="text" id="mid_tp_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_tp_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Tibial Anterior</td> <td><input type="text" id="mid_ta_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_ta_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Media</td> <td><input type="text" id="mid_media_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mid_media_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
                         </tbody>
                     </table>
-                </form>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <h6>MIEMBRO INFERIOR <span style="color: rgb(128, 15, 0);">IZQUIERDA</span>:</h6>
-                        <textarea class="form-control form-control-sm" id="descripcionProcedimientoIzquierdo" rows="3">PLACAS ATEROMATOSA A PREDOMINIO DE PIERNA.</textarea>
-                    </div>
                 </div>
-    
-                    <form>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Arteria</th>
-                                    <th>VPS</th>
-                                    <th>ONDA</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>F. Común</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_fc" value="60"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_fc" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>F. Superficial</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_fs" value="50"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_fs" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Poplitea</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_poplitea" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_poplitea" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Tibial Posterior</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_tp" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_tp" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Tibial Anterior</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_ta" value="38"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_ta" value="Bifásica"></td>
-                                </tr>
-                                <tr>
-                                    <td>Media</td>
-                                    <td><input type="text" class="form-control form-control-sm" name="vps_media" value="35"></td>
-                                    <td><input type="text" class="form-control form-control-sm" name="onda_media" value="Bifásica"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-            
-            <div class="form-group">
-                <label for="conclusiones">Conclusiones:</label>
-                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
             </div>
-            <div class="form-group">
-                <label for="sugerencias">Sugerencias:</label>
-                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
+        </div>
+
+        <div class="card mb-3 border-danger">
+            <div class="card-header bg-light text-danger font-weight-bold py-1">
+                MIEMBRO INFERIOR IZQUIERDO
             </div>
-              <div class="row mt-1">
-                <div class="col-md-3">
-                <button type="button" class="btn btn-primary" onclick="createEcografiaArterial()">Guardar</button>
+            <div class="card-body py-2">
+                <div class="form-group mb-2">
+                    <textarea class="form-control form-control-sm" id="mii_descripcion" rows="2" placeholder="Descripción de placas o hallazgos..."></textarea>
                 </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 small">
+                        <thead class="bg-light text-center">
+                            <tr>
+                                <th style="width: 40%;">Arteria</th>
+                                <th style="width: 30%;">VPS (cm/s)</th>
+                                <th style="width: 30%;">Onda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>F. Común</td> <td><input type="text" id="mii_fc_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_fc_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>F. Superficial</td> <td><input type="text" id="mii_fs_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_fs_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Poplítea</td> <td><input type="text" id="mii_pop_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_pop_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Tibial Posterior</td> <td><input type="text" id="mii_tp_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_tp_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Tibial Anterior</td> <td><input type="text" id="mii_ta_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_ta_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                            <tr><td>Media</td> <td><input type="text" id="mii_media_vps" class="form-control form-control-sm border-0 text-center"></td> <td><input type="text" id="mii_media_onda" class="form-control form-control-sm border-0 text-center"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="font-weight-bold text-primary">Conclusiones</h6>
+        <div class="mb-3">
+            <textarea class="form-control" id="conclusiones" rows="2"></textarea>
+        </div>
+
+        <h6 class="font-weight-bold">Sugerencias</h6>
+        <div class="mb-3">
+            <textarea class="form-control" id="sugerencias" rows="1"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaArterial()">Guardar Ecografía Arterial</button>
+</div>
               </div>
             </form>
               <br>

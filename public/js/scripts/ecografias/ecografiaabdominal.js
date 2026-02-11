@@ -3,6 +3,15 @@ function createEcografiaAbdominal() {
     
     // Datos Paciente
     var documento_paciente = $("#dni").val();
+
+    if (documento_paciente == "") {
+        $("body").overhang({
+            type: "error",
+            message: "Ingresar el numero de DNI."
+        });
+        return;
+    }
+
     var codigo_doctor = $("#codigo_doctor").val();
     var motivo = $("#motivo").val();
 

@@ -1,5 +1,11 @@
 function createEcografiaObstetrica() {
     var url = baseurl + "administracion/ecografiaobstetrica"; 
+
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
     
     // 1. DATOS DEL PACIENTE
     var documento_paciente = $("#dni").val();

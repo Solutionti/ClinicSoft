@@ -1,6 +1,12 @@
 function createEcografiaProstatica() {
     var url = baseurl + "administracion/ecografiaprostatica";
 
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
+
     // Datos Generales
     var documento_paciente = $("#dni").val();
     var codigo_doctor = $("#codigo_doctor").val();

@@ -2,6 +2,12 @@ function createEcografiaHisterosonografia() {
     // Asegúrate de que esta URL coincida con el nombre de tu función en el Controlador
     var url = baseurl + "administracion/ecografiahisterosonografia";
 
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
+
     // --- 1. CAPTURA DE VARIABLES ---
     var documento_paciente = $("#dni").val();
     var codigo_doctor = $("#codigo_doctor").val();

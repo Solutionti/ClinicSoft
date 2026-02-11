@@ -1,5 +1,12 @@
 function createEcografiaPelvica() {
     var url = baseurl + "administracion/ecografiapelvica";
+
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
+
     var documento_paciente = $("#dni").val(),
         codigo_doctor = $("#codigo_doctor").val();
     var replecion = $("#replecion").val();
