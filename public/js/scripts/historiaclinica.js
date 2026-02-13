@@ -2395,7 +2395,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                   $("#comentarios_cita").val(data.comentarios);
                 }
               });
-      }
+       }
     }
   });   
 }
