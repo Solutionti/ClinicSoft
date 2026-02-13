@@ -226,7 +226,7 @@ class Historias_model extends CI_model
     $this->db->join('triajes t', 'h.triaje = t.codigo_triaje');
     $this->db->where('h.codigo_historia', $documento);
     $this->db->where('h.triaje', $triage);
-    // $this->db->where("h.tipo_consulta", 2);
+    $this->db->where("h.tipo_consulta", 2);
     $result = $this->db->get();
 
     return $result;
@@ -941,6 +941,24 @@ class Historias_model extends CI_model
       "paciente" => $data['paciente'],
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
+  }
+
+  public function getConsultasGeneralCodigo($codigo) {
+    $this->db->select('*');
+    $this->db->from('h_consultas');
+    $this->db->where('codigo_h_consulta', $codigo);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getGinecologiaCodigo($codigo) {
+    $this->db->select('*');
+    $this->db->from('h_ginecologia');
+    $this->db->where('codigo_h_consulta', $codigo);
+    $result = $this->db->get();
+
+    return $result;
   }
 }
 

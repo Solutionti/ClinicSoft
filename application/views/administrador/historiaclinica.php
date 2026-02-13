@@ -819,35 +819,37 @@
                         </small>
                         <ul class="list-unstyled">
                           <?php foreach ($historia->result() as $historias): ?>
+                            <?php print_r($historias); ?>
                             <?php // print_r($historias); ?>
                             <?php if ($historias->tipo_consulta == 1) { ?>
                             <li class="">
                               <i class="fas fa-calendar-alt text-primary"></i>
                               <span class="text-primary">
-                                <?php
-                                $fecha = $historias->fecha;
-                                $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                                  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-                                $partes = explode('-', $fecha);
-                                echo $partes[0] . ' ' . $meses[(int) $partes[1]] . ' ' . $partes[2];
-                                ?>
-                              </span> 
-                              - General (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)">ver PDF</a>]
+                                <?php echo $historias->fecha;  ?>
+                              </span>
+                               - General (Dr.<?php echo $historias->doctor; ?>) - 
+                               <a href="#" onclick="descargarHistoriaGeneral(<?php echo $historias->triaje; ?>)">
+                                <i class="fas fa-file-pdf text-danger mx-2" title="descargar pdf"></i>
+                              </a>
+                              <a href="#">
+                                <i 
+                                  class="fas fa-eye text-primary"
+                                  title="Editar historia"
+                                  onclick="abrirEditarModalHistoriaClinica(<?php echo $historias->codigo; ?>)"></i>
+                              </a>
                             </li>
                             <?php } else { ?>
                             <li class="">
                               <i class="fas fa-calendar-alt text-danger"></i>
                                <span class="text-danger">
-                                <?php
-                                $fecha = $historias->fecha;
-                                $meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                                  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-                                $partes = explode('-', $fecha);
-                                echo $partes[0] . ' ' . $meses[(int) $partes[1]] . ' ' . $partes[2];
-                                ?>
-                               </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - [<a href="#" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">ver PDF</a>]
+                                <?php echo $historias->fecha; ?>
+                               </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - 
+                                <a href="#" class="text-danger" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">
+                                 <i class="fas fa-file-pdf text-danger mx-2" title="descargar pdf"></i>
+                                </a>
+                                <a href="#">
+                                <i class="fas fa-eye text-danger" title="Editar historia"></i>
+                              </a>
                             </li>
                             <?php } ?>
                           <?php endforeach; ?>
@@ -958,16 +960,8 @@
               readonly
             >
           </div>
-          <div class="col-md-1" hidden>
-            <label>Triaje</label>
-            <input
-              type="number"
-              class="form-control"
-              id="consecutivo_historia"
-              readonly
-            >
-          </div>
-          <div class="col-md-6">
+          
+          <div class="col-md-5">
             <label>Nombre del Paciente</label>
             <input
               type="text"
@@ -994,7 +988,15 @@
               readonly
             >
           </div>
-          
+          <div class="col-md-1">
+            <label>Triaje</label>
+            <input
+              type="number"
+              class="form-control"
+              id="consecutivo_historia"
+              readonly
+            >
+          </div>
         </div>
         <!-- Signos Vitales del Paciente -->
         <div class="row mt-3">

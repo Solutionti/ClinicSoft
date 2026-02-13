@@ -26,7 +26,7 @@
     }
     body {
       background-color: #fbf8ff;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231d0643' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-image: url('public/img/theme/fondoagua.png');
     }
   </style>
 </head>
@@ -56,11 +56,13 @@
       style="background-image: url('https://www.policlinicorisso.com/assets/uploads/especialidades/1665593423_6ef6619f6c1b9a1c11e1.jpg'); background-size: cover;"
     >
     <span class="mask bg-gradient-dark opacity-6"></span>
-    <!-- <h3 class="mt-1 text-white font-weight-bolder position-relative">VENTAS E  INVENTARIOS</span> </h3>
-                <p class=" font-weight-bold text-white position-relative">
-                  Bienvenido a la plataforma de ventas y inventario todo lo que 
-                  tu negocio necesita para llevar su negocio a otro nivel.
-                </p> -->
+    <h6 class="mt-1 text-white font-weight-bolder position-relative">Bienvenido a</h6>
+    <h3 class="text-white font-weight-bolder position-relative">ClinisSoft</span> </h3>
+      <p class=" font-weight-bold text-white position-relative">
+        Bienvenido a la plataforma de gestión clínica diseñada para llevar su institución al siguiente nivel, 
+        facilitando el control de inventarios, la administración de servicios y la organización eficiente
+        de su centro de salud.
+      </p>
     </div>
     </div>
     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
@@ -76,8 +78,7 @@
         </div>
       </div>
       <h5 class="font-weight-bolder  mt-4">Iniciar sesión</h5>
-    </div>
-    <div class="card-body">
+
       <div class="messageError"></div>
     <form role="form" method="post" validate id="FormLOG">
       <div class="mb-3">
@@ -104,10 +105,9 @@
       <div class="text-center">
         <button type="submit" class="btn bg-default text-white w-100 my-4 mb-2" id="login">Ingresar</button>
       </div>
-      <!-- <p class="text-sm mt-3 mb-0">No tiene usuario y contraseña? <a href="javascript:;" class="text-dark font-weight-bolder">Solicitar</a></p> -->
+      <br>
+      <br>
     </form>
-    </div>
-    <div class="card-footer text-center pt-0 px-lg-2 px-1">
     <p class="mb-4 text-sm mx-auto">
       ¿Aun no tienes tu sistema medico ?
       <a
@@ -118,6 +118,10 @@
         Contactanos
       </a>
     </p>
+    </div>
+    
+    <div class="card-footer text-center pt-0 px-lg-2 px-1">
+    
     </div>
   </div>
  </div>

@@ -2083,17 +2083,28 @@ function crearOrdenResonancia(tipo) {
 function limpiarSeleccionResonancia() {
     // Mover todos los elementos de vuelta a la tabla original
     var datosActuales = table_reso_mini.data().toArray();
-    
     for (let i = 0; i < datosActuales.length; i++) {
         table_reso.row.add(datosActuales[i]).draw(false);
     }
-    
     // Limpiar tabla de selección
     table_reso_mini.clear().draw();
-    
     // Limpiar array de elementos
     elementos_reso = [];
-    
     table_reso.draw(false);
 }
+
+function abrirEditarModalHistoriaClinica(codigo) {
+  //datos de consulta general
+    url = baseurl + "administracion/getConsultasGeneralCodigo/" + codigo;
+  $.ajax({
+    url: url,
+    method: "GET",
+    success: function(data) {
+      console.log(data);
+    }
+  });
+
+}
+
+
 
