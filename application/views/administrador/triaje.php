@@ -134,13 +134,13 @@
            <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-triaje">
              <thead>
                <tr>
-                 <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="status">Estado</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">DNI</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="name">Paciente</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Doctor</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Especialidad</th>
-                 <th  class="text-uppercase text-dark text-xs font-weight-bolder opacity-12" data-sort="budget">Costo</th>
+                 <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Opciones</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="status">Estado</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="name">DNI</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="name">Paciente</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="budget">Doctor</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="budget">Especialidad</th>
+                 <th  class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark" data-sort="budget">Costo</th>
                </tr>
              </thead>
              <tbody>

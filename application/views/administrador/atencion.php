@@ -67,12 +67,12 @@
                   <table class="table align-items-center table-borderless mb-0 text-uppercase" id="table-atencion">
                      <thead>
                         <tr>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Paciente</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
-                           <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12 ps-2">Doctor</th>
-                           <th class="text-center text-uppercase text-dark text-xs font-weight-bolder opacity-12">Especialidad</th>
-                           <th class="text-center text-uppercase text-dark text-xs font-weight-bolder opacity-12">Costo</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Opciones</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Paciente</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Estado</th>
+                           <th class="text-uppercase text-white text-xs font-weight-bolder opacity-12 ps-2 bg-dark">Doctor</th>
+                           <th class="text-center text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Especialidad</th>
+                           <th class="text-center text-uppercase text-white text-xs font-weight-bolder opacity-12 bg-dark">Costo</th>
                         </tr>
                      </thead>
                      <tbody>

@@ -139,14 +139,14 @@
       <thead>
         <tr>
         <?php if($this->session->userdata("rol") == "Administrador"){ ?>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Opciones</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Opciones</th>
                      <?php } else {  ?>
                       <?php } ?>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Codigo</th>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Nombre</th>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Precio</th>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Comision</th>
-                    <th class="text-uppercase text-dark text-xs font-weight-bolder opacity-12">Estado</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Codigo</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Nombre</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Precio</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Comision</th>
+                    <th class="text-uppercase text-white bg-dark text-xs font-weight-bolder opacity-12">Estado</th>
           
         </tr>
       </thead>
