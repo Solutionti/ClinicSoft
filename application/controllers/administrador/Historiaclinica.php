@@ -2183,13 +2183,13 @@ class Historiaclinica extends Admin_Controller
 	  }
 	}
 
-	public function getConsultasGeneralCodigo($codigo) {
-		$data = $this->Historias_model->getConsultasGeneralCodigo($codigo);
+	public function getConsultasGeneralCodigo($codigo, $paciente) {
+		$data = $this->Historias_model->getConsultasGeneralCodigo($codigo, $paciente)->result()[0];
 		echo json_encode($data);
 	}
 
-	public function getGinecologiaCodigo($codigo) {
-		$data = $this->Historias_model->getGinecologiaCodigo($codigo);
+	public function getGinecologiaCodigo($codigo, $paciente) {
+		$data = $this->Historias_model->getGinecologiaCodigo($codigo, $paciente)->result()[0];
 		echo json_encode($data);
 	}
 }

@@ -123,6 +123,9 @@ $route["administracion/crearprocedimientos"] = "administrador/historiaclinica/cr
 $route["administracion/ordenecografia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresEcografias";
 $route["administracion/ordentomografia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresTomografias";
 $route["administracion/ordenresonancia"] = "administrador/historiaclinica/DetalleExamenAuxiliaresResonancia";
+$route["administracion/getconsultasgeneralcodigo/(:num)/(:any)"] = "administrador/historiaclinica/getConsultasGeneralCodigo/$1/$2";
+$route["administracion/getconsultasginecologiacodigo/(:num)/(:any)"] = "administrador/historiaclinica/getGinecologiaCodigo/$1/$2";
+
 
 /***********************************************************
 ****************** COLPOSCOPIA *****************************

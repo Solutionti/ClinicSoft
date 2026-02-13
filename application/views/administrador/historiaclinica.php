@@ -819,7 +819,7 @@
                         </small>
                         <ul class="list-unstyled">
                           <?php foreach ($historia->result() as $historias): ?>
-                            <?php print_r($historias); ?>
+                            
                             <?php // print_r($historias); ?>
                             <?php if ($historias->tipo_consulta == 1) { ?>
                             <li class="">
@@ -835,7 +835,7 @@
                                 <i 
                                   class="fas fa-eye text-primary"
                                   title="Editar historia"
-                                  onclick="abrirEditarModalHistoriaClinica(<?php echo $historias->codigo; ?>)"></i>
+                                  onclick="abrirEditarModalHistoriaClinicaGeneral(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
                               </a>
                             </li>
                             <?php } else { ?>
@@ -848,7 +848,11 @@
                                  <i class="fas fa-file-pdf text-danger mx-2" title="descargar pdf"></i>
                                 </a>
                                 <a href="#">
-                                <i class="fas fa-eye text-danger" title="Editar historia"></i>
+                                <i
+                                  class="fas fa-eye text-danger"
+                                  title="Editar historia"
+                                  onclick="abrirEditarModalHistoriaClinicaGinecologica(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
+                                </i>
                               </a>
                             </li>
                             <?php } ?>

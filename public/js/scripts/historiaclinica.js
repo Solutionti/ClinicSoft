@@ -2093,17 +2093,154 @@ function limpiarSeleccionResonancia() {
     table_reso.draw(false);
 }
 
-function abrirEditarModalHistoriaClinica(codigo) {
+function abrirEditarModalHistoriaClinicaGeneral(codigo) {
   //datos de consulta general
-    url = baseurl + "administracion/getConsultasGeneralCodigo/" + codigo;
-  $.ajax({
-    url: url,
-    method: "GET",
-    success: function(data) {
-      console.log(data);
-    }
-  });
+  let triage = String(codigo).slice(0,1);
+  let paciente = String(codigo).slice(1,20);
+  let url = baseurl + "administracion/getconsultasgeneralcodigo/" + triage + '/' +  paciente;
 
+  $("body").overhang({
+       type: "confirm",
+       primary: "#5e72e4",
+       accent: "#ffffff",
+       yesColor: "#3498DB",
+       message: "¿Desea editar la historia clínica general?",
+       overlay: true,
+       callback: function (value) {
+         if(value == false){
+         }
+         else {
+           $.ajax({
+             url: url,
+             method: "GET",
+             success: function(data) {
+               data = JSON.parse(data);
+               console.log(data);
+               //
+               document.getElementById('tphistoria').value = 1;
+                 $('#tphistoria').trigger('change');
+                 var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                 modal.show();
+                   $("#nav-antecedentesgine").removeClass("show active");
+                   $("#nav-home").addClass("show active");
+
+               //DATOS DE ANAMNESIS
+               $("#anamnesis_directa").val(data.anamnesis);
+               $("#anamnesis_empresa").val(data.empresa);
+               $("#anamnesis_compania").val(data.compania);
+               $("#anamnesis_iafa").val(data.iafa);
+               $("#anamnesis_acompanante").val(data.nombre_acompanante);
+               $("#anamnesis_dni").val(data.dni);
+               $("#anamnesis_celular").val(data.celular);
+               $("#anamnesis_consulta").val(data.motivo_consulta);
+               $("#anamnesis_tratamiento").val(data.tratamiento_anterior);
+               $("#anamnesis_enfermedad").val(data.enfermedad_actual);
+               $("#anamnesis_tiempo").val(data.tiempo);
+               $("#anamnesis_inicio").val(data.inicio);
+               $("#anamnesis_curso").val(data.curso);
+               $("#anamnesis_sintomas").val(data.sintomas);
+
+               //EXAMEN FISICO
+               $("#fisico_cuello").val(data.cuello);
+               $("#fisico_abdomen").val(data.abdomen);
+               $("#fisico_respiratorio").val(data.ap_respiratoria);
+               $("#fisico_cardio").val(data.ap_cardio);
+               $("#fisico_sistema").val(data.sistema_nervioso);
+               $("#fisico_cabeza").val(data.cabeza);
+               $("#fisico_locomotor").val(data.loco_motor);
+               $("#fisico_apetito").val(data.apetito);
+               $("#fisico_sed").val(data.sed);
+               $("#fisico_orina").val(data.orina);
+               $("#ap_genito2").val(data.ap_genitourinario);
+
+               //PLAN DE TRABAJO
+               $("#plan_examen").val(data.examen_dx);
+               $("#plan_procedimiento").val(data.procedimientos);
+               $("#plan_interconsulta").val(data.interconsultas);
+               $("#plan_tratamiento").val(data.tratamiento);
+               $("#plan_referencia").val(data.referencia);
+               $("#plan_firma").val(data.firma_medico);
+
+             }
+           });
+         }
+       }
+  });
+}
+
+function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
+    //datos de consulta ginecologica
+    let triage = String(codigo).slice(0,1);
+    let paciente = String(codigo).slice(1,20);
+    let url = baseurl + "administracion/getconsultasginecologiacodigo/" + triage + '/' +  paciente;
+
+    $("body").overhang({
+       type: "confirm",
+       primary: "#5e72e4",
+       accent: "#ffffff",
+       yesColor: "#3498DB",
+       message: "¿Desea editar la historia clínica general?",
+       overlay: true,
+       callback: function (value) {
+         if(value == false){
+
+         }
+         else {
+           $.ajax({
+             url: url,
+             method: "GET",
+             success: function(data) {
+               data = JSON.parse(data);
+               //    
+               document.getElementById('tphistoria').value = 2;
+               $('#tphistoria').trigger('change');
+                 var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                 modal.show();
+                  $("#nav-home").removeClass("show active");
+                  $("#nav-antecedentesgine").addClass("show active");
+
+               // ANTECEDENTES
+               $("#antecedentes_familiares").val(data.familiares);
+               $("#antecedentes_patologicos").val(data.patologicos);
+               $("#antecedentes_gineco").val(data.gineco_obstetrico);
+               $("#antecedentes_fum").val(data.fum);
+               $("#antecedentes_rm").val(data.rm);
+               $("#antecedentes_flujo").val(data.flujo_genital);
+               $("#antecedentes_parejas").val(data.no_de_parejas);
+               $("#antecedentes_gestas").val(data.gestas);
+               $("#antecedentes_partos").val(data.partos);
+               $("#antecedentes_abortos").val(data.abortos);
+               $("#antecedentes_anticonceptivos").val(data.anticonceptivos);
+               $("#antecedentes_tipos").val(data.tipo);
+               $("#antecedentes_tiempo").val(data.tiempo);
+               $("#antecedentes_otros").val(data.otros);
+               $("#antecedentes_fecha").val(data.fecha_pap);
+               $("#antecedentes_hijos").val(data.no_hijos);
+               // CONSULTA
+               $("#consulta_motivo").val(data.motivo_consulta);
+               $("#consulta_sintomas").val(data.signossintomas);
+               // EXAMEN FISICO
+               $("#examen_piel").val(data.piel_tscs);
+               $("#examen_tiroides").val(data.tiroides);
+               $("#examen_mamas").val(data.mamas);
+               $("#examen_respiratorio").val(data.arespiratorio);
+               $("#examen_cardiovascular").val(data.acardiovascular);
+               $("#examen_abdomen").val(data.abdomen);
+               $("#examen_genito").val(data.genito_urinario);
+               $("#examen_tacto").val(data.tacto_rectal);
+               $("#examen_locomotor").val(data.locomotor);
+               $("#examen_sistema").val(data.sistema_nervioso);
+               // 
+               $("#exa_auxiliares1").val(data.examenes_auxiiliares);
+               $("#tratamientos_gine").val(data.tratamiento);
+               $("#plan_trabajo1").val(data.plan_trabajo);
+               $("#proxima_cita1").val(data.proxima_cita);
+               $("#firma_medico1").val(data.firma_medico);
+             }
+          });
+      }
+    }
+  });   
 }
 
 
