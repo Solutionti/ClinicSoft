@@ -1,5 +1,12 @@
 function createEcografiaMorfologica() {
     var url = baseurl + "administracion/ecografiamorfologica";
+
+    // Validar DNI
+    if ($("#dni").val() == "") {
+        $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+        return;
+    }
+
     var documento_paciente = $("#dni").val();
     var codigo_doctor = $("#codigo_doctor").val();
     var sexo = $("input[name='sexo']:checked").val();

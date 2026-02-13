@@ -151,79 +151,164 @@
         >
         </div>
         </div>
-        <div class="row mb-3">
+       <div class="modal-body">
+
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <label class="small font-weight-bold">Motivo del Examen</label>
+            <input type="text" class="form-control form-control-sm" id="motivo" placeholder="Dolor abdominal, chequeo...">
+        </div>
+        <div class="col-md-4 text-right mt-4">
+            <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarAbdominalNormal()">
+                <i class="fas fa-magic"></i> Cargar Normal
+            </button>
+        </div>
+    </div>
+
+    <div class="card mb-3 border-primary">
+        <div class="card-header bg-light text-primary font-weight-bold py-1">
+            1. HÍGADO Y VÍAS BILIARES
+        </div>
+        <div class="card-body py-2">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Longitud Hepática (mm)</label>
+                    <input type="number" id="higado_tamano" class="form-control form-control-sm" placeholder="< 150 mm">
+                </div>
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Ecoestructura (Grasa)</label>
+                    <select id="higado_eco" class="form-control form-control-sm">
+                        <option value="Conservada">Conservada</option>
+                        <option value="Esteatosis Leve">Esteatosis Leve (Grado I)</option>
+                        <option value="Esteatosis Moderada">Esteatosis Moderada (Grado II)</option>
+                        <option value="Esteatosis Severa">Esteatosis Severa (Grado III)</option>
+                        <option value="Cirrosis">Patrón Cirrótico</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Colédoco (mm)</label>
+                    <input type="number" id="coledoco_diametro" class="form-control form-control-sm" placeholder="< 6 mm">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
+                    <label class="small font-weight-bold">Vesícula Biliar</label>
+                    <div class="input-group input-group-sm">
+                        <select id="vesicula_paredes" class="form-control form-control-sm" style="max-width: 160px;"> <option value="Paredes Delgadas">Paredes Delgadas</option>
+                            <option value="Paredes Engrosadas">Paredes Engrosadas</option>
+                            <option value="Alitiásica">Alitiásica</option>
+                            <option value="Litiásica">Litiásica (Piedras)</option>
+                            <option value="Extirpada">Extirpada (Ausente)</option>
+                        </select>
+                        <input type="text" id="vesicula_detalles" class="form-control" placeholder="Detalles adicionales (ej: Pólipos, barro biliar)">
+                    </div>
                 </div>
             </div>
-            <h6>Hallazgos:</h6>
-            <!-- Estómago y hígado en la misma línea -->
-            <div class="row mb-3">
-                <div class="form-group col-md-6">
-                    <label for="estomago">Estómago:</label>
-                    <input type="text" class="form-control form-control-sm" id="estomago" placeholder="Ingrese hallazgos">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="higado">Hígado:</label>
-                    <input type="text" class="form-control form-control-sm" id="higado" placeholder="Ingrese hallazgos">
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <!-- Colédoco y vesícula en la misma línea -->
-            <div class="row mb-3">
-                <div class="form-group col-md-6">
-                    <label for="coledoco_diametro">Colédoco (diámetro):</label>
-                    <input type="text" class="form-control form-control-sm" id="coledoco_diametro" placeholder="Ingrese diámetro en mm">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="vesicula_volumen">Vesícula (medidas):</label>
-                    <input type="text" class="form-control form-control-sm" id="vesicula_volumen" placeholder="Ingrese medidas">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card border-secondary h-100">
+                <div class="card-header bg-light text-secondary font-weight-bold py-1">2. PÁNCREAS</div>
+                <div class="card-body py-2">
+                    <textarea id="pancreas" class="form-control form-control-sm" rows="2" placeholder="Cabeza, cuerpo y cola..."></textarea>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-secondary h-100">
+                <div class="card-header bg-light text-secondary font-weight-bold py-1">3. BAZO</div>
+                <div class="card-body py-2">
+                    <div class="row">
+                        <div class="col-5">
+                            <label class="small font-weight-bold">Longitud (mm)</label>
+                            <input type="number" id="bazo_tamano" class="form-control form-control-sm" placeholder="< 120">
+                        </div>
+                        <div class="col-7">
+                            <label class="small font-weight-bold">Aspecto</label>
+                            <select id="bazo_aspecto" class="form-control form-control-sm">
+                                <option value="Homogéneo">Homogéneo</option>
+                                <option value="Esplenomegalia">Esplenomegalia</option>
+                                <option value="Granulomas">Granulomas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <!-- Páncreas y bazo en la misma línea -->
-            <div class="row mb-3">
-                <div class="form-group col-md-6">
-                    <label for="vesicula_paredes">Páncreas:</label>
-                    <input type="text" class="form-control form-control-sm" id="vesicula_paredes" placeholder="Ingrese tamaño y ecoestructura">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="bazo">Bazo:</label>
-                    <input type="text" class="form-control form-control-sm" id="bazo" placeholder="Ingrese tamaño y ecoestructura">
-                </div>
-            </div>
-
-            <!-- Riñones (derecho e izquierdo) en la misma línea -->
-            <div class="row mb-3">
-                <div class="form-group col-md-6">
-                    <label for="rinon_derecho">Riñón Derecho:</label>
-                    <input type="text" class="form-control form-control-sm" id="rinon_derecho" placeholder="Ingrese hallazgos">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="rinon_izquierdo">Riñón Izquierdo:</label>
-                    <input type="text" class="form-control form-control-sm" id="rinon_izquierdo" placeholder="Ingrese hallazgos">
-                </div>
-            </div>
-
-            <!-- Otros hallazgos, conclusiones y sugerencias en filas separadas -->
-            <div class="form-group">
-                <label for="otros_hallazgos">Otros Hallazgos:</label>
-                <textarea class="form-control form-control-sm" id="otros_hallazgos" rows="2" placeholder="Ingrese otros hallazgos"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="conclusiones">Conclusiones:</label>
-                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="sugerencias">Sugerencias:</label>
-                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
-            </div>
-              <div class="row mt-1">
+    <div class="card mb-3 border-success">
+        <div class="card-header bg-light text-success font-weight-bold py-1">
+            4. RIÑONES (Longitud y Parénquima)
+        </div>
+        <div class="card-body py-2">
+            <div class="row mb-2">
+                <div class="col-md-2"><label class="small font-weight-bold mt-1">Derecho:</label></div>
                 <div class="col-md-3">
-                  <button class="btn btn-primary btn-xs mt-2" onclick="createEcografiaAbdominal()">
-                    Guardar
-                  </button>
+                    <input type="number" id="rd_long" class="form-control form-control-sm" placeholder="Long (mm)">
+                </div>
+                <div class="col-md-3">
+                    <input type="number" id="rd_par" class="form-control form-control-sm" placeholder="Parénq (mm)">
+                </div>
+                <div class="col-md-4">
+                    <select id="rinon_derecho" class="form-control form-control-sm"> <option value="Conservado">Conservado</option>
+                        <option value="Litiasis">Litiasis</option>
+                        <option value="Hidronefrosis">Hidronefrosis</option>
+                        <option value="Quiste Simple">Quiste Simple</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"><label class="small font-weight-bold mt-1">Izquierdo:</label></div>
+                <div class="col-md-3">
+                    <input type="number" id="ri_long" class="form-control form-control-sm" placeholder="Long (mm)">
+                </div>
+                <div class="col-md-3">
+                    <input type="number" id="ri_par" class="form-control form-control-sm" placeholder="Parénq (mm)">
+                </div>
+                <div class="col-md-4">
+                    <select id="rinon_izquierdo" class="form-control form-control-sm"> <option value="Conservado">Conservado</option>
+                        <option value="Litiasis">Litiasis</option>
+                        <option value="Hidronefrosis">Hidronefrosis</option>
+                        <option value="Quiste Simple">Quiste Simple</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label class="small font-weight-bold">Estómago / Intestino</label>
+            <input type="text" id="estomago" class="form-control form-control-sm" value="Meteorismo habitual.">
+        </div>
+        <div class="col-md-8">
+            <label class="small font-weight-bold">Otros Hallazgos (Líquido/Vejiga)</label>
+            <textarea id="otros_hallazgos" class="form-control form-control-sm" rows="1">No líquido libre en cavidad. Vejiga vacía.</textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="small font-weight-bold">Conclusiones</label>
+            <textarea id="conclusiones" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="col-md-12 mt-2">
+            <label class="small font-weight-bold">Sugerencias</label>
+            <textarea id="sugerencias" class="form-control" rows="1"></textarea>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-primary" onclick="createEcografiaAbdominal()">
+                <i class="fas fa-save"></i> Guardar Ecografía
+            </button>
+        </div>
+    </div>
+</div>
                 </div>
               </div>
             </form>

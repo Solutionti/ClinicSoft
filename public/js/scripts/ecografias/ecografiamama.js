@@ -1,5 +1,12 @@
 function createEcografiaMama() {
   var url = baseurl + "administracion/ecografiamama";
+
+  // Validar DNI
+  if ($("#dni").val() == "") {
+    $("body").overhang({ type: "error", message: "El DNI del paciente es obligatorio." });
+    return;
+  }
+
   var documento_paciente = $("#dni").val(),
       codigo_doctor = $("#codigo_doctor").val(),
       pezon_izq = $("#pezon_izq").val(),

@@ -150,72 +150,111 @@
         >
         </div>
         </div>
+        <div class="modal-body">
+    <form id="formTiroides">
+        
         <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="motivo" class="form-label">Motivo del Examen:</label>
-                    <input type="text" class="form-control form-control-sm" id="motivo" formControlName="motivo">
-                </div>
+            <div class="col-md-8">
+                <label class="small font-weight-bold">Motivo del Examen</label>
+                <input type="text" class="form-control form-control-sm" id="motivo">
+            </div>
+            <div class="col-md-4 text-right mt-4">
+                <button type="button" class="btn btn-success btn-sm btn-block" onclick="cargarTiroidesNormal()">
+                    <i class="fas fa-magic"></i> Cargar Normal
+                </button>
+            </div>
         </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="descripcionTiroides">Descripción de la Tiroides:</label>
-                    <textarea class="form-control" id="descripcionTiroides" rows="3">Ubicación central, Parénquima homogéneo, Volumen normal, No se observan lesiones focales</textarea>
-                </div>
-            </div>
-            <div class="row">
-            <div class="col-md-6">
-            <label for="lobuloDerecho">Lóbulo Derecho:</label>
-            <input type="text" class="form-control" id="lobuloDerecho" placeholder="10x13x28 mm, 1.9 cc">
-            </div>
-            <div class="col-md-6">
-            <label for="lobuloIzquierdo">Lóbulo Izquierdo:</label>
-            <input type="text" class="form-control" id="lobuloIzquierdo" placeholder="10x13x26 mm, 1.7 cc">
-            </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="istmo">Istmo:</label>
-                    <input type="text" class="form-control" id="istmo" placeholder="Espesor de 2 mm">
+        <div class="form-group mb-3">
+            <label class="small font-weight-bold">Descripción de la Tiroides</label>
+            <textarea class="form-control form-control-sm" id="descripcionTiroides" rows="2">Ubicación central, Parénquima homogéneo, Volumen normal, No se observan lesiones focales</textarea>
+        </div>
+
+        <div class="card mb-3 border-primary">
+            <div class="card-header bg-light text-primary font-weight-bold py-1 text-center">
+                BIOMETRÍA Y VOLUMEN TIROIDEO
+            </div>
+            <div class="card-body py-2 px-1">
+                <div class="row mx-0 border-bottom pb-1 mb-2">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5 text-center font-weight-bold text-primary">LÓBULO DERECHO</div>
+                    <div class="col-md-5 text-center font-weight-bold text-primary">LÓBULO IZQUIERDO</div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="estructurasVasculares">Estructuras Vasculares:</label>
-                    <input type="text" class="form-control" id="estructurasVasculares" placeholder="Normales">
+
+                <div class="row mx-0 mb-1 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Long (mm)</label></div>
+                    <div class="col-md-5"><input type="number" id="ld_long" class="form-control form-control-sm text-center" placeholder="L"></div>
+                    <div class="col-md-5"><input type="number" id="li_long" class="form-control form-control-sm text-center" placeholder="L"></div>
+                </div>
+                <div class="row mx-0 mb-1 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Antero-P (mm)</label></div>
+                    <div class="col-md-5"><input type="number" id="ld_ap" class="form-control form-control-sm text-center" placeholder="AP"></div>
+                    <div class="col-md-5"><input type="number" id="li_ap" class="form-control form-control-sm text-center" placeholder="AP"></div>
+                </div>
+                <div class="row mx-0 mb-1 align-items-center">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0">Trans (mm)</label></div>
+                    <div class="col-md-5"><input type="number" id="ld_trans" class="form-control form-control-sm text-center" placeholder="T"></div>
+                    <div class="col-md-5"><input type="number" id="li_trans" class="form-control form-control-sm text-center" placeholder="T"></div>
+                </div>
+
+                <div class="row mx-0 mt-2 align-items-center bg-light py-2">
+                    <div class="col-md-2 text-right"><label class="small font-weight-bold mb-0 text-success">Volumen</label></div>
+                    <div class="col-md-5"><input type="text" id="ld_volumen" class="form-control form-control-sm text-center font-weight-bold text-success" readonly placeholder="0.0 cc"></div>
+                    <div class="col-md-5"><input type="text" id="li_volumen" class="form-control form-control-sm text-center font-weight-bold text-success" readonly placeholder="0.0 cc"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="glandulasSubmaxilares">Glándulas Submaxilares:</label>
-                    <input type="text" class="form-control" id="glandulasSubmaxilares" placeholder="Normales">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="adenopatiaCervicales">Adenopatía Cervicales:</label>
-                    <input type="text" class="form-control" id="adenopatiaCervicales" placeholder="No se observan">
-                </div>
+            <div class="card-footer py-1 text-center bg-white">
+                <span class="small font-weight-bold text-dark">VOLUMEN GLANDULAR TOTAL: </span>
+                <input type="text" id="volumen_total" class="d-inline-block form-control form-control-sm font-weight-bold text-center border-0 bg-transparent text-primary" style="width: 100px; font-size: 1.1em;" readonly>
             </div>
-            <div class="form-group">
-                <label for="piel">Piel:</label>
-                <input type="text" class="form-control" id="piel" placeholder="Delgada sin diferenciación">
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <label class="small font-weight-bold">Istmo</label>
+                <input type="text" class="form-control form-control-sm" id="istmo" placeholder="Espesor mm">
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="tcsc">TCSC:</label>
-                    <textarea class="form-control" id="tcsc" rows="3">De caracteres normales ecográficamente normales, no se observan quistes, ni nódulos</textarea>
-                </div>
+            <div class="col-md-6">
+                <label class="small font-weight-bold">Estructuras Vasculares</label>
+                <input type="text" class="form-control form-control-sm" id="estructurasVasculares" value="Normales">
             </div>
-                
-            <div class="form-group">
-                <label for="conclusiones">Conclusiones:</label>
-                <textarea class="form-control form-control-sm" id="conclusiones" rows="2" placeholder="Ingrese conclusiones"></textarea>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <label class="small font-weight-bold">Glándulas Submaxilares</label>
+                <input type="text" class="form-control form-control-sm" id="glandulasSubmaxilares" value="Normales">
             </div>
-            <div class="form-group">
-                <label for="sugerencias">Sugerencias:</label>
-                <textarea class="form-control form-control-sm" id="sugerencias" rows="2" placeholder="Ingrese sugerencias"></textarea>
+            <div class="col-md-6">
+                <label class="small font-weight-bold">Adenopatías Cervicales</label>
+                <input type="text" class="form-control form-control-sm" id="adenopatiaCervicales" value="No se observan">
             </div>
-              <div class="row mt-1">
-                <div class="col-md-3">
-                  <button type="button" class="btn btn-primary" onclick="createEcografiaTiroides()">Guardar</button>
-               </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label class="small font-weight-bold">Piel</label>
+            <input type="text" class="form-control form-control-sm" id="piel" value="Delgada sin diferenciación">
+        </div>
+
+        <div class="form-group mb-2">
+            <label class="small font-weight-bold">TCSC</label>
+            <textarea class="form-control form-control-sm" id="tcsc" rows="2">De caracteres normales ecográficamente normales, no se observan quistes, ni nódulos</textarea>
+        </div>
+
+        <h6 class="font-weight-bold mt-3">Conclusiones</h6>
+        <div class="mb-2">
+            <textarea class="form-control form-control-sm" id="conclusiones" rows="2"></textarea>
+        </div>
+
+        <h6 class="font-weight-bold">Sugerencias</h6>
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" id="sugerencias" rows="1"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaTiroides()">Guardar</button>
+</div>
                 </div>
               </div>
             </form>

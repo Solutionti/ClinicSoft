@@ -150,157 +150,165 @@
         >
         </div>
         </div>
-        <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Utero</label>
-                        <select class="form-control form-control-sm" id="utero-tipo">
-                           <option value="Anteverso">Anteverso</option>
-                           <option value="Retroverso">Retroverso</option>
-                           <option value="Ausente">Ausente</option>
-                        </select>
-                     </div>
-                  </div>
-                  <div class="col-md-4 offset-md-1">
-                     <label>Superficie</label>
-                     <br>
-                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="superficie" id="regular" value="Regular">
-                        <label class="form-check-label" for="inlineRadio1">Regular</label> 
-                     </div>
-                     <div class="form-check form-check-inline">
+<div class="modal-body">
+
+    <div class="card mb-3 border-info">
+        <div class="card-header bg-light text-info font-weight-bold py-1 d-flex justify-content-between align-items-center">
+            <span>1. VEJIGA Y PREPARACIÓN</span>
+            <button type="button" class="btn btn-success btn-sm" onclick="cargarPelvicaNormal()">
+                <i class="fas fa-magic"></i> Cargar Valores Normales
+            </button>
+        </div>
+        <div class="card-body py-2">
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Repleción Vesical</label>
+                    <select id="replecion" class="form-control form-control-sm">
+                        <option value="Adecuada">Adecuada (Llena)</option>
+                        <option value="Escasa">Escasa (Insuficiente)</option>
+                        <option value="Excesiva">Excesiva</option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <label class="small font-weight-bold">Descripción</label>
+                    <input type="text" id="vejiga_desc" class="form-control form-control-sm" value="Paredes delgadas, contenido anecoico.">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3 border-primary">
+        <div class="card-header bg-light text-primary font-weight-bold py-1">
+            2. EVALUACIÓN DEL ÚTERO
+        </div>
+        <div class="card-body py-2">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Posición</label>
+                    <select class="form-control form-control-sm" id="utero-tipo">
+                        <option value="Anteverso">Anteverso</option>
+                        <option value="Retroverso">Retroverso</option>
+                        <option value="Ausente">Ausente</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Superficie</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="superficie" id="regular" value="Regular" checked>
+                        <label class="form-check-label small" for="regular">Regular</label> 
+                    </div>
+                    <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="superficie" id="modular" value="Modular">
-                        <label class="form-check-label" for="inlineRadio2">Modular</label>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="form-group">
-                           <label>Endometrio</label>
-                           <textarea class="form-control" rows="1" id="endometrio">Grosor mm libre</textarea>
-                           <br>
-                           <label>Tumor anexial</label>
-                           <br>
-                           <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="tumoraxial" id="si" value="Si">
-                              <label class="form-check-label" for="inlineRadio1">Si</label> 
-                           </div>
-                           <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="tumoraxial" id="no" value="No">
-                              <label class="form-check-label" for="inlineRadio2">No</label>
-                           </div>
-                           <input  id="tumor_anexial_com" class="form-control-sm form-control" value="No hay masas solidas ni quisticas">
-                        </div>
-                     </div>
-                     <div class="col-md-8 ">
-                        <div class="row">
-                           <div class="col-md-2 offset-md-1">
-                              <label>Dimensiones =></label>
-                           </div>
-                           <div class="col-md-2">
-                              <label>Longitud</label>
-                           </div>
-                           <div class="col-md-2">
-                              <label>Transverso</label>
-                           </div>
-                           <div class="col-md-2">
-                              <label>Ant. post</label>
-                           </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-md-2 offset-md-1">
-                              <label>UTERO</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="utero-medidas">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="medidaUtero1">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="medidaUtero2">
-                           </div>
-                           <div class="col-md-3">
-                              <textarea id="comentarioUtero" class="form-control form-control-sm" rows="1">DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
-                           </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                           <div class="col-md-2 offset-md-1">
-                              <label>OVARIO DERECHO</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="ovario-der1">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="ovario-der2">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-4">
-                              <textarea id="comentarioOvario-der" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
-                           </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                           <div class="col-md-2 offset-md-1">
-                              <label>OVARIO IZQUIERDO</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="ovario-iz1">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-1">
-                              <input  class="form-control form-control-sm" id="ovario-iz2">
-                           </div>
-                           <div class="col-md-1">
-                              <label class="mt-3">mm</label>
-                           </div>
-                           <div class="col-md-4">
-                              <textarea id="comentarioOvario-izq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <label>Fondo de saco</label>
-                        <textarea id="fondosaco" class="form-control form-control-sm" rows="1">    Libre</textarea>
-                     </div>
-                     <div class="col-md-6">
-                        <label>Miometrio</label>
-                        <textarea id="miometrio" class="form-control form-control-sm" rows="1">Homogenio</textarea>
-                     </div>
-                  </div>
-                  <br>
-                  <br>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <label>Conclusión</label>
-                        <textarea id="conclusion" class="form-control form-control-sm" rows="2"></textarea>
-                     </div>
-                     <div class="col-md-6">
-                        <label>Sugerencias</label>
-                        <textarea id="sugerencias" class="form-control form-control-sm" rows="2"></textarea>
-                     </div>
-                  </div>
-               </div>
-               <br>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="createEcografiaPelvica()">Guardar</button>
-               </div>
+                        <label class="form-check-label small" for="modular">Nodular</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="small font-weight-bold">Miometrio</label>
+                    <textarea id="miometrio" class="form-control form-control-sm" rows="1">Homogéneo</textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="small font-weight-bold">Endometrio</label>
+                    <textarea class="form-control form-control-sm" rows="1" id="endometrio">Grosor mm libre</textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="small font-weight-bold">Tumor Anexial</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tumoraxial" id="si" value="Si">
+                        <label class="form-check-label small" for="si">Si</label> 
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tumoraxial" id="no" value="No" checked>
+                        <label class="form-check-label small" for="no">No</label>
+                    </div>
+                    <input id="tumor_anexial_com" class="form-control-sm form-control mt-1" placeholder="Descripción...">
+                </div>
+            </div>
+
+            <div class="row bg-light p-2 rounded mx-0">
+                <div class="col-12 text-primary font-weight-bold small mb-1">Dimensiones (Long x AP x Trans)</div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="utero-medidas" placeholder="Long (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="medidaUtero1" placeholder="AP (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="medidaUtero2" placeholder="Trans (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="text" id="ut_vol" class="form-control form-control-sm font-weight-bold bg-white" readonly placeholder="Vol cc">
+                </div>
+                <div class="col-12 mt-2 px-1">
+                    <textarea id="comentarioUtero" class="form-control form-control-sm" rows="1">DE BORDES REGULARES Y PARENQUIMA HOMOGENEO</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3 border-warning">
+        <div class="card-header bg-light text-warning font-weight-bold py-1">
+            3. OVARIOS (MEDIDAS Y VOLUMEN)
+        </div>
+        <div class="card-body py-2">
+            <div class="row mb-2">
+                <div class="col-12 font-weight-bold small text-secondary">OVARIO DERECHO</div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ovario-der1" placeholder="L (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ovario-der2" placeholder="AP (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ov_der_t" placeholder="Trans (mm)"> </div>
+                <div class="col-md-3 px-1">
+                    <input type="text" id="od_vol" class="form-control form-control-sm bg-light" readonly placeholder="Vol cc"> </div>
+                <div class="col-12 mt-1 px-1">
+                    <textarea id="comentarioOvario-der" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="row">
+                <div class="col-12 font-weight-bold small text-secondary">OVARIO IZQUIERDO</div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ovario-iz1" placeholder="L (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ovario-iz2" placeholder="AP (mm)">
+                </div>
+                <div class="col-md-3 px-1">
+                    <input type="number" class="form-control form-control-sm" id="ov_izq_t" placeholder="Trans (mm)"> </div>
+                <div class="col-md-3 px-1">
+                    <input type="text" id="oi_vol" class="form-control form-control-sm bg-light" readonly placeholder="Vol cc"> </div>
+                <div class="col-12 mt-1 px-1">
+                    <textarea id="comentarioOvario-izq" class="form-control form-control-sm" rows="1">DE ASPECTO NORMAL.</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-2">
+            <label class="small font-weight-bold">Fondo de Saco</label>
+            <textarea id="fondosaco" class="form-control form-control-sm" rows="1">Libre</textarea>
+        </div>
+        <div class="col-md-6">
+            <label class="small font-weight-bold">Conclusión</label>
+            <textarea id="conclusion" class="form-control form-control-sm" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label class="small font-weight-bold">Sugerencias</label>
+            <textarea id="sugerencias" class="form-control form-control-sm" rows="3"></textarea>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaPelvica()">Guardar</button>
+</div>
             </div>
          </div>
       </div>

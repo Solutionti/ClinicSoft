@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PdfController extends CI_Controller {
 
     private function fixText($texto) {
-        return utf8_decode($texto);
+        return ($texto);
     }
 
     
@@ -917,2163 +917,2235 @@ public function getEcografiaTrasvaginalPdf($dni) {
 }
 
 public function getEcografiaPelvicaPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-    $datosecografia = $this->Ecografias_model->getEcografiaPelvicaPdf($dni)->result()[0];
+    $datosecografia = $this->Ecografias_model->getEcografiaPelvicaPdf($dni)->result()[0]; // Asegúrate que tu modelo traiga 'replecion', 'ut_vol', etc.
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+    // =========================================================
+    // 2. DEFINIMOS LA PLANTILLA (DISEÑO BASE)
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        // Marca de agua
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        // Barra lateral
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        // Imágenes laterales
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+        // Lista
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
+    // =========================================================
+    // 3. PÁGINA 1 Y ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->SetXY(70, 10);
+    $pdf->Cell(130, 10, ('ECOGRAFÍA PÉLVICA'), 0, 1, 'C');
 
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    // Datos Paciente
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
 
-  // Título
-  $pdf->SetFont('Arial', 'B', 14);
-  $pdf->SetXY(70, 10);
-  $pdf->Cell(130, 10, ('ECOGRAFÍA PÉLVICA'), 0, 1, 'C');
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
-
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
-
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
-
-// ÚTERO
-$pdf->SetXY(70, 70);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, ('ÚTERO:'), 0, 1);
-
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 77);
-$pdf->Cell(50, 6, 'Tipo:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->utero_tipo, 0);
-
-$pdf->SetXY(70, 84);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Superficie:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->superficie, 0);
-
-$pdf->SetXY(70, 91);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Medidas:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->utero_medidas . ' x ' . $datosecografia->medida_utero1 . ' x ' . $datosecografia->medida_utero2 . ' mm', 0);
-
-$pdf->SetXY(70, 98);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Miometrio:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->miometrio, 0);
-
-$pdf->SetXY(70, 105);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Comentario:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->comentario_utero, 0);
-
-// ENDOMETRIO
-$pdf->SetXY(70, 122);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'ENDOMETRIO:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 129);
-$pdf->MultiCell(130, 5, $datosecografia->endometrio, 0);
-
-// OVARIOS
-$pdf->SetXY(70, 145);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'OVARIOS:', 0, 1);
-
-// Ovario Derecho
-$pdf->SetXY(70, 152);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Ovario Derecho:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->ovario_der1 . ' x ' . $datosecografia->ovario_der2 . ' mm', 0);
-
-$pdf->SetXY(70, 159);
-$pdf->MultiCell(130, 5, 'Comentario: ' . $datosecografia->comentario_ovario_der, 0);
-
-// Ovario Izquierdo
-$pdf->SetXY(70, 171);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Ovario Izquierdo:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->ovario_iz1 . ' x ' . $datosecografia->ovario_iz2 . ' mm', 0);
-
-$pdf->SetXY(70, 178);
-$pdf->MultiCell(130, 5, 'Comentario: ' . $datosecografia->comentario_ovario_izq, 0);
-
-// OTROS HALLAZGOS
-$pdf->SetXY(70, 190);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'OTROS HALLAZGOS:', 0, 1);
-
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 197);
-$pdf->Cell(50, 6, 'Fondo de Saco:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->fondosaco, 0);
-
-$pdf->SetXY(70, 204);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Tumor Anexial:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->tumor_anexial_com, 0);
-
-// CONCLUSIÓN Y SUGERENCIAS
-$pdf->SetXY(70, 221);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, $this->fixText('CONCLUSIÓN:'), 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 228);
-$pdf->MultiCell(130, 5, $datosecografia->conclusion, 0);
-
-$pdf->SetXY(70, 245);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 252);
-$pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosecografia->codigo_doctor), 0);
 
 
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // =========================================================
+    // 4. CUERPO DEL REPORTE (VERTICAL)
+    // =========================================================
+    $y = 70;
+
+    // Función auxiliar (Con interruptor de UTF8)
+    function itemPelvic($pdf, &$y, $label, $valor, $esLargo = false, $yaEsUTF8 = false) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetTextColor(13, 110, 253); // Azul
+        $pdf->Cell(45, 6, $label, 0); 
+        
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0); // Negro
+        
+        $texto_final = ($yaEsUTF8) ? $valor : utf8_encode($valor);
+
+        if ($esLargo) {
+            $pdf->SetXY(115, $y); 
+            $pdf->MultiCell(85, 5, $texto_final, 0, 'L');
+            $y = $pdf->GetY() + 2; 
+        } else {
+            $pdf->Cell(85, 6, $texto_final, 0, 1);
+            $y += 6;
+        }
+    }
+
+    // --- 1. VEJIGA (NUEVO BLOQUE) ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell(130, 7, ('  1. VEJIGA Y PREPARACIÓN'), 0, 1, 'L', true);
+    $y += 8;
+
+    itemPelvic($pdf, $y, 'Repleción:', $datosecografia->replecion, false, true); // true si viene del select
+    itemPelvic($pdf, $y, 'Descripción:', $datosecografia->vejiga_desc, true);
+
+    // --- 2. ÚTERO ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, ('  2. EVALUACIÓN DEL ÚTERO'), 0, 1, 'L', true);
+    $y += 8;
+
+    itemPelvic($pdf, $y, 'Posición:', $datosecografia->utero_tipo, false, true); 
+    itemPelvic($pdf, $y, 'Superficie:', $datosecografia->superficie, false, true);
+    itemPelvic($pdf, $y, 'Miometrio:', $datosecografia->miometrio, false, true);
+    
+    // Dimensiones Uterinas (L x AP x T)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(45, 6, 'Dimensiones:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+    // Armamos la cadena de medidas
+    $dims = $datosecografia->utero_medidas . ' x ' . $datosecografia->medida_utero1 . ' x ' . $datosecografia->medida_utero2 . ' mm';
+    $pdf->Cell(85, 6, $dims, 0, 1);
+    $y += 6;
+
+    // Volumen Uterino (Resaltado)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(45, 6, 'Volumen Uterino:', 0);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(0); // Negrita
+    $pdf->Cell(85, 6, $datosecografia->ut_vol, 0, 1);
+    $y += 6;
+
+    itemPelvic($pdf, $y, 'Comentario:', $datosecografia->comentario_utero, true);
+
+    // Endometrio
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(220, 53, 69); // Rojo
+    $pdf->Cell(45, 6, 'Endometrio:', 0);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(0);
+    $pdf->Cell(85, 6, $datosecografia->endometrio . ' mm', 0, 1);
+    $y += 10;
+
+
+    // --- 3. OVARIOS ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, '  3. OVARIOS (MEDIDAS Y VOLUMEN)', 0, 1, 'L', true);
+    $y += 8;
+
+    // Ovario Derecho
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(130, 6, 'OVARIO DERECHO:', 0, 1);
+    $y += 6;
+    
+    // Medidas OD
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(0);
+    $dims_od = 'Medidas: ' . $datosecografia->ovario_der1 . ' x ' . $datosecografia->ovario_der2 . ' x ' . $datosecografia->ov_der_t . ' mm';
+    $pdf->Cell(80, 5, $dims_od, 0);
+    // Volumen OD
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(15, 5, 'Vol:', 0); $pdf->SetTextColor(0);
+    $pdf->Cell(35, 5, $datosecografia->od_vol, 0, 1);
+    $y += 5;
+    
+    itemPelvic($pdf, $y, 'Descripción:', $datosecografia->comentario_ovario_der, true);
+    $y += 2; 
+
+    // Ovario Izquierdo
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(130, 6, 'OVARIO IZQUIERDO:', 0, 1);
+    $y += 6;
+    
+    // Medidas OI
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(0);
+    $dims_oi = 'Medidas: ' . $datosecografia->ovario_iz1 . ' x ' . $datosecografia->ovario_iz2 . ' x ' . $datosecografia->ov_izq_t . ' mm';
+    $pdf->Cell(80, 5, $dims_oi, 0);
+    // Volumen OI
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(15, 5, 'Vol:', 0); $pdf->SetTextColor(0);
+    $pdf->Cell(35, 5, $datosecografia->oi_vol, 0, 1);
+    $y += 5;
+
+    itemPelvic($pdf, $y, 'Descripción:', $datosecografia->comentario_ovario_izq, true);
+    $y += 8;
+
+
+    // --- 4. OTROS HALLAZGOS ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, '  4. OTROS HALLAZGOS', 0, 1, 'L', true);
+    $y += 8;
+
+    itemPelvic($pdf, $y, 'Fondo de Saco:', $datosecografia->fondosaco, true);
+    
+    // Tumor Anexial
+    if ($datosecografia->tumoraxial == 'Si') { // Variable corregida
+        $pdf->SetTextColor(220, 53, 69);
+    }
+    itemPelvic($pdf, $y, 'Tumoración:', $datosecografia->tumor_anexial_com, true);
+    $pdf->SetTextColor(0); 
+    $y += 4;
+
+
+    // =========================================================
+    // 5. CONCLUSIÓN (CON SALTO DE PÁGINA)
+    // =========================================================
+    if ($y > 230) { 
+        $pdf->AddPage(); 
+        $imprimirPlantilla($pdf); 
+        $y = 30; 
+    }
+
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, ('CONCLUSIÓN:'), 0, 1);
+    
+    $pdf->SetX(70);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusion), 0, 'J');
+
+    $y = $pdf->GetY() + 5;
+
+    // Sugerencias
+    if ($y > 250) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+    
+    $pdf->SetX(70);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->sugerencias), 0, 'J');
+
+
+    // PIE DE PÁGINA
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_pelvica.pdf');
-exit;
+    $pdf->Output('I', 'ecografia_pelvica.pdf');
+    exit;
+
 
 
 }
 
 public function getEcografiaObstetricaPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-    $datosecografia = $this->Ecografias_model->getEcografiaObstetricaPdf($dni)->result()[0]; 
+    $datosecografia = $this->Ecografias_model->getEcografiaObstetricaPdf($dni)->result()[0];
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+    // =========================================================
+    // 2. DEFINIMOS LA PLANTILLA (BARRA LATERAL)
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        // Imágenes laterales...
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        // Lista de ecografías...
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L'); $pdf->SetX(15);
+        }
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
-
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
-
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
-
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
     $pdf->Cell(130, 10, ('ECOGRAFÍA OBSTÉTRICA'), 0, 1, 'C');
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    // Datos Paciente (Igual que antes)...
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosecografia->codigo_doctor), 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    // =========================================================
+    // 4. LÓGICA INTELIGENTE: ¿ES PRECOZ O TARDÍA?
+    // =========================================================
+    // Si llenaste el campo LCC, asumimos que es precoz.
+    $esPrecoz = !empty($datosecografia->lcc); 
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
+    $y = 70;
 
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
+    // Función auxiliar para imprimir líneas
+    function itemObs($pdf, &$y, $label, $valor, $esLargo = false) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetTextColor(13, 110, 253); 
+        $pdf->Cell(45, 6, $label, 0); 
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0); 
+        $valorLimpio = utf8_encode($valor);
+        if ($esLargo) {
+            $pdf->SetXY(115, $y); $pdf->MultiCell(85, 5, $valorLimpio, 0, 'L');
+            $y = $pdf->GetY() + 2; 
+        } else {
+            $pdf->Cell(85, 6, $valorLimpio, 0, 1); $y += 6;
+        }
+    }
 
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
-
-// EVALUACIÓN FETAL
-$pdf->SetXY(70, 70);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, ('EVALUACIÓN FETAL:'), 0, 1);
-
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 77);
-$pdf->Cell(50, 6, 'Feto/Embrión:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->fetoembrion, 0);
-
-$pdf->SetXY(70, 84);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, ('Situación:'), 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->situacion, 0);
-
-$pdf->SetXY(70, 91);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Estado Fetal:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->estadoFeto, 0);
-
-// BIOMETRÍA FETAL
-$pdf->SetXY(70, 110);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, ('BIOMETRÍA FETAL:'), 0, 1);
-
-// Primera fila
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'DBP: ' . $datosecografia->dpb . ' mm', 0, 0, 'L');
-$pdf->Cell(65, 6, 'CC: ' . $datosecografia->cc . ' mm', 0, 1, 'L');
-
-// Segunda fila
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'CA: ' . $datosecografia->ca . ' mm', 0, 0, 'L');
-$pdf->Cell(65, 6, 'LF: ' . $datosecografia->lf . ' mm', 0, 1, 'L');
-
-// Tercera fila
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'LCF: ' . $datosecografia->lcf . ' lpm', 0, 0, 'L');
-$pdf->Cell(65, 6, 'Minutos: ' . $datosecografia->min, 0, 1, 'L');
-
-// OTROS HALLAZGOS
-$pdf->SetXY(70, 140);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'OTROS HALLAZGOS:', 0, 1);
-
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 147);
-$pdf->Cell(50, 6, 'Placenta:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->placenta . ' mm', 0);
-
-$pdf->SetXY(70, 154);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, ('Líquido Amniótico:'), 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->ila, 0);
-
-$pdf->SetXY(70, 167);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Percentil:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->percentil, 0);
-
-// RECOMENDACIONES
-$pdf->SetXY(70, 180);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'TIPO DE PARTO:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 187);
-$pdf->MultiCell(130, 5, $datosecografia->tipoParto, 0);
-
-// CONCLUSIÓN Y SUGERENCIAS
-$pdf->SetXY(70, 200);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, ('CONCLUSIÓN:'), 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 207);
-$pdf->MultiCell(130, 5, $datosecografia->conclusion, 0);
-
-$pdf->SetXY(70, 225);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 232);
-$pdf->MultiCell(130, 5, $datosecografia->sugerencia, 0);
-
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
-    $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
-    $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
-    $pdf->SetXY(140, 283);
-    $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    // --- BLOQUE 1: DATOS BIOMÉTRICOS ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
     
-    // Íconos al lado del celular
+    // CAMBIA EL TÍTULO SEGÚN EL TIPO
+    $tituloBloque1 = $esPrecoz ? '  1. BIOMETRÍA (PRIMERAS SEMANAS)' : '  1. BIOMETRÍA FETAL';
+    $pdf->Cell(130, 7, ($tituloBloque1), 0, 1, 'L', true);
+    $y += 8;
+
+    if ($esPrecoz) {
+        // [DISEÑO A] SI ES PRECOZ: Muestra Saco, LCC, etc.
+        itemObs($pdf, $y, 'Saco Gestacional:', $datosecografia->saco_gestacional);
+        itemObs($pdf, $y, 'Vesícula Vitelina:', $datosecografia->saco_vitelino);
+        itemObs($pdf, $y, 'LCC (Longitud):', $datosecografia->lcc . ' mm');
+        itemObs($pdf, $y, 'Embrión:', $datosecografia->embrion_visualizado);
+    } else {
+        // [DISEÑO B] SI ES AVANZADA: Muestra DBP, LF, Peso
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(20, 6, 'DBP:', 0); $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(45, 6, $datosecografia->dpb . ' mm', 0);
+        
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(20, 6, 'CC:', 0); $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(45, 6, $datosecografia->cc . ' mm', 0, 1);
+        $y += 6;
+
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(20, 6, 'CA:', 0); $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(45, 6, $datosecografia->ca . ' mm', 0);
+        
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(20, 6, 'LF:', 0); $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(45, 6, $datosecografia->lf . ' mm', 0, 1);
+        $y += 8;
+
+        // Peso Resaltado
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(45, 6, 'Peso Estimado:', 0);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(85, 6, $datosecografia->ponderado . ' g  (P: ' . $datosecografia->percentil . ')', 0, 1);
+        $y += 6;
+        
+        itemObs($pdf, $y, 'Edad Gestacional:', $datosecografia->edad_gestacional);
+    }
+
+    // --- BLOQUE 2: VITALIDAD ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, ('  2. ESTÁTICA Y VITALIDAD'), 0, 1, 'L', true);
+    $y += 8;
+
+    if (!$esPrecoz) { // Solo mostrar esto si es grande
+        itemObs($pdf, $y, 'Situación:', $datosecografia->situacion);
+        itemObs($pdf, $y, 'Presentación:', $datosecografia->presentacion);
+        itemObs($pdf, $y, 'Dorso:', $datosecografia->dorso);
+    }
+    
+    itemObs($pdf, $y, 'Latidos (LCF):', $datosecografia->lcf . ' lpm');
+    // Mapeamos 'estadoFeto' que ahora guarda los movimientos
+    itemObs($pdf, $y, 'Actividad:', $datosecografia->estadoFeto, true); 
+    
+    if (!$esPrecoz) {
+        itemObs($pdf, $y, 'Sexo Fetal:', $datosecografia->sexo);
+    }
+    $y += 2;
+
+    // --- BLOQUE 3: PLACENTA ---
+    if (!$esPrecoz) { // La placenta no se evalúa igual en precoz
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 7, ('  3. PLACENTA Y LÍQUIDO'), 0, 1, 'L', true);
+        $y += 8;
+
+        itemObs($pdf, $y, 'Ubicación:', $datosecografia->placenta); // Campo 'placenta'
+        itemObs($pdf, $y, 'Grado:', 'Grado ' . $datosecografia->placenta_grado);
+        itemObs($pdf, $y, 'Líquido Amniótico:', $datosecografia->ila, true);
+        $y += 4;
+    } else {
+        // En precoz, solo mostramos si hay hematomas o datos relevantes en ILA
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 7, ('  3. OBSERVACIONES ADICIONALES'), 0, 1, 'L', true);
+        $y += 8;
+        itemObs($pdf, $y, 'Trofoblasto/ILA:', $datosecografia->ila, true);
+    }
+
+    // --- CONCLUSIÓN ---
+    if ($y > 230) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->Cell(130, 6, ('CONCLUSIÓN:'), 0, 1);
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusion), 0, 'J');
+    $y = $pdf->GetY() + 5;
+
+    // --- SUGERENCIAS ---
+    if ($y > 250) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->sugerencia), 0, 'J');
+
+    // PIE DE PÁGINA
+    $pdf->SetFillColor(0,24,0); $pdf->Rect(10, 290, 190, 2, 'F');
+    $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(128,128,128);
+    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_obstetrica.pdf');
-exit;
-
+    $pdf->Output('I', 'ecografia_obstetrica.pdf');
+    exit;
 }
 
 public function getEcografiaAbdominalPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-    $datosecografia = $this->Ecografias_model->getEcografiaAbdominalPdf($dni)->result()[0]; 
+    $datosecografia = $this->Ecografias_model->getEcografiaAbdominalPdf($dni)->result()[0];
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+    // =========================================================
+    // 2. PLANTILLA BASE (BARRA LATERAL Y LOGO)
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        // Logo y Marca de agua
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        // Barra Lateral
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        // Imágenes
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+        // Lista de servicios
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
     $pdf->Cell(130, 10, ('ECOGRAFÍA ABDOMINAL'), 0, 1, 'C');
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    // Datos del Paciente
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
 
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
 
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosecografia->codigo_doctor), 0);
 
-// MOTIVO
-$pdf->SetXY(70, 60);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 67);
-$pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
 
-// HALLAZGOS
-$pdf->SetXY(70, 80);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'HALLAZGOS:', 0, 1);
+    // =========================================================
+    // 4. CUERPO DEL REPORTE (NUEVOS CAMPOS)
+    // =========================================================
+    $y = 70;
 
-// Estómago
-$pdf->SetXY(70, 87);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'ESTÓMAGO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->estomago, 0);
+    // Función auxiliar para imprimir líneas estandarizadas (Etiqueta Azul / Valor Negro)
+    function itemAbd($pdf, &$y, $label, $valor, $esLargo = false) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetTextColor(13, 110, 253); // Azul
+        $pdf->Cell(35, 6, ($label), 0); 
+        
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0); // Negro
+        
+        $valorLimpio = ($valor);
 
-// Hígado
-$pdf->SetXY(70, 100);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'HÍGADO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->higado, 0);
+        if ($esLargo) {
+            $pdf->SetXY(105, $y); 
+            $pdf->MultiCell(95, 5, $valorLimpio, 0, 'L');
+            $y = $pdf->GetY() + 2; 
+        } else {
+            $pdf->Cell(95, 6, $valorLimpio, 0, 1);
+            $y += 6;
+        }
+    }
 
-// Vesícula
-$pdf->SetXY(70, 113);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(130, 6, 'VESÍCULA:', 0, 1);
+    // --- BLOQUE 1: HÍGADO Y VÍAS BILIARES ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell(130, 7, ('  1. HÍGADO Y VÍAS BILIARES'), 0, 1, 'L', true);
+    $y += 8;
 
-$pdf->SetX(70);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(65, 6, 'Volumen: ' . $datosecografia->vesicula_volumen, 0, 1);
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'Paredes: ' . $datosecografia->vesicula_paredes, 0, 1);
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'Colédoco: ' . $datosecografia->coledoco_diametro . ' mm', 0, 1);
+    itemAbd($pdf, $y, 'Tamaño Hepático:', $datosecografia->higado_tamano . ' mm');
+    itemAbd($pdf, $y, 'Ecoestructura:', $datosecografia->higado_eco);
+    itemAbd($pdf, $y, 'Colédoco:', $datosecografia->coledoco_diametro . ' mm');
+    
+    // Vesícula (Combinamos Paredes + Detalles)
+    $vesicula_texto = $datosecografia->vesicula_paredes . '. ' . $datosecografia->vesicula_detalles;
+    itemAbd($pdf, $y, 'Vesícula Biliar:', $vesicula_texto, true);
+    $y += 2;
 
-// Bazo
-$pdf->SetXY(70, 138);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'BAZO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->bazo, 0);
+    // --- BLOQUE 2: PÁNCREAS Y BAZO ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, ('  2. PÁNCREAS Y BAZO'), 0, 1, 'L', true);
+    $y += 8;
 
-// Riñones
-$pdf->SetXY(70, 150);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(130, 6, 'RIÑONES:', 0, 1);
+    itemAbd($pdf, $y, 'Páncreas:', utf8_encode($datosecografia->pancreas), true);
+    
+    // Bazo (Tamaño + Aspecto)
+    $bazo_texto = 'Longitud: ' . $datosecografia->bazo_tamano . ' mm. Aspecto: ' . $datosecografia->bazo_aspecto;
+    itemAbd($pdf, $y, 'Bazo:', utf8_encode($bazo_texto), true);
+    $y += 2;
 
-$pdf->SetX(70);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(65, 6, 'Derecho: ' . $datosecografia->rinon_derecho, 0, 1);
-$pdf->SetX(70);
-$pdf->Cell(65, 6, 'Izquierdo: ' . $datosecografia->rinon_izquierdo, 0, 1);
+    // --- BLOQUE 3: RIÑONES (COMPARATIVA) ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, ('  3. RIÑONES'), 0, 1, 'L', true);
+    $y += 10; // Damos un poco más de aire antes de la tabla
 
-// Otros Hallazgos
-$pdf->SetXY(70, 170);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(130, 6, 'OTROS HALLAZGOS:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 177);
-$pdf->MultiCell(130, 5, $datosecografia->otros_hallazgos, 0);
+    // Encabezados de tabla (CENTRADOS Y MÁS SEPARADOS)
+    // Encabezados de tabla (CON COLOR)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); 
+    
+    // CAMBIO DE COLOR A AZUL
+    $pdf->SetTextColor(13, 110, 253); 
+    
+    $pdf->Cell(40, 5, '', 0); // Espacio vacío
+    $pdf->Cell(45, 5, 'DERECHO', 0, 0, 'C'); 
+    $pdf->Cell(45, 5, 'IZQUIERDO', 0, 1, 'C'); 
+    
+    // RESET A NEGRO PARA LO QUE SIGUE
+    $pdf->SetTextColor(0); 
+    $y += 6;
 
-// Conclusiones
-$pdf->SetXY(70, 195);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 202);
-$pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
+    // Fila 1: Longitud
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253); // Azul
+    $pdf->Cell(40, 6, 'Longitud:', 0); // Etiqueta más ancha (40)
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0); // Negro
+    $pdf->Cell(45, 6, $datosecografia->rd_long . ' mm', 0, 0, 'C');
+    $pdf->Cell(45, 6, $datosecografia->ri_long . ' mm', 0, 1, 'C');
+    $y += 6;
 
-// Sugerencias
-$pdf->SetXY(70, 220);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 227);
-$pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
+    // Fila 2: Parénquima
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(40, 6, ('Parénquima:'), 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+    $pdf->Cell(45, 6, $datosecografia->rd_par . ' mm', 0, 0, 'C');
+    $pdf->Cell(45, 6, $datosecografia->ri_par . ' mm', 0, 1, 'C');
+    $y += 6;
 
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // Fila 3: Aspecto / Diagnóstico (MultiCell para que no se corte)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(40, 6, 'Diagnostico:', 0);
+    $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(0);
+    
+    // Guardamos la posición Y actual
+    $y_inicio = $y;
+    
+    // Columna Derecha
+    $pdf->SetXY(110, $y_inicio); // 70 + 40 = 110
+    $pdf->MultiCell(45, 5, utf8_encode($datosecografia->rinon_derecho), 0, 'C');
+    $y_final_der = $pdf->GetY();
+    
+    // Columna Izquierda
+    $pdf->SetXY(155, $y_inicio); // 110 + 45 = 155
+    $pdf->MultiCell(45, 5, utf8_encode($datosecografia->rinon_izquierdo), 0, 'C');
+    $y_final_izq = $pdf->GetY();
+    
+    // El nuevo Y será el mayor de los dos bloques + margen
+    $y = max($y_final_der, $y_final_izq) + 6;
+
+
+    // --- BLOQUE 4: OTROS HALLAZGOS ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 7, utf8_decode('  4. OTROS HALLAZGOS'), 0, 1, 'L', true);
+    $y += 8;
+
+    itemAbd($pdf, $y, 'Estómago:',utf8_encode($datosecografia->estomago), true);
+    itemAbd($pdf, $y, 'Cavidad/Vejiga:', utf8_encode($datosecografia->otros_hallazgos), true);
+    $y += 4;
+
+
+    // =========================================================
+    // 5. CONCLUSIONES Y SUGERENCIAS
+    // ========================================================
+    
+    // Validar salto de página
+    if ($y > 230) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    // Conclusiones
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetTextColor(0);
+    $pdf->Cell(130, 6, ('CONCLUSIÓN:'), 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0, 'J');
+    $y = $pdf->GetY() + 5;
+
+    // Sugerencias
+    if ($y > 250) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->sugerencias), 0, 'J');
+
+
+    // =========================================================
+    // 6. PIE DE PÁGINA
+    // =========================================================
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_abdominal.pdf');
-exit;
-
+    $pdf->Output('I', 'ecografia_abdominal.pdf');
+    exit;
 }
 
 public function getEcografiaProstaticaPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-    $datosecografia = $this->Ecografias_model->getEcografiaProstaticaPdf($dni)->result()[0];  
+    $datosecografia = $this->Ecografias_model->getEcografiaProstaticaPdf($dni)->result()[0];
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+    // =========================================================
+    // 2. PLANTILLA BASE
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
-    $pdf->Cell(130, 10, ('ECOGRAFÍA PROSTÁTICA'), 0, 1, 'C');
+    // SIN utf8_decode/encode en el título
+    $pdf->Cell(130, 10, 'ECOGRAFÍA VESICO-PROSTÁTICA', 0, 1, 'C');
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
-
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
-
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
-
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
-
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
-
-// MOTIVO
-$pdf->SetXY(70, 60);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 67);
-$pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
-
-// VEJIGA
-$pdf->SetXY(70, 80);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'VEJIGA:', 0, 1);
-
-$pdf->SetXY(70, 87);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Replicación:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->replicacion, 0);
-
-$pdf->SetXY(70, 94);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Paredes:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->paredes, 0);
-
-// Contenido
-$pdf->SetXY(70, 101);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Contenido anecoico:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->contenido, 0);
-
-if ($datosecografia->contenido == 'Sí') {
-    $pdf->SetXY(70, 108);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->MultiCell(130, 5, 'Detalle: ' . $datosecografia->detalle_contenido, 0);
-}
-
-// Imágenes expansivas
-$pdf->SetXY(70, 118);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Imágenes Expansivas:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->imagenes_expansivas, 0);
-
-if ($datosecografia->imagenes_expansivas == 'Sí') {
-    $pdf->SetXY(70, 125);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->MultiCell(130, 5, 'Detalle: ' . $datosecografia->detalle_imagenes, 0);
-}
-
-// Cálculos
-$pdf->SetXY(70, 135);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Cálculos:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->calculos, 0);
-
-if ($datosecografia->calculos == 'Sí') {
-    $pdf->SetXY(70, 142);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->MultiCell(130, 5, 'Detalle: ' . $datosecografia->detalle_calculos, 0);
-}
-
-// Volúmenes
-$pdf->SetXY(70, 152);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Vol. Pre-miccional:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->vol_pre . ' cc', 0);
-
-$pdf->SetXY(70, 159);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Vol. Post-miccional:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->vol_post . ' cc', 0);
-
-$pdf->SetXY(70, 166);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Retención:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->retencion . '%', 0);
-
-// PRÓSTATA
-$pdf->SetXY(70, 178);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'PRÓSTATA:', 0, 1);
-
-$pdf->SetXY(70, 185);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Descripción:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->descripcion, 0);
-
-$pdf->SetXY(70, 197);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Bordes:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->bordes, 0);
-
-// Medidas próstata
-$pdf->SetXY(70, 204);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Medidas:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, 'Transverso: ' . $datosecografia->transverso . ' mm', 0);
-
-$pdf->SetXY(70, 211);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(130, 6, 'Anteroposterior: ' . $datosecografia->antero_posterior . ' mm', 0);
-
-$pdf->SetXY(70, 218);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(130, 6, 'Longitudinal: ' . $datosecografia->longitudinal . ' mm', 0);
-
-$pdf->SetXY(70, 225);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Volumen:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->volumen . ' cc', 0);
-
-// Otras observaciones
-if ($datosecografia->otra == 'Sí') {
-    $pdf->SetXY(70, 232);
+    // Datos del Paciente
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(50, 6, 'Otras Observaciones:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->MultiCell(80, 6, $datosecografia->observacion_textarea, 0);
-}
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
+    
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
+    
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_encode($datosecografia->codigo_doctor), 0);
 
-// CONCLUSIONES
-$pdf->SetXY(70, 245);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
+    // =========================================================
+    // 4. CUERPO DEL REPORTE
+    // =========================================================
+    $y = 70;
 
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 252);
-$pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
+    // Función auxiliar: NO codifica el $label, SI codifica el $valor (data de BD)
+    function itemPros($pdf, &$y, $label, $valor, $esLargo = false) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetTextColor(13, 110, 253); 
+        
+        // AQUÍ: $label se imprime directo, sin utf8_encode/decode
+        $pdf->Cell(45, 6, $label, 0); 
+        
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetTextColor(0, 0, 0); 
+        
+        // El valor de la BD sí suele necesitar encode si la BD no es UTF8 nativa
+        $valorLimpio = utf8_encode($valor); 
 
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+        if ($esLargo) {
+            $pdf->SetXY(115, $y); 
+            $pdf->MultiCell(85, 5, $valorLimpio, 0, 'L');
+            $y = $pdf->GetY() + 2; 
+        } else {
+            $pdf->Cell(85, 6, $valorLimpio, 0, 1);
+            $y += 6;
+        }
+    }
+
+    // --- BLOQUE 1: VEJIGA ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0);
+    // Texto directo
+    $pdf->Cell(130, 7, '  1. VEJIGA', 0, 1, 'L', true);
+    $y += 8;
+
+    itemPros($pdf, $y, 'Paredes:', $datosecografia->paredes);
+    itemPros($pdf, $y, 'Contenido:', $datosecografia->contenido);
+    itemPros($pdf, $y, 'Descripción:', $datosecografia->descripcion_vejiga, true);
+    $y += 2;
+
+    // --- BLOQUE 2: VOLÚMENES Y RESIDUO ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetTextColor(0);
+    // Texto directo "VOLÚMENES" (si tu archivo PHP es UTF8, esto pasará bien)
+    $pdf->Cell(130, 7, '  2. VOLÚMENES Y RESIDUO', 0, 1, 'L', true);
+    $y += 8;
+
+    itemPros($pdf, $y, 'Vol. Pre-miccional:', $datosecografia->vol_pre . ' cc');
+    itemPros($pdf, $y, 'Vol. Post-miccional:', $datosecografia->vol_post . ' cc');
+    
+    // Retención
+    $retencionVal = floatval($datosecografia->retencion);
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    
+    // Texto directo
+    $pdf->Cell(45, 6, 'Retención (%):', 0);
+    
+    $pdf->SetFont('Arial', 'B', 10); 
+    if($retencionVal > 20) $pdf->SetTextColor(220, 53, 69); 
+    else $pdf->SetTextColor(0); 
+    
+    $pdf->Cell(85, 6, $datosecografia->retencion, 0, 1);
+    $y += 8;
+
+    // --- BLOQUE 3: PRÓSTATA ---
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetTextColor(0);
+    // Texto directo
+    $pdf->Cell(130, 7, '  3. PRÓSTATA', 0, 1, 'L', true);
+    $y += 8;
+
+    // Medidas
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(25, 6, 'Dimensiones:', 0);
+    $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(0);
+    $medidas = 'Transv: '.$datosecografia->transverso.'mm  x  AP: '.$datosecografia->antero_posterior.'mm  x  Long: '.$datosecografia->longitudinal.'mm';
+    $pdf->Cell(105, 6, $medidas, 0, 1);
+    $y += 6;
+
+    // Características
+    itemPros($pdf, $y, 'Volumen / Peso:', $datosecografia->volumen);
+    itemPros($pdf, $y, 'Bordes:', $datosecografia->bordes);
+    itemPros($pdf, $y, 'Ecoestructura:', $datosecografia->observacion, true);
+    $y += 4;
+
+    // =========================================================
+    // 5. CONCLUSIONES Y SUGERENCIAS
+    // =========================================================
+    if ($y > 230) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
+
+    // Conclusiones
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetTextColor(0);
+    // Texto directo
+    $pdf->Cell(130, 6, 'CONCLUSIÓN:', 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0, 'J');
+
+    // Pie de Página
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    // Textos directos (si tu editor guarda en UTF8, los acentos se verán bien con PDF_UTF8)
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_prostatica.pdf');
-exit;
-
+    $pdf->Output('I', 'ecografia_prostatica.pdf');
+    exit;
 }
 
 public function getEcografiaRenalPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
     $datosecografia = $this->Ecografias_model->getEcografiaRenalPdf($dni)->result()[0];
 
-       //documentar esta linea para que genere el pdf 
-       
-       //print_r($datosPaciente);
-      //echo "<br><br><br><br>";
-     // print_r($datosecografia);
-    //   
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    // =========================================================
+    // 2. PLANTILLA BASE
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
-
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
-    $pdf->Cell(130, 10, ('ECOGRAFÍA RENAL'), 0, 1, 'C');
+    $pdf->Cell(130, 10, 'ECOGRAFÍA RENAL', 0, 1, 'C'); 
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    // Datos del Paciente (SIN utf8_encode)
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->apellido . ' ' . $datosPaciente->nombre, 0);
+    
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->edad . ' años', 0);
+    
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+  
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosecografia->codigo_doctor, 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    // Motivo
+    $pdf->SetXY(70, 60);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(70, 66);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->motivo), 0);
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
+    // =========================================================
+    // 4. COMPARATIVA RENAL (LIMPIA)
+    // =========================================================
+    $y = 80;
 
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
+    // Título Principal
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0);
+    $pdf->Cell(130, 7, '  1. EVALUACIÓN RENAL', 0, 1, 'L', true);
+    $y += 10;
 
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
+    // Encabezados
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253); 
+    $pdf->Cell(30, 5, '', 0); 
+    $pdf->Cell(50, 5, 'DERECHO', 0, 0, 'C');
+    $pdf->Cell(50, 5, 'IZQUIERDO', 0, 1, 'C');
+    $pdf->SetTextColor(0); 
+    $y += 6;
 
- // MOTIVO
- $pdf->SetXY(70, 60);
- $pdf->SetFont('Arial', 'B', 11);
- $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
- $pdf->SetFont('Arial', '', 10);
- $pdf->SetXY(70, 67);
- $pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
+    // Función fila simple (SIN utf8_encode)
+    function filaComp($pdf, &$y, $label, $valDer, $valIzq) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 9); 
+        $pdf->Cell(30, 6, $label, 0); 
+        
+        $pdf->SetFont('Arial', '', 9);
+        $pdf->Cell(50, 6, $valDer, 0, 0, 'C'); 
+        $pdf->Cell(50, 6, $valIzq, 0, 1, 'C'); 
+        $y += 6;
+    }
 
- // RIÑÓN DERECHO
- $pdf->SetXY(70, 80);
- $pdf->SetFont('Arial', 'B', 11);
- $pdf->Cell(130, 6, 'RIÑÓN DERECHO:', 0, 1);
+    filaComp($pdf, $y, 'Morfología:', $datosecografia->rd_morfologia, $datosecografia->ri_morfologia);
+    filaComp($pdf, $y, 'Ecogenicidad:', $datosecografia->rd_ecogenicidad, $datosecografia->ri_ecogenicidad);
+    
+    // Medidas (Concatenamos mm solo si hay número)
+    $longD = !empty($datosecografia->rd_longitud) ? $datosecografia->rd_longitud . ' mm' : '-';
+    $longI = !empty($datosecografia->ri_longitud) ? $datosecografia->ri_longitud . ' mm' : '-';
+    filaComp($pdf, $y, 'Longitud:', $longD, $longI);
 
- $pdf->SetXY(70, 87);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Morfología y Movilidad:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->morfologia_movilidad_derecho, 0);
+    $parD = !empty($datosecografia->rd_parenquima) ? $datosecografia->rd_parenquima . ' mm' : '-';
+    $parI = !empty($datosecografia->ri_parenquima) ? $datosecografia->ri_parenquima . ' mm' : '-';
+    filaComp($pdf, $y, 'Parénquima:', $parD, $parI);
 
- $pdf->SetXY(70, 94);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Ecogenicidad:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->ecogenicidad_derecho, 0);
+    // Patologías (Lógica corregida: Solo mostrar medida si es "Sí")
+    filaComp($pdf, $y, 'Img. Sólidas:', $datosecografia->rd_solidas, $datosecografia->ri_solidas);
+    filaComp($pdf, $y, 'Img. Quísticas:', $datosecografia->rd_quisticas, $datosecografia->ri_quisticas);
+    
+    // Hidronefrosis: Verificar si dice "Sí" (considerando acentos)
+    $esSi_HD = ($datosecografia->rd_hidronefrosis == 'Sí' || $datosecografia->rd_hidronefrosis == 'Si');
+    $esSi_HI = ($datosecografia->ri_hidronefrosis == 'Sí' || $datosecografia->ri_hidronefrosis == 'Si');
 
- $pdf->SetXY(70, 101);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Medidas:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->medidas_longitud_derecho, 0);
+    $hidroD = $datosecografia->rd_hidronefrosis . ($esSi_HD ? ' ('.$datosecografia->rd_hidro_medida.')' : '');
+    $hidroI = $datosecografia->ri_hidronefrosis . ($esSi_HI ? ' ('.$datosecografia->ri_hidro_medida.')' : '');
+    filaComp($pdf, $y, 'Hidronefrosis:', $hidroD, $hidroI);
 
- $pdf->SetXY(70, 108);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(130, 6, $datosecografia->medidas_parenquima_derecho, 0);
+    // Microlitiasis
+    $esSi_MD = ($datosecografia->rd_microlitiasis == 'Sí' || $datosecografia->rd_microlitiasis == 'Si');
+    $esSi_MI = ($datosecografia->ri_microlitiasis == 'Sí' || $datosecografia->ri_microlitiasis == 'Si');
+    
+    $microD = $datosecografia->rd_microlitiasis . ($esSi_MD ? ' ('.$datosecografia->rd_micro_medida.')' : '');
+    $microI = $datosecografia->ri_microlitiasis . ($esSi_MI ? ' ('.$datosecografia->ri_micro_medida.')' : '');
+    filaComp($pdf, $y, 'Microlitiasis:', $microD, $microI);
 
- // Imágenes expansivas riñón derecho
- $pdf->SetXY(70, 115);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Imágenes Expansivas:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(40, 6, 'Sólidas: ' . $datosecografia->imagenes_expansivas_solidas_derecho, 0);
- $pdf->Cell(40, 6, 'Quísticas: ' . $datosecografia->imagenes_expansivas_quisticas_derecho, 0);
+    // Cálculos
+    $esSi_CD = ($datosecografia->rd_calculos == 'Sí' || $datosecografia->rd_calculos == 'Si');
+    $esSi_CI = ($datosecografia->ri_calculos == 'Sí' || $datosecografia->ri_calculos == 'Si');
 
- // Hidronefrosis riñón derecho
- $pdf->SetXY(70, 122);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Hidronefrosis:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->hidronefrosis_derecho, 0);
+    $calcD = $datosecografia->rd_calculos . ($esSi_CD ? ' ('.$datosecografia->rd_calculos_medida.')' : '');
+    $calcI = $datosecografia->ri_calculos . ($esSi_CI ? ' ('.$datosecografia->ri_calculos_medida.')' : '');
+    filaComp($pdf, $y, 'Cálculos:', $calcD, $calcI);
+    
+    $y += 4; 
 
- if (!empty($datosecografia->medidas_hidronefrosis_derecho)) {
-     $pdf->SetXY(70, 129);
-     $pdf->SetFont('Arial', '', 10);
-     $pdf->Cell(130, 6, 'Medidas: ' . $datosecografia->medidas_hidronefrosis_derecho, 0);
- }
+    // =========================================================
+    // 5. VEJIGA
+    // =========================================================
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell(130, 7, '  2. VEJIGA', 0, 1, 'L', true);
+    $y += 8;
 
- // RIÑÓN IZQUIERDO
- $pdf->SetXY(70, 140);
- $pdf->SetFont('Arial', 'B', 11);
- $pdf->Cell(130, 6, 'RIÑÓN IZQUIERDO:', 0, 1);
+    function itemVej($pdf, &$y, $label, $val, $col2Label = '', $col2Val = '') {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(35, 6, $label, 0);
+        $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+        $pdf->Cell(30, 6, $val, 0); // Sin encode
+        
+        if($col2Label != '') {
+            $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+            $pdf->Cell(35, 6, $col2Label, 0);
+            $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+            $pdf->Cell(30, 6, $col2Val, 0); // Sin encode
+        }
+        $pdf->Ln();
+        $y += 6;
+    }
 
- $pdf->SetXY(70, 147);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Morfología y Movilidad:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->morfologia_movilidad_izquierdo, 0);
+    itemVej($pdf, $y, 'Repleción:', $datosecografia->vejiga_replecion, 'Paredes:', $datosecografia->vejiga_paredes);
+    itemVej($pdf, $y, 'Contenido:', $datosecografia->vejiga_contenido, 'Cálculos:', $datosecografia->vejiga_calculos);
+    
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(35, 6, 'Descripción:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+    $pdf->MultiCell(95, 6, utf8_encode($datosecografia->descripcion_vejiga), 0);
+    $y = $pdf->GetY() + 2;
 
- $pdf->SetXY(70, 154);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Ecogenicidad:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->ecogenicidad_izquierdo, 0);
 
- $pdf->SetXY(70, 161);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Medidas:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->medidas_longitud_izquierdo, 0);
+    // =========================================================
+    // 6. VOLÚMENES
+    // =========================================================
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell(130, 7, '  3. VOLÚMENES', 0, 1, 'L', true);
+    $y += 8;
 
- $pdf->SetXY(70, 168);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(130, 6, $datosecografia->medidas_parenquima_izquierdo, 0);
+    itemVej($pdf, $y, 'Pre-miccional:', $datosecografia->vol_pre . ' cc', 'Post-miccional:', $datosecografia->vol_post . ' cc');
+    
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(35, 6, 'Retención (%):', 0);
+    
+    $valRet = floatval($datosecografia->retencion);
+    if($valRet > 20) $pdf->SetTextColor(220, 53, 69); // Rojo
+    else $pdf->SetTextColor(0); // Negro
+    
+    $pdf->Cell(30, 6, $datosecografia->retencion, 0, 1);
+    $y += 8;
 
- // Imágenes expansivas riñón izquierdo
- $pdf->SetXY(70, 175);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Imágenes Expansivas:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(40, 6, 'Sólidas: ' . $datosecografia->imagenes_expansivas_solidas_izquierdo, 0);
- $pdf->Cell(40, 6, 'Quísticas: ' . $datosecografia->imagenes_expansivas_quisticas_izquierdo, 0);
+    // =========================================================
+    // 7. CONCLUSIONES
+    // =========================================================
+    if ($y > 220) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
 
- // Hidronefrosis riñón izquierdo
- $pdf->SetXY(70, 182);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Hidronefrosis:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->hidronefrosis_izquierdo, 0);
+    if (!empty($datosecografia->observaciones)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11); $pdf->SetTextColor(0);
+        $pdf->Cell(130, 6, 'OBSERVACIONES:', 0, 1);
+        $y += 6;
+        $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, $datosecografia->observaciones, 0);
+        $y = $pdf->GetY() + 6;
+    }
 
- if (!empty($datosecografia->medidas_hidronefrosis_izquierdo)) {
-     $pdf->SetXY(70, 189);
-     $pdf->SetFont('Arial', '', 10);
-     $pdf->Cell(130, 6, 'Medidas: ' . $datosecografia->medidas_hidronefrosis_izquierdo, 0);
- }
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0);
+    $y = $pdf->GetY() + 6;
 
- // VEJIGA
-$pdf->SetXY(70, 200);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'VEJIGA:', 0, 1);
+    if (!empty($datosecografia->sugerencias)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+        $y += 6;
+        $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
+    }
 
-// Primera columna
-$pdf->SetXY(70, 207);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Repleción:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->repelcion_vejiga, 0);
-
-// Segunda columna
-$pdf->SetXY(135, 207);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Vol. Pre-miccional:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->vol_pre_miccional . ' cc', 0);
-
-// Primera columna
-$pdf->SetXY(70, 214);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Paredes:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->paredes_vejiga, 0);
-
-// Segunda columna
-$pdf->SetXY(135, 214);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Vol. Post-miccional:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->vol_post_miccional . ' cc', 0);
-
-// Primera columna
-$pdf->SetXY(70, 221);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Contenido:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->contenido_aneocoico, 0);
-
-// Segunda columna
-$pdf->SetXY(135, 221);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Retención:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->retencion . '%', 0);
-
-// Primera columna
-$pdf->SetXY(70, 228);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Imágenes Expansivas:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->imagenes_expansivas_vejiga, 0);
-
-// Primera columna
-$pdf->SetXY(70, 235);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 6, 'Cálculos:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(25, 6, $datosecografia->calculos_vejiga, 0);
-
- // Volúmenes
- $pdf->SetXY(70, 242);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Vol. Pre-miccional:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->vol_pre_miccional . ' cc', 0);
-
- $pdf->SetXY(70, 249);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Vol. Post-miccional:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->vol_post_miccional . ' cc', 0);
-
- $pdf->SetXY(70, 256);
- $pdf->SetFont('Arial', 'B', 10);
- $pdf->Cell(50, 6, 'Retención:', 0);
- $pdf->SetFont('Arial', '', 10);
- $pdf->Cell(80, 6, $datosecografia->retencion . '%', 0);
-
- // Nueva página para conclusiones
- $pdf->AddPage();
- 
- // Marca de agua en la segunda página
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
-
-// Barra lateral izquierda con imágenes en la segunda página
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
-
-// Imágenes en la barra lateral de la segunda página
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
-
-// Lista de ecografías en la segunda página
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-// Imágenes adicionales en la barra lateral de la segunda página
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
- // Otras observaciones
- if (!empty($datosecografia->observacion_textarea)) {
-     $pdf->SetXY(70, 30);
-     $pdf->SetFont('Arial', 'B', 11);
-     $pdf->Cell(130, 6, 'OTRAS OBSERVACIONES:', 0, 1);
-     $pdf->SetFont('Arial', '', 10);
-     $pdf->SetXY(70, 37);
-     $pdf->MultiCell(130, 5, $datosecografia->observacion_textarea, 0);
- }
-
- // CONCLUSIONES
- $pdf->SetXY(70, 60);
- $pdf->SetFont('Arial', 'B', 11);
- $pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
- 
- $pdf->SetFont('Arial', '', 10);
- $pdf->SetXY(70, 67);
- $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
-
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // Pie de Página
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_renal.pdf');
-exit;
-
+    $pdf->Output('I', 'ecografia_renal.pdf');
+    exit;
 }
 
 
 public function getEcografiaTiroidesPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-    $datosecografia = $this->Ecografias_model->getEcografiaTiroidesPdf($dni)->result()[0]; 
+    $datosecografia = $this->Ecografias_model->getEcografiaTiroidesPdf($dni)->result()[0];
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+    // =========================================================
+    // 2. PLANTILLA BASE
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Obstétrica", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
-    $pdf->Cell(130, 10, ('ECOGRAFÍA TIROIDES'), 0, 1, 'C');
+    $pdf->Cell(130, 10, 'ECOGRAFÍA DE TIROIDES', 0, 1, 'C'); 
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    // Datos del Paciente (SIN utf8_encode)
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->apellido . ' ' . $datosPaciente->nombre, 0);
+    
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->edad . ' años', 0);
+    
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosecografia->codigo_doctor, 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    // Motivo
+    $pdf->SetXY(70, 64);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(70, 70);
+    $pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
+    // =========================================================
+    // 4. TIROIDES - DESCRIPCIÓN Y MEDIDAS
+    // =========================================================
+    $y = 85;
 
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
+    // Título Principal
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0);
+    $pdf->Cell(130, 7, '  1. DESCRIPCIÓN Y BIOMETRÍA', 0, 1, 'L', true);
+    $y += 10;
 
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
+    // Descripción General
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(35, 6, 'Descripción:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+    $pdf->MultiCell(95, 6, utf8_encode($datosecografia->descripcion_tiroides), 0);
+    $y = $pdf->GetY() + 4;
 
-// MOTIVO
-$pdf->SetXY(70, 60);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 67);
-$pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
+    // --- TABLA DE MEDIDAS (LADO A LADO) ---
+    // Encabezados
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253); 
+    $pdf->Cell(30, 5, '', 0); 
+    $pdf->Cell(50, 5, 'LÓBULO DERECHO', 0, 0, 'C');
+    $pdf->Cell(50, 5, 'LÓBULO IZQUIERDO', 0, 1, 'C');
+    $pdf->SetTextColor(0); 
+    $y += 6;
 
-// TIROIDES
-$pdf->SetXY(70, 80);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'TIROIDES:', 0, 1);
+    // Función fila comparativa
+    function filaMedida($pdf, &$y, $label, $valDer, $valIzq) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 9); 
+        $pdf->Cell(30, 6, $label, 0); 
+        
+        $pdf->SetFont('Arial', '', 9);
+        $valDerStr = !empty($valDer) ? $valDer . ' mm' : '-';
+        $valIzqStr = !empty($valIzq) ? $valIzq . ' mm' : '-';
+        
+        $pdf->Cell(50, 6, $valDerStr, 0, 0, 'C'); 
+        $pdf->Cell(50, 6, $valIzqStr, 0, 1, 'C'); 
+        $y += 6;
+    }
 
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 87);
-$pdf->MultiCell(130, 5, $datosecografia->descripcionTiroides, 0);
+    filaMedida($pdf, $y, 'Longitud:', $datosecografia->ld_long, $datosecografia->li_long);
+    filaMedida($pdf, $y, 'Antero-Post:', $datosecografia->ld_ap, $datosecografia->li_ap);
+    filaMedida($pdf, $y, 'Transverso:', $datosecografia->ld_trans, $datosecografia->li_trans);
 
-// Lóbulos y Istmo
-$pdf->SetXY(70, 102);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Lóbulo Derecho:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->lobuloDerecho, 0);
+    // Volumen Individual
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(13, 110, 253);
+    $pdf->Cell(30, 6, 'Volumen:', 0); 
+    $pdf->SetFont('Arial', 'B', 9); $pdf->SetTextColor(0); // Negrita para volumen
+    $volD = !empty($datosecografia->ld_volumen) ? $datosecografia->ld_volumen : '-';
+    $volI = !empty($datosecografia->li_volumen) ? $datosecografia->li_volumen : '-';
+    $pdf->Cell(50, 6, $volD, 0, 0, 'C'); 
+    $pdf->Cell(50, 6, $volI, 0, 1, 'C'); 
+    $y += 8;
 
-$pdf->SetXY(70, 109);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Lóbulo Izquierdo:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->lobuloIzquierdo, 0);
+    // Volumen Total
+    if(!empty($datosecografia->volumen_total)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); $pdf->SetTextColor(13, 110, 253);
+        $pdf->Cell(130, 6, 'VOLUMEN GLANDULAR TOTAL: ' . $datosecografia->volumen_total, 0, 1, 'C');
+        $pdf->SetTextColor(0);
+        $y += 6;
+    }
 
-$pdf->SetXY(70, 116);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Istmo:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->istmo, 0);
+    // =========================================================
+    // 5. OTRAS ESTRUCTURAS
+    // =========================================================
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell(130, 7, '  2. ESTRUCTURAS ADYACENTES', 0, 1, 'L', true);
+    $y += 8;
 
-// Estructuras y Glandulas
-$pdf->SetXY(70, 123);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'ESTRUCTURAS ADYACENTES:', 0, 1);
+    function itemEstructura($pdf, &$y, $label, $val) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 10); 
+        $pdf->Cell(50, 6, $label, 0);
+        $pdf->SetFont('Arial', '', 10); 
+        $pdf->Cell(80, 6, $val, 0);
+        $y += 6;
+    }
 
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 130);
-$pdf->Cell(50, 6, 'Estructuras Vasculares:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->estructurasVasculares, 0);
+    itemEstructura($pdf, $y, 'Istmo:', $datosecografia->istmo);
+    itemEstructura($pdf, $y, 'Vasculares:', $datosecografia->estructuras_vasculares);
+    itemEstructura($pdf, $y, 'Submaxilares:', $datosecografia->glandulas_submaxilares);
+    itemEstructura($pdf, $y, 'Adenopatías:', $datosecografia->adenopatia_cervicales);
+    
+    // Piel y TCSC
+    $y += 2;
+    itemEstructura($pdf, $y, 'Piel:', $datosecografia->piel);
+    
+    // TCSC (Puede ser largo)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(50, 6, 'TCSC:', 0);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(80, 6, utf8_encode($datosecografia->tcsc), 0);
+    $y = $pdf->GetY() + 4;
 
-$pdf->SetXY(70, 137);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Glándulas Submaxilares:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->glandulasSubmaxilares, 0);
+    // =========================================================
+    // 6. CONCLUSIONES
+    // =========================================================
+    if ($y > 220) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
 
-$pdf->SetXY(70, 144);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'Adenopatía Cervicales:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->adenopatiaCervicales, 0);
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0);
+    $y = $pdf->GetY() + 6;
 
-// Piel y TCSC
-$pdf->SetXY(70, 151);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'PIEL Y TCSC:', 0, 1);
+    if (!empty($datosecografia->sugerencias)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+        $y += 6;
+        $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, utf8_encode($datosecografia->sugerencias), 0);
+    }
 
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 158);
-$pdf->Cell(50, 6, 'Piel:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(80, 6, $datosecografia->piel, 0);
-
-$pdf->SetXY(70, 165);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(50, 6, 'TCSC:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->MultiCell(80, 6, $datosecografia->tcsc, 0);
-
-// Conclusiones
-$pdf->SetXY(70, 180);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 187);
-$pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
-
-// Sugerencias
-$pdf->SetXY(70, 205);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 212);
-$pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
-
-
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // Pie de Página
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-$pdf->Output('I', 'ecografia_tiroides.pdf');
-exit;
-
+    $pdf->Output('I', 'ecografia_tiroides.pdf');
+    exit;
 }
 
-
 public function getEcografiaHisterosonografiaPdf($dni) {
+    // 1. CARGA DE DATOS
     $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
     $datosecografia = $this->Ecografias_model->getEcografiaHisterosonografiaPdf($dni)->result()[0];
 
-       //documentar esta linea para que genere el pdf 
-       
-     // print_r($datosPaciente);
-    // echo "<br><br><br><br>";
-    //print_r($datosecografia);
-    //   
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
 
-  $this->load->library('PDF_UTF8');
-  $pdf = new PDF_UTF8();
-  $pdf->AddPage();
-  $pdf->SetAutoPageBreak(false);
+    // =========================================================
+    // 2. PLANTILLA BASE
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
 
-  // Marca de agua
-$pdf->SetAlpha(0.1);
-$pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-$pdf->SetAlpha(1);
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
 
-// Barra lateral izquierda con imágenes
-$pdf->SetFillColor(230,230,230);
-$pdf->Rect(10, 5, 50, 277, 'F');
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Histerosonografía", "Ecografía Gemelar",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, $item, 0, 1, 'L');
+            $pdf->SetX(15);
+        }
 
-// Imágenes en la barra lateral
-$pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-$pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-$pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
 
-// Lista de ecografías (igual que antes)
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->SetXY(15, 140);
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
 
-$listado = array(
-    "Ecografía Morfológica",
-    "Ecografía Genética",
-    "Ecografía Obstétrica",
-    "Ecografía Obstétrica Doppler",
-    "Ecografía Seguimiento",
-    "Ovulatorio",
-    "Ecografía Transvaginal",
-    "Ecografía Obstétrica – Dopple",
-    "Ecografía Gemelar",
-    "Ecografía 3D, 4D, 5D",
-    "Ecografía de Mamas",
-    "",
-    "OTRAS ECOGRAFÍAS",
-    "Ecografía Partes Blandas",
-    "Ecografía Abdominal",
-    "Ecografía Tiroides",
-    "Ecografía Pélvica"
-);
-
-foreach($listado as $item) {
-    $pdf->Cell(50, 4, $item, 0, 1, 'L');
-    $pdf->SetX(15);
-}
-
-
-// Imágenes adicionales en la barra lateral
-$pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-$pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-
-
-$pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetXY(70, 10);
-    $pdf->Cell(130, 10, ('ECOGRAFÍA HISTEROSONOGRAFIA'), 0, 1, 'C');
+    $pdf->Cell(130, 10, 'HISTEROSONOGRAFÍA', 0, 1, 'C'); // Título sin encode
 
-// Información del paciente
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->SetXY(70, 30);
-$pdf->Cell(30, 6, 'PACIENTE:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
+    // Datos del Paciente
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->apellido . ' ' . $datosPaciente->nombre, 0);
+    
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->edad . ' años', 0);
+    
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'MÉDICO:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosecografia->codigo_doctor, 0);
 
-$pdf->SetXY(70, 36);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'DNI:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->documento, 0);
+    // Motivo
+    $pdf->SetXY(70, 64);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(70, 70);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->motivo), 0);
 
-$pdf->SetXY(70, 42);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'EDAD:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
+    // =========================================================
+    // 4. PROCEDIMIENTO Y HALLAZGOS
+    // =========================================================
+    $y = 85;
 
-$pdf->SetXY(70, 48);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'FECHA:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->fecha, 0);
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0);
+    $pdf->Cell(130, 7, '  1. PROCEDIMIENTO Y HALLAZGOS', 0, 1, 'L', true);
+    $y += 10;
 
-$pdf->SetXY(70, 54);
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(30, 6, 'MÉDICO:', 0);
-$pdf->SetFont('Arial', '', 10);
-$pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
+    // Descripción del Procedimiento (Texto largo -> CON utf8_encode)
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetTextColor(0);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->descripcion_procedimiento), 0);
+    $y = $pdf->GetY() + 8;
 
-// MOTIVO
-$pdf->SetXY(70, 65);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 70);
-$pdf->MultiCell(130, 5, $datosecografia->motivo, 0);
+    // =========================================================
+    // 5. CONCLUSIONES
+    // =========================================================
+    if ($y > 220) { $pdf->AddPage(); $imprimirPlantilla($pdf); $y = 30; }
 
-// DESCRIPCIÓN DEL PROCEDIMIENTO
-$pdf->SetXY(70, 85);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'DESCRIPCIÓN DEL PROCEDIMIENTO:', 0, 1);
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0);
+    $y = $pdf->GetY() + 6;
 
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 92);
-$pdf->MultiCell(130, 5, $datosecografia->descripcionProcedimiento, 0);
+    if (!empty($datosecografia->sugerencias)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+        $y += 6;
+        $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, utf8_encode($datosecografia->sugerencias), 0);
+    }
 
-// CONCLUSIONES
-$pdf->SetXY(70, 130);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 137);
-$pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
-
-// SUGERENCIAS
-$pdf->SetXY(70, 160);
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-
-$pdf->SetFont('Arial', '', 10);
-$pdf->SetXY(70, 167);
-$pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
-
-
-// Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // Pie de Página
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, 'DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios', 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
-    $pdf->Output('I', 'ecografia_histerosonografia.pdf');
+    $pdf->Output('I', 'histerosonografia.pdf');
     exit;
-
-
-    }
+}
 
     public function getEcografiaArterialPdf($dni) {
-        $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-        $datosecografia = $this->Ecografias_model->getEcografiaArterialPdf($dni)->result()[0];  
+    // 1. CARGA DE DATOS
+    $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
+    $datosecografia = $this->Ecografias_model->getEcografiaArterialPdf($dni)->result()[0];
+
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
+
+    // =========================================================
+    // 2. PLANTILLA BASE (Logo y Barra Lateral)
+    // =========================================================
+    $imprimirPlantilla = function($pdf) {
+        $pdf->SetAlpha(0.1);
+        $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
+        $pdf->SetAlpha(1);
+
+        $pdf->SetFillColor(230,230,230);
+        $pdf->Rect(10, 5, 50, 277, 'F');
+        
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetXY(15, 140);
+        // Lista Lateral
+        $listado = array(
+            "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+            "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+            "Ecografía Transvaginal", "Ecografía Arterial M.I.", "Ecografía Venosa M.I.",
+            "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+            "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica"
+        );
+        foreach($listado as $item) {
+            $pdf->Cell(50, 4, utf8_decode($item), 0, 1, 'L');
+            $pdf->SetX(15);
+        }
+
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+    };
+
+    // =========================================================
+    // 3. ENCABEZADO
+    // =========================================================
+    $pdf->AddPage();
+    $imprimirPlantilla($pdf);
+
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetXY(70, 10);
+    $pdf->Cell(130, 10, ('ECOGRAFÍA ARTERIAL DE MIEMBROS INFERIORES'), 0, 1, 'C'); 
+
+    // Datos del Paciente
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_decode($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
     
-      $this->load->library('PDF_UTF8');
-      $pdf = new PDF_UTF8();
-      $pdf->AddPage();
-      $pdf->SetAutoPageBreak(false);
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
     
-      // Marca de agua
-    $pdf->SetAlpha(0.1);
-    $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
-    $pdf->SetAlpha(1);
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
     
-    // Barra lateral izquierda con imágenes
-    $pdf->SetFillColor(230,230,230);
-    $pdf->Rect(10, 5, 50, 277, 'F');
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
     
-    // Imágenes en la barra lateral
-    $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
-    $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
-    $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, utf8_decode('MÉDICO:'), 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, utf8_decode($datosecografia->codigo_doctor), 0);
+
+    // Motivo
+    $pdf->SetXY(70, 64);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(70, 70);
+    $pdf->MultiCell(130, 5, utf8_decode($datosecografia->motivo), 0);
+
+    $y = 85;
+
+    // =========================================================
+    // 4. FUNCIÓN PARA DIBUJAR TABLAS (DERECHA E IZQUIERDA)
+    // =========================================================
+    $dibujarSeccionPierna = function($pdf, &$y, $titulo, $descripcion, $prefijo, $data) {
+        // Título de la Sección
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11); 
+        $pdf->SetFillColor(240, 240, 240); 
+        $pdf->SetTextColor(0);
+        $pdf->Cell(130, 7, ($titulo), 0, 1, 'L', true);
+        $y += 10;
+
+        // Descripción de Hallazgos
+        if (!empty($descripcion)) {
+            $pdf->SetXY(70, $y);
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->MultiCell(130, 5, ($descripcion), 0);
+            $y = $pdf->GetY() + 4;
+        }
+
+        // --- TABLA DE VALORES ---
+        // Cabecera
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 9); 
+        $pdf->SetFillColor(220, 220, 220);
+        $pdf->Cell(50, 6, 'ARTERIA', 1, 0, 'C', true);
+        $pdf->Cell(40, 6, 'VPS (cm/s)', 1, 0, 'C', true);
+        $pdf->Cell(40, 6, 'ONDA', 1, 1, 'C', true);
+        $y += 6;
+
+        // Filas
+        $arterias = [
+            'fc' => ('F. Común'),
+            'fs' => ('F. Superficial'),
+            'pop' => ('Poplítea'),
+            'tp' => ('Tibial Posterior'),
+            'ta' => ('Tibial Anterior'),
+            'media' => ('Media / Pedia')
+        ];
+
+        $pdf->SetFont('Arial', '', 9);
+        foreach($arterias as $key => $nombre) {
+            $pdf->SetX(70);
+            // Obtenemos valor dinámicamente del objeto $data (ej: mid_fc_vps)
+            $vps = $data->{$prefijo . '_' . $key . '_vps'};
+            $onda = $data->{$prefijo . '_' . $key . '_onda'};
+            
+            $pdf->Cell(50, 6, ($nombre), 1);
+            $pdf->Cell(40, 6, $vps, 1, 0, 'C');
+            $pdf->Cell(40, 6, ($onda), 1, 1, 'C');
+            $y += 6;
+        }
+        $y += 8; // Espacio después de la tabla
+    };
+
+    // =========================================================
+    // 5. IMPRIMIR SECCIONES
+    // =========================================================
     
-    // Lista de ecografías (igual que antes)
-    $pdf->SetFont('Arial', 'B', 8);
-    $pdf->SetXY(15, 140);
-    
-    $listado = array(
-        "Ecografía Morfológica",
-        "Ecografía Genética",
-        "Ecografía Obstétrica",
-        "Ecografía Obstétrica Doppler",
-        "Ecografía Seguimiento",
-        "Ovulatorio",
-        "Ecografía Transvaginal",
-        "Ecografía Obstétrica – Dopple",
-        "Ecografía Gemelar",
-        "Ecografía 3D, 4D, 5D",
-        "Ecografía de Mamas",
-        "",
-        "OTRAS ECOGRAFÍAS",
-        "Ecografía Partes Blandas",
-        "Ecografía Abdominal",
-        "Ecografía Tiroides",
-        "Ecografía Pélvica"
+    // --> MIEMBRO DERECHO
+    $dibujarSeccionPierna(
+        $pdf, $y, '1. MIEMBRO INFERIOR DERECHO', 
+        $datosecografia->mid_descripcion, 
+        'mid', 
+        $datosecografia
     );
-    
-    foreach($listado as $item) {
-        $pdf->Cell(50, 4, $item, 0, 1, 'L');
-        $pdf->SetX(15);
-    }
-    
-    
-    // Imágenes adicionales en la barra lateral
-    $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
-    $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-    
-    
-    $pdf->SetFont('Arial', 'B', 13);
-        $pdf->SetXY(70, 10);
-        $pdf->Cell(130, 10, ('ECOGRAFÍA DOPPLER ARTERIAL DE MIEMBROS INFERIORES'), 0, 1, 'C');
-    
-    // Información del paciente
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->SetXY(70, 30);
-    $pdf->Cell(30, 6, 'PACIENTE:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
-    
-    $pdf->SetXY(70, 36);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'DNI:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->documento, 0);
-    
-    $pdf->SetXY(70, 42);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'EDAD:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
-    
-    $pdf->SetXY(70, 48);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'FECHA:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosecografia->fecha, 0);
-    
-    $pdf->SetXY(70, 54);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'MÉDICO:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, utf8_decode($datosecografia->codigo_doctor), 0);
 
-    // MIEMBRO INFERIOR DERECHO
-    $pdf->SetXY(70, 60);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'MIEMBRO INFERIOR DERECHO', 0, 1);
-    
-    // Descripción del procedimiento derecho
-    if (!empty($datosecografia->descripcionProcedimientoDerecho)) {
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(70, 68);
-        $pdf->MultiCell(130, 5, $datosecografia->descripcionProcedimientoDerecho, 0);
-        $pdf->Ln(3);
+    // Verificamos espacio para el Izquierdo
+    if ($y > 200) { 
+        $pdf->AddPage(); 
+        $imprimirPlantilla($pdf); 
+        $y = 30; 
     }
 
-    // Tabla para miembro inferior derecho
-    $pdf->SetXY(70, 75);
-    
-    // Encabezados de tabla
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(60, 7, 'ARTERIA', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'VPS (cm/seg)', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'ONDA', 1, 1, 'C');
-    
-    // Datos de la tabla
-    $pdf->SetFont('Arial', '', 9);
-    
-    // Femoral Común
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Femoral Común', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_fc_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_fc_derecho, 1, 1, 'C');
-    
-    // Femoral Superficial
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Femoral Superficial', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_fs_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_fs_derecho, 1, 1, 'C');
-    
-    // Poplítea
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Poplítea', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_poplitea_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_poplitea_derecho, 1, 1, 'C');
-    
-    // Tibial Posterior
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Tibial Posterior', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_tp_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_tp_derecho, 1, 1, 'C');
-    
-    // Tibial Anterior
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Tibial Anterior', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_ta_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_ta_derecho, 1, 1, 'C');
-    
-    // Pedia
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Pedia', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_media_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_media_derecho, 1, 1, 'C');
+    // --> MIEMBRO IZQUIERDO
+    $dibujarSeccionPierna(
+        $pdf, $y, '2. MIEMBRO INFERIOR IZQUIERDO', 
+        $datosecografia->mii_descripcion, 
+        'mii', 
+        $datosecografia
+    );
 
-    // MIEMBRO INFERIOR IZQUIERDO
-    $pdf->SetXY(70, 125);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'MIEMBRO INFERIOR IZQUIERDO', 0, 1);
-    
-    // Descripción del procedimiento izquierdo
-    if (!empty($datosecografia->descripcionProcedimientoIzquierdo)) {
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(70, 132);
-        $pdf->MultiCell(130, 5, $datosecografia->descripcionProcedimientoIzquierdo, 0);
-        $pdf->Ln(3);
+    // =========================================================
+    // 6. CONCLUSIONES Y SUGERENCIAS
+    // =========================================================
+    if ($y > 220) { 
+        $pdf->AddPage(); 
+        $imprimirPlantilla($pdf); 
+        $y = 30; 
     }
 
-    // Tabla para miembro inferior izquierdo
-    $pdf->SetXY(70, 140);
-    
-    // Encabezados de tabla
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(60, 7, 'ARTERIA', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'VPS (cm/seg)', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'ONDA', 1, 1, 'C');
-    
-    // Datos de la tabla
-    $pdf->SetFont('Arial', '', 9);
-    
-    // Femoral Común
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Femoral Común', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_fc_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_fc_izquierdo, 1, 1, 'C');
-    
-    // Femoral Superficial
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Femoral Superficial', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_fs_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_fs_izquierdo, 1, 1, 'C');
-    
-    // Poplítea
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Poplítea', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_poplitea_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_poplitea_izquierdo, 1, 1, 'C');
-    
-    // Tibial Posterior
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Tibial Posterior', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_tp_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_tp_izquierdo, 1, 1, 'C');
-    
-    // Tibial Anterior
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Tibial Anterior', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_ta_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_ta_izquierdo, 1, 1, 'C');
-    
-    // Pedia
-    $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'Pedia', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->vps_media_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->onda_media_izquierdo, 1, 1, 'C');
-
-    // CONCLUSIONES
-    $pdf->SetXY(70, 190);
+    $pdf->SetXY(70, $y);
     $pdf->SetFont('Arial', 'B', 11);
     $pdf->Cell(130, 6, 'CONCLUSIONES:', 0, 1);
-    
-    // Separamos las conclusiones por líneas y las mostramos con viñetas
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->SetXY(70, 197);
-    $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
+    $y += 6;
+    $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(130, 5, utf8_encode($datosecografia->conclusiones), 0);
+    $y = $pdf->GetY() + 6;
 
-    // SUGERENCIAS
-    $pdf->SetXY(70, 220);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
-    
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->SetXY(70, 227);
-    $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
+    if (!empty($datosecografia->sugerencias)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+        $y += 6;
+        $pdf->SetX(70); $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, ($datosecografia->sugerencias), 0);
+    }
 
-    // Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    // Pie de Página
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
-
-    // Lado derecho - Celular e íconos
+    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
-    
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
     $pdf->Output('I', 'ecografia_arterial.pdf');
     exit;
-    
-    }
+}
 
     public function getEcografiaVenosaPdf($dni) {
-        $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
-        $datosecografia = $this->Ecografias_model->getEcografiaVenosaPdf($dni)->result()[0];
+    // 1. CARGA DE DATOS
+    $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
+    $datosecografia = $this->Ecografias_model->getEcografiaVenosaPdf($dni)->result()[0];
+
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
+
+    // =========================================================
+    // 2. PLANTILLA BASE
+    // =========================================================
+    $pdf->AddPage();
     
-           //documentar esta linea para que genere el pdf 
-           
-          //print_r($datosPaciente);
-         //echo "<br><br><br><br>";
-      // print_r($datosecografia);
-        //   
-    
-      $this->load->library('PDF_UTF8');
-      $pdf = new PDF_UTF8();
-      $pdf->AddPage();
-      $pdf->SetAutoPageBreak(false);
-    
-      // Marca de agua
+    // Marca de agua
     $pdf->SetAlpha(0.1);
     $pdf->Image("public/img/theme/logo.png", 70, 90, 120);
     $pdf->SetAlpha(1);
     
-    // Barra lateral izquierda con imágenes
+    // Barra lateral
     $pdf->SetFillColor(230,230,230);
     $pdf->Rect(10, 5, 50, 277, 'F');
     
-    // Imágenes en la barra lateral
+    // Imágenes laterales
     $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
     $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
     $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
     
-    // Lista de ecografías (igual que antes)
+    // Lista de ecografías
     $pdf->SetFont('Arial', 'B', 8);
-    $pdf->SetXY(15, 140);
-    
+    $pdf->SetXY(15, 135);
     $listado = array(
-        "Ecografía Morfológica",
-        "Ecografía Genética",
-        "Ecografía Obstétrica",
-        "Ecografía Obstétrica Doppler",
-        "Ecografía Seguimiento",
-        "Ovulatorio",
-        "Ecografía Transvaginal",
-        "Ecografía Obstétrica – Dopple",
-        "Ecografía Gemelar",
-        "Ecografía 3D, 4D, 5D",
-        "Ecografía de Mamas",
-        "",
-        "OTRAS ECOGRAFÍAS",
-        "Ecografía Partes Blandas",
-        "Ecografía Abdominal",
-        "Ecografía Tiroides",
-        "Ecografía Pélvica"
+        "Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica",
+        "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio",
+        "Ecografía Transvaginal", "Histerosonografía", "Ecografía Gemelar",
+        "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS",
+        "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica",
+        "Ecografía Venosa M.I."
     );
     
     foreach($listado as $item) {
-        $pdf->Cell(50, 4, $item, 0, 1, 'L');
+        $pdf->Cell(50, 4, ($item), 0, 1, 'L');
         $pdf->SetX(15);
     }
     
-    
-    // Imágenes adicionales en la barra lateral
     $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
     $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
-    
-    
-    $pdf->SetFont('Arial', 'B', 12);
-        $pdf->SetXY(70, 10);
-        $pdf->Cell(130, 10, ('ECOGRAFÍA DOPPLER VENOSO DE MIEMBROS INFERIORES'), 0, 1, 'C');
-    
-    // Información del paciente
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->SetXY(70, 30);
-    $pdf->Cell(30, 6, 'PACIENTE:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->nombre . ' ' . $datosPaciente->apellido, 0);
-    
-    $pdf->SetXY(70, 36);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'DNI:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->documento, 0);
-    
-    $pdf->SetXY(70, 42);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'EDAD:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosPaciente->edad . ' años', 0);
-    
-    $pdf->SetXY(70, 48);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'FECHA:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosecografia->fecha, 0);
-    
-    $pdf->SetXY(70, 54);
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(30, 6, 'MÉDICO:', 0);
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(100, 6, $datosecografia->codigo_doctor, 0);
 
-    // MIEMBRO INFERIOR DERECHO
-    $pdf->SetXY(70, 60);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'MIEMBRO INFERIOR DERECHO', 0, 1);
+    // =========================================================
+    // 3. DATOS DEL PACIENTE
+    // =========================================================
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetXY(70, 10);
+    $pdf->Cell(130, 10, ('ECOGRAFÍA DOPPLER VENOSO DE MIEMBROS INFERIORES'), 0, 1, 'C');
+
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY(70, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->apellido . ' ' . $datosPaciente->nombre), 0);
     
-    // Descripción del procedimiento derecho
-    if (!empty($datosecografia->descripcionProcedimientoDerecho)) {
+    $pdf->SetXY(70, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, $datosPaciente->documento, 0);
+    
+    $pdf->SetXY(70, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosPaciente->edad . ' años'), 0);
+    
+    $pdf->SetXY(70, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    
+    $pdf->SetXY(70, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, ('MÉDICO:'), 0);
+    $pdf->SetFont('Arial', '', 10); $pdf->Cell(105, 6, ($datosecografia->codigo_doctor), 0);
+
+    // Motivo
+    $pdf->SetXY(70, 64);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->Cell(130, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetXY(70, 70);
+    $pdf->MultiCell(130, 5, utf8_decode($datosecografia->motivo), 0);
+
+    $y = 85;
+
+    // =========================================================
+    // 4. MIEMBRO INFERIOR DERECHO
+    // =========================================================
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); 
+    $pdf->SetFillColor(240, 240, 240); 
+    $pdf->SetTextColor(0);
+    $pdf->Cell(130, 7, 'MIEMBRO INFERIOR DERECHO', 0, 1, 'L', true);
+    $y += 10;
+
+    // Descripción Derecha
+    if (!empty($datosecografia->mid_descripcion)) {
+        $pdf->SetXY(70, $y);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(70, 65);
-        $pdf->MultiCell(130, 5, $datosecografia->descripcionProcedimientoDerecho, 0);
-        $pdf->Ln(3);
+        $pdf->MultiCell(130, 5, utf8_encode($datosecografia->mid_descripcion), 0);
+        $y = $pdf->GetY() + 4;
     }
 
-    // Tabla para miembro inferior derecho
-    $pdf->SetXY(70, 75);
-    
-    // Encabezados de tabla
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(60, 7, 'VENA', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'MEDIDA MM', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'REFLUJO', 1, 1, 'C');
-    
-    // Datos de la tabla
+    // Encabezados Tabla
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 9); 
+    $pdf->SetFillColor(220, 220, 220);
+    $pdf->Cell(50, 6, 'VENA', 1, 0, 'C', true);
+    $pdf->Cell(40, 6, 'MEDIDA MM', 1, 0, 'C', true);
+    $pdf->Cell(40, 6, 'REFLUJO', 1, 1, 'C', true);
+    $y += 6;
+
+    // Filas Derecha
     $pdf->SetFont('Arial', '', 9);
     
-    // Femoral Común
+    // F. Común
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'F. COMÚN', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_fc_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_fc_derecho, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, ('F. Común'), 1);
+    $pdf->Cell(40, 6, $datosecografia->mid_fc_med, 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_fc_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Mayor Muslo
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MAYOR MUSLO', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_fs_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_fs_derecho, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Mayor Muslo', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mid_smm_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_smm_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Mayor Pierna
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MAYOR PIERNA', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_tp_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_tp_derecho, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Mayor Pierna', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mid_smp_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_smp_ref), 1, 1, 'C');
+    $y += 6;
+
     // Poplítea
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'POPLÍTEA', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_poplitea_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_poplitea_derecho, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, ('Poplítea'), 1);
+    $pdf->Cell(40, 6, ($datosecografia->mid_pop_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_pop_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Menor
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MENOR', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_ta_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_ta_derecho, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Menor', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mid_sm_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_sm_ref), 1, 1, 'C');
+    $y += 6;
+
     // Perforantes
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'PERFORANTES', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_media_derecho, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_media_derecho, 1, 1, 'C');
+    $pdf->Cell(50, 6, 'Perforantes', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mid_perf_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mid_perf_ref), 1, 1, 'C');
+    $y += 10;
 
-    // MIEMBRO INFERIOR IZQUIERDO
-    $pdf->SetXY(70, 125);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'MIEMBRO INFERIOR IZQUIERDO', 0, 1);
+    // =========================================================
+    // 5. MIEMBRO INFERIOR IZQUIERDO
+    // =========================================================
     
-    // Descripción del procedimiento izquierdo
-    if (!empty($datosecografia->descripcionProcedimientoIzquierdo)) {
-        $pdf->SetFont('Arial', '', 10);
-        $pdf->SetXY(70, 132);
-        $pdf->MultiCell(130, 5, $datosecografia->descripcionProcedimientoIzquierdo, 0);
-        $pdf->Ln(3);
+    // Validar espacio
+    if ($y > 200) { 
+        $pdf->AddPage(); 
+        $imprimirPlantilla($pdf); // NO hay helper aquí, solo el código de arriba
+        // Como imprimirPlantilla es local, copiamos la lógica si no usas funciones
+        // Pero para simplificar, asumimos que copiaste la parte de arriba
+        $pdf->SetAlpha(0.1); $pdf->Image("public/img/theme/logo.png", 70, 90, 120); $pdf->SetAlpha(1);
+        $pdf->SetFillColor(230,230,230); $pdf->Rect(10, 5, 50, 277, 'F');
+        // (Imágenes laterales...)
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->SetFont('Arial', 'B', 8); $pdf->SetXY(15, 135);
+        foreach($listado as $item) { $pdf->Cell(50, 4, $item, 0, 1, 'L'); $pdf->SetX(15); }
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+        
+        $y = 30; 
     }
 
-    // Tabla para miembro inferior izquierdo
-    $pdf->SetXY(70, 145);
-    
-    // Encabezados de tabla
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(60, 7, 'VENA', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'MEDIDA MM', 1, 0, 'C');
-    $pdf->Cell(35, 7, 'REFLUJO', 1, 1, 'C');
-    
-    // Datos de la tabla
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 11); 
+    $pdf->SetFillColor(240, 240, 240); 
+    $pdf->SetTextColor(0);
+    $pdf->Cell(130, 7, 'MIEMBRO INFERIOR IZQUIERDO', 0, 1, 'L', true);
+    $y += 10;
+
+    // Descripción Izquierda
+    if (!empty($datosecografia->mii_descripcion)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->MultiCell(130, 5, utf8_encode($datosecografia->mii_descripcion), 0);
+        $y = $pdf->GetY() + 4;
+    }
+
+    // Encabezados Tabla
+    $pdf->SetXY(70, $y);
+    $pdf->SetFont('Arial', 'B', 9); 
+    $pdf->SetFillColor(220, 220, 220);
+    $pdf->Cell(50, 6, 'VENA', 1, 0, 'C', true);
+    $pdf->Cell(40, 6, 'MEDIDA MM', 1, 0, 'C', true);
+    $pdf->Cell(40, 6, 'REFLUJO', 1, 1, 'C', true);
+    $y += 6;
+
+    // Filas Izquierda
     $pdf->SetFont('Arial', '', 9);
     
-    // Femoral Común
+    // F. Común
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'F. COMÚN', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_fc_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_fc_izquierdo, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, ('F. Común'), 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_fc_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_fc_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Mayor Muslo
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MAYOR MUSLO', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_fs_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_fs_izquierdo, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Mayor Muslo', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_smm_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_smm_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Mayor Pierna
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MAYOR PIERNA', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_tp_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_tp_izquierdo, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Mayor Pierna', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_smp_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_smp_ref), 1, 1, 'C');
+    $y += 6;
+
     // Poplítea
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'POPLÍTEA', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_poplitea_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_poplitea_izquierdo, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, ('Poplítea'), 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_pop_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_pop_ref), 1, 1, 'C');
+    $y += 6;
+
     // Safena Menor
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'SAFENA MENOR', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_ta_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_ta_izquierdo, 1, 1, 'C');
-    
+    $pdf->Cell(50, 6, 'Safena Menor', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_sm_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_sm_ref), 1, 1, 'C');
+    $y += 6;
+
     // Perforantes
     $pdf->SetX(70);
-    $pdf->Cell(60, 6, 'PERFORANTES', 1, 0, 'L');
-    $pdf->Cell(35, 6, $datosecografia->medida_media_izquierdo, 1, 0, 'C');
-    $pdf->Cell(35, 6, $datosecografia->reflujo_media_izquierdo, 1, 1, 'C');
+    $pdf->Cell(50, 6, 'Perforantes', 1);
+    $pdf->Cell(40, 6, ($datosecografia->mii_perf_med), 1, 0, 'C');
+    $pdf->Cell(40, 6, ($datosecografia->mii_perf_ref), 1, 1, 'C');
+    $y += 10;
 
-    // CONCLUSIONES
-    $pdf->SetXY(70, 190);
+    // =========================================================
+    // 6. CONCLUSIONES
+    // =========================================================
+    if ($y > 220) { 
+        $pdf->AddPage(); 
+        // Copiar lógica de plantilla lateral de nuevo si es necesario
+        $pdf->SetAlpha(0.1); $pdf->Image("public/img/theme/logo.png", 70, 90, 120); $pdf->SetAlpha(1);
+        $pdf->SetFillColor(230,230,230); $pdf->Rect(10, 5, 50, 277, 'F');
+        // (Imágenes laterales...)
+        $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+        $pdf->SetFont('Arial', 'B', 8); $pdf->SetXY(15, 135);
+        foreach($listado as $item) { $pdf->Cell(50, 4, $item, 0, 1, 'L'); $pdf->SetX(15); }
+        $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+        $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+        $y = 30; 
+    }
+
+    $pdf->SetXY(70, $y);
     $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'CONCLUSIÓN:', 0, 1);
-
-    // Mostramos las conclusiones como texto normal
-    $pdf->SetFont('Arial', '', 10);
-    $pdf->SetXY(70, 197);
-    $pdf->MultiCell(130, 5, $datosecografia->conclusiones, 0);
-
-    
-    // SUGERENCIAS
-    $pdf->SetXY(70, 220);
-    $pdf->SetFont('Arial', 'B', 11);
-    $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+    $pdf->Cell(130, 6, ('CONCLUSIÓN:'), 0, 1);
+    $y += 6;
     
     $pdf->SetFont('Arial', '', 10);
-    $pdf->SetXY(70, 227);
-    $pdf->MultiCell(130, 5, $datosecografia->sugerencias, 0);
+    $pdf->SetXY(70, $y);
+    $pdf->MultiCell(130, 5, utf8_decode($datosecografia->conclusiones), 0);
+    $y = $pdf->GetY() + 6;
 
+    // Sugerencias
+    if (!empty($datosecografia->sugerencias)) {
+        $pdf->SetXY(70, $y);
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(130, 6, 'SUGERENCIAS:', 0, 1);
+        $y += 6;
+        
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->SetXY(70, $y);
+        $pdf->MultiCell(130, 5, utf8_decode($datosecografia->sugerencias), 0);
+    }
+    
     // Pie de página
-     // Borde superior decorativo
-     $pdf->SetFillColor(0,24,0); // Verde oscuro
-     $pdf->Rect(10, 290, 190, 2, 'F');
- 
-     // Información de contacto
-    // Lado izquierdo - Dirección
+    $pdf->SetFillColor(0,24,0); 
+    $pdf->Rect(10, 290, 190, 2, 'F');
     $pdf->SetFont('Arial', '', 9);
-    $pdf->SetTextColor(128,128,128); // Color gris para el texto
+    $pdf->SetTextColor(128,128,128);
     $pdf->SetXY(60, 283);
-    $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->Cell(100, 5, utf8_decode('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
 
-    // Lado derecho - Celular e íconos
     $pdf->SetXY(140, 283);
     $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
     
-    // Íconos al lado del celular
     $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4);
     $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4);
     $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
 
     $pdf->Output('I', 'ecografia_venoso.pdf');
     exit;
+}
 
+public function getEcografiaDopplerPdf($dni) {
+    // 1. CARGA DE DATOS
+    $datosPaciente = $this->Ecografias_model->getDatosPaciente($dni)->result()[0];
+    $datosecografia = $this->Ecografias_model->getEcografiaDopplerPdf($dni)->result()[0];
+
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->SetAutoPageBreak(false); 
+    $pdf->AddPage();
+
+    // ==========================================
+    // PLANTILLA
+    // ==========================================
+    $pdf->SetAlpha(0.1); $pdf->Image("public/img/theme/logo.png", 75, 90, 110); $pdf->SetAlpha(1);
+    
+    // Barra Lateral
+    $pdf->SetFillColor(230,230,230); $pdf->Rect(10, 5, 50, 277, 'F');
+    $pdf->Image("public/img/theme/ecografia_mama.jpg", 12, 20, 46, 30);
+    $pdf->Image("public/img/theme/ecografia_renal.jpg", 12, 60, 46, 30);
+    $pdf->Image("public/img/theme/ecografia_prostatica.jpg", 12, 100, 46, 30);
+    
+    $pdf->SetFont('Arial', 'B', 8); $pdf->SetXY(15, 135);
+    $listado = ["Ecografía Morfológica", "Ecografía Genética", "Ecografía Obstétrica", "Ecografía Obstétrica Doppler", "Ecografía Seguimiento", "Ovulatorio", "Ecografía Transvaginal", "Histerosonografía", "Ecografía Gemelar", "Ecografía 3D, 4D, 5D", "Ecografía de Mamas", "", "OTRAS ECOGRAFÍAS", "Ecografía Partes Blandas", "Ecografía Abdominal", "Ecografía Tiroides", "Ecografía Pélvica", "Ecografía Venosa M.I."];
+    
+    foreach($listado as $item) { 
+        $pdf->Cell(50, 4, ($item), 0, 1, 'L'); 
+        $pdf->SetX(15); 
     }
+    $pdf->Image("public/img/theme/ecografia_abdominal.jpg", 12, 210, 46, 30);
+    $pdf->Image("public/img/theme/ecografia_tiroides.jpg", 12, 245, 46, 30);
+
+    // Configuración de Márgenes
+    $X = 65; 
+    $W = 140;
+
+    // ==========================================
+    // ENCABEZADO
+    // ==========================================
+    $pdf->SetFont('Arial', 'B', 14); $pdf->SetXY($X, 10);
+    $pdf->Cell($W, 10, ('ECOGRAFÍA OBSTÉTRICA DOPPLER'), 0, 1, 'C');
+
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetXY($X, 30); $pdf->Cell(25, 6, 'PACIENTE:', 0); $pdf->SetFont('Arial', '', 10); $pdf->Cell(115, 6, utf8_decode($datosPaciente->nombre . ' ' . $datosPaciente->apellido), 0);
+    $pdf->SetXY($X, 36); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'DNI:', 0); $pdf->SetFont('Arial', '', 10); $pdf->Cell(115, 6, $datosPaciente->documento, 0);
+    $pdf->SetXY($X, 42); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'EDAD:', 0); $pdf->SetFont('Arial', '', 10); $pdf->Cell(115, 6, ($datosPaciente->edad . ' años'), 0);
+    $pdf->SetXY($X, 48); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, 'FECHA:', 0); $pdf->SetFont('Arial', '', 10); $pdf->Cell(115, 6, date("d/m/Y", strtotime($datosecografia->fecha)), 0);
+    $pdf->SetXY($X, 54); $pdf->SetFont('Arial', 'B', 10); $pdf->Cell(25, 6, utf8_decode('MÉDICO:'), 0); $pdf->SetFont('Arial', '', 10); $pdf->Cell(115, 6, utf8_decode($datosecografia->codigo_doctor), 0);
+
+    $pdf->SetXY($X, 64); $pdf->SetFont('Arial', 'B', 11); $pdf->Cell($W, 6, 'MOTIVO DE EXAMEN:', 0, 1);
+    $pdf->SetFont('Arial', '', 10); $pdf->SetXY($X, 70); $pdf->MultiCell($W, 5, utf8_encode($datosecografia->motivo), 0);
+
+    $y = 85;
+
+    // ==========================================
+    // 1. BIOMETRÍA FETAL
+    // ==========================================
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0);
+    $pdf->Cell($W, 7, ('  1. BIOMETRÍA FETAL'), 0, 1, 'L', true); $y += 8;
+
+    // Anchos optimizados
+    $w1 = 38; $w2 = 27; $w3 = 43; $w4 = 25;
+
+    // Fila 1: Etiquetas
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell($w1, 5, ('Situación:'),0); $pdf->Cell($w2, 5, ('LCF (lpm):'),0); 
+    $pdf->Cell($w3, 5, ('Placenta:'),0);  $pdf->Cell($w4, 5, ('ILA (Líquido):'),0);
+    $y += 5;
+
+    // Fila 1: Valores
+    $pdf->SetFont('Arial', '', 8);
+    
+    // Guardamos posiciones para calcular altura máxima de fila
+    $y_start = $y;
+    
+    $pdf->SetXY($X, $y); 
+    $pdf->MultiCell($w1, 4, utf8_encode($datosecografia->situacion), 0, 'L');
+    $h1 = $pdf->GetY() - $y;
+
+    $pdf->SetXY($X+$w1, $y); 
+    $pdf->Cell($w2, 4, ($datosecografia->lcf), 0, 0, 'L');
+
+    $pdf->SetXY($X+$w1+$w2, $y); 
+    $pdf->MultiCell($w3, 4, utf8_encode($datosecografia->placenta_grado), 0, 'L');
+    $h3 = $pdf->GetY() - $y;
+
+    $pdf->SetXY($X+$w1+$w2+$w3, $y); 
+    $pdf->Cell($w4, 4, utf8_encode($datosecografia->ila), 0, 0, 'L');
+
+    // Ajustamos Y al más alto para que nada se monte
+    $y += max($h1, $h3, 5) + 2;
+
+    // Fila 2: Medidas
+    $col_eq = 35;
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell($col_eq, 5, 'DBP (mm):',0); $pdf->Cell($col_eq, 5, 'CC (mm):',0); $pdf->Cell($col_eq, 5, 'CA (mm):',0); $pdf->Cell($col_eq, 5, 'LF (mm):',0);
+    $y += 5;
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell($col_eq, 5, $datosecografia->dbp,0); $pdf->Cell($col_eq, 5, $datosecografia->cc,0); $pdf->Cell($col_eq, 5, $datosecografia->ca,0); $pdf->Cell($col_eq, 5, $datosecografia->lf,0);
+    $y += 10;
+
+    // Peso Fetal
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell($W, 8, utf8_decode('PESO FETAL ESTIMADO: ' . $datosecografia->pfe), 1, 1, 'C');
+    $y += 12;
+
+    // ==========================================
+    // 2. HEMODINAMIA (Tabla con NbLines)
+    // ==========================================
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell($W, 7, utf8_decode('  2. HEMODINAMIA (DOPPLER COLOR)'), 0, 1, 'L', true); $y += 8;
+
+    // Anchos de tabla
+    $cw_vaso = 34; $cw_ip = 30; $cw_ir = 30; $cw_otro = 46;
+
+    // Cabecera Tabla
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 8); $pdf->SetFillColor(220, 220, 220);
+    $pdf->Cell($cw_vaso, 6, 'VASO', 1, 0, 'C', true);
+    $pdf->Cell($cw_ip, 6, 'IP', 1, 0, 'C', true);
+    $pdf->Cell($cw_ir, 6, 'IR', 1, 0, 'C', true);
+    $pdf->Cell($cw_otro, 6, 'OTRO / S/D', 1, 1, 'C', true);
+    $y += 6;
+
+    // FUNCIÓN DE IMPRESIÓN CON NbLines
+    $printRow = function($c1, $c2, $c3, $c4) use ($pdf, $X, $cw_vaso, $cw_ip, $cw_ir, $cw_otro) {
+        $pdf->SetFont('Arial', '', 8);
+        
+        // Calcular alto máximo de la fila
+        $nb1 = $pdf->NbLines($cw_vaso, utf8_decode($c1));
+        $nb2 = $pdf->NbLines($cw_ip, utf8_decode($c2));
+        $nb3 = $pdf->NbLines($cw_ir, utf8_encode($c3));
+        $nb4 = $pdf->NbLines($cw_otro, ($c4));
+        
+        $h = 5 * max($nb1, $nb2, $nb3, $nb4); // 5mm de alto por línea
+        
+        // Salto de página
+        if($pdf->GetY() + $h > 275) $pdf->AddPage();
+        
+        $y_curr = $pdf->GetY();
+        
+        // Imprimir Celdas
+        $pdf->SetXY($X, $y_curr); $pdf->MultiCell($cw_vaso, 5, ($c1), 0, 'L');
+        $pdf->SetXY($X, $y_curr); $pdf->Rect($X, $y_curr, $cw_vaso, $h);
+
+        $pdf->SetXY($X+$cw_vaso, $y_curr); $pdf->MultiCell($cw_ip, 5, ($c2), 0, 'C');
+        $pdf->SetXY($X+$cw_vaso, $y_curr); $pdf->Rect($X+$cw_vaso, $y_curr, $cw_ip, $h);
+
+        $pdf->SetXY($X+$cw_vaso+$cw_ip, $y_curr); $pdf->MultiCell($cw_ir, 5, ($c3), 0, 'C');
+        $pdf->SetXY($X+$cw_vaso+$cw_ip, $y_curr); $pdf->Rect($X+$cw_vaso+$cw_ip, $y_curr, $cw_ir, $h);
+
+        $pdf->SetXY($X+$cw_vaso+$cw_ip+$cw_ir, $y_curr); $pdf->MultiCell($cw_otro, 5, ($c4), 0, 'C');
+        $pdf->SetXY($X+$cw_vaso+$cw_ip+$cw_ir, $y_curr); $pdf->Rect($X+$cw_vaso+$cw_ip+$cw_ir, $y_curr, $cw_otro, $h);
+
+        $pdf->SetY($y_curr + $h);
+    };
+
+    // Imprimir datos
+    $printRow('Art. Umbilical', utf8_encode($datosecografia->au_ip), utf8_encode($datosecografia->au_ir), 'S/D: ' . utf8_encode($datosecografia->au_sd));
+    $printRow('Art. Cerebral Media', utf8_encode($datosecografia->acm_ip), '-', 'Vmax: ' . utf8_encode($datosecografia->acm_vmax));
+    $printRow('Art. Uterinas', 'Der: ' . utf8_encode($datosecografia->ut_der_ip), 'Izq: ' . utf8_encode($datosecografia->ut_izq_ip), utf8_encode($datosecografia->ut_promedio));
+    
+    $y = $pdf->GetY() + 4;
+
+    // Ductus y CPR
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 9); $pdf->Cell(30, 6, 'Ductus Venoso:', 0); 
+    $pdf->SetFont('Arial', '', 9); $pdf->Cell(110, 6, utf8_encode($datosecografia->ductus_venoso), 0); $y += 5;
+
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 9); $pdf->Cell(30, 6, 'CPR (Ratio):', 0); 
+    $pdf->SetFont('Arial', '', 9); $pdf->Cell(110, 6, utf8_encode($datosecografia->ratio_cerebro_placentario), 0); $y += 10;
+
+    // ==========================================
+    // 3. OBSERVACIONES Y CONCLUSIONES
+    // ==========================================
+    if ($y > 220) { $pdf->AddPage(); $pdf->SetFillColor(230,230,230); $pdf->Rect(10, 5, 50, 277, 'F'); $pdf->Image("public/img/theme/logo.png", 75, 90, 110); $y = 30; }
+
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 11); $pdf->SetFillColor(240, 240, 240);
+    $pdf->Cell($W, 7, ('  3. OBSERVACIONES ANATÓMICAS'), 0, 1, 'L', true); $y += 8;
+    
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', '', 9);
+    $pdf->MultiCell($W, 5, utf8_encode($datosecografia->descripcion_anatomica), 0);
+    $y = $pdf->GetY() + 6;
+
+    if ($y > 230) { $pdf->AddPage(); $pdf->SetFillColor(230,230,230); $pdf->Rect(10, 5, 50, 277, 'F'); $y = 30; }
+
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 11); $pdf->Cell($W, 6, 'CONCLUSIONES:', 0, 1); $y += 6;
+    $pdf->SetXY($X, $y); $pdf->SetFont('Arial', '', 10); $pdf->MultiCell($W, 5, utf8_encode($datosecografia->conclusiones), 0); 
+    
+    if (!empty($datosecografia->sugerencias)) {
+        $y = $pdf->GetY() + 6;
+        $pdf->SetXY($X, $y); $pdf->SetFont('Arial', 'B', 11); $pdf->Cell($W, 6, 'SUGERENCIAS:', 0, 1); $y += 6;
+        $pdf->SetXY($X, $y); $pdf->SetFont('Arial', '', 10); $pdf->MultiCell($W, 5, utf8_encode($datosecografia->sugerencias), 0);
+    }
+
+    // Pie
+    $pdf->SetFillColor(0,24,0); $pdf->Rect(10, 290, 190, 2, 'F');
+    $pdf->SetFont('Arial', '', 9); $pdf->SetTextColor(128,128,128);
+    $pdf->SetXY(60, 283); $pdf->Cell(100, 5, ('DIRECCIÓN: Av. Salaverry 1402 - Urb. Bancarios'), 0, 0, 'L');
+    $pdf->SetXY(140, 283); $pdf->Cell(30, 5, 'CELULAR: 902720312', 0, 0, 'R');
+    $pdf->Image("public/img/theme/facebook.png", 175, 283, 4, 4); $pdf->Image("public/img/theme/instagram.png", 182, 283, 4, 4); $pdf->Image("public/img/theme/wsp.jpeg", 189, 283, 4, 4);
+
+    $pdf->Output('I', 'ecografia_doppler.pdf');
+    exit;
+}
 
 }

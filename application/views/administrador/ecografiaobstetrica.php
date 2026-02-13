@@ -150,141 +150,192 @@
         >
         </div>
         </div>
-        <div class="row">
-                 <div class="col-md-3">
-                    <label>Feto / Embrión</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="unico" value="Unico">
-                     <label class="form-check-label" for="inlineRadio1">Unico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="fetoembrion" id="multiple" value="Multiple">
-                     <label class="form-check-label" for="inlineRadio2">Multiple</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row mt-2">
-               <div class="col-md-3">
-                    <label>Situaciòn</label>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="cefalico" value="cefalico">
-                     <label class="form-check-label" for="inlineRadio1">Cefalico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="podatico" value="podalico">
-                     <label class="form-check-label" for="inlineRadio2">Podatico</label>
-                   </div>
-                 </div>
-                 <div class="col-md-3">
-                   <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="situacion" id="indiferente" value="indiferente">
-                     <label class="form-check-label" for="inlineRadio2">Indiferente</label>
-                   </div>
-                 </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="form-group">
-                        <label>Estado del feto</label>
-                        <textarea id="estadoFeto" class="form-control" rows="1">MOVIMIENTOS RESPIRATORIOS Y CORPORALES PRESENTES</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-1">
-                     <div class="form-group">
-                        <label>Placenta</label>
-                        <input id="placenta" type="text" class="form-control form-control-sm" placeholder="Grados"> 
-                     </div>
-                  </div>
-                  <div class="col-md-1">
-                     <label>DPB</label> 
-                     <input id="dpb" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LCF</label> 
-                     <input id="lcf" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4 text-center">
-                    <label class="mt-3">X</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>Min</label> 
-                     <input id="min" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1">
-                     <label>CC</label> 
-                     <input id="cc" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>CA</label> 
-                     <input id="ca" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-                  <div class="col-md-1">
-                     <label>LF</label> 
-                     <input id="lf" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">mm</label>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-4">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="ila" class="form-control" rows="1">ILA ADECUADO PARA LA EDAD GESTACIONAL (POZO MAYOR 42 mm)</textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-2">
-                     <label>Percentil</label> 
-                     <input id="percentil" type="text" class="form-control form-control-sm">
-                  </div>
-                  <div class="col-md-1 mt-4">
-                    <label class="mt-3">%</label>
-                  </div>
-                  <div class="col-md-5">
-                     <div class="form-group">
-                        <label for=""></label>
-                        <textarea id="tipoParto" class="form-control" rows="1">SE SUGIERE PARTO INSTITUCIONAL.</textarea>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Conclusion</label>
-                        <textarea id="conclusion" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="form-group">
-                        <label>Sugerencia</label>
-                        <textarea id="sugerencia" rows="2" class="form-control"></textarea>
-                     </div>
-                  </div>
-               </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" onclick="createEcografiaObstetrica()">Guardar</button>
-               </div>
+      <div class="modal-body">
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <button type="button" class="btn btn-outline-warning btn-block font-weight-bold" id="btn_precoz" onclick="activarModo('precoz')">
+                <i class="fas fa-baby"></i> 1º TRIMESTRE (< 13 Sem)
+            </button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-primary btn-block font-weight-bold" id="btn_avanzado" onclick="activarModo('avanzado')">
+                <i class="fas fa-child"></i> 2º y 3º TRIMESTRE (> 13 Sem)
+            </button>
+        </div>
+    </div>
+
+    <div id="bloque_precoz" style="display: none;">
+        <div class="card mb-3 border-warning">
+            <div class="card-header bg-light text-warning font-weight-bold py-1">
+                BIOMETRÍA Y SACO (PRIMERAS SEMANAS)
+                <button class="btn btn-xs btn-warning float-right" onclick="cargarPrecozNormal()">Cargar Normal</button>
             </div>
+            <div class="card-body py-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Saco Gestacional</label>
+                        <select id="saco_gestacional" class="form-control form-control-sm">
+                            <option value="">--</option>
+                            <option value="Normoinserto">Normoinserto</option>
+                            <option value="Irregular">Irregular</option>
+                            <option value="Doble">Doble</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Vesícula Vitelina</label>
+                        <select id="saco_vitelino" class="form-control form-control-sm">
+                            <option value="">--</option>
+                            <option value="Presente">Presente</option>
+                            <option value="Ausente">Ausente</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold text-primary">LCC (Longitud mm)</label>
+                        <input type="number" id="lcc" class="form-control form-control-sm" placeholder="mm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small font-weight-bold">Embrión</label>
+                        <select id="embrion_visualizado" class="form-control form-control-sm">
+                            <option value="Visualizado">Visualizado</option>
+                            <option value="No Visualizado">No Visualizado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bloque_avanzado">
+        
+        <div class="card mb-3 border-primary">
+            <div class="card-header bg-light text-primary font-weight-bold py-1">
+                BIOMETRÍA Y PESO (Hadlock)
+                <button class="btn btn-xs btn-primary float-right" onclick="cargarAvanzadoNormal()">Cargar Normal</button>
+            </div>
+            <div class="card-body py-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="small">DBP (Cabeza)</label>
+                        <input type="number" id="dpb" class="form-control form-control-sm" placeholder="mm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small">CC (Circunf.)</label>
+                        <input type="number" id="cc" class="form-control form-control-sm" placeholder="mm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small">CA (Abdomen)</label>
+                        <input type="number" id="ca" class="form-control form-control-sm" placeholder="mm">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small">LF (Fémur)</label>
+                        <input type="number" id="lf" class="form-control form-control-sm" placeholder="mm">
+                    </div>
+                </div>
+                <hr class="my-2">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold text-success">Peso Estimado (g)</label>
+                        <input type="number" id="ponderado" class="form-control form-control-sm font-weight-bold text-success" placeholder="Gramos">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold">Edad Gestacional</label>
+                        <input type="text" id="edad_gestacional" class="form-control form-control-sm" placeholder="Ej: 25 sem">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="small font-weight-bold">Percentil</label>
+                        <input type="text" id="percentil" class="form-control form-control-sm" placeholder="%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Situación</label>
+                <select id="situacion" class="form-control form-control-sm">
+                    <option value="Longitudinal">Longitudinal</option>
+                    <option value="Transversa">Transversa</option>
+                    <option value="Oblicua">Oblicua</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Presentación</label>
+                <select id="presentacion" class="form-control form-control-sm">
+                    <option value="Cefalico">Cefálico</option>
+                    <option value="Podalico">Podálico</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Dorso</label>
+                <select id="dorso" class="form-control form-control-sm">
+                    <option value="Derecho">Derecho</option>
+                    <option value="Izquierdo">Izquierdo</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="small font-weight-bold text-info">Sexo Fetal</label>
+                <select id="sexo" class="form-control form-control-sm">
+                    <option value="No Visible">No Visible</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label class="small font-weight-bold">Placenta</label>
+                <select id="placenta_ub" class="form-control form-control-sm">
+                    <option value="Corporal Anterior">Anterior</option>
+                    <option value="Corporal Posterior">Posterior</option>
+                    <option value="Fúndica">Fúndica</option>
+                    <option value="Previa">Previa</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="small font-weight-bold">Grado</label>
+                <select id="placenta_grado" class="form-control form-control-sm">
+                    <option value="0">0</option>
+                    <option value="I">I</option>
+                    <option value="II">II</option>
+                    <option value="III">III</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <h6 class="text-secondary font-weight-bold border-bottom pb-1">Vitalidad y Conclusiones</h6>
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label class="small font-weight-bold text-danger">LCF (Latidos)</label>
+            <input type="number" id="lcf" class="form-control form-control-sm" placeholder="140">
+        </div>
+        <div class="col-md-4">
+            <label class="small font-weight-bold">Movimientos</label>
+            <input type="text" id="movimientos" class="form-control form-control-sm" value="Presentes">
+        </div>
+        <div class="col-md-5">
+            <label class="small font-weight-bold">Líquido Amniótico (ILA)</label>
+            <input type="text" id="ila" class="form-control form-control-sm" value="Normal">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="small font-weight-bold">Conclusión</label>
+            <textarea id="conclusion" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="col-md-12 mt-2">
+            <label class="small font-weight-bold">Sugerencias</label>
+            <textarea id="sugerencia" class="form-control" rows="1"></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" onclick="createEcografiaObstetrica()">Guardar Ecografía</button>
+</div>
          </div>
       </div>
       </div>
