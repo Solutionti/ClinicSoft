@@ -962,6 +962,40 @@ class Historias_model extends CI_model
 
     return $result;
   }
+
+  //diagnosticos 
+  public function getdiagnosticosEditar($triage, $paciente, $especialidad) {
+    $this->db->select('d.*, dc.descripcion as nombrediagnostico, dc.id as iddiagnostico');
+    $this->db->from('diagnosticos d');
+    $this->db->join('diagnosticoscie10 dc', 'd.codigo_diagnosti = dc.clave');
+    $this->db->where('d.codigo_historia', $triage);
+    $this->db->where('d.paciente', $paciente);
+    $this->db->where('tipo_especialidad', $especialidad);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  //medicamentos 
+  public function getMedicamentosEditar($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('medicamentos');
+    $this->db->where('triaje', $triage);
+    $this->db->where('paciente', $paciente);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
+  public function getCitasPaciente($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('citas');
+    $this->db->where('triage', $triage);
+    $this->db->where('documento', $paciente);
+    $result = $this->db->get();
+
+    return $result;
+  }
 }
 
 ?>
