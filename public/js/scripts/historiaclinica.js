@@ -2471,6 +2471,82 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                     }
                 });
 
+                //EXAMENES AUXILIARES
+                  //ECOGRAFIAS 
+                  let url6 = baseurl + "administracion/auxiliarecografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url6,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(ecografia) {
+                                elemEco = [
+                                    ecografia.codigoauxiliar,
+                                    ecografia.nombreauxiliar
+                                ];
+                                elementos_eco.push(elemEco);
+                                table_eco.row(this).remove();
+                                table_eco_mini.row.add(elemEco).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_eco.length; i++) {
+                                  total_ += elementos_eco[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_eco.draw(false);
+                            });
+                        }
+                    });
+
+                  //TOMOGRAFIAS
+                  let url7 = baseurl + "administracion/auxiliaretomografias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url7,
+                        method: "GET",
+                        success: function(data) {
+                          data = JSON.parse(data);
+                          data.forEach(function(tomografia) {
+                            elemTomo = [
+                                tomografia.codigoauxiliar,
+                                tomografia.nombreauxiliar
+                            ];
+                            elementos_tomo.push(elemTomo);
+                            table_tomo.row(this).remove();
+                            table_tomo_mini.row.add(elemTomo).draw(false);
+                            total_ = 0;
+                            for (let i = 0; i < elementos_tomo.length; i++) {
+                              total_ += elementos_tomo[i][2] * 1;
+                            }
+                            $("#total").val((total_).toFixed(2));
+                            table_tomo.draw(false);
+                          });
+                        }
+                    });
+
+                  //RESONANCIAS
+                  let url8 = baseurl + "administracion/auxiliareresonancias/" + triage + '/' +  paciente;
+                    $.ajax({
+                        url: url8,
+                        method: "GET",
+                        success: function(data) {
+                            data = JSON.parse(data);
+                            data.forEach(function(resonancia) {
+                              elemReso = [
+                                resonancia.codigoauxiliar,
+                                resonancia.nombreauxiliar
+                              ];
+                              elementos_reso.push(elemReso);
+                              table_reso.row(this).remove();
+                              table_reso_mini.row.add(elemReso).draw(false);
+                                total_ = 0;
+                                for (let i = 0; i < elementos_reso.length; i++) {
+                                  total_ += elementos_reso[i][2] * 1;
+                                }
+                                $("#total").val((total_).toFixed(2));
+                                table_reso.draw(false);
+                            });
+                        }
+                    });
+
                 //REECETA MEDICA
                 var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
                 $.ajax({
