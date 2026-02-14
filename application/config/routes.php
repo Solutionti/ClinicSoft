@@ -130,6 +130,10 @@ $route["administracion/getmedicamentoscodigo/(:num)/(:any)"] = "administrador/hi
 $route["administracion/getcitascodigo/(:num)/(:any)"] = "administrador/historiaclinica/getCitasPaciente/$1/$2";
 $route["administracion/getprocedimientoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getProcedimientosCodigo/$1/$2/$3";
 
+$route["administracion/auxiliarecografias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresEcografiasEditar/$1/$2";
+$route["administracion/auxiliaretomografias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresTomografiasEditar/$1/$2";
+$route["administracion/auxiliareresonancias/(:num)/(:any)"] = "administrador/historiaclinica/examenesAuxiliaresResonanciasEditar/$1/$2";
+
 
 /***********************************************************
 ****************** COLPOSCOPIA *****************************

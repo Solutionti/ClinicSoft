@@ -2212,4 +2212,20 @@ class Historiaclinica extends Admin_Controller
 	  $data = $this->Historias_model->getProcedimientosCodigo($triage, $paciente, $especialidad)->result();
       echo json_encode($data);	
 	}
+
+	public function examenesAuxiliaresEcografiasEditar($triage, $paciente) {
+	  $data = $this->Historias_model->examenesAuxiliaresEcografiasEditar($triage, $paciente)->result();
+      echo json_encode($data);		
+	}
+
+	public function examenesAuxiliaresTomografiasEditar($triage, $paciente) {
+	  $data = $this->Historias_model->examenesAuxiliaresTomografiasEditar($triage, $paciente)->result();
+      echo json_encode($data);		
+	}
+
+	public function examenesAuxiliaresResonanciasEditar($triage, $paciente) {
+	  $data = $this->Historias_model->examenesAuxiliaresResonanciasEditar($triage, $paciente)->result();
+	  echo json_encode($data);
+
+	}
 }
