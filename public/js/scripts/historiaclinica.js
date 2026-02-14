@@ -2120,7 +2120,7 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
        primary: "#5e72e4",
        accent: "#ffffff",
        yesColor: "#3498DB",
-       message: "¿Desea editar la historia clínica general?",
+       message: "¿Desea editar la historia Clínica General?",
        overlay: true,
        callback: function (value) {
          if(value == false){
@@ -2206,6 +2206,32 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                     }
                 });
 
+                //PROCEDIMIENTOS
+                var url5 = baseurl + "administracion/getprocedimientoscodigo/" + triage + '/' +  paciente + '/' + 1;
+                $.ajax({
+                    url: url5,
+                    method: "GET",
+                    success: function(response) {
+                      response = JSON.parse(response);
+                      response.forEach(function(proce, index) {
+                        elemDiagnosti = [
+                          proce.codigo_procedimiento,
+                          proce.nombreprocedimiento, 
+                          proce.texto_plantilla 
+                        ];
+                        elementos_procedimientos2.push(elemDiagnosti);
+                        table_procedi.row(this).remove();
+                        table_lab_mini4.row.add(elemDiagnosti).draw(false);
+                        total_ = 0;
+                        for (let x = 0; x < elementos_procedimientos2.length; x++) {
+                          total_ += elementos_procedimientos2[x][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_procedi.draw(false);
+                      });
+                    }
+                });
+
                 //REECETA MEDICA
                 var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
                 $.ajax({
@@ -2266,7 +2292,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
        primary: "#5e72e4",
        accent: "#ffffff",
        yesColor: "#3498DB",
-       message: "¿Desea editar la historia clínica general?",
+       message: "¿Desea editar la historia Clínica Gineologica?",
        overlay: true,
        callback: function (value) {
          if(value == false){
@@ -2349,6 +2375,32 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                         }
                         $("#total").val((total_).toFixed(2));
                         table_general.draw(false);
+                      });
+                    }
+                });
+
+                //PROCEDIMIENTOS
+                var url5 = baseurl + "administracion/getprocedimientoscodigo/" + triage + '/' +  paciente + '/' + 2;
+                $.ajax({
+                    url: url5,
+                    method: "GET",
+                    success: function(response) {
+                      response = JSON.parse(response);
+                      response.forEach(function(proce, index) {
+                        elemDiagnosti = [
+                          proce.codigo_procedimiento,
+                          proce.nombreprocedimiento, 
+                          proce.texto_plantilla 
+                        ];
+                        elementos_procedimientos2.push(elemDiagnosti);
+                        table_procedi.row(this).remove();
+                        table_lab_mini4.row.add(elemDiagnosti).draw(false);
+                        total_ = 0;
+                        for (let x = 0; x < elementos_procedimientos2.length; x++) {
+                          total_ += elementos_procedimientos2[x][2] * 1;
+                        }
+                        $("#total").val((total_).toFixed(2));
+                        table_procedi.draw(false);
                       });
                     }
                 });

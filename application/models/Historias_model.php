@@ -976,6 +976,19 @@ class Historias_model extends CI_model
     return $result;
   }
 
+  //diagnosticos
+  public function getProcedimientosCodigo($triage, $paciente, $especialidad) {
+    $this->db->select('p.*, pr.nombre as nombreprocedimiento, pr.codigo_cpt as codigoprocedimiento');
+    $this->db->from('procedimiento_historias p');
+    $this->db->join('procedimientos pr', 'p.codigo_procedimiento = pr.codigo_cpt');
+    $this->db->where('p.codigo_historia', $triage);
+    $this->db->where('p.paciente', $paciente);
+    $this->db->where('p.tipo_especialidad', $especialidad);
+    $result = $this->db->get();
+
+    return $result;
+  }
+
   //medicamentos 
   public function getMedicamentosEditar($triage, $paciente) {
     $this->db->select('*');
@@ -987,6 +1000,7 @@ class Historias_model extends CI_model
     return $result;
   }
 
+  //citas
   public function getCitasPaciente($triage, $paciente) {
     $this->db->select('*');
     $this->db->from('citas');

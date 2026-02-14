@@ -2207,4 +2207,9 @@ class Historiaclinica extends Admin_Controller
 	  $data = $this->Historias_model->getCitasPaciente($triage, $paciente)->result()[0];
       echo json_encode($data);	
 	}
+
+	public function getProcedimientosCodigo($triage, $paciente, $especialidad) {
+	  $data = $this->Historias_model->getProcedimientosCodigo($triage, $paciente, $especialidad)->result();
+      echo json_encode($data);	
+	}
 }
