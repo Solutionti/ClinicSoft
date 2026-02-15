@@ -2172,6 +2172,7 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                $("#anamnesis_sintomas").val(data.sintomas);
 
                //EXAMEN FISICO
+               $("#fisico_piel").val(data.piel);
                $("#fisico_cuello").val(data.cuello);
                $("#fisico_abdomen").val(data.abdomen);
                $("#fisico_respiratorio").val(data.ap_respiratoria);
