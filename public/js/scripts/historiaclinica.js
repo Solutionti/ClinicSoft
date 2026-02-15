@@ -533,6 +533,7 @@ $("#saveBtn").on("click", function (){
       tratamiento = $("#plan_tratamiento").val(),
       referencia = $("#plan_referencia").val(),
       firma = $("#plan_firma").val();
+      piel = $("#fisico_piel").val();
 
       $.ajax({
         url: url2,
@@ -566,12 +567,13 @@ $("#saveBtn").on("click", function (){
           apetito: apetito,
           sed: sed,
           orina: orina,
-          // diagnosticosgeneral: diagnosticosgeneral,
           examendx: examendx,
           interconsultas: interconsultas,
           tratamiento: tratamiento,
           referencia: referencia,
-          firma: firma
+          firma: firma,
+          procedimientoss: procedimientos,
+          piel: piel
         },
         success: function () {
             //Diagnosticos

@@ -165,6 +165,8 @@ class Historias_model extends CI_model
       'referencia' => $data['referencia'],
       'proxima_cita' => $data['cita'],
       'firma_medico' => $data['firma'],
+      'tiempo' => $data['tp_enfermedad'],
+      'piel' => $data['piel'],
       'usuario' => $this->session->userdata('nombre')
     ];
     
@@ -255,25 +257,14 @@ class Historias_model extends CI_model
     return $result;
   }
 
-  public function crearDiagnosticos($data)
+  public function eliminarDiagnosticos($historia, $paciente)
   {
-    $datos = [
-      'codigo_historia' => $data['triaje'],
-      'paciente' => $data['paciente'],
-      'codigo_diagnosti' => $data['diagnosticos'],
-      'tipo_especialidad' => 2,
-      'historia' => $data['historia'],
-      'fecha' => date('Y-m-d'),
-      'usuario' => $this->session->userdata('nombre')
-    ];
-    $this->db->insert('diagnosticos', $datos);
+    $this->db->where("codigo_historia", $historia);
+    $this->db->where("paciente", $paciente);
+    $this->db->delete("diagnosticos");
   }
 
   public function crearDiagnosticosGeneral($data){
-    $this->db->where("codigo_historia", $data['triaje']);
-    $this->db->where("paciente", $data['paciente']);
-    $this->db->delete("diagnosticos");
-
     $datos = [
       'codigo_historia' => $data['triaje'],
       'paciente' => $data['paciente'],
@@ -597,6 +588,12 @@ class Historias_model extends CI_model
     ];
 
     $this->db->insert('ordenes_laboratorio_detalle', $orden_laboratorio);
+  }
+
+  public function eliminarProcedimientos($triage, $paciente) {
+    $this->db->where("codigo_historia", $triage);
+    $this->db->where("paciente", $paciente);
+    $this->db->delete("procedimiento_historias");
   }
 
   public function crearProcedimientosHistoria($data)

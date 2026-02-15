@@ -212,12 +212,13 @@ class Historiaclinica extends Admin_Controller
 		$orina = $this->input->post('orina');
 		$diagnosticosgeneral = $this->input->post('diagnosticosgeneral');
 		$examendx = $this->input->post('examendx');
-		$procedimientos = $this->input->post('procedimientos');
+		$procedimientos = $this->input->post('procedimientoss');
 		$interconsultas = $this->input->post('interconsultas');
 		$tratamiento = $this->input->post('tratamiento');
 		$referencia = $this->input->post('referencia');
 		$cita = $this->input->post('cita');
 		$firma = $this->input->post('firma');
+		$piel = $this->input->post('piel');
 		$procedimientos_seleccionados = $this->input->post('procedimientos_seleccionados');
 
 		$data2 = [
@@ -255,6 +256,7 @@ class Historiaclinica extends Admin_Controller
 			'interconsultas' => $interconsultas,
 			'cita' => $cita,
 			'firma' => $firma,
+			'piel' => $piel
 		];
 
 		$id = $this->Historias_model->crearHconsultasGeneral($data2);
@@ -2068,11 +2070,12 @@ class Historiaclinica extends Admin_Controller
 	}
 
 	public function crearDiagnosticos() {
-		$paciente = $this->input->post('paciente');
-		$triage = $this->input->post('triage');
-		$diagnosticos = $this->input->post('diagnosticos');
-		$tipo = $this->input->post('tipo');
+	  $paciente = $this->input->post('paciente');
+      $triage = $this->input->post('triage');
+	  $diagnosticos = $this->input->post('diagnosticos');
+	  $tipo = $this->input->post('tipo');
 
+	  $this->Historias_model->eliminarDiagnosticos($triage, $paciente);
 	  for ($i = 0; $i < sizeof($diagnosticos); $i++) {
 	    $data3 = [
 		  'paciente' => $paciente,
@@ -2081,7 +2084,6 @@ class Historiaclinica extends Admin_Controller
 		  'tipo' => $tipo,
 		  'triaje' => $triage
 		];
-		
 	   $this->Historias_model->crearDiagnosticosGeneral($data3);
 	  }
 	}
@@ -2092,6 +2094,7 @@ class Historiaclinica extends Admin_Controller
       $procedimientos = $this->input->post('procedimientos');
 	  $tipo = $this->input->post('tipo');
 
+	  $this->Historias_model->eliminarProcedimientos($triage, $paciente);
 	  for ($i = 0; $i < sizeof($procedimientos); $i++) {
 		$data4 = [
 		  'paciente' => $paciente,

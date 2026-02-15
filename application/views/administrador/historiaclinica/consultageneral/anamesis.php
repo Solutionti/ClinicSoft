@@ -30,7 +30,7 @@
                     <input
                       type="text"
                       class="form-control form-control-sm"
-                      id="anamnesis_compañia"
+                      id="anamnesis_compania"
                     >
                   </div>
                 </div>
