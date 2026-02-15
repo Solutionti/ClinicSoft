@@ -971,7 +971,7 @@ function crearProcedimientos(tipo) {
 function crearExamenesAuxiliares() {
 
 }
-
+let medicamentosarray = [];
 function crearMedicamento() {
     var url = baseurl + "administracion/crearmedicamento",
     triaje = $("#consecutivo_historia").val(),
@@ -1017,9 +1017,9 @@ function crearMedicamento() {
              $("#frecuencia_medicamento").val(''),
              $("#duracion_medicamento").val('');
              
-             let medicamentos = [];
+             
        
-             medicamentos.push({
+             medicamentosarray.push({
                triaje: triaje,
                paciente: paciente,
                medicamento: medicamento,
@@ -1030,7 +1030,7 @@ function crearMedicamento() {
                duracion: duracion
              });
        
-             medicamentos.forEach(function(med) {
+             medicamentosarray.forEach(function(med) {
                document.getElementById('listarecetamedica').innerHTML += `
                  <tr>
                    <td class="text-xs">
@@ -1084,11 +1084,31 @@ function eliminarMedicamento(medicamentos) {
               triaje: triaje
             },
             success: function() {
+
+               document.getElementById('listarecetamedica').innerHTML = '';
+               const medact = medicamentosarray.filter(med => med.medicamento !== medicamentos);
+               medact.forEach(function(med) {
+                document.getElementById('listarecetamedica').innerHTML += `
+                 <tr>
+                   <td class="text-xs">
+                     <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('${med.medicamento}')">
+                       <i class="fa fa-trash"></i>
+                     </button>
+                   </td>
+                   <td class="text-xs text-uppercase">${med.medicamento}</td>
+                   <td class="text-xs text-uppercase">${med.cantidad}</td>
+                   <td class="text-xs text-uppercase">${med.dosis}</td>
+                   <td class="text-xs text-uppercase">${med.via_aplicacion}</td>
+                   <td class="text-xs text-uppercase">${med.frecuencia}</td>
+                   <td class="text-xs text-uppercase">${med.duracion}</td>
+                 </tr>
+               `;
+               });
+
               $("body").overhang({
                 type: "success",
                 message: "El medicamento se ha eliminado correctamente"
               });
-
               
             }
           });             
