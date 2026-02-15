@@ -1370,6 +1370,8 @@ function abrirHistoriaClinica(tipo) {
                 modal.show();
                   $("#nav-antecedentesgine").removeClass("show active");
                   $("#nav-home").addClass("show active");
+                  $("#terminarginecologia").prop("hidden", true);
+                  $("#terminargeneral").prop("hidden", false);
                
             }
             else if(tipo == 2) {
@@ -1379,6 +1381,8 @@ function abrirHistoriaClinica(tipo) {
               modal.show();
                 $("#nav-home").removeClass("show active");
                 $("#nav-antecedentesgine").addClass("show active");
+                $("#terminargeneral").prop("hidden", true);
+                $("#terminarginecologia").prop("hidden", false);
              }         
             }
             else {
@@ -2154,6 +2158,8 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                  modal.show();
                    $("#nav-antecedentesgine").removeClass("show active");
                    $("#nav-home").addClass("show active");
+                   $("#terminarginecologia").prop("hidden", true);
+                   $("#terminargeneral").prop("hidden", false);
 
                //DATOS DE ANAMNESIS
                $("#anamnesis_directa").val(data.anamnesis);
@@ -2403,7 +2409,8 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                  modal.show();
                   $("#nav-home").removeClass("show active");
                   $("#nav-antecedentesgine").addClass("show active");
-
+                  $("#terminargeneral").prop("hidden", true);
+                  $("#terminarginecologia").prop(false);
                // ANTECEDENTES
                $("#antecedentes_familiares").val(data.familiares);
                $("#antecedentes_patologicos").val(data.patologicos);
@@ -2617,6 +2624,32 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
        }
     }
   });   
+}
+
+terminarAtenciongeneral = () => {
+  triage = $("#consecutivo_historia").val();
+  id = $("#documento_historia").val();
+  let url = baseurl + "administracion/pdfhistoriaclinica/" + triage + "/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");
+
+  setTimeout(() => {
+    reloadPage();
+  }, 3000);
+}
+
+terminarAtencionginecologia = () => {
+  triage = $("#consecutivo_historia").val();
+  id = $("#documento_historia").val();
+  let url = baseurl + "administracion/pdfhistoriaclinicaginecologica/" + triage + "/" + id;
+  window.open(url, "_blank", " width=1100, height=1000");
+
+  setTimeout(() => {
+    reloadPage();
+  }, 3000);
+}
+
+reloadPage = () => {
+    location.reload();
 }
 
 
