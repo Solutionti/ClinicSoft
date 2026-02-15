@@ -2100,9 +2100,11 @@ function limpiarSeleccionResonancia() {
 }
 
 function abrirEditarModalHistoriaClinicaGeneral(codigo) {
+   
   //datos de consulta general
-  let triage = String(codigo).slice(0,1);
-  let paciente = String(codigo).slice(1,20);
+  let triage = String(codigo).split('2026')[0];
+  let paciente = String(codigo).split('2026')[1];
+   
   let url = baseurl + "administracion/getconsultasgeneralcodigo/" + triage + '/' +  paciente;
 
   $("body").overhang({
@@ -2349,8 +2351,8 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
 
 function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
     //datos de consulta ginecologica
-    let triage = String(codigo).slice(0,1);
-    let paciente = String(codigo).slice(1,20);
+    let triage = String(codigo).split('2026')[0];
+    let paciente = String(codigo).split('2026')[1];
     let url = baseurl + "administracion/getconsultasginecologiacodigo/" + triage + '/' +  paciente;
 
     $("body").overhang({

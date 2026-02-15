@@ -835,7 +835,7 @@
                                 <i 
                                   class="fas fa-eye text-primary"
                                   title="Editar historia"
-                                  onclick="abrirEditarModalHistoriaClinicaGeneral(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
+                                  onclick="abrirEditarModalHistoriaClinicaGeneral(<?php echo $historias->triaje . '2026' . $historias->paciente; ?>)"></i>
                               </a>
                             </li>
                             <?php } else { ?>
@@ -844,7 +844,7 @@
                                <span class="text-danger">
                                 <?php echo $historias->fecha; ?>
                                </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - 
-                                <a href="#" class="text-danger" onclick="descargarHistoriaGineco(<?php echo $historias->triaje; ?>)">
+                                <a href="#" class="text-danger" onclick="descargarHistoriaGineco(<?php echo $historias->triaje . '2026' . $historias->paciente; ?>)">
                                  <i class="fas fa-file-pdf text-danger mx-2" title="descargar pdf"></i>
                                 </a>
                                 <a href="#">
