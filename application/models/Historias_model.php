@@ -1043,6 +1043,34 @@ class Historias_model extends CI_model
 
     return $result;
   }
+
+  public function validarexistentegeneral($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('h_consultas');
+    $this->db->where('codigo_triage', $triage);
+    $this->db->where('codigo_paciente', $paciente);
+    $result = $this->db->get();
+
+    if ($result->num_rows() > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  public function validarexistenteginecologia($triage, $paciente) {
+    $this->db->select('*');
+    $this->db->from('h_ginecologias');
+    $this->db->where('codigo_triage', $triage);
+    $this->db->where('codigo_historia', $paciente);
+    $result = $this->db->get();
+
+    if ($result->num_rows() > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }
 
 ?>

@@ -171,13 +171,40 @@ class Historiaclinica extends Admin_Controller
 	}
 
 	public function crearConsecutivoHC() {
-		$data1 = [
-		  'paciente' => $this->input->post('paciente'),
-	      'doctor' => $this->session->userdata('codigo'),
-		  'triaje' => $this->input->post('triaje'),
-		  'tipo' => $this->input->post('tipo'),
-		];
-	  $this->Historias_model->crearHistorialPacientesGinecologicas($data1);
+		$paciente = $this->input->post('paciente');
+		$triage = $this->input->post('triaje');
+		$tipo = $this->input->post('tipo');
+		if($tipo == 1 ) {
+		  $validar = $this->Historias_model->validarexistentegeneral($triage, $paciente);
+		  if($validar == 1) {
+	        echo "error";
+		  }
+		  else {
+			  $data1 = [
+				  'paciente' => $this->input->post('paciente'),
+				  'doctor' => $this->session->userdata('codigo'),
+				  'triaje' => $this->input->post('triaje'),
+				  'tipo' => $this->input->post('tipo'),
+			  ];
+			  $this->Historias_model->crearHistorialPacientesGinecologicas($data1);
+		  }
+
+		}
+		else if($tipo == 2) {
+		  $validar = $this->Historias_model->validarexistenteginecologia($triage, $paciente);
+		  if($validar == 1) {
+	        echo "error";
+		  }
+		  else {
+			  $data1 = [
+				  'paciente' => $this->input->post('paciente'),
+				  'doctor' => $this->session->userdata('codigo'),
+				  'triaje' => $this->input->post('triaje'),
+				  'tipo' => $this->input->post('tipo'),
+			  ];
+			  $this->Historias_model->crearHistorialPacientesGinecologicas($data1);
+		  }
+		}
 	}
 
 	public function crearHistorialPacientesGeneral()

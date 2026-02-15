@@ -1363,6 +1363,7 @@ function abrirHistoriaClinica(tipo) {
               }
             });
             if(value === false){
+
               if(tipo == 1) {
                 document.getElementById('tphistoria').value = tipo;
                 $('#tphistoria').trigger('change');
@@ -1382,19 +1383,12 @@ function abrirHistoriaClinica(tipo) {
                 $("#nav-home").removeClass("show active");
                 $("#nav-antecedentesgine").addClass("show active");
                 $("#terminargeneral").prop("hidden", true);
-                $("#terminarginecologia").prop("hidden", false);
+                $("#terminarginecologia").prop("hidden", false);   
              }         
             }
             else {
-            document.getElementById('tphistoria').value = tipo;
-            $('#tphistoria').trigger('change');
-            var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
-            modal.show();
 
             if(tipo == 1) {
-             $("#nav-antecedentesgine").removeClass("show active");
-             $("#nav-home").addClass("show active");
-             
              $.ajax({
                url: baseurl + "administracion/consecutivohistoria",
                 method: "POST",
@@ -1404,14 +1398,26 @@ function abrirHistoriaClinica(tipo) {
                   tipo: tipo 
                 },
                 success: function(response) {
-                  
+                  if(response === "error") {
+                    $("body").overhang({
+                      type: "error",
+                      message: "ya existe una historia clinica con el triage .",
+                    });
+                  }
+                  else {
+                    document.getElementById('tphistoria').value = tipo;
+                    $('#tphistoria').trigger('change');
+                    var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                    modal.show();
+                    $("#nav-antecedentesgine").removeClass("show active");
+                    $("#nav-home").addClass("show active");
+                    $("#terminarginecologia").prop("hidden", true);
+                    $("#terminargeneral").prop("hidden", false);
+                  }
                 }
               });
             }
             else if(tipo == 2) {
-              $("#nav-home").removeClass("show active");
-             $("#nav-antecedentesgine").addClass("show active");
-             
              $.ajax({
                url: baseurl + "administracion/consecutivohistoria",
                 method: "POST",
@@ -1421,7 +1427,22 @@ function abrirHistoriaClinica(tipo) {
                   tipo: tipo 
                 },
                 success: function(response) {
-                  
+                  if(response === "error") {
+                    $("body").overhang({
+                      type: "error",
+                      message: "ya existe una historia clinica con el triage .",
+                    });
+                  }
+                  else {
+                    document.getElementById('tphistoria').value = tipo;
+                    $('#tphistoria').trigger('change');
+                    var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                    modal.show();
+                    $("#nav-home").removeClass("show active");
+                    $("#nav-antecedentesgine").addClass("show active");
+                    $("#terminargeneral").prop("hidden", true);
+                    $("#terminarginecologia").prop("hidden", false); 
+                  }
                 }
               });
             }
