@@ -1030,6 +1030,7 @@ function crearMedicamento() {
                duracion: duracion
              });
        
+             document.getElementById('listarecetamedica').innerHTML = '';
              medicamentosarray.forEach(function(med) {
                document.getElementById('listarecetamedica').innerHTML += `
                  <tr>
