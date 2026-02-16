@@ -851,7 +851,7 @@
                                 <i
                                   class="fas fa-eye text-danger"
                                   title="Editar historia"
-                                  onclick="abrirEditarModalHistoriaClinicaGinecologica(<?php echo $historias->triaje . $historias->paciente; ?> )"></i>
+                                  onclick="abrirEditarModalHistoriaClinicaGinecologica(<?php echo $historias->triaje .'2026'. $historias->paciente; ?> )"></i>
                                 </i>
                               </a>
                             </li>
