@@ -1074,6 +1074,7 @@ class Historiaclinica extends Admin_Controller
 		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
 		$datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
 		$datosgineco = $this->Historias_model->GenerarPdfGinecologia($documento, $triage)->result()[0];
+		
 		$datosalergias = $this->Historias_model->getAllAlergias($documento);
 		$datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
 		$datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);

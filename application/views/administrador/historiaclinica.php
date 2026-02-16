@@ -844,7 +844,7 @@
                                <span class="text-danger">
                                 <?php echo $historias->fecha; ?>
                                </span> - Ginecologia (Dr.<?php echo $historias->doctor; ?>) - 
-                                <a href="#" class="text-danger" onclick="descargarHistoriaGineco(<?php echo $historias->triaje . '2026' . $historias->paciente; ?>)">
+                                <a href="#" class="text-danger" onclick="descargarHistoriaGineco(<?php echo $historias->triaje;?>)">
                                  <i class="fas fa-file-pdf text-danger mx-2" title="descargar pdf"></i>
                                 </a>
                                 <a href="#">

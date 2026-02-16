@@ -223,8 +223,8 @@ class Historias_model extends CI_model
   {
     $this->db->select('h.*, g.*');
     $this->db->from('historial_pacientes h');
-    $this->db->join('h_ginecologias g', 'h.triaje = g.codigo_historia');
-    $this->db->join('triajes t', 'h.triaje = t.codigo_triaje');
+    $this->db->join('h_ginecologias g', 'h.paciente = g.codigo_historia');
+    // $this->db->join('triajes t', 'h.triaje = t.codigo_triaje');
     $this->db->where('h.codigo_historia', $documento);
     $this->db->where('h.triaje', $triage);
     $this->db->where("h.tipo_consulta", 2);
