@@ -2432,7 +2432,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                   $("#nav-home").removeClass("show active");
                   $("#nav-antecedentesgine").addClass("show active");
                   $("#terminargeneral").prop("hidden", true);
-                  $("#terminarginecologia").prop(false);
+                  $("#terminarginecologia").prop("hidden",false);
                // ANTECEDENTES
                $("#antecedentes_familiares").val(data.familiares);
                $("#antecedentes_patologicos").val(data.patologicos);
