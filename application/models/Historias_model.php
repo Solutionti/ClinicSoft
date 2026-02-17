@@ -381,6 +381,7 @@ class Historias_model extends CI_model
       'frecuencia' => $datos['frecuencia'],
       'duracion' => $datos['duracion'],
       'fecha' => date('Y-m-d'),
+      'especialidad' => $datos['especialidad']
     ];
     $this->db->insert('medicamentos', $medicamento);
   }
@@ -912,6 +913,7 @@ class Historias_model extends CI_model
       "fecha" => date('Y-m-d'),
       "triage" => $data['triaje'],
       "paciente" => $data['paciente'],
+      "especialidad" => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
@@ -923,6 +925,7 @@ class Historias_model extends CI_model
       "fecha" => date('Y-m-d'),
       "triage" => $data['triaje'],
       "paciente" => $data['paciente'],
+      "especialidad" => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
@@ -935,6 +938,7 @@ class Historias_model extends CI_model
       "fecha" => date('Y-m-d'),
       "triage" => $data['triaje'],
       "paciente" => $data['paciente'],
+      "especialidad" => $data['especialidad']
     ];
     $this->db->insert('detalle_examen_auxiliares', $datos);
   }
@@ -986,11 +990,12 @@ class Historias_model extends CI_model
   }
 
   //medicamentos 
-  public function getMedicamentosEditar($triage, $paciente) {
+  public function getMedicamentosEditar($triage, $paciente, $especialidad) {
     $this->db->select('*');
     $this->db->from('medicamentos');
     $this->db->where('triaje', $triage);
     $this->db->where('paciente', $paciente);
+    $this->db->where('especialidad', $especialidad);
     $result = $this->db->get();
 
     return $result;

@@ -126,7 +126,7 @@ $route["administracion/ordenresonancia"] = "administrador/historiaclinica/Detall
 $route["administracion/getconsultasgeneralcodigo/(:num)/(:any)"] = "administrador/historiaclinica/getConsultasGeneralCodigo/$1/$2";
 $route["administracion/getconsultasginecologiacodigo/(:num)/(:any)"] = "administrador/historiaclinica/getGinecologiaCodigo/$1/$2";
 $route["administracion/getdiagnosticoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getdiagnosticosEditar/$1/$2/$3";
-$route["administracion/getmedicamentoscodigo/(:num)/(:any)"] = "administrador/historiaclinica/getMedicamentosEditar/$1/$2";
+$route["administracion/getmedicamentoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getMedicamentosEditar/$1/$2/$3";
 $route["administracion/getcitascodigo/(:num)/(:any)"] = "administrador/historiaclinica/getCitasPaciente/$1/$2";
 $route["administracion/getprocedimientoscodigo/(:num)/(:any)/(:any)"] = "administrador/historiaclinica/getProcedimientosCodigo/$1/$2/$3";
 

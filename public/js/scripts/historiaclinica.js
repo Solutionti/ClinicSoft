@@ -982,6 +982,7 @@ function crearMedicamento() {
     dosis = $("#dosis_medicamento").val(),
     via_aplicacion = $("#via_aplicacion_medicamento").val(),
     frecuencia = $("#frecuencia_medicamento").val(),
+    especialidad = $("#tphistoria").val(),
     duracion = $("#duracion_medicamento").val();
 
     if(medicamento == "" || cantidad == "" || dosis == "" || via_aplicacion == "" || frecuencia == "" || duracion == "") {
@@ -1003,6 +1004,7 @@ function crearMedicamento() {
             dosis: dosis,
             via_aplicacion: via_aplicacion,
             frecuencia: frecuencia,
+            especialidad: especialidad,
             duracion: duracion
           },
           success: function() {
@@ -1635,6 +1637,7 @@ function crearOrdenEcografiaHistoria(tipo) {
     var url = baseurl + "administracion/ordenecografia";
     
     let paciente = $("#documento_historia").val(),
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordeneco = [];
@@ -1649,6 +1652,7 @@ function crearOrdenEcografiaHistoria(tipo) {
                 paciente: paciente,
                 triage: triage,
                 ecografia: ordeneco,
+                especialidad: especialidad,
                 examen: 'Ecografias',
                 tipo: tipo
             },
@@ -1871,6 +1875,7 @@ $('#table-tomografia-items').on('dblclick', 'tr', function(e) {
 function crearOrdenTomografia(tipo) {
     var url = baseurl + "administracion/ordentomografia";
     let documento = $("#documento_historia").val(),
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordentomo = [];
@@ -1885,6 +1890,7 @@ function crearOrdenTomografia(tipo) {
                 paciente: documento,
                 tomografia: ordentomo,
                 triage: triage,
+                especialidad: especialidad,
                 examen: 'Tomografias',
                 tipo: tipo
             },
@@ -2106,7 +2112,7 @@ function crearOrdenResonancia(tipo) {
     var url = baseurl + "administracion/ordenresonancia";
     
     let documento = $("#documento_historia").val(),
-       
+        especialidad = $("#tphistoria").val(),
         triage = $("#consecutivo_historia").val();
     
     let ordenreso = [];
@@ -2120,6 +2126,7 @@ function crearOrdenResonancia(tipo) {
                 paciente: documento,
                 triage: triage,
                 resonancia: ordenreso,
+                especialidad: especialidad,
                 examen: 'Resonancias',
                 tipo: tipo
             },
@@ -2352,7 +2359,7 @@ function abrirEditarModalHistoriaClinicaGeneral(codigo) {
                     });
 
                 //REECETA MEDICA
-                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente + '/' + 1;
                 $.ajax({
                     url: url3,
                     method: "GET",
@@ -2436,6 +2443,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                // ANTECEDENTES
                $("#antecedentes_familiares").val(data.familiares);
                $("#antecedentes_patologicos").val(data.patologicos);
+               $("#antecedentes_cirugia").val(data.cirugia_ginecologica);
                $("#antecedentes_gineco").val(data.gineco_obstetrico);
                $("#antecedentes_fum").val(data.fum);
                $("#antecedentes_rm").val(data.rm);
@@ -2602,7 +2610,7 @@ function abrirEditarModalHistoriaClinicaGinecologica(codigo) {
                     });
 
                 //REECETA MEDICA
-                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente;
+                var url3 = baseurl + "administracion/getmedicamentoscodigo/" + triage + '/' +  paciente + '/' + 2;
                 $.ajax({
                     url: url3,
                     method: "GET",

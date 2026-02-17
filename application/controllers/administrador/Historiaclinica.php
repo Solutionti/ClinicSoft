@@ -564,6 +564,7 @@ class Historiaclinica extends Admin_Controller
 		$via_aplicacion = $this->input->post('via_aplicacion');
 		$frecuencia = $this->input->post('frecuencia');
 		$duracion = $this->input->post('duracion');
+		$especialidad = $this->input->post('especialidad');
 		$triaje = $this->input->post('triaje');
 
 		$receta = $this->Historias_model->validarExistenciaReceta($paciente, $triaje);
@@ -586,6 +587,7 @@ class Historiaclinica extends Admin_Controller
 			'via_aplicacion' => $via_aplicacion,
 			'frecuencia' => $frecuencia,
 			'duracion' => $duracion,
+			'especialidad' => $especialidad,
 		];
 
 		$this->Historias_model->crearMedicamento($datos);
@@ -2157,6 +2159,7 @@ class Historiaclinica extends Admin_Controller
 		$ecografia = $this->input->post('ecografia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
+		$especialidad = $this->input->post('especialidad');
 		
       $this->Historias_model->eliminarexamenesAuxiliares('Ecografias', $triage, $paciente);
 	  for ($i = 0; $i < sizeof($ecografia); $i++) {
@@ -2165,6 +2168,7 @@ class Historiaclinica extends Admin_Controller
 		  'ecografia' => $ecografia[$i],
 		  'examen' => $examen,
 		  'historia' => $paciente,
+		  'especialidad' => $especialidad,
 		  'tipo' => $tipo,
 		  'triaje' => $triage
 		];			
@@ -2178,6 +2182,7 @@ class Historiaclinica extends Admin_Controller
 		$tomografia = $this->input->post('tomografia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
+		$especialidad = $this->input->post('especialidad');
 	  $this->Historias_model->eliminarexamenesAuxiliares('Tomografias', $triage, $paciente);
 	  for ($i = 0; $i < sizeof($tomografia); $i++) {
 		$data5 = [
@@ -2186,6 +2191,7 @@ class Historiaclinica extends Admin_Controller
 		  'examen' => $examen,
 		  'historia' => $paciente,
 		  'tipo' => $tipo,
+		  'especialidad' => $especialidad,
 		  'triaje' => $triage
 		];			
 		$this->Historias_model->crearExamenAuxiliaresTomografia($data5);
@@ -2198,7 +2204,9 @@ class Historiaclinica extends Admin_Controller
 		$resonancia = $this->input->post('resonancia');
 		$examen = $this->input->post('examen');
 		$tipo = $this->input->post('tipo');
+		$especialidad = $this->input->post('especialidad');
 	  
+
 	  $this->Historias_model->eliminarexamenesAuxiliares('Resonancias', $triage, $paciente);
 
 	  for ($i = 0; $i < sizeof($resonancia); $i++) {
@@ -2208,6 +2216,7 @@ class Historiaclinica extends Admin_Controller
 		  'examen' => $examen,
 		  'historia' => $paciente,
 		  'tipo' => $tipo,
+		  'especialidad' => $especialidad,
 		  'triaje' => $triage
 		];			
 		$this->Historias_model->crearExamenAuxiliaresResonancia($data5);
@@ -2229,8 +2238,8 @@ class Historiaclinica extends Admin_Controller
 		echo json_encode($data);
 	}
 
-	public function getMedicamentosEditar($triage, $paciente) {
-      $data = $this->Historias_model->getMedicamentosEditar($triage, $paciente)->result();
+	public function getMedicamentosEditar($triage, $paciente, $especialidad) {
+      $data = $this->Historias_model->getMedicamentosEditar($triage, $paciente, $especialidad)->result();
       echo json_encode($data);
 	} 
 
