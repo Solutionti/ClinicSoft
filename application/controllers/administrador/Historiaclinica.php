@@ -592,959 +592,608 @@ class Historiaclinica extends Admin_Controller
 	}
 
 	public function crearPdfHistoriaClinica($triage, $documento)
-	{
-		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
-		$datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
-		$datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral($documento, $triage)->result()[0];
-		$datosalergias = $this->Historias_model->getAllAlergias($documento);
-		$datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
-		$datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);
-
-		$this->load->library('PDF_UTF8');
-		$pdf = new PDF_UTF8();
-		$pdf->AddPage();
-		$pdf->SetAlpha(0.2);  // Transparencia (0.1 = 10% opacidad)
-		$pdf->Image('public/img/theme/logo.png', 60, 110, 80);  // Ajusta las coordenadas y tamaño según necesites
-		$pdf->SetAlpha(1);  // Restauramos la opacidad al 100%
-		$pdf->SetDrawColor(0, 24, 0);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 40, 196, 6, 'F');
-		$pdf->Image('public/img/theme/logo.png', 10, 12, 25, 0, 'PNG');
-		$pdf->Ln(15);
-		$pdf->SetFont('Arial', 'B', 10);
-		$pdf->cell(124, 5, '', 0);
-		// $pdf->cell(40,5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
-		$pdf->Ln(5);
-		$pdf->cell(128, 5, '', 0);
-		$pdf->cell(40, 5, 'HISTORIA DE MEDICINA GENERAL', 0);
-
-		$pdf->Ln(10);
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(65, 6, '1. DATOS DEL PACIENTE', 0, 0, 'L');
-
-		// DATOS PERSONALES
-		$pdf->Ln(6);
-		$pdf->SetTextColor(0, 0, 0);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'APELLIDOS Y NOMBRES', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(100, 5, $datospaciente->apellido . ' ' . $datospaciente->nombre, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(10, 5, 'HC', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(46, 5, $datospaciente->hc, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'DNI', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, $datospaciente->documento, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(10, 5, 'EDAD', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(10, 5, $datospaciente->edad, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'SEXO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->sexo, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'TELEFONO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(46, 5, $datospaciente->telefono, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'DIRECCION', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(45, 5, substr($datospaciente->direccion, 0, 35), 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, mb_strtoupper($datospaciente->departamento_nombre, 'UTF-8'), 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'PROVINCIA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, mb_strtoupper($datospaciente->provincia_nombre, 'UTF-8'), 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'DISTRITO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(21, 5, mb_strtoupper(substr($datospaciente->distrito_nombre, 0, 15), 'UTF-8'), 1);
-
-		$pdf->Ln(5);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'OCUPACION', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(100, 5, $datospaciente->ocupacion, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(36, 5, mb_strtoupper($datospaciente->estado_civil, 'UTF-8'), 1);
-		$pdf->Ln(9);
-
-		// DATOS DEL TRIAGE
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 70, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '2. SIGNOS VITALES', 0);
-
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->Ln(6);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(27, 5, 'PRESIÓN ARTERIAL', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->presion_arterial . ' mmHg', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'FRECUENCIA CARDÍACA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(10, 5, $datostriage->frecuencia_cardiaca . ' lpm', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(35, 5, 'FRECUENCIA RESPIRATORIA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(14, 5, $datostriage->frecuencia_respiratoria . ' r/m', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'SATURACIÓN', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(10, 5, $datostriage->saturacion . ' %', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(22, 5, 'TEMPERATURA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(8, 5, $datostriage->temperatura . ' °C', 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(27, 5, 'PESO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->peso . ' kg', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'TALLA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(10, 5, $datostriage->talla . ' cm', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(35, 5, 'IMC', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(14, 5, $datostriage->imc . ' kg/m2', 1);
-
-
-		// DATOS DE LA CONSULTA GENERAL
-		$pdf->ln(9);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 90, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '3. DATOS DE LA CONSULTA GENERAL', 0, 0, 'L');
-
-		$pdf->Ln(6);
-		$pdf->SetTextColor(0, 0, 0);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ANAMNESIS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datosgeneral->anamnesis, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'EMPRESA', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgeneral->empresa, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'COMPAÑIA', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgeneral->compania, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'IAFA', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(16, 5, $datosgeneral->iafa, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'NOMBRE ACOMPAÑANTE', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(70, 5, $datosgeneral->nombre_acompanante, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('DNI'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(25, 5, $datosgeneral->dni, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('CELULAR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(31, 5, $datosgeneral->celular, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MOTIVO CONSULTA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->motivo_consulta, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TRATAMIENTO ANTERIOR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->tratamiento_anterior, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TIEMPO ENFERMEDAD'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(47, 5, $datosgeneral->tiempo, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, utf8_decode('INICIO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgeneral->inicio, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, utf8_decode('CURSO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(49, 5, $datosgeneral->curso, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('SINTOMAS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->sintomas, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('PIEL'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, '', 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CUELLO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->cuello, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('AP RESPIRATORIO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->ap_respiratoria, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('AP CARDIO VASCULAR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->ap_cardio, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('ABDOMEN'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->abdomen, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CABEZA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->cabeza, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('LOCOMOTOR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->loco_motor, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('SISTEMA NERVIOSO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->sistema_nervioso, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('APETITO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, $datosgeneral->apetito, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('SED'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgeneral->sed, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(25, 5, utf8_decode('ORINA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(41, 5, $datosgeneral->orina, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('AYUDA AL DX'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->examen_dx, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('INTERCONSULTAS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->interconsultas, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TRATAMIENTO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->tratamiento, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('REFERENCIA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgeneral->referencia, 1);
-
-		// DATOS DE LA CONSULTA GINECOLOGICA
-		$pdf->ln(4);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 190, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '4. PROCESOS CLINICOS', 0, 0, 'L');
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('ALERGIAS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TIPO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'ALERGIA', 1);
-
-		if ($datosalergias == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(166, 5, '', 1);
-		} else {
-			foreach ($datosalergias->result() as $alergia) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, utf8_decode($alergia->tipo_alergia), 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(166, 5, utf8_decode($alergia->descripcion), 1);
-			}
-		}
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('DIAGNOSTICOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CODIGO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'DIAGNOSTICO', 1);
-
-		if ($datosdiagnosticos == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, utf8_decode('R112'), 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(166, 5, 'OTRAS COSAS NO DEFINIDAS', 1);
-		} else {
-			foreach ($datosdiagnosticos->result() as $diagnostico) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $diagnostico->clave, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(166, 5, $diagnostico->descripcion, 1);
-			}
-		}
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('PROCEDIMIENTOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CODIGO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'PROCEDIMIENTO', 1);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, '', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, '', 1);
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MEDICAMENTOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(70, 5, utf8_decode('FARMACO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(11, 5, 'CANT', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'DOSIS', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'VIA', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'FRECUENCIA', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(35, 5, 'DURACION', 1);
-
-		if ($datosmedicamentos == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(70, 5, utf8_decode('FARMACO'), 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(11, 5, 'CANT', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(20, 5, 'DOSIS', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, 'VIA', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, 'FRECUENCIA', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(35, 5, 'DURACION', 1);
-		} else {
-			foreach ($datosmedicamentos->result() as $medicamento) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(70, 5, $medicamento->medicamento, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(11, 5, $medicamento->cantidad, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(20, 5, $medicamento->dosis, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $medicamento->via_aplicacion, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $medicamento->frecuencia, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(35, 5, $medicamento->duracion, 1);
-			}
-		}
-
-		$pdf->ln(10);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('          PROXIMA CITA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, utf8_decode('          '), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('     FIRMA DEL DOCTOR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(106, 5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
-
-		$pdf->Output('I', 'Historia_Clinica_General_' . $documento . '.pdf');
-	}
+    {
+        // 1. CARGA DE DATOS DE LA BASE DE DATOS
+        $datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+        $datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
+        $datosgeneral = $this->Historias_model->GenerarPdfMedicinaGeneral($documento, $triage)->result()[0];
+        $datosalergias = $this->Historias_model->getAllAlergias($documento);
+        $datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
+        $datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);
+
+        // 2. INICIALIZAR PDF
+        $this->load->library('PDF_UTF8');
+        $pdf = new PDF_UTF8();
+        $pdf->SetAutoPageBreak(false); // Desactiva salto automático para control manual
+        $pdf->AddPage();
+
+        // --- FUNCIÓN AUXILIAR PARA DIBUJAR LÍNEAS DE FORMULARIO ---
+        // Esta función dibuja: "Etiqueta: _______________"
+        if (!function_exists('lineaFormulario')) {
+            function lineaFormulario($pdf, $label, $valor, $anchoTotal, $saltoLinea = 0) {
+                $pdf->SetFont('Arial', 'B', 8);
+                $label_final = utf8_decode($label);
+                
+                // Calculamos ancho de la etiqueta
+                $anchoLabel = $pdf->GetStringWidth($label_final) + 1;
+                
+                // 1. Imprimimos Etiqueta
+                $pdf->Cell($anchoLabel, 5, $label_final, 0, 0, 'L');
+                
+                // 2. Imprimimos Valor con Subrayado ('B')
+                $pdf->SetFont('Arial', '', 8);
+                $pdf->Cell($anchoTotal - $anchoLabel, 5, utf8_decode($valor), 'B', $saltoLinea, 'L');
+            }
+        }
+
+        // --- MARCA DE AGUA (LOGO DE FONDO) ---
+        $pdf->SetAlpha(0.1); // Transparencia suave
+        $pdf->Image('public/img/theme/logo.png', 50, 100, 110);
+        $pdf->SetAlpha(1);   // Restaurar opacidad
+
+        // --- LOGO PEQUEÑO ESQUINA ---
+        $pdf->Image('public/img/theme/logo.png', 10, 8, 25);
+
+        // --- TÍTULO PRINCIPAL ---
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->SetTextColor(0, 0, 0); 
+        $pdf->Cell(0, 10, ('HISTORIA CLÍNICA GENERAL'), 0, 1, 'C');
+
+        // --- VALIDACIÓN DE FECHA Y HORA (EVITA ERRORES) ---
+        $fecha_doc = (isset($datostriage->fecha)) ? date('d/m/Y', strtotime($datostriage->fecha)) : date('d/m/Y');
+        $hora_doc  = (isset($datostriage->hora))  ? date('H:i', strtotime($datostriage->hora))  : date('H:i');
+
+        // ==========================================================
+        // PARTE 1: DATOS DE FILIACIÓN (ESTILO CUADROS CERRADOS)
+        // ==========================================================
+        $pdf->SetFillColor(240, 240, 240); // Fondo gris claro opcional para títulos
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Ln(5);
+
+        // FILA 1: Fecha | Hora | Edad | Sexo
+        $pdf->Cell(15, 6, 'FECHA:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(25, 6, $fecha_doc, 1, 0, 'C');
+        
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(15, 6, 'HORA:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(20, 6, $hora_doc, 1, 0, 'C');
+
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(15, 6, 'EDAD:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(50, 6, ($datospaciente->edad . ' años'), 1, 0, 'L');
+
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(15, 6, 'SEXO:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(35, 6, $datospaciente->sexo, 1, 1, 'L');
+
+        // FILA 2: Nombres y Apellidos
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(40, 6, 'NOMBRES Y APELLIDOS:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(150, 6, utf8_decode($datospaciente->apellido . ' ' . $datospaciente->nombre), 1, 1, 'L');
+
+        // FILA 3: Domicilio | Teléfono
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(20, 6, 'DOMICILIO:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(110, 6, utf8_decode(substr($datospaciente->direccion, 0, 60)), 1, 0, 'L');
+        
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(20, 6, ('TELÉFONO:'), 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(40, 6, $datospaciente->telefono, 1, 1, 'L');
+
+        // FILA 4: Empresa / Acompañante
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(20, 6, 'EMPRESA:', 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(70, 6, ($datosgeneral->empresa), 1, 0, 'L');
+        
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(25, 6, ('ACOMPAÑANTE:'), 1, 0, 'L');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(75, 6, ($datosgeneral->nombre_acompanante), 1, 1, 'L');
+
+        $pdf->Ln(4);
+
+        // ==========================================================
+        // PARTE 2: A. ANAMNESIS (ESTILO LÍNEAS SUBRAYADAS)
+        // ==========================================================
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFillColor(220, 220, 220); // Barra gris de título
+        $pdf->Cell(0, 6, 'A. ANAMNESIS', 1, 1, 'L', true);
+        
+        $pdf->Ln(2);
+        
+        // --- Bloque Motivo (Izq) y Tratamiento (Der) ---
+        $y_inicio = $pdf->GetY();
+        
+        // Columna Izquierda: Motivo
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(35, 5, 'MOTIVO DE CONSULTA:', 0, 0);
+        $pdf->Ln(5); 
+        $pdf->SetFont('Arial', '', 8);
+        // MultiCell para que si el texto es largo baje de línea
+        $pdf->MultiCell(90, 5, utf8_decode($datosgeneral->motivo_consulta), 'B', 'L');
+        $altura_motivo = $pdf->GetY();
+
+        // Columna Derecha: Tratamiento Anterior
+        $pdf->SetXY(110, $y_inicio); // Movemos cursor a la derecha
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(40, 5, 'TRATAMIENTO ANTERIOR:', 0, 1);
+        $pdf->SetXY(110, $y_inicio + 5);
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->MultiCell(90, 5, utf8_decode($datosgeneral->tratamiento_anterior), 'B', 'L');
+        
+        // Igualamos altura (nos quedamos con la más baja para seguir escribiendo)
+        $pdf->SetY(max($altura_motivo, $pdf->GetY()) + 2);
+
+        // --- Enfermedad Actual ---
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(40, 5, 'ENFERMEDAD ACTUAL:', 0, 0);
+        
+        lineaFormulario($pdf, 'TIEMPO ENF:', utf8_encode($datosgeneral->tiempo), 50, 0);
+        $pdf->Cell(2, 5, '', 0, 0); // Espacio
+        lineaFormulario($pdf, 'INICIO:', $datosgeneral->inicio, 45, 0);
+        $pdf->Cell(2, 5, '', 0, 0); // Espacio
+        lineaFormulario($pdf, 'CURSO:', $datosgeneral->curso, 50, 1);
+
+        $pdf->Ln(2);
+        
+        // --- Síntomas ---
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(190, 5, 'SINTOMAS Y SIGNOS PRINCIPALES:', 0, 1);
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->MultiCell(190, 5, utf8_decode($datosgeneral->sintomas), 'B', 'L');
+
+        // --- Signos Vitales (Tira horizontal con líneas separadoras) ---
+        $pdf->Ln(3);
+        $pdf->Line(10, $pdf->GetY(), 200, $pdf->GetY()); // Línea Arriba
+        $pdf->Ln(1);
+        
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(27, 5, 'SIGNOS VITALES:', 0, 0);
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(28, 5, 'PA: '.$datostriage->presion_arterial.' mmHg', 0, 0);
+        $pdf->Cell(20, 5, 'FR: '.$datostriage->frecuencia_respiratoria.' rpm', 0, 0);
+        $pdf->Cell(23, 5, 'FC: '.$datostriage->frecuencia_cardiaca.' lpm', 0, 0);
+        $pdf->Cell(20, 5, 'T: '.$datostriage->temperatura.('°'), 0, 0);
+        $pdf->Cell(25, 5, 'SpO2: '.$datostriage->saturacion.'%', 0, 0);
+        $pdf->Cell(25, 5, 'Peso: '.$datostriage->peso.'kg', 0, 0);
+        $pdf->Cell(25, 5, 'Talla: '.$datostriage->talla.'cm', 0, 1);
+        
+        $pdf->Line(10, $pdf->GetY(), 200, $pdf->GetY()); // Línea Abajo
+
+        // --- Funciones Biológicas ---
+        $pdf->Ln(2);
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(38, 5, 'FUNCIONES BIOLOGICAS:', 0, 0);
+        lineaFormulario($pdf, ' Apetito:', $datosgeneral->apetito, 50, 0);
+        lineaFormulario($pdf, ' Sed:', $datosgeneral->sed, 40, 0);
+        lineaFormulario($pdf, ' Orina:', $datosgeneral->orina, 40, 1);
+
+        // ==========================================================
+        // PARTE 3: B. EXAMEN FÍSICO (LISTA VERTICAL)
+        // ==========================================================
+        $pdf->Ln(3);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(0, 6, ('B. EXAMEN FÍSICO'), 1, 1, 'L', true);
+        $pdf->Ln(1);
+
+        $campos_fisicos = [
+            '1. CABEZA' => $datosgeneral->cabeza,
+            '2. CUELLO' => $datosgeneral->cuello,
+            '3. AP. RESPIRATORIO' => $datosgeneral->ap_respiratoria,
+            '4. AP. CARDIOVASCULAR' => $datosgeneral->ap_cardio,
+            '5. ABDOMEN' => $datosgeneral->abdomen,
+            '6. AP. GENITOURINARIO' => '', 
+            '7. LOCOMOTOR' => $datosgeneral->loco_motor,
+            '8. SISTEMA NERVIOSO' => $datosgeneral->sistema_nervioso,
+        ];
+
+        foreach ($campos_fisicos as $label => $valor) {
+            $pdf->SetFont('Arial', 'B', 7);
+            $pdf->Cell(35, 5, $label . ':', 0, 0);
+            $pdf->SetFont('Arial', '', 8);
+            // La línea ('B') ocupa todo el ancho restante
+            $pdf->Cell(155, 5, utf8_decode($valor), 'B', 1); 
+        }
+
+        // ==========================================================
+        // PARTE 4: C. DIAGNÓSTICO (CIE 10)
+        // ==========================================================
+        $pdf->Ln(3);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFillColor(220, 220, 220);
+        $pdf->Cell(0, 6, ('C. DIAGNÓSTICO (CIE 10)'), 1, 1, 'L', true);
+        $pdf->Ln(2);
+
+        $diagnosticos = ($datosdiagnosticos) ? $datosdiagnosticos->result() : [];
+        $pdf->Ln(2);
+        // Imprimimos 3 líneas fijas
+        for ($i = 0; $i < 3; $i++) {
+            $txt = isset($diagnosticos[$i]) ? $diagnosticos[$i]->descripcion . ' (' . $diagnosticos[$i]->clave . ')' : '';
+            $pdf->SetFont('Arial', 'B', 8);
+            $pdf->Cell(10, 5, ($i+1).'.', 0, 0, 'R');
+            $pdf->SetFont('Arial', '', 8);
+            // Acortamos la línea de texto y ampliamos la celda de paréntesis
+            $pdf->Cell(140, 5, utf8_decode($txt), 'B', 0); 
+            $pdf->Cell(40, 5, '(      )', 0, 1, 'L'); // Paréntesis para Tipo de DX, más pegados a la izquierda
+        }
+
+        // ==========================================================
+        // PARTE 5: D. PLAN DE TRABAJO Y TRATAMIENTO
+        // ==========================================================
+        $pdf->Ln(3);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFillColor(220, 220, 220);
+        $pdf->Cell(0, 6, ('D. PLAN DE TRABAJO / TRATAMIENTO'), 1, 1, 'L', true);
+		$pdf->Ln(2);
+        lineaFormulario($pdf, 'EXAMEN DE AYUDA AL DX:', $datosgeneral->examen_dx, 190, 1);
+        lineaFormulario($pdf, 'PROCEDIMIENTOS:', '', 190, 1);
+		lineaFormulario($pdf, 'INTERCONSULTAS:', '', 190, 1);
+		lineaFormulario($pdf, 'REFERENCIAS:', '', 190, 1);
+        
+        $pdf->Ln(2);
+        $pdf->SetFont('Arial', 'B', 9);
+        $pdf->Cell(0, 5, 'E. TRATAMIENTO:', 0, 1);
+        
+        $meds = ($datosmedicamentos) ? $datosmedicamentos->result() : [];
+        // Imprimimos 4 líneas de tratamiento
+        for ($i = 0; $i < 4; $i++) { 
+            $txt = isset($meds[$i]) ? $meds[$i]->medicamento . ' ' . $meds[$i]->dosis . ' ' . $meds[$i]->frecuencia : '';
+            $pdf->SetFont('Arial', 'B', 8);
+            $pdf->Cell(10, 5, ($i+1).'.', 0, 0, 'R');
+            $pdf->SetFont('Arial', '', 8);
+            $pdf->Cell(180, 5, utf8_decode($txt), 'B', 1);
+        }
+
+        // ==========================================================
+        // PIE DE PÁGINA: PRÓXIMA CITA Y FIRMA
+        // ==========================================================
+        $pdf->SetY(-35); // Posicionamos al final de la hoja
+        $y_pie = $pdf->GetY();
+
+        // Próxima Cita (Izq)
+        $pdf->SetFont('Arial', 'B', 8);
+        // Acercamos el inicio de la línea al título
+        $pdf->Cell(25, 5, 'F. PROXIMA CITA:', 0, 0);
+        $pdf->Cell(50, 5, '', 'B', 0); 
+
+        // Firma del Médico (Der)
+        // Dibujamos línea superior para la firma
+        $pdf->SetXY(120, $y_pie + 12);
+        $pdf->Cell(70, 4, 'FIRMA Y SELLO DEL MEDICO RESPONSABLE', 'T', 0, 'C'); 
+
+        // Salida del PDF
+        $pdf->Output('I', 'Historia_Medicina_General_' . $documento . '.pdf');
+    }
 
 	public function crearPdfHistoriaClinicaGinecologica($triage, $documento)
-	{
-		$datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
-		$datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0];
-		$datosgineco = $this->Historias_model->GenerarPdfGinecologia($documento, $triage)->result()[0];
-		
-		$datosalergias = $this->Historias_model->getAllAlergias($documento);
-		$datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
-		$datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);
-		
-		$this->load->library('PDF_UTF8');
-		$pdf = new PDF_UTF8();
-		$pdf->AddPage();
-		$pdf->SetAlpha(0.2);  // Transparencia (0.1 = 10% opacidad)
-		$pdf->Image('public/img/theme/logo.png', 60, 110, 80);  // Ajusta las coordenadas y tamaño según necesites
-		$pdf->SetAlpha(1);  // Restauramos la opacidad al 100%
-		$pdf->SetDrawColor(0, 24, 0);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 40, 196, 6, 'F');
-		$pdf->Image('public/img/theme/logo.png', 10, 12, 25, 0, 'PNG');
-		$pdf->Ln(15);
-		$pdf->SetFont('Arial', 'B', 10);
-		$pdf->cell(124, 5, '', 0);
-		$pdf->cell(40, 5, 'ORDEN DE INTERCONSULTA MEDICA', 0);
-		$pdf->Ln(5);
-		$pdf->cell(128, 5, '', 0);
-		$pdf->cell(40, 5, 'HISTORIA CLINICA DEL PACIENTE', 0);
-
-		$pdf->Ln(10);
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(65, 6, '1. DATOS DEL PACIENTE', 0, 0, 'L');
-
-		// DATOS PERSONALES
-		$pdf->Ln(6);
-		$pdf->SetTextColor(0, 0, 0);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'APELLIDOS Y NOMBRES', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(100, 5, $datospaciente->nombre . ' ' . $datospaciente->apellido, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(10, 5, 'HC', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(46, 5, $datospaciente->hc, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'DNI', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, $datospaciente->documento, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(10, 5, 'EDAD', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(10, 5, $datospaciente->edad, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'SEXO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->sexo, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'TELEFONO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(46, 5, $datospaciente->telefono, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'DIRECCION', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(45, 5, $datospaciente->direccion, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'DEPARTAMENTO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->departamento, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'PROVINCIA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datospaciente->provincia, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'DISTRITO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(21, 5, $datospaciente->distrito, 1);
-
-		$pdf->Ln(5);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'OCUPACION', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(100, 5, $datospaciente->ocupacion, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ESTADO CIVIL', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(36, 5, $datospaciente->estado_civil, 1);
-		$pdf->Ln(9);
-
-		// DATOS DEL TRIAGE
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 70, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '2. SIGNOS VITALES', 0);
-
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->Ln(6);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ESTATURA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->talla . ' CM', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'PESO', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->peso . ' KG', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'IMC', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->imc . ' IMC', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'TEMPERATURA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->temperatura . ' C°', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, '% GRASA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(16, 5, '0%', 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'FRECUENCIA RESPIRATORIA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->frecuencia_respiratoria . ' R/M', 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(40, 5, 'FRECUENCIA CARDIACA', 1);
-
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datostriage->frecuencia_cardiaca . ' MMHG', 1);
-
-		// DATOS DE LA CONSULTA GENERAL
-		$pdf->ln(9);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 90, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '3. DATOS DE LA CONSULTA GINECOLOGICA', 0, 0, 'L');
-
-		$pdf->Ln(6);
-		$pdf->SetTextColor(0, 0, 0);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('FAMILIARES'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->familiares, 1);
-		$pdf->Ln(5);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('PATOLOGICOS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->patologicos, 1);
-		$pdf->Ln(5);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MENARQUIA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->gineco_obstetrico, 1);
-		$pdf->Ln(5);
-		//
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'FUM', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(45, 5, $datosgineco->fum, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(25, 5, utf8_decode('RM (RET.MENSTR)'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(47, 5, $datosgineco->rm, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'IRS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(44, 5, $datosgineco->flujo_genital, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'No PAREJAS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(20, 5, $datosgineco->no_de_parejas, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'GESTAS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgineco->gestas, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('PARTOS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgineco->partos, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'ABORTOS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(16, 5, $datosgineco->abortos, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('ANTICONCEPTIVOS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(70, 5, $datosgineco->anticonceptivos, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('TIPOS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(25, 5, $datosgineco->tipo, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, utf8_decode('TIEMPO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(31, 5, $datosgineco->tiempo, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('QUIRURGICOS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->cirugia_ginecologica, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('OTROS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(47, 5, $datosgineco->otros, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, utf8_decode('FECHA PAP'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(40, 5, $datosgineco->fecha_pap, 1);
-
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(15, 5, 'Nº HIJOS', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(49, 5, $datosgineco->no_hijos, 1);
-		//
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('PIEL Y TSCS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->piel_tscs, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TIROIDES'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->tiroides, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MAMAS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->mamas, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('A RESPIRATORIO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->arespiratorio, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('A CARDIOVASCULAR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->acardiovascular, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('ABDOMEN'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->abdomen, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('A GENITO - URINARIO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->genito_urinario, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TACTO RECTAL'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->tacto_rectal, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('LOCOMOTOR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->locomotor, 1);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('SISTEMA NERVIOSO'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->sistema_nervioso, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MOTIVO CONSULTA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->motivo_consulta, 1);
-
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('SIGNOS Y SINTOMAS'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, $datosgineco->signossintomas, 1);
-
-		// DATOS DE LA CONSULTA GINECOLOGICA
-		$pdf->ln(4);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 195, 196, 6, 'F');
-		$pdf->SetFont('Courier', 'B', 8);
-		$pdf->SetTextColor(255, 255, 255);
-		$pdf->cell(196, 6, '4. PROCESOS CLINICOS', 0, 0, 'L');
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('ALERGIAS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('TIPO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'ALERGIA', 1);
-
-		if ($datosalergias == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(166, 5, '', 1);
-		} else {
-			foreach ($datosalergias->result() as $alergia) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, utf8_decode($alergia->tipo_alergia), 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(166, 5, utf8_decode($alergia->descripcion), 1);
-			}
-		}
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('DIAGNOSTICOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CODIGO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'DIAGNOSTICO', 1);
-
-		if ($datosdiagnosticos == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, utf8_decode('R112'), 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(166, 5, 'OTRAS COSAS NO DEFINIDAS', 1);
-		} else {
-			foreach ($datosdiagnosticos->result() as $diagnostico) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $diagnostico->clave, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(166, 5, $diagnostico->descripcion, 1);
-			}
-		}
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('PROCEDIMIENTOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('CODIGO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(166, 5, 'PROCEDIMIENTO', 1);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, '', 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(166, 5, '', 1);
-
-		$pdf->ln(7);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('MEDICAMENTOS'), 0);
-
-		$pdf->ln(5);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(70, 5, utf8_decode('FARMACO'), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(11, 5, 'CANT', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(20, 5, 'DOSIS', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'VIA', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, 'FRECUENCIA', 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(35, 5, 'DURACION', 1);
-
-		if ($datosmedicamentos == false) {
-			$pdf->ln(5);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(70, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(11, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(20, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(30, 5, '', 1);
-			$pdf->SetFont('Arial', '', 6);
-			$pdf->cell(35, 5, '', 1);
-		} else {
-			foreach ($datosmedicamentos->result() as $medicamento) {
-				$pdf->ln(5);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(70, 5, $medicamento->medicamento, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(11, 5, $medicamento->cantidad, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(20, 5, $medicamento->dosis, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $medicamento->via_aplicacion, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(30, 5, $medicamento->frecuencia, 1);
-				$pdf->SetFont('Arial', '', 6);
-				$pdf->cell(35, 5, $medicamento->duracion, 1);
-			}
-		}
-
-		$pdf->ln(10);
-		$pdf->SetTextColor(0, 0, 0);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('          PROXIMA CITA'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(30, 5, utf8_decode('          '), 1);
-		$pdf->SetFont('Arial', 'B', 6);
-		$pdf->cell(30, 5, utf8_decode('     FIRMA DEL DOCTOR'), 1);
-		$pdf->SetFont('Arial', '', 6);
-		$pdf->cell(106, 5, utf8_decode('JERSON GALVEZ ENSUNCHO'), 1);
-
-		$pdf->Output('I', 'Historia_Clinica_Ginecologica_' . $documento . '.pdf');
-	}
+{
+    // 1. CARGA DE DATOS (Misma lógica tuya)
+    $datospaciente = $this->Pacientes_model->getPacienteId($documento)->result()[0];
+    $datostriage = $this->Historias_model->getUltimoDatoTriage($documento)->result()[0]; // Ojo: asegúrate que este método traiga el triage específico si es necesario
+    $datosgineco = $this->Historias_model->GenerarPdfGinecologia($documento, $triage)->result()[0];
+    
+    $datosalergias = $this->Historias_model->getAllAlergias($documento);
+    $datosmedicamentos = $this->Historias_model->getMedicamentosHistoria($documento, $triage);
+    $datosdiagnosticos = $this->Historias_model->getDiagnosticosHistoria($documento, $triage);
+
+    // 2. INICIALIZACIÓN DEL PDF
+    $this->load->library('PDF_UTF8');
+    $pdf = new PDF_UTF8();
+    $pdf->AddPage();
+
+	$pdf->SetAlpha(0.1);
+    $pdf->Image('public/img/theme/logo.png', 50, 100, 110);
+    $pdf->SetAlpha(1);
+	$pdf->Image('public/img/theme/logo.png', 10, 5, 23);
+    $pdf->SetMargins(10, 10, 10);
+    $pdf->SetAutoPageBreak(true, 10);
+
+    // --- CABECERA ---
+    // Título Rojo
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->SetTextColor(255, 0, 0); // Rojo
+    $pdf->Cell(0, 10, ('HISTORIA CLÍNICA GINECOLÓGICA'), 0, 1, 'C');
+    $pdf->SetTextColor(0, 0, 0); // Volver a Negro
+
+    // --- BLOQUE CORREGIDO DE FECHA Y HORA ---
+    // 1. Validamos qué fecha usar (Si no viene del triaje, usamos HOY)
+    $fecha_impresion = (isset($datostriage->fecha)) ? $datostriage->fecha : date('Y-m-d');
+    $hora_impresion  = (isset($datostriage->hora))  ? $datostriage->hora  : date('H:i:s');
+
+    // Caja de Fecha
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(15, 6, 'FECHA:', 1, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(30, 6, date('d-m-Y', strtotime($fecha_impresion)), 1, 0, 'C');
+    
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(115, 6, '', 1, 0, 'L'); // Espacio vacío
+    
+    // Caja de Hora
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(12, 6, 'HORA:', 1, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(18, 6, date('H:i', strtotime($hora_impresion)), 1, 1, 'C');
+    //
+
+    // Fila: Apellidos y Nombres
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(40, 6, 'APELLIDOS Y NOMBRES:', 1, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(150, 6, utf8_decode($datospaciente->apellido . ' ' . $datospaciente->nombre), 1, 1, 'L');
+
+    // Fila: Edad y Sexo
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(15, 6, 'EDAD:', 1, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(80, 6, ($datospaciente->edad. ' años'), 1, 0, 'L');
+    
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(15, 6, 'SEXO:', 1, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(80, 6, utf8_decode($datospaciente->sexo), 1, 1, 'L');
+
+    $pdf->Ln(2); // Pequeño espacio
+
+    // --- ANTECEDENTES ---
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, 'ANTECEDENTES:', 0, 1, 'L');
+
+    // Función auxiliar para dibujar líneas de formulario: Etiqueta + Valor subrayado
+   // Función auxiliar corregida para que la línea pegue exacto al texto
+    function lineaFormulario($pdf, $label, $valor, $anchoTotal, $saltoLinea = 0) {
+        $pdf->SetFont('Arial', 'B', 8);
+        
+        // 1. Decodificamos PRIMERO para que FPDF mida el tamaño real de la letra
+        $label_final = ($label); 
+        
+        // 2. Calculamos el ancho exacto (+1 de espacio pequeño)
+        $anchoLabel = $pdf->GetStringWidth($label_final) + 1; 
+        
+        // 3. Imprimimos la etiqueta
+        $pdf->Cell($anchoLabel, 5, $label_final, 0, 0, 'L');
+        
+        // 4. Imprimimos el valor subrayado
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell($anchoTotal - $anchoLabel, 5, utf8_decode($valor), 'B', $saltoLinea, 'L'); 
+    }
+
+    // Familiares
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'FAMILIARES:', $datosgineco->familiares, 185, 1);
+    
+    // Patológicos
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'PATOLÓGICOS:', $datosgineco->patologicos, 185, 1);
+
+    // Gineco - Obstétricos (Menarquia en tu DB)
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'GINECO - OBSTÉTRICOS:', $datosgineco->gineco_obstetrico, 185, 1);
+
+    // FUM y RM
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'FUM:', $datosgineco->fum, 80, 0);
+    $pdf->Cell(5, 5, '', 0, 0); // Espacio
+    lineaFormulario($pdf, 'RM (Ret. Menstr.):', $datosgineco->rm, 100, 1);
+
+    // Flujo y Parejas
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'FLUJO GENITAL:', $datosgineco->flujo_genital, 100, 0);
+    $pdf->Cell(5, 5, '', 0, 0);
+    lineaFormulario($pdf, 'N° DE PAREJAS:', $datosgineco->no_de_parejas, 80, 1);
+
+    // Gestas, Partos, Abortos
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'GESTAS:', $datosgineco->gestas, 50, 0);
+    $pdf->Cell(5, 5, '', 0, 0);
+    lineaFormulario($pdf, 'PARTOS:', $datosgineco->partos, 50, 0);
+    $pdf->Cell(5, 5, '', 0, 0);
+    lineaFormulario($pdf, 'ABORTOS:', $datosgineco->abortos, 70, 1);
+
+    // --- ANTICONCEPTIVOS (Campo normal) ---
+    $pdf->Cell(5, 5, '-', 0, 0);
+    
+    // 1. Anticonceptivos (Ancho 75)
+    lineaFormulario($pdf, 'ANTICONCEPTIVOS:', $datosgineco->anticonceptivos, 75, 0);
+    
+    // Espacio separador
+    $pdf->Cell(5, 5, '', 0, 0);
+    
+    // 2. Tipo (Ancho 50)
+    lineaFormulario($pdf, 'TIPO:', $datosgineco->tipo, 50, 0);
+
+    // Espacio separador
+    $pdf->Cell(5, 5, '', 0, 0);
+
+    // 3. Tiempo (Ancho 50 y Salto de línea = 1)
+    lineaFormulario($pdf, 'TIEMPO:', $datosgineco->tiempo, 50, 1);
+
+    // Cirugía
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf,('CIRUGÍA GINECOLÓGICA:'), $datosgineco->cirugia_ginecologica, 185, 1);
+
+    // Otros
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'OTROS:', $datosgineco->otros, 185, 1);
+
+    // PAP y Hijos
+    // Validamos si hay fecha para no imprimir "01/01/1970" si está vacío
+    $fecha_pap_formato = ($datosgineco->fecha_pap && $datosgineco->fecha_pap != '0000-00-00') 
+                         ? date('d/m/Y', strtotime($datosgineco->fecha_pap)) 
+                         : '';
+
+    $pdf->Cell(5, 5, '-', 0, 0);
+    lineaFormulario($pdf, 'FECHA DE PAP:', $fecha_pap_formato, 90, 0);
+    $pdf->Cell(5, 5, '', 0, 0);
+    $pdf->Cell(5, 5, '', 0, 0);
+    lineaFormulario($pdf, 'N° HIJOS:', $datosgineco->no_hijos, 85, 1);
+
+
+    // --- MOTIVO DE CONSULTA ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(40, 5, 'MOTIVO DE CONSULTA:', 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(150, 5, utf8_decode($datosgineco->motivo_consulta), 'B', 1, 'L');
+    $pdf->Cell(190, 5, '', 'B', 1, 'L'); // Línea extra para escribir a mano si es necesario
+
+    // --- SIGNOS Y SINTOMAS ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(40, 5, 'SIGNOS Y SINTOMAS:', 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(150, 5, utf8_decode($datosgineco->signossintomas), 'B', 1, 'L');
+
+    // --- EXAMEN FISICO ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, 'EXAMEN FISICO:', 0, 1, 'L');
+
+    // Signos Vitales (Tira gris o simple línea)
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(5, 5, '-', 0, 0);
+    $pdf->Cell(25, 5, 'SIGNOS VITALES:', 0, 0);
+    
+    $pdf->SetFont('Arial', '', 8);
+   // Signos Vitales con Unidades
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(28, 5, 'P/A: '.$datostriage->presion_arterial.' mmHg', 'B', 0);
+    $pdf->Cell(22, 5, 'FR: '.$datostriage->frecuencia_respiratoria.' rpm', 'B', 0);
+    $pdf->Cell(22, 5, 'FC: '.$datostriage->frecuencia_cardiaca.' lpm', 'B', 0);
+    $pdf->Cell(20, 5, 'T: '.$datostriage->temperatura. (' °C'), 'B', 0);
+    $pdf->Cell(22, 5, 'Peso: '.$datostriage->peso.' kg', 'B', 0);
+    $pdf->Cell(22, 5, 'Talla: '.$datostriage->talla.' cm', 'B', 0);
+    $pdf->Cell(25, 5, 'IMC: '.$datostriage->imc, 'B', 1);
+
+    // Lista de Examen Físico (Vertical, como en la imagen)
+    $campos_examen = [
+        'PIEL Y TCSC:' => $datosgineco->piel_tscs,
+        'TIROIDES:' => $datosgineco->tiroides,
+        'MAMAS:' => $datosgineco->mamas,
+        'A. RESPIRATORIO:' => $datosgineco->arespiratorio,
+        'A. CARDIOVASCULAR:' => $datosgineco->acardiovascular,
+        'ABDOMEN:' => $datosgineco->abdomen,
+        'A. GENITO - URINARIO:' => $datosgineco->genito_urinario,
+        'TACTO RECTAL:' => $datosgineco->tacto_rectal,
+        'LOCOMOTOR:' => $datosgineco->locomotor,
+        'SISTEMA NERVIOSO:' => $datosgineco->sistema_nervioso,
+    ];
+
+    foreach($campos_examen as $label => $valor) {
+        $pdf->Cell(5, 5, '-', 0, 0);
+        lineaFormulario($pdf, $label, $valor, 185, 1);
+    }
+
+    // --- EXAMENES AUXILIARES ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(40, 5, 'EXAMENES AUXILIARES:', 0, 0, 'L');
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->Cell(150, 5, utf8_decode($datosgineco->examenes_auxiiliares), 'B', 1, 'L');
+
+    // --- DIAGNOSTICO (CIE10) ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, 'DIAGNOSTICO: (CIE10)', 0, 1, 'L');
+    
+    // Convertir diagnósticos a array para iterar
+    $diagnosticos_lista = [];
+    if ($datosdiagnosticos) {
+        foreach ($datosdiagnosticos->result() as $d) {
+            $diagnosticos_lista[] = $d->descripcion . ' (' . $d->clave . ')';
+        }
+    }
+
+    // Imprimir 2 líneas fijas mínimo (como la imagen 1. y 2.)
+    for ($i = 0; $i < 3; $i++) {
+        $texto = isset($diagnosticos_lista[$i]) ? $diagnosticos_lista[$i] : '';
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(10, 5, ($i + 1) . '.', 0, 0, 'C');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(150, 5, utf8_decode($texto), 'B', 0, 'L');
+        $pdf->Cell(30, 5, '(       )', 'B', 1, 'C'); // Paréntesis tipo/estado
+    }
+
+    // --- PLAN DE TRABAJO ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, 'PROCEDIMIENTOS:', 0, 1, 'L');
+    
+    // Si tienes un campo de texto largo para plan, lo usamos, si no, lineas vacias
+    $plan_texto = $datosgineco->plan_trabajo; 
+    // Dividimos por saltos de línea si es necesario o simplemente imprimimos
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(10, 5, '1.', 0, 0, 'C');
+    $pdf->SetFont('Arial', '', 8);
+    $pdf->Cell(180, 5, utf8_decode($plan_texto), 'B', 1, 'L');
+    // Líneas adicionales vacías para rellenar
+    $pdf->Cell(10, 5, '2.', 0, 0, 'C');
+    $pdf->Cell(180, 5, '', 'B', 1, 'L');
+    $pdf->Cell(10, 5, '3.', 0, 0, 'C');
+    $pdf->Cell(180, 5, '', 'B', 1, 'L');
+
+    // --- TRATAMIENTO ---
+    $pdf->Ln(2);
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->Cell(0, 5, 'TRATAMIENTO:', 0, 1, 'L');
+
+    $medicamentos_lista = [];
+    if ($datosmedicamentos) {
+        foreach ($datosmedicamentos->result() as $m) {
+            $medicamentos_lista[] = $m->medicamento . ' ' . $m->dosis . ' (' . $m->frecuencia . ' x ' . $m->duracion . ')';
+        }
+    }
+
+    for ($i = 0; $i < 3; $i++) {
+        $texto = isset($medicamentos_lista[$i]) ? $medicamentos_lista[$i] : '';
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(10, 5, ($i + 1) . '.', 0, 0, 'C');
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(180, 5, utf8_decode($texto), 'B', 1, 'L');
+    }
+
+    // --- PIE DE PAGINA (Cuadros) ---
+    $pdf->Ln(10);
+    $y_footer = $pdf->GetY();
+
+    // Cuadro Próxima Cita
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->Cell(100, 15, '', 1, 0); // Caja vacía borde
+    $pdf->SetXY(12, $y_footer + 2);
+    $pdf->Cell(30, 5, 'PROXIMA CITA:', 0, 0);
+    $pdf->SetXY(40, $y_footer + 5);
+    $pdf->Cell(60, 0, utf8_decode($datosgineco->proxima_cita), 'B', 0); // Línea subrayada
+
+    // Cuadro Firma Médico (Lado Derecho, estilo sello)
+    $pdf->SetXY(120, $y_footer - 5); // Subimos un poco para dar espacio al sello
+    $pdf->SetFont('Arial', 'B', 7);
+    
+    // Caja para la firma/sello azul
+    $pdf->SetDrawColor(0, 150, 200); // Color cian/azul similar a la imagen
+    $pdf->Rect(120, $y_footer - 5, 70, 25);
+    $pdf->SetDrawColor(0, 0, 0); // Reset color negro
+    
+    // Texto Firma
+    $pdf->SetXY(120, $y_footer + 15);
+    $pdf->Cell(70, 5, 'FIRMA DEL MEDICO', 0, 0, 'C');
+    
+    // Nombre Doctor (Debajo)
+    $pdf->SetXY(120, $y_footer + 12);
+    // Si tienes el dato del doctor en una variable, ponlo aquí, ej:
+    $pdf->SetFont('Arial', '', 6);
+    // $pdf->Cell(70, 3, 'DR. JERSON GALVEZ', 0, 0, 'C'); 
+
+
+    $pdf->Output('I', 'Historia_Clinica_Ginecologica_' . $documento . '.pdf');
+}
 
 	public function formatoMedicamentosOrdenamiento($paciente, $triaje)
 	{

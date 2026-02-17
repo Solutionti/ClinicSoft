@@ -23,7 +23,7 @@
                 <label class="color_ginecologia">QUIRURGICOS</label>
                   <textarea
                     class="form-control form-control-sm"
-                    id="antecedentes_cirugia"
+                    id="cirugia_ginecologica"
                   ></textarea>
                   </div>
                 </div>
