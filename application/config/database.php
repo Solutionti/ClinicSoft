@@ -96,6 +96,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
+
 //BASE DE DATOS PRODUCCION
 // $db['default'] = array(
 // 	'dsn'	=> '',
