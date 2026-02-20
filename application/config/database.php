@@ -76,10 +76,10 @@ $query_builder = TRUE;
 //BASE DE DATOS PRODUCCION
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'clinicsoft',
+	'hostname' => '127.0.0.1',
+	'username' => 'CAQI_mujerplena_usuario',
+	'password' => 'tahwUdsM%j8DJudQ',
+	'database' => 'CAQI_mujerplena',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
