@@ -57,7 +57,7 @@
     >
     <span class="mask bg-gradient-dark opacity-6"></span>
     <h6 class="mt-1 text-white font-weight-bolder position-relative">Bienvenido a</h6>
-    <h3 class="text-white font-weight-bolder position-relative">ClinisSoft</span> </h3>
+    <h3 class="text-white font-weight-bolder position-relative">ClinicSoft</span> </h3>
       <p class=" font-weight-bold text-white position-relative">
         Bienvenido a la plataforma de gestión clínica diseñada para llevar su institución al siguiente nivel, 
         facilitando el control de inventarios, la administración de servicios y la organización eficiente

@@ -32,11 +32,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 
 #PRODUCCION IGNORE
-public/colposcopia/
-public/documentos/
-public/img/
-public/laboratorio/
+public/colposcopia/*
+public/documentos/*
+public/img/*
+public/laboratorio/*
 
 #BASE DE DATOS
-application/config/database.php
+!application/config/database.php
 
