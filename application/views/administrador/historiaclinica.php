@@ -1296,24 +1296,24 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($medicamentofarmacias->result() as $farmacia) { ?>
-                <tr>
+                <?php //foreach ($medicamentofarmacias->result() as $farmacia) { ?>
+                <!-- <tr>
                   <td>
                     <div class="form-check mb-3">
                       <input
                         type="radio"
                         class="form-check-input"
                         name="formRadio"
-                        onchange="asociarmedicamentoFarmacia('<?php echo $farmacia->codigo_producto . ' - ' . utf8_decode($farmacia->nombre_producto); ?>')"
+                        onchange="asociarmedicamentoFarmacia('<?php //echo $farmacia->codigo_producto . ' - ' . utf8_decode($farmacia->nombre_producto); ?>')"
                       >
                     </div> 
                   </td>
-                  <td><?php echo utf8_decode($farmacia->codigo_producto); ?></td>
-                  <td><?php echo utf8_decode($farmacia->nombre_producto); ?></td>
-                  <td><?php echo utf8_decode($farmacia->b1); ?></td>
+                  <td><?php //echo utf8_decode($farmacia->codigo_producto); ?></td>
+                  <td><?php //echo utf8_decode($farmacia->nombre_producto); ?></td>
+                  <td><?php //echo utf8_decode($farmacia->b1); ?></td>
                   <td>Disponible</td>
-                </tr>
-                <?php } ?>
+                </tr> -->
+                <?php //} ?>
               </tbody>
             </table>
           </div>

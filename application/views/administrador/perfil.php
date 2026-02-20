@@ -48,7 +48,7 @@
             gap: 25px;
             margin-top: -60px;
             position: relative;
-            z-index: 2;
+            z-index: 0;
             flex-wrap: wrap;
         }
 
@@ -519,7 +519,7 @@
             cursor: pointer;
             box-shadow: 0 10px 40px rgba(45, 206, 137, 0.4);
             transition: all 0.3s ease;
-            z-index: 1000;
+            z-index: 0;
             display: flex;
             align-items: center;
             gap: 10px;

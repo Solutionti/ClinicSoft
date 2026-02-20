@@ -2,12 +2,12 @@
 
 class Historias_model extends CI_model
 {
-  public $farmacia;
+  // public $farmacia;
 
   public function __construct()
   {
     parent::__construct();
-    $this->farmacia = $this->load->database('farmacia', TRUE);
+    // $this->farmacia = $this->load->database('farmacia', TRUE);
   }
 
   public function getHistoriasId($paciente)
@@ -865,14 +865,14 @@ class Historias_model extends CI_model
     $this->db->insert('recetas_medicas', $receta);
   }
 
-  public function getMedicamentosFarmacia()
-  {
-    $this->farmacia->select('*');
-    $this->farmacia->from('products');
-    $result = $this->farmacia->get();
+  // public function getMedicamentosFarmacia()
+  // {
+  //   $this->farmacia->select('*');
+  //   $this->farmacia->from('products');
+  //   $result = $this->farmacia->get();
 
-    return $result;
-  }
+  //   return $result;
+  // }
 
   public function borrarArchivoPdf($codigo)
   {
