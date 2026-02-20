@@ -69,7 +69,7 @@
     <div class="card card-plain">
     <div class="card-header pb-0 text-start">
       <div class="text-center">
-        <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="50px;">
+        <!-- <img src="<?php echo base_url(); ?>public/img/theme/logo2.png" class="img-fluid mb-3" width="50px;"> -->
       </div>
       <div class="text-center">
         <span class="mx-3 font-weight-bold h6"> <span class="text-primary h4 text-bold">Clinic</span><span class="text-default h3 text-bold">Soft</span><small class="text-danger text-bold">Peru</small></span>

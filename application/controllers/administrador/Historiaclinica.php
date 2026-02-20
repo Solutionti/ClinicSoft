@@ -642,8 +642,8 @@ class Historiaclinica extends Admin_Controller
         $pdf->Cell(0, 10, ('HISTORIA CLÍNICA GENERAL'), 0, 1, 'C');
 
         // --- VALIDACIÓN DE FECHA Y HORA (EVITA ERRORES) ---
-        $fecha_doc = (isset($datostriage->fecha)) ? date('d/m/Y', strtotime($datostriage->fecha)) : date('d/m/Y');
-        $hora_doc  = (isset($datostriage->hora))  ? date('H:i', strtotime($datostriage->hora))  : date('H:i');
+        $fecha_doc = (isset($datosgeneral->fecha)) ? date('d/m/Y', strtotime($datosgeneral->fecha)) : date('d/m/Y');
+        $hora_doc  = (isset($datosgeneral->hora))  ? date('H:i', strtotime($datosgeneral->hora))  : date('H:i');
 
         // ==========================================================
         // PARTE 1: DATOS DE FILIACIÓN (ESTILO CUADROS CERRADOS)
@@ -907,8 +907,8 @@ class Historiaclinica extends Admin_Controller
 
     // --- BLOQUE CORREGIDO DE FECHA Y HORA ---
     // 1. Validamos qué fecha usar (Si no viene del triaje, usamos HOY)
-    $fecha_impresion = (isset($datostriage->fecha)) ? $datostriage->fecha : date('Y-m-d');
-    $hora_impresion  = (isset($datostriage->hora))  ? $datostriage->hora  : date('H:i:s');
+    $fecha_impresion = (isset($datosgineco->fecha)) ? $datosgineco->fecha : date('Y-m-d');
+    $hora_impresion  = (isset($datosgineco->hora))  ? $datosgineco->hora  : date('H:i:s');
 
     // Caja de Fecha
     $pdf->SetFont('Arial', 'B', 9);
