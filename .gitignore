@@ -38,5 +38,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /public/laboratorio/*
 
 #BASE DE DATOS
-!application/config/database.php
+application/config/database.php
 

@@ -74,7 +74,7 @@
       <div class="text-center">
         <span class="mx-3 font-weight-bold h6"> <span class="text-primary h4 text-bold">Clinic</span><span class="text-default h3 text-bold">Soft</span><small class="text-danger text-bold">Peru</small></span>
         <div class="stats">
-          <small class="">Software Para Clinicas y Laboratorios</small>
+          <small class="">Software Para Clinicas</small>
         </div>
       </div>
       <h5 class="font-weight-bolder  mt-4">Iniciar sesión</h5>

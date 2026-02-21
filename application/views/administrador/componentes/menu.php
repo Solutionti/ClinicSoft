@@ -1,3 +1,23 @@
+<?php
+   $segment2 = $this->uri->segment(2);
+   $ecografias_routes = [
+      'ecografiaMamaview',
+      'ecografiaGeneticaview',
+      'ecografiaMorfologicaview',
+      'ecografiaTrasvaginalview',
+      'ecografiaPelvicaview',
+      'ecografiaObstetricaview',
+      'ecografiaAbdominalview',
+      'ecografiaProstaticaview',
+      'ecografiaRenalview',
+      'ecografiaTiroidesview',
+      'ecografiaHisteronosografiaview',
+      'ecografiaArterialview',
+      'ecografiaVenosaview',
+      'ecografiaObstetricadopplerview'
+   ];
+   $is_ecografia = in_array($segment2, $ecografias_routes);
+?>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
    <div class="sidenav-header">
       <i class="fas text-dark fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -70,11 +90,11 @@
             </div>
          </li>
          <li class="nav-item ">
-            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
+            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="<?php echo $is_ecografia ? 'true' : 'false'; ?>" href="#ecografias">
             <i class="fas text-dark fa-prescription"></i>
             <span class="sidenav-normal text-dark "> Ecografias <b class="caret"></b></span>
             </a>
-            <div class="collapse " id="ecografias">
+            <div class="collapse <?php echo $is_ecografia ? 'show' : ''; ?>" id="ecografias">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMamaview">
@@ -254,12 +274,12 @@
                      <span class=" "> Colposcopia</span>
                      </a>
                   </li>
-                  <li class="nav-item ">
-            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#ecografias">
+         <li class="nav-item ">
+            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="<?php echo $is_ecografia ? 'true' : 'false'; ?>" href="#ecografias">
             <i class="fas text-dark fa-prescription"></i>
             <span class="sidenav-normal "> Ecografias <b class="caret"></b></span>
             </a>
-            <div class="collapse " id="ecografias">
+            <div class="collapse <?php echo $is_ecografia ? 'show' : ''; ?>" id="ecografias">
                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
                      <a class="nav-link" href="<?php echo base_url(); ?>administracion/ecografiaMamaview">
