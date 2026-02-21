@@ -1198,133 +1198,228 @@ class Historiaclinica extends Admin_Controller
 }
 
 	public function formatoMedicamentosOrdenamiento($paciente, $triaje)
-	{
-		$datospaciente = $this->Pacientes_model->getPacienteId($paciente)->result()[0];
-		$medicamentos = $this->Historias_model->formatoMedicamentosOrdenamiento($paciente, $triaje);
-		$this->load->library('PDF_UTF8');
-		$pdf = new PDF_UTF8();
-		$pdf->AddPage('P');
-		$pdf->SetAlpha(0.1);  // Transparencia (0.1 = 10% opacidad)
-		$pdf->Image('public/img/theme/logo.png', 70, 80, 70);  // Ajusta las coordenadas y tamaño según necesites
-		$pdf->SetAlpha(1);  // Restauramos la opacidad al 100%
-		$pdf->SetDrawColor(0, 24, 0);
-		$pdf->SetFillColor(115, 115, 115);
-		$pdf->Rect(10, 35, 198, 2, 'F');
-		$pdf->Image('public/img/theme/logo.png', 10, 18, 25, 0, 'PNG');
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 9);
-		$pdf->cell(135, 5, '', 0);
-		$pdf->cell(40, 5, 'UNA NUEVA MANERA DE CUIDAR', 0);
-		$pdf->Ln(5);
-		$pdf->cell(130, 5, '', 0);
-		$pdf->cell(40, 5, 'TU SALUD Y DE LOS QUE MAS QUIERES', 0);
-		$pdf->Ln(10);
-		$pdf->cell(80, 5, '', 0);
-		$pdf->cell(20, 5, 'RECETA DE MEDICAMENTOS', 0);
+    {
+        $datospaciente = $this->Pacientes_model->getPacienteId($paciente)->result()[0];
+        $medicamentos = $this->Historias_model->formatoMedicamentosOrdenamiento($paciente, $triaje);
+        
+        $this->load->library('PDF_UTF8');
+        $pdf = new PDF_UTF8();
+        
+        // Orientación Vertical ('P')
+        $pdf->SetAutoPageBreak(false);
+        $pdf->AddPage('P');
+        
+        // --- LÍNEA DIVISORIA HORIZONTAL (Corte de media hoja A4) ---
+        // Se dibuja en Y = 148.5 mm (Mitad exacta de la altura A4 que es 297mm)
+        $pdf->SetDrawColor(180, 180, 180);
+        $x_line = 5;
+        while ($x_line < 205) {
+            $pdf->Line($x_line, 148.5, $x_line + 3, 148.5); 
+            $x_line += 6; 
+        }
+        $pdf->SetDrawColor(0, 0, 0);
 
-		$pdf->Ln(10);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(34, 5, 'NOMBRE Y APELLIDOS:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(70, 5, $datospaciente->nombre . '' . $datospaciente->apellido, 0);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(10, 5, 'SEXO:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(20, 5, $datospaciente->sexo, 0);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(15, 5, 'CELULAR:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(15, 5, $datospaciente->telefono, 0);
-		$pdf->Ln(5);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(18, 5, 'DIRECCIÓN:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(86, 5, $datospaciente->direccion, 0);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(10, 5, 'EDAD:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(20, 5, $datospaciente->edad . ' AÑOS', 0);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(27, 5, 'HISTORIA CLINICA:', 0);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(70, 5, $datospaciente->hc, 0);
+        // Variables de posición (2 Columnas en la mitad superior)
+        $x_izq = 8;
+        $x_der = 108; // Mitad de la hoja (105) + margen
+        $w_col = 94;  // Ancho de cada recuadro
+        
+        // --- CABECERAS (Izquierda y Derecha son idénticas en la foto) ---
+        $columnas = [$x_izq, $x_der];
+        
+        foreach ($columnas as $x) {
+            // Logo
+            $pdf->Image('public/img/theme/logo.png', $x, 8, 26);
+            
+            // Textos Azules
+            $pdf->SetTextColor(0, 102, 204);
+            $pdf->SetFont('Arial', 'B', 6);
+            $pdf->SetXY($x + 30, 12);
+            $pdf->Cell(50, 3, utf8_decode("UNA NUEVA MANERA DE CUIDAR"), 0, 1, 'C');
+            $pdf->SetX($x + 30);
+            $pdf->Cell(50, 3, utf8_decode("TU SALUD Y DE LOS QUE MAS QUIERES."), 0, 1, 'C');
+            
+            // Textos Rojos (Direcciones y Teléfonos)
+            $pdf->SetTextColor(180, 20, 40); 
+            $pdf->SetFont('Arial', '', 6);
+            $pdf->SetXY($x, 22);
+            $pdf->Cell($w_col, 3, utf8_decode('Av. Salaverry 1402 - Urb. Bancarios - Chiclayo (Costado de Condominios Colibrí)'), 0, 1, 'C');
+            $pdf->SetX($x);
+            $pdf->Cell($w_col, 3, utf8_decode('074600891 - 902 720 312'), 0, 1, 'C');
+            $pdf->SetX($x);
+            $pdf->Cell($w_col, 3, utf8_decode('Jr. Juan Ugaz 622 - Santa Cruz - 948 608 819 - CLINICA "MI SALUD"'), 0, 1, 'C');
+            
+            // Línea Azul Separadora
+            $pdf->SetDrawColor(0, 102, 204);
+            $pdf->Line($x, 31, $x + $w_col, 31);
+            $pdf->SetDrawColor(0, 0, 0); 
+        }
 
-		$pdf->Ln(7);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(40, 5, 'ATENCION EN', 0);
-		$pdf->Ln(7);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(35, 5, 'MEDICINA GENERAL', 0);
-		$pdf->cell(5, 5, ' ', 1);
-		$pdf->cell(40, 5, '', 0);
-		$pdf->SetX($pdf->GetX() + 10);
-		$pdf->cell(37, 5, 'ECOGRAFIAS', 0);
-		$pdf->cell(5, 5, ' ', 1);
-		$pdf->cell(50, 5, '', 0);
-		$pdf->Ln(6);
-		$pdf->cell(35, 5, 'GINECOLOGIA', 0);
-		$pdf->cell(5, 5, '', 1);
-		$pdf->cell(50, 5, '', 0);
-		$pdf->cell(37, 5, 'FARMACIA', 0);
-		$pdf->cell(5, 5, '', 1);
-		$pdf->cell(50, 5, '', 0);
-		$pdf->Ln(6);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(35, 5, 'OSTETRICA', 0);
-		$pdf->cell(5, 5, '', 1);
-		$pdf->cell(50, 5, '', 0);
-		$pdf->cell(37, 5, 'LABORATORIO CLINICO', 0);
-		$pdf->cell(5, 5, '', 1);
-		$pdf->cell(50, 5, '', 0);
+        // Restaurar color a negro para el contenido
+        $pdf->SetTextColor(0, 0, 0);
 
-		$pdf->Ln(13);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(40, 5, 'OTROS ________________________________________________________________________________________________', 0);
-		$pdf->Ln(7);
-		$pdf->cell(90, 5, 'DIAGNOSTICO   ( CIE10 )', 0);
-		$pdf->Ln(7);
-		$pdf->cell(10, 5, 'CANT', 1);
-		$pdf->cell(55, 5, 'MEDICAMENTO O INSUMO', 1);
-		$pdf->cell(30, 5, 'DOSIS', 1);
-		$pdf->cell(40, 5, 'VIA DE APLICACION', 1);
-		$pdf->cell(30, 5, 'FRECUENCIA', 1);
-		$pdf->cell(30, 5, 'DURACION', 1);
+        // ==========================================================
+        // LADO IZQUIERDO: RECETA (FARMACIA)
+        // ==========================================================
+        
+        // Nombres
+        $pdf->SetXY($x_izq, 33);
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->Cell(30, 4, 'Apellidos y Nombres : ', 0, 0);
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(64, 4, utf8_decode($datospaciente->apellido . ' ' . $datospaciente->nombre), 'B', 1);
 
-		$pdf->Ln(5);
-		foreach ($medicamentos->result() as $medicamento) {
-			$pdf->SetFont('Arial', '', 8);
-			$pdf->cell(10, 5, $medicamento->cantidad, 1);
-			$pdf->cell(55, 5, strtoupper(explode('-', $medicamento->medicamento)[1]), 1);
-			$pdf->cell(30, 5, strtoupper($medicamento->dosis), 1);
-			$pdf->cell(40, 5, strtoupper($medicamento->via_aplicacion), 1);
-			$pdf->cell(30, 5, $medicamento->frecuencia, 1);
-			$pdf->cell(30, 5, $medicamento->duracion, 1);
-			$pdf->Ln(5);
-		}
+        // ATENCIÓN EN (Grilla tipo checkbox)
+        $pdf->SetXY($x_izq, 39);
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->SetTextColor(0, 102, 204); // Azul
+        $pdf->Cell($w_col, 4, ('ATENCIÓN EN:'), 0, 1);
+        
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetFont('Arial', '', 7);
+        $y_grid = $pdf->GetY();
+        
+        // Fila 1
+        $pdf->SetXY($x_izq, $y_grid);
+        $pdf->Cell(22, 4, 'Medicina General', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(2, 4, '', 0, 0);
+        $pdf->Cell(20, 4, 'Ecografias', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(12, 4, '', 0, 0);
+        $pdf->Cell(8, 4, 'Edad', 0, 0); $pdf->Cell(22, 4, $datospaciente->edad, 1, 1, 'C');
+        
+        // Fila 2
+        $y_grid += 4;
+        $pdf->SetXY($x_izq, $y_grid);
+        $pdf->Cell(22, 4, 'Ginecologia', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(2, 4, '', 0, 0);
+        $pdf->Cell(20, 4, 'Farmacia', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(12, 4, '', 0, 0);
+        $pdf->Cell(8, 4, 'H.C.', 0, 0); $pdf->Cell(22, 4, $datospaciente->hc, 1, 1, 'C');
+        
+        // Fila 3
+        $y_grid += 4;
+        $pdf->SetXY($x_izq, $y_grid);
+        $pdf->Cell(22, 4, 'Obstetricia', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(2, 4, '', 0, 0);
+        $pdf->Cell(20, 4, 'Lab. Clinico', 0, 0); $pdf->Cell(4, 3, '', 1, 0); $pdf->Cell(12, 4, '', 0, 0);
+        
+        // Otros y Diagnóstico
+        $pdf->Ln(5);
+        $pdf->SetX($x_izq);
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->Cell(8, 4, 'Otros', 0, 0); 
+        $pdf->Cell(86, 4, '', 'B', 1);
+        
+        $pdf->Ln(2);
+        $pdf->SetX($x_izq);
+        $pdf->Cell(16, 4, ('Diagnóstico'), 0, 0); 
+        $pdf->Cell(53, 4, '', 'B', 0);
+        $pdf->SetFont('Arial', '', 6);
+        $pdf->Cell(10, 4, '(CIE-10)', 0, 0); 
+        $pdf->Cell(15, 4, '', 1, 1);
 
-		$pdf->Ln(10);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(10, 5, 'INDICACIONES', 0);
-		$pdf->SetFont('Arial', '', 7);
-		$pdf->Ln(10);
-		$pdf->multicell(270, 4, '', 0);
+        // Tabla Medicamentos
+        $pdf->Ln(2);
+        $pdf->SetX($x_izq);
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->SetTextColor(0, 102, 204); // Azul
+        $pdf->Cell(6, 4, 'Rp.', 0, 0);
+        $pdf->Cell(48, 4, 'Medicamento o insumo', 0, 0, 'C');
+        $pdf->Cell(16, 4, utf8_decode('Concen-'), 0, 0, 'C');
+        $pdf->Cell(16, 4, 'Forma', 0, 0, 'C');
+        $pdf->Cell(8, 4, 'Cant.', 0, 1, 'C');
+        
+        $pdf->SetFont('Arial', '', 6);
+        $pdf->SetX($x_izq + 6);
+        $pdf->Cell(48, 2, '(Obligatorio DCI)', 0, 0, 'C');
+        $pdf->Cell(16, 2, ('tración'), 0, 0, 'C');
+        $pdf->Cell(16, 2, ('Farmacéutica'), 0, 1, 'C');
+        
+        $pdf->SetDrawColor(180, 180, 180);
+        $pdf->Line($x_izq, $pdf->GetY(), $x_izq + $w_col, $pdf->GetY());
+        $pdf->SetDrawColor(0, 0, 0);
+        $pdf->SetTextColor(0, 0, 0);
 
-		$pdf->Ln(7);
-		$pdf->SetFont('Arial', 'B', 8);
-		$pdf->cell(100, 5, strtoupper($this->session->userdata('nombre') . ' ' . $this->session->userdata('apellido')), 0);
-		$pdf->cell(50, 5, 'Fecha de Atención', 0);
-		$pdf->Ln(3);
-		$pdf->cell(100, 5, '_________________________________________', 0);
-		$pdf->cell(50, 5, date('Y-m-d'), 0);
-		$pdf->Ln(4);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(100, 5, 'Quien Ordena', 0);
-		$pdf->Ln(8);
-		$pdf->SetFont('Arial', '', 8);
-		$pdf->cell(80, 5, '', 0);
-		$pdf->cell(30, 5, '*** Fin del receta ***', 0);
-		$pdf->Output('I', 'recetamedica.pdf');
-	}
+        // Listado de Medicamentos (Solo Nombre, Forma y Cantidad)
+        $pdf->Ln(2);
+        $pdf->SetFont('Arial', '', 7);
+        if ($medicamentos) {
+            foreach ($medicamentos->result() as $m) {
+                $nombre_med = (strpos($m->medicamento, '-') !== false) ? explode('-', $m->medicamento)[1] : $m->medicamento;
+                $med_name = substr(utf8_decode(strtoupper(trim($nombre_med))), 0, 32);
+                
+                $pdf->SetX($x_izq);
+                $pdf->Cell(6, 5, '', 0, 0); 
+                $pdf->Cell(48, 5, $med_name, 0, 0);
+                $pdf->Cell(16, 5, '-', 0, 0, 'C'); 
+                $pdf->Cell(16, 5, utf8_decode(strtoupper($m->dosis)), 0, 0, 'C'); 
+                $pdf->Cell(8, 5, $m->cantidad, 0, 1, 'C');
+            }
+        }
+
+        // ==========================================================
+        // LADO DERECHO: INDICACIONES (PACIENTE)
+        // ==========================================================
+        $pdf->SetXY($x_der, 33);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetTextColor(0, 102, 204); // Azul
+        $pdf->Cell($w_col, 5, 'INDICACIONES', 0, 1, 'C');
+        $pdf->SetTextColor(0, 0, 0);
+        
+        $pdf->Ln(2);
+        
+        // Tabla de Instrucciones
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->SetX($x_der);
+        $pdf->Cell(49, 4, 'Medicamento', 'B', 0);
+        $pdf->Cell(20, 4, 'Via', 'B', 0, 'C');
+        $pdf->Cell(25, 4, 'Frecuencia', 'B', 1, 'C');
+        
+        $pdf->SetFont('Arial', '', 7);
+        if ($medicamentos) {
+            foreach ($medicamentos->result() as $m) {
+                $nombre_med = (strpos($m->medicamento, '-') !== false) ? explode('-', $m->medicamento)[1] : $m->medicamento;
+                $med_name = substr(utf8_decode(strtoupper(trim($nombre_med))), 0, 26);
+                
+                $pdf->SetX($x_der);
+                $pdf->Cell(49, 5, $med_name, 0, 0);
+                $pdf->Cell(20, 5, utf8_decode(strtoupper($m->via_aplicacion)), 0, 0, 'C');
+                $pdf->Cell(25, 5, utf8_decode($m->frecuencia), 0, 1, 'C');
+            }
+        }
+        
+        // Líneas en blanco para rellenar a mano (Ayuda Diagnostico, etc.)
+        $pdf->Ln(4);
+        for($i=0; $i<6; $i++){
+            $pdf->SetX($x_der);
+            $pdf->Cell($w_col, 6, '', 'B', 1);
+        }
+
+        // ==========================================================
+        // PIE DE PÁGINA (Firma y Fechas en ambas columnas)
+        // ==========================================================
+        // Se dibuja fijo en Y = 135 para que no cruce la línea de corte
+        $y_footer = 135;
+        
+        foreach ([$x_izq, $x_der] as $x) {
+            // Líneas para firmar
+            $pdf->SetXY($x, $y_footer);
+            $pdf->Cell(45, 4, '', 'B', 0); $pdf->Cell(2, 4, '', 0, 0);
+            $pdf->Cell(22, 4, '', 'B', 0); $pdf->Cell(2, 4, '', 0, 0);
+            $pdf->Cell(23, 4, '', 'B', 1);
+            
+            // Textos debajo de la línea
+            $pdf->SetXY($x, $y_footer + 4);
+            $pdf->SetFont('Arial', '', 6);
+            $pdf->SetTextColor(150, 150, 150);
+            $pdf->Cell(45, 3, 'Sello / Firma / Coleg. Profesional', 0, 0, 'C'); $pdf->Cell(2, 3, '', 0, 0);
+            $pdf->Cell(22, 3, utf8_decode('Fecha de atención'), 0, 0, 'C'); $pdf->Cell(2, 3, '', 0, 0);
+            $pdf->Cell(23, 3, utf8_decode('Válido hasta'), 0, 1, 'C');
+            $pdf->SetTextColor(0, 0, 0);
+            
+            // Llenado automático de Fecha (Opcional)
+            $pdf->SetXY($x + 47, $y_footer);
+            $pdf->SetFont('Arial', '', 7);
+            $pdf->Cell(22, 4, date('d/m/Y'), 0, 0, 'C');
+        }
+
+        $pdf->Output('I', 'Receta_Medica_A4_' . $datospaciente->documento . '.pdf');
+    }
 
 	public function formatoLaboratorioOrdenes($triage, $documento, $idlaboratorio)
 	{

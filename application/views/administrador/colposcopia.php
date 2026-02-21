@@ -368,7 +368,7 @@
     <!-- Imagen 1 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen1" id="inputImg1" accept=".jpg, .jpeg">
+            <input type="file" class="custom-file-input" name="imagen1" id="inputImg1" accept=".jpg, .jpeg, .png">
             <label class="custom-file-label">Sin Filtro (Basal)</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
@@ -380,7 +380,7 @@
     <!-- Imagen 2 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen2" id="inputImg2" accept=".jpg, .jpeg">
+            <input type="file" class="custom-file-input" name="imagen2" id="inputImg2" accept=".jpg, .jpeg, .png">
             <label class="custom-file-label">Con Ácido Acético</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
@@ -392,7 +392,7 @@
     <!-- Imagen 3 -->
     <div class="col-md-4">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="imagen3" id="inputImg3" accept=".jpg, .jpeg">
+            <input type="file" class="custom-file-input" name="imagen3" id="inputImg3" accept=".jpg, .jpeg, .png">
             <label class="custom-file-label">Test de Schiller (Lugol)</label>
         </div>
         <div class="mt-2 text-center border rounded p-1" style="min-height: 150px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">

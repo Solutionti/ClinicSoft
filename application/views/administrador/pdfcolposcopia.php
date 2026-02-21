@@ -42,16 +42,18 @@ $pdf->SetFillColor(245, 245, 245); // Gris muy claro
 $pdf->SetFont('Arial', 'B', 9);
 
 // Cabeceras
-$pdf->Cell(95, 6, 'PACIENTE', 1, 0, 'L', true);
-$pdf->Cell(50, 6, 'DOCUMENTO', 1, 0, 'C', true);
-$pdf->Cell(45, 6, 'FECHA', 1, 0, 'C', true);
+$pdf->Cell(75, 6, 'PACIENTE', 1, 0, 'L', true);
+$pdf->Cell(45, 6, 'DOCUMENTO', 1, 0, 'C', true);
+$pdf->Cell(20, 6, 'EDAD', 1, 0, 'C', true);
+$pdf->Cell(50, 6, 'FECHA', 1, 0, 'C', true);
 $pdf->Ln();
 
 // Datos
 $pdf->SetFont('Arial', '', 9);
-$pdf->Cell(95, 7, utf8_decode($colposcopias->apellido . " " . $colposcopias->nombre), 1, 0, 'L');
-$pdf->Cell(50, 7, $colposcopias->paciente, 1, 0, 'C');
-$pdf->Cell(45, 7, date("d/m/Y", strtotime($colposcopias->fecha)), 1, 0, 'C');
+$pdf->Cell(75, 7, utf8_decode($colposcopias->apellido . " " . $colposcopias->nombre), 1, 0, 'L');
+$pdf->Cell(45, 7, $colposcopias->paciente, 1, 0, 'C');
+$pdf->Cell(20, 7, $colposcopias->edad, 1, 0, 'C');
+$pdf->Cell(50, 7, date("d/m/Y", strtotime($colposcopias->fecha)), 1, 0, 'C');
 $pdf->Ln(10);
 
 

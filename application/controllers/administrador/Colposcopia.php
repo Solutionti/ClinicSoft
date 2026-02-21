@@ -19,7 +19,7 @@ class Colposcopia extends Admin_Controller {
     public function crearColposcopia() {
         // 1. CONFIGURACIÓN DE SUBIDA DE IMÁGENES (Más seguro que move_uploaded_file)
         $config['upload_path']   = './public/colposcopia/'; // Asegúrate que esta carpeta exista
-        $config['allowed_types'] = 'jpg|jpeg';
+        $config['allowed_types'] = 'jpg|jpeg|png';
         $config['max_size']      = 5120; // 5MB
         $config['encrypt_name']  = TRUE; // Encripta el nombre (ej: 837483.jpg)
 
